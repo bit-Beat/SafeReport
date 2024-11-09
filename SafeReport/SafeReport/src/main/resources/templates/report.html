@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap.min.css">
+	
+	<!-- 폼 제출 성공 시 알림 -->
+	<script>
+	    window.onload = function () {
+	        if (window.location.search.includes("success")) {
+	            alert("제보가 성공적으로 접수되었습니다.");
+	        }
+	    }
+	</script>
+</head>
+<style>
+	@import url('https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap');
+	@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
+	@import url('https://fonts.googleapis.com/css2?family=Gothic+A1&family=Jua&display=swap');
+	h1{
+		font-family: Jua;
+	}
+</style>
+
+
+
+<body >
+	<div layout:fragment="content" class="container-fluid">
+
+		<div class="container mt-5"> <!--마진탑 5-->
+			<h1 class="text-center mb-4">📢 현대파텍스 안전신문고제보 <p style="font-size: 15px; font-family:Gothic A1; margin-top: 3px;">안전 위험요인/요소를 가감없이 제보해주세요.</p> </h1>
+			
+		    <form method="post" th:action="@{/report/create}" th:object="${reportForm}">
+				<div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
+				    <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+				</div>
+
+				<div class="mb-3">
+					<label for="reportTitle" class="form-label" >신고 제목</label>
+					<input th:field="*{reportTitle}" type="text" class="form-control" name="reportTitle" id="reportTitle" placeholder="제목을 입력하세요">
+				</div>
+				   
+				<div class="mb-3">
+					<label for="reportDepartment" class="form-label">소속</label>
+					<select class="form-select" name="reportDepartment" id="reportDepartment">
+						<option disabled hidden selected value="소속을 선택해주세요.">
+						    소속을 선택해주세요.
+						  </option>
+						<optgroup label="현대파텍스">
+							<option value="관리지원팀">관리지원팀</option>
+							<option value="안전환경팀">안전환경팀</option>
+							<option value="사업기획팀">사업기획팀</option>
+							<option value="재경팀">재경팀</option>
+							<option value="자재관리팀">자재관리팀</option>
+							<option value="프레스지원팀">프레스지원팀</option>
+							<option value="차체지원팀">차체지원팀</option>
+							<option value="품질보증팀">품질보증팀</option>
+						</optgroup>
+					  	<option value="SMP">SMP</option>
+					  	<option value="JS파트너스">JS파트너스</option>
+					  	<option value="협성테크">협성테크</option>
+					</select>
+				</div>
+
+				<div class="mb-3">
+					<label for="reporterName" class="form-label">신고자 이름</label>
+					<input th:field="*{reporterName}" type="text" class="form-control" name="reporterName" id="reporterName" placeholder="이름을 입력하세요">
+				</div>
+
+				<div class="mb-3">
+					<label for="reportLocation" class="form-label">발생위치</label>
+					<input th:field="*{reportLocation}" type="text" class="form-control" name="reportLocation" id="reportLocation" placeholder="발생위치를 입력하세요.">
+				</div>
+				   
+				<div class="mb-3">
+					<label for="reportContent" class="form-label">신고 내용</label>
+					<textarea th:field="*{reportContent}" class="form-control" name="reportContent" id="reportContent" rows="5" placeholder="신고 내용을 입력하세요"></textarea>
+				</div>
+				
+				<div class="mb-3">
+					<label for="reportDetails" class="form-label">개선 요청</label>
+					<textarea th:field="*{reportDetails}" class="form-control" name="reportDetails" id="reportDetails" rows="5" placeholder="개선하고싶은 내용을 입력하세요"></textarea>
+				</div>
+				
+				<div class="mb-3">
+					<label for="reportFile" class="form-label">첨부 파일</label>
+					<input class="form-control" type="file" id="reportFile">
+				</div>
+				
+				<div class="mb-3">
+				   	<label for="reportPassword" class="form-label">비밀번호</label>
+				   	<input type="password" class="form-control" name="reportPassword" id="reportPassword" placeholder="비밀번호를 입력하세요, 접수된 내용을 조회하거나 삭제 시 필요합니다.">
+				</div>
+
+		           <div class="d-grid gap-2">
+		               <button type="submit" class="btn btn-primary">제출</button>
+		           </div>
+		       </form>
+		   </div>
+
+	</div>
+	
+</body>
+</html>
