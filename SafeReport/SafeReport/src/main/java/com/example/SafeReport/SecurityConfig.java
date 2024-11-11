@@ -22,6 +22,10 @@ public class SecurityConfig { // Spring Security 설정을 담당
 	            .formLogin((formLogin) -> formLogin
 	                .loginPage("/user/login")
 	                .defaultSuccessUrl("/home")) // 로그인 성공 시 기본 페이지로 리다이렉트 
+	            .logout((logout) -> logout
+	            	.logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
+	                .logoutSuccessUrl("/")
+	                .invalidateHttpSession(true))
 	        ;
 	        return http.build();
 	    }

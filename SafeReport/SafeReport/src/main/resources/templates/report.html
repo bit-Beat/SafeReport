@@ -39,7 +39,7 @@
 
 				<div class="mb-3">
 					<label for="reportTitle" class="form-label" >신고 제목</label>
-					<input th:field="*{reportTitle}" type="text" class="form-control" name="reportTitle" id="reportTitle" placeholder="제목을 입력하세요">
+					<input th:field="*{reportTitle}" type="text" class="form-control" name="reportTitle" id="reportTitle" placeholder="제목을 입력하세요" autocomplete="off">
 				</div>
 				   
 				<div class="mb-3">
@@ -66,32 +66,32 @@
 
 				<div class="mb-3">
 					<label for="reporterName" class="form-label">신고자 이름</label>
-					<input th:field="*{reporterName}" type="text" class="form-control" name="reporterName" id="reporterName" placeholder="이름을 입력하세요">
+					<input th:field="*{reporterName}" type="text" class="form-control" name="reporterName" id="reporterName" placeholder="이름을 입력하세요" autocomplete="off">
 				</div>
 
 				<div class="mb-3">
 					<label for="reportLocation" class="form-label">발생위치</label>
-					<input th:field="*{reportLocation}" type="text" class="form-control" name="reportLocation" id="reportLocation" placeholder="발생위치를 입력하세요.">
+					<input th:field="*{reportLocation}" type="text" class="form-control" name="reportLocation" id="reportLocation" placeholder="발생위치를 입력하세요." autocomplete="off">
 				</div>
 				   
 				<div class="mb-3">
 					<label for="reportContent" class="form-label">신고 내용</label>
-					<textarea th:field="*{reportContent}" class="form-control" name="reportContent" id="reportContent" rows="5" placeholder="신고 내용을 입력하세요"></textarea>
+					<textarea th:field="*{reportContent}" class="form-control" name="reportContent" id="reportContent" rows="5" placeholder="신고 내용을 입력하세요" autocomplete="off"></textarea>
 				</div>
 				
 				<div class="mb-3">
 					<label for="reportDetails" class="form-label">개선 요청</label>
-					<textarea th:field="*{reportDetails}" class="form-control" name="reportDetails" id="reportDetails" rows="5" placeholder="개선하고싶은 내용을 입력하세요"></textarea>
+					<textarea th:field="*{reportDetails}" class="form-control" name="reportDetails" id="reportDetails" rows="5" placeholder="개선하고싶은 내용을 입력하세요" autocomplete="off"></textarea>
 				</div>
 				
 				<div class="mb-3">
 					<label for="reportFile" class="form-label">첨부 파일</label>
-					<input class="form-control" type="file" id="reportFile">
+					<input class="form-control" type="file" id="reportFile" autocomplete="off">
 				</div>
 				
 				<div class="mb-3">
 				   	<label for="reportPassword" class="form-label">비밀번호</label>
-				   	<input type="password" class="form-control" name="reportPassword" id="reportPassword" placeholder="비밀번호를 입력하세요, 접수된 내용을 조회하거나 삭제 시 필요합니다.">
+				   	<input type="password" class="form-control" name="reportPassword" id="reportPassword" placeholder="비밀번호를 입력하세요, 접수된 내용을 조회하거나 삭제 시 필요합니다." autocomplete="off">
 				</div>
 
 		           <div class="d-grid gap-2">

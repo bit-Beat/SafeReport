@@ -30,11 +30,13 @@ public class IndexController {
     public String home(Model model) {
     	List<Report> report = this.indexService.getList();
     	model.addAttribute("reportList", report);
+    	model.addAttribute("page", "home");
         return "index";  // index.html을 반환
     }
 	
     @GetMapping("/") // 루트 경로
-    public String root(ReportForm reportForm) {
+    public String root(ReportForm reportForm, Model model) {
+    	model.addAttribute("page", "report"); // 현재 페이지 
         return "report";  // report.html을 반환
     }
     

@@ -40,11 +40,12 @@
             <div class="row">
 				<div class="col-md-6">
 					<h3><a class="nav-link" href="/reportlist">최근 신고 게시글</a></h3>
-					<table class="table table-striped">
-						<thead class="table-dark">
+					<table class="table table-striped table-hover">
+						<thead class="table-light">
 							<tr>
 								<th>번호</th>
 								<th>제목</th>
+								<th>작성자</th>
 								<th>작성일</th>
 							</tr>
 						</thead>
@@ -54,6 +55,7 @@
 								<td>
 									<a th:href="@{|/board/report_detail/${report.reportid}|}" >[[${report.report_title}]]</a>
 								</td>
+								<td>[[${report.reporter_name}]]</td>
 								<td th:text="${#temporals.format(report.reportcreatedate, 'yyyy-MM-dd HH:mm')}"></td>
 								
 							</tr>
@@ -64,20 +66,23 @@
                 <!-- 공지사항 -->
                 <div class="col-md-6">
                     <h3>공지사항</h3>
-                    <table class="table table-striped">
-                        <thead>
+                    <table class="table table-striped table-hover">
+                        <thead class="table-light">
                             <tr>
+								<th>번호</th>
                                 <th>제목</th>
                                 <th>작성일</th>
                             </tr>
                         </thead>
                         <tbody>
                             <!-- 최근 공지사항 게시글 5개 표시 (예시 데이터) -->
-                            <tr>
-                                <td><a href="/notice/1">공지사항 제목 1</a></td>
+                            <tr class="table-danger">
+								<td>1</td>
+                                <td ><a href="/notice/1"><긴급> 공지사항 제목 1</a></td>
                                 <td>2024-10-10</td>
                             </tr>
                             <tr>
+								<td>2</td>
                                 <td><a href="/notice/2">공지사항 제목 2</a></td>
                                 <td>2024-10-09</td>
                             </tr>
@@ -87,12 +92,12 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row mt-5">
                 <!-- 이달의 우수 신고 -->
                 <div class="col-md-6">
                     <h3>이달의 우수 신고</h3>
-                    <table class="table table-striped">
-                        <thead>
+                    <table class="table table-striped table-hover">
+                        <thead class="table-light">
                             <tr>
                                 <th>제목</th>
                                 <th>작성자</th>
@@ -119,9 +124,10 @@
                 <!-- 이용 문의 -->
                 <div class="col-md-6">
                     <h3>이용 문의</h3>
-                    <table class="table table-striped">
-                        <thead>
+                    <table class="table table-striped table-hover">
+                        <thead class="table-light">
                             <tr>
+								<th>번호</th>
                                 <th>제목</th>
                                 <th>작성자</th>
                                 <th>작성일</th>
@@ -130,15 +136,35 @@
                         <tbody>
                             <!-- 이용 문의 최근 게시글 5개 표시 (예시 데이터) -->
                             <tr>
+								<td>1</td>
                                 <td><a href="/qna/1">이용 문의 제목 1</a></td>
                                 <td>정하나</td>
                                 <td>2024-10-03</td>
                             </tr>
                             <tr>
+								<td>2</td>
                                 <td><a href="/qna/2">이용 문의 제목 2</a></td>
                                 <td>김서준</td>
                                 <td>2024-10-02</td>
                             </tr>
+							<tr>
+								<td>3</td>
+   								<td><a href="/qna/1">이용 문의 제목 1</a></td>
+   								<td>정하나</td>
+   								<td>2024-10-03</td>
+							</tr>
+							<tr>
+								<td>4</td>
+                            	<td><a href="/qna/1">이용 문의 제목 1</a></td>
+                              	<td>정하나</t>
+                              	<td>2024-10-03</td>
+                          	</tr>
+						  	<tr>
+								<td>5</td>
+								<td><a href="/qna/1">이용 문의 제목 1</a></td>
+								<td>정하나</td>
+								<td>2024-10-03</td>
+							</tr>
                             <!-- 실제 데이터를 표시할 때는 th:each를 이용 -->
                         </tbody>
                     </table>
