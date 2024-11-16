@@ -32,7 +32,8 @@
 		<div class="container mt-5"> <!--마진탑 5-->
 			<h1 class="text-center mb-4">📢 현대파텍스 안전신문고제보 <p style="font-size: 15px; font-family:Gothic A1; margin-top: 3px;">안전 위험요인/요소를 가감없이 제보해주세요.</p> </h1>
 			
-		    <form method="post" th:action="@{/report/create}" th:object="${reportForm}">
+		    <form method="post" th:object="${reportForm}">
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 				<div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
 				    <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
 				</div>
@@ -45,23 +46,37 @@
 				<div class="mb-3">
 					<label for="reportDepartment" class="form-label">소속</label>
 					<select class="form-select" name="reportDepartment" id="reportDepartment">
-						<option disabled hidden selected value="소속을 선택해주세요.">
-						    소속을 선택해주세요.
-						  </option>
-						<optgroup label="현대파텍스">
-							<option value="관리지원팀">관리지원팀</option>
-							<option value="안전환경팀">안전환경팀</option>
-							<option value="사업기획팀">사업기획팀</option>
-							<option value="재경팀">재경팀</option>
-							<option value="자재관리팀">자재관리팀</option>
-							<option value="프레스지원팀">프레스지원팀</option>
-							<option value="차체지원팀">차체지원팀</option>
-							<option value="품질보증팀">품질보증팀</option>
-						</optgroup>
-					  	<option value="SMP">SMP</option>
-					  	<option value="JS파트너스">JS파트너스</option>
-					  	<option value="협성테크">협성테크</option>
+					    <option disabled hidden 
+					        th:selected="${reportForm.reportDepartment == null}" 
+					        value="소속을 선택해주세요.">
+					        소속을 선택해주세요.
+					    </option>
+					    <optgroup label="현대파텍스">
+					        <option th:value="관리지원팀" 
+					                th:selected="${reportForm.reportDepartment == '관리지원팀'}">관리지원팀</option>
+					        <option th:value="안전환경팀" 
+					                th:selected="${reportForm.reportDepartment == '안전환경팀'}">안전환경팀</option>
+					        <option th:value="사업기획팀" 
+					                th:selected="${reportForm.reportDepartment == '사업기획팀'}">사업기획팀</option>
+					        <option th:value="재경팀" 
+					                th:selected="${reportForm.reportDepartment == '재경팀'}">재경팀</option>
+					        <option th:value="자재관리팀" 
+					                th:selected="${reportForm.reportDepartment == '자재관리팀'}">자재관리팀</option>
+					        <option th:value="프레스지원팀" 
+					                th:selected="${reportForm.reportDepartment == '프레스지원팀'}">프레스지원팀</option>
+					        <option th:value="차체지원팀" 
+					                th:selected="${reportForm.reportDepartment == '차체지원팀'}">차체지원팀</option>
+					        <option th:value="품질보증팀" 
+					                th:selected="${reportForm.reportDepartment == '품질보증팀'}">품질보증팀</option>
+					    </optgroup>
+					    <option th:value="SMP" 
+					            th:selected="${reportForm.reportDepartment == 'SMP'}">SMP</option>
+					    <option th:value="JS파트너스" 
+					            th:selected="${reportForm.reportDepartment == 'JS파트너스'}">JS파트너스</option>
+					    <option th:value="협성테크" 
+					            th:selected="${reportForm.reportDepartment == '협성테크'}">협성테크</option>
 					</select>
+
 				</div>
 
 				<div class="mb-3">

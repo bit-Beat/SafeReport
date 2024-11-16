@@ -47,6 +47,9 @@ public class Report {
 	@Column(name = "report_createdate") // DB 컬럼 이름과 매핑, 실제 db에 들어가는 이름
 	private LocalDateTime reportcreatedate;
 	
+	@Column(name = "report_modifydate") // DB 컬럼 이름과 매핑, 실제 db에 들어가는 이름
+	private LocalDateTime reportmodifydate;
+	
 	@Column(length=255)
 	private String attachfile;
 	

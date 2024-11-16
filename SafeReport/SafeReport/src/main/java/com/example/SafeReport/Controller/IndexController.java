@@ -24,7 +24,7 @@ import lombok.RequiredArgsConstructor;
 public class IndexController {
 	
 	private final IndexService indexService;
-	private final ReportService reportService;
+
 	
 	@GetMapping("/home") // 홈 경로
     public String home(Model model) {
@@ -40,44 +40,7 @@ public class IndexController {
         return "report";  // report.html을 반환
     }
     
-    @GetMapping("/reportlist")
-	public String reportlist(Model model, @RequestParam(value="page", defaultValue="1") int page, @RequestParam(value = "keyword", defaultValue = "") String keyword) // 모델은 자바와 탬플릿간의 연결고리역할
-	{
-		Page<Report> paging = this.indexService.getList(page-1, keyword);  // page - 1로 0부터 시작
-		model.addAttribute("paging", paging); // 모델 객체에 questionList라는 이름으로 저장했다. 
-		model.addAttribute("keyword", keyword);
-		return "board/report_list";
-	}
-    
-	@GetMapping(value = "/board/report_detail/{reportid}")
-	public String detail(Model model, @PathVariable("reportid") Integer reportid)
-	{
-		Report report = this.indexService.getReport(reportid);
-		model.addAttribute("report", report);
-		return "board/report_detail";
-	}
-    
-    @PostMapping("/report/create")
-    public String createReport(@Valid ReportForm reportForm, BindingResult bindingResult, Model model)
-    {
-    	if(bindingResult.hasErrors())
-    	{
-    		return "report";
-    	}
-    		
-    	this.reportService.create(
-                reportForm.getReportTitle(),
-                reportForm.getReportDepartment(),
-                reportForm.getReporterName(),
-                reportForm.getReportLocation(),
-                reportForm.getReportContent(),
-                reportForm.getReportDetails(),
-                reportForm.getReportPassword()
-            );
-        //model.addAttribute("successMessage", "제보가 성공적으로 접수되었습니다.");
-        return "redirect:/?success";
-    	//return "redirect:/";
-    }
+   
     
 
 }

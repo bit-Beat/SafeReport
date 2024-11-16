@@ -1,6 +1,7 @@
 package com.example.SafeReport.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -31,4 +32,33 @@ public class ReportService {
 		report.setReportcreatedate(LocalDateTime.now()); // 저장시간
 		this.reportRepository.save(report); // 저장
 	}
+	
+	/// Report Update
+	public void modify(Report report, String title, String department, String name, String location, String content, String details) {
+		
+		report.setReport_title(title); // 신고제목
+		report.setReport_department(department); // 접수부서
+		report.setReport_location(location); // 위치 
+		report.setReporter_name(name); // 신고자
+		report.setReport_content(content); // 신고내용 접수
+		report.setReport_detail(details); // 개선내용
+		report.setReportmodifydate(LocalDateTime.now()); // 수정시간
+		
+        this.reportRepository.save(report); //저장
+    }
+	
+	/// Report Read
+	public Report getReport(Integer id) {  
+        Optional<Report> report = this.reportRepository.findById(id); /// optiona npe 방지 클래스
+        //if (report.isPresent()) {
+            return report.get();
+        //} else {
+            //throw new Exception();
+            //throw new DataNotFoundException("question not found");
+        //}
+    }
+	
+	public void delete(Report report) {
+        this.reportRepository.delete(report);
+    }
 }
