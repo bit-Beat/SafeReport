@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.example.SafeReport.DataNotFoundException;
 import com.example.SafeReport.Entity.Report;
 import com.example.SafeReport.Repository.ReportRepository;
 
@@ -49,13 +50,12 @@ public class ReportService {
 	
 	/// Report Read
 	public Report getReport(Integer id) {  
-        Optional<Report> report = this.reportRepository.findById(id); /// optiona npe 방지 클래스
-        //if (report.isPresent()) {
+        Optional<Report> report = this.reportRepository.findById(id);
+        if (report.isPresent()) {
             return report.get();
-        //} else {
-            //throw new Exception();
-            //throw new DataNotFoundException("question not found");
-        //}
+        } else {
+            throw new DataNotFoundException("question not found");
+        }
     }
 	
 	public void delete(Report report) {

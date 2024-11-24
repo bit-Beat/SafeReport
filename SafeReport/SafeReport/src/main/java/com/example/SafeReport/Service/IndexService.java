@@ -33,15 +33,6 @@ public class IndexService {
 		return this.reportRepository.findAll();
 	}
 	
-	// 신고 불러오기
-	public Report getReport(Integer id) {  
-        Optional<Report> report = this.reportRepository.findById(id);
-        if (report.isPresent()) {
-            return report.get();
-        } else {
-            throw new DataNotFoundException("question not found");
-        }
-    }
 	
 	//페이징 불러오기
 	public Page<Report> getList(int page, String keyword)

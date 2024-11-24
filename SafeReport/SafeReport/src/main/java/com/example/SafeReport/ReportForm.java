@@ -34,3 +34,5 @@ public class ReportForm {
     @Size(max = 50, message = "비밀번호는 최대 50자까지 입력할 수 있습니다.")
     private String reportPassword;
 }
+
+
