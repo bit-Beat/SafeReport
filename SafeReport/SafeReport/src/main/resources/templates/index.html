@@ -5,31 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css" href="/static/bootstrap.min.css">
     <title>안전신문고 제보사이트</title>
+	
+	<style>
+		.inactive-row {
+		    background-color: rgb(234, 189, 189); /* 원하는 색상으로 변경 */
+		}
+	</style>
 </head>
-
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Gothic+A1&family=Jua&display=swap');
-
-    h2 {
-        margin-top: 20px;
-    }
-
-    table {
-        width: 100%;
-        margin-bottom: 20px;
-    }
-
-    th, td {
-        text-align: left;
-        padding: 10px;
-    }
-
-    th {
-        background-color: #f8f9fa;
-    }
-</style>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -72,15 +54,17 @@
                             <tr>
 								<th>번호</th>
                                 <th>제목</th>
+								<th>작성자</th>
                                 <th>작성일</th>
                             </tr>
                         </thead>
                         <tbody>
-							<tr th:each="notice, loop : ${notice}">
+							<tr th:each="notice, loop : ${notice}" th:class="${notice.active == true} ? 'inactive-row' : ''">
 								<td th:text="${loop.count}"></td>
 								<td>
-									[[${notice.title}]]</a>
+									<a th:href="@{|/board/notice/notice_detail/${notice.noticeid}|}" >[[${notice.title}]]</a>
 								</td>
+								<td>[[${notice.author}]]</td>
 								<td th:text="${#temporals.format(notice.createdate, 'yyyy-MM-dd HH:mm')}"></td>
 							</tr>
                         </tbody>

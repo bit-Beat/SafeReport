@@ -39,7 +39,7 @@ public class ReportController {
 	        reportForm.setReporterName(principal.getName());
 	    }
 	    model.addAttribute("page", "report"); // 현재 페이지
-	    return "report";  // report.html 반환
+	    return "board/report";  // report.html 반환
 	}
 	@PostMapping("/")
 	  public String createReport(@Valid ReportForm reportForm, BindingResult bindingResult, Model model)
@@ -71,7 +71,7 @@ public class ReportController {
 			model.addAttribute("keyword", keyword);
 			return "board/report_list";
 		}
-	    
+ 	    
 		@GetMapping(value = "/board/report_detail/{reportid}")
 		public String detail(Model model, @PathVariable("reportid") Integer reportid)
 		{
@@ -96,13 +96,13 @@ public class ReportController {
 	        reportForm.setReportDetails(report.getReport_detail()); //개선요청
 	        
 	    	model.addAttribute("page", "report"); // 현재 페이지 
-	        return "report"; /// 신고접수 페이ㅣ
+	        return "board/report"; /// 신고접수 페이ㅣ
 	    }
 	    
 	    @PostMapping("/report/modify/{id}") //// form에 액션을 지정하지 않으면 간은 uri로 요청된다.
 	    public String reportModify(@Valid ReportForm reportForm, BindingResult bindingResult,Principal principal, @PathVariable("id") Integer id) {
 	        if (bindingResult.hasErrors()) {
-	            return "report";
+	            return "board/report";
 	        }
 	        Report report = this.reportService.getReport(id);
 	        //if (!question.getAuthor().getUsername().equals(principal.getName())) {

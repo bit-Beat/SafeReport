@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap.min.css">
+</head>
+
+<style>
+</style>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<body >
+	
+	<div layout:fragment="content" class="container-fluid">
+		<!--body시작-->
+		<!--질문-->
+		<div class="container mt-5">	
+			<h2 class="border-bottom py-2" th:text="${notice.title}"></h2>
+			
+			<div class="card my-3">
+				<div class="card-header">				
+					공지사항 
+				</div>
+				
+				<div class="card-body">
+					<p class="card-text" th:text="${notice.contents}"></p>
+					<div class="d-flex justify-content-end">
+						<div class="badge bg-light text-dark p-2 text-start">
+							<div th:text="${#temporals.format(notice.createdate, 'yyyy-MM-dd HH:mm')}"></div>
+							<hr>
+							<div>작성자 : [[${notice.author}]]</div>
+						</div>
+					</div>	
+				</div>
+			</div>
+			
+			
+
+			<div class ="my-3" style="display: flex; justify-content: flex-end;">
+			</div>
+		</div>
+		<!--body끝-->
+
+			<script type='text/javascript'>
+				const delete_elements = document.getElementsByClassName("delete");
+				Array.from(delete_elements).forEach(function(element) {
+				    element.addEventListener('click', function() {
+				        if(confirm("정말로 삭제하시겠습니까?")) {
+			    	        location.href = this.dataset.uri;
+			        	};
+			    	});
+				});
+			</script>
+	</div>
+
+</body>
+</html>

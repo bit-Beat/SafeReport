@@ -1,10 +1,12 @@
 package com.example.SafeReport.Controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.SafeReport.Entity.Notice;
@@ -27,5 +29,18 @@ public class NoticeController {
 		List<Notice> notice = this.noticeService.getList();
 		model.addAttribute("notice", notice);
 		return "board/notice/notice_list";
+	}
+	
+	@GetMapping(value = "/board/notice/notice_detail/{noticeid}")
+	public String noticeDetail(Model model, @PathVariable("noticeid") Integer noticeid) {
+		Notice notice = this.noticeService.getNotice(noticeid);
+		model.addAttribute("notice", notice);
+		return "board/notice/notice_detail";
+	}
+	
+	@GetMapping("/notice")
+	public String noticeCreate(Model model, Principal principal)
+	{
+		return "board/notice/notice";
 	}
 }

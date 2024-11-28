@@ -25,6 +25,9 @@ public class Notice {
 	@Column(nullable = false, length = 255) //notnull, varchar(255)
 	private String title; // 공지사항 제목  	
 	
+	@Column(nullable = false, length = 100)
+	private String author; // 작성자
+	
 	@Column(nullable = false)
 	private String contents; // 공지사항 내용
 	
