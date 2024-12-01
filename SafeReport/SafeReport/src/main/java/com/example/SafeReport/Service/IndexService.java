@@ -30,7 +30,8 @@ public class IndexService {
 	}
 	
 	public List<Report> getFindAll(){
-		return this.reportRepository.findAll();
+		//return this.reportRepository.findAll();
+		return this.reportRepository.findAll(Sort.by(Sort.Direction.DESC, "reportcreatedate"));
 	}
 	
 	
@@ -47,13 +48,13 @@ public class IndexService {
 	}
 	
 	/// 검색기능
-	  public static Specification<Report> reporterNameContains(String keyword) {
-	        return (Root<Report> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) -> {
-	            if (keyword == null || keyword.isEmpty()) {
-	                return criteriaBuilder.conjunction(); // 조건이 없을 경우 모두 반환
-	            }
-	            return criteriaBuilder.like(root.get("reporterName"), "%" + keyword + "%");
-	        };
-	    }
-	
+	public static Specification<Report> reporterNameContains(String keyword) {
+	      return (Root<Report> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) -> {
+	          if (keyword == null || keyword.isEmpty()) {
+	              return criteriaBuilder.conjunction(); // 조건이 없을 경우 모두 반환
+	          }
+	          return criteriaBuilder.like(root.get("reporterName"), "%" + keyword + "%");
+	      };
+	  }
+		
 }

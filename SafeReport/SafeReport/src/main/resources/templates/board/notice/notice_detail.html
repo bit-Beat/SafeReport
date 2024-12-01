@@ -19,8 +19,9 @@
 			<h2 class="border-bottom py-2" th:text="${notice.title}"></h2>
 			
 			<div class="card my-3">
-				<div class="card-header">				
-					공지사항 
+				<div class="card-header">
+					 <span th:if="${notice.active == true}" class="badge rounded-pill text-bg-danger me-2">긴급</span>
+					 <span>공지사항</span> 
 				</div>
 				
 				<div class="card-body">
@@ -35,23 +36,23 @@
 				</div>
 			</div>
 			
-			
-
 			<div class ="my-3" style="display: flex; justify-content: flex-end;">
+				<a th:href="@{|/notice/update/${notice.noticeid}|}" class="btn btn-sm btn-outline-secondary m-1" sec:authorize="hasRole('ROLE_ADMIN')">수정</a>
+				
 			</div>
 		</div>
 		<!--body끝-->
 
-			<script type='text/javascript'>
-				const delete_elements = document.getElementsByClassName("delete");
-				Array.from(delete_elements).forEach(function(element) {
-				    element.addEventListener('click', function() {
-				        if(confirm("정말로 삭제하시겠습니까?")) {
-			    	        location.href = this.dataset.uri;
-			        	};
-			    	});
+		<script type='text/javascript'>
+			const delete_elements = document.getElementsByClassName("delete");
+			Array.from(delete_elements).forEach(function(element) {
+				element.addEventListener('click', function() {
+					if(confirm("정말로 삭제하시겠습니까?")) {
+						location.href = this.dataset.uri;
+						};
+					});
 				});
-			</script>
+		</script>
 	</div>
 
 </body>

@@ -3,7 +3,6 @@ package com.example.SafeReport.Controller;
 import java.security.Principal;
 
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,12 +10,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.server.ResponseStatusException;
 
 import com.example.SafeReport.ReportForm;
 import com.example.SafeReport.Entity.Report;
 import com.example.SafeReport.Service.IndexService;
 import com.example.SafeReport.Service.ReportService;
+import com.example.SafeReport.Service.RiskService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -26,12 +25,8 @@ import lombok.RequiredArgsConstructor;
 public class ReportController {
 	private final IndexService indexService;
 	private final ReportService reportService;
+	private final RiskService riskService;
 	
-	/*@GetMapping("/") // 루트 경로
-	public String root(ReportForm reportForm, Model model) {
-		model.addAttribute("page", "report"); // 현재 페이지 
-		return "report";  // report.html을 반환
-	}*/
 	@GetMapping("/")
 	public String root(ReportForm reportForm, Model model, Principal principal) {
 	    // reporterName 값이 비어 있을 때만 로그인한 사용자의 이름을 설정
@@ -42,14 +37,14 @@ public class ReportController {
 	    return "board/report";  // report.html 반환
 	}
 	@PostMapping("/")
-	  public String createReport(@Valid ReportForm reportForm, BindingResult bindingResult, Model model)
-	  {
-	  	if(bindingResult.hasErrors())
+	public String createReport(@Valid ReportForm reportForm, BindingResult bindingResult, Model model)
+	{
+		if(bindingResult.hasErrors())
 	  	{
 	  		return "report";
 	  	}
 	  		
-	  	this.reportService.create(
+		Report savedReport = this.reportService.create(
 	              reportForm.getReportTitle(),
 	              reportForm.getReportDepartment(),
 	              reportForm.getReporterName(),
@@ -58,8 +53,11 @@ public class ReportController {
 	              reportForm.getReportDetails(),
 	              reportForm.getReportPassword()
 	          );
-	      //model.addAttribute("successMessage", "제보가 성공적으로 접수되었습니다.");
-	      return "redirect:/?success";
+
+	    // Risk 생성 및 저장
+	    this.riskService.creteRisk_FkReport(savedReport);
+	  	
+	    return "redirect:/?success";
 	  	//return "redirect:/";
 	  }
 	
@@ -79,9 +77,7 @@ public class ReportController {
 			model.addAttribute("report", report);
 			return "board/report_detail";
 		}
-	    
-	  
-	    
+
 	    @GetMapping("/report/modify/{id}")
 	    public String reportModify(ReportForm reportForm, @PathVariable("id") Integer id, Principal principal, Model model) {
 	    	Report report = this.reportService.getReport(id);
@@ -96,7 +92,7 @@ public class ReportController {
 	        reportForm.setReportDetails(report.getReport_detail()); //개선요청
 	        
 	    	model.addAttribute("page", "report"); // 현재 페이지 
-	        return "board/report"; /// 신고접수 페이ㅣ
+	        return "board/report"; /// 신고접수 페이지
 	    }
 	    
 	    @PostMapping("/report/modify/{id}") //// form에 액션을 지정하지 않으면 간은 uri로 요청된다.
@@ -118,6 +114,13 @@ public class ReportController {
 	        Report report = this.reportService.getReport(id);	     
 	        this.reportService.delete(report);	
 	        return "redirect:/reportlist";
+	    }
+	    
+	    @PostMapping("/report/delete/{id}")
+	    public String questionDelete( @PathVariable("id") Integer id) {
+	        Report report = this.reportService.getReport(id);	     
+	        this.reportService.delete(report);	
+	        return "redirect:/admin/reports";
 	    }
 	    
 	    

@@ -22,6 +22,15 @@
         }
 
     </style>
+	
+	<!-- 폼 제출 성공 시 알림 -->
+	<script>
+	    window.onload = function () {
+	        if (window.location.search.includes("success")) {
+	            alert("공지사항이 성공적으로 등록되었습니다.");
+	        }
+	    }
+	</script>
 </head>
 
 <body>
@@ -30,24 +39,30 @@
             <div class="form-container mx-auto" style="max-width: 2000px;">
                 <h1 class="text-center mb-4">공지사항 작성</h1>
 
-                <form method="post">
+                <form method="post" th:object="${noticeForm}">
+					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+					<div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
+						<div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+					</div>
+					
                     <!-- 제목 입력 -->
                     <div class="mb-4">
                         <label for="noticeTitle" class="form-label">제목</label>
-                        <input type="text" class="form-control" name="noticeTitle" id="noticeTitle" placeholder="제목을 입력하세요" autocomplete="off">
+                        <input th:field="*{noticeTitle}" type="text" class="form-control" name="noticeTitle" id="noticeTitle" placeholder="제목을 입력하세요" autocomplete="off">
                     </div>
 
                     <!-- 내용 입력 -->
                     <div class="mb-4">
                         <label for="noticeContent" class="form-label">내용</label>
-                        <textarea class="form-control" name="noticeContent" id="noticeContent" rows="5" placeholder="내용을 입력하세요" autocomplete="off"></textarea>
+                        <textarea th:field="*{noticeContent}" class="form-control" name="noticeContent" id="noticeContent" rows="5" placeholder="내용을 입력하세요" autocomplete="off"></textarea>
                     </div>
 
                     <!-- 상단 고정 -->
-                    <div class="form-check form-switch mb-4">
-                        <input class="form-check-input" type="checkbox" id="active">
-                        <label class="form-check-label" for="active">공지사항 상단 고정</label>
-                    </div>
+					<div class="form-check form-switch mb-4">
+					    
+					    <input class="form-check-input" th:field="*{active}" type="checkbox" value="true" id="active">
+					    <label class="form-check-label" for="active">공지사항 상단 고정</label>
+					</div>
 
                     <!-- 제출 버튼 -->
                     <div class="d-grid gap-2">
@@ -57,5 +72,7 @@
             </div>
         </div>
     </div>
+	
+
 </body>
 </html>

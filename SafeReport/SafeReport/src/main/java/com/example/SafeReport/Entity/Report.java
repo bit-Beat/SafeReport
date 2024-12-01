@@ -1,14 +1,12 @@
 package com.example.SafeReport.Entity;
 import java.time.LocalDateTime;
-import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -55,5 +53,8 @@ public class Report {
 	
 	@Column(nullable = false, length=50)
 	private String report_pw;
+	
+	@OneToOne(mappedBy = "reportid") 
+    private Risk risk; // Risk와 ManyToOne 매핑을 통해 riskList 참조 가능 
 	
 }

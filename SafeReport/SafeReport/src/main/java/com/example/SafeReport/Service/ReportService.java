@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.SafeReport.DataNotFoundException;
 import com.example.SafeReport.Entity.Report;
+import com.example.SafeReport.Entity.Risk;
 import com.example.SafeReport.Repository.ReportRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,7 @@ public class ReportService {
 	private final ReportRepository reportRepository;
 	
 	/// Report Insert
-	public void create(String title, String department, String name, String location, String content, String details, String password)
+	public Report create(String title, String department, String name, String location, String content, String details, String password)
 	{
 		Report report = new Report(); // Report 테이블 생성
 		
@@ -31,7 +32,7 @@ public class ReportService {
 		report.setReport_detail(details); // 개선내용
 		report.setReport_pw(password);//패스워드
 		report.setReportcreatedate(LocalDateTime.now()); // 저장시간
-		this.reportRepository.save(report); // 저장
+		return this.reportRepository.save(report); // 저장 후 리턴
 	}
 	
 	/// Report Update
@@ -57,6 +58,7 @@ public class ReportService {
             throw new DataNotFoundException("question not found");
         }
     }
+	
 	
 	public void delete(Report report) {
         this.reportRepository.delete(report);

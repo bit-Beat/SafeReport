@@ -37,7 +37,7 @@
 	<div layout:fragment="content" class="container-fluid">
 		<div class="container mt-5"> <!--마진탑 5-->
 			<div class="form-container mx-auto" style="max-width: 2000px;">
-			<h1 class="text-center mb-4">📢 현대파텍스 안전신문고제보 <p style="font-size: 15px; font-family:Gothic A1; margin-top: 3px;">안전 위험요인/요소를 가감없이 제보해주세요.</p> </h1>
+				<h1 class="text-center mb-4">📢 현대파텍스 안전신문고제보 <p style="font-size: 15px; font-family:Gothic A1; margin-top: 3px;">안전 위험요인/요소를 가감없이 제보해주세요.</p> </h1>
 			
 		    <form method="post" th:object="${reportForm}">
 				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />

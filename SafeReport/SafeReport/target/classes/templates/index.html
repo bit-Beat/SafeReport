@@ -60,9 +60,10 @@
                         </thead>
                         <tbody>
 							<tr th:each="notice, loop : ${notice}" th:class="${notice.active == true} ? 'inactive-row' : ''">
-								<td th:text="${loop.count}"></td>
+								<td th:if="${notice.active != true}" th:text="${loop.count}"></td>
+								<td th:if="${notice.active == true}"><span class="badge rounded-pill text-bg-danger">긴급</span></td>
 								<td>
-									<a th:href="@{|/board/notice/notice_detail/${notice.noticeid}|}" >[[${notice.title}]]</a>
+									<a th:href="@{|/notice/notice_detail/${notice.noticeid}|}" >[[${notice.title}]]</a>
 								</td>
 								<td>[[${notice.author}]]</td>
 								<td th:text="${#temporals.format(notice.createdate, 'yyyy-MM-dd HH:mm')}"></td>
