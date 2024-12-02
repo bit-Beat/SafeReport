@@ -30,10 +30,10 @@
 	}
 </style>
 
-<body>
+<body >
 	<!-- 기본 템플릿 안에 삽입될 내용 Start -->
 	<nav th:replace="~{layout/header :: header}"></nav><!--헤더 네비게이션-->
-	<th:block layout:fragment="content"></th:block>
+	<th:block layout:fragment="content" class = "text-truncate"></th:block>
 	<!-- 기본 템플릿 안에 삽입될 내용 End -->
 	<footer th:replace="~{layout/footer :: footer}"></footer>
 	
