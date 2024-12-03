@@ -61,6 +61,7 @@
                             <th>작성자</th>
                             <th>위험 등급</th>
                             <th>상태</th>
+							<th>진행상황</th>
                             <th>작성일</th>
                             <th>관리</th>
                         </tr>
@@ -89,8 +90,13 @@
 								                      'badge text-bg-light'}" 
 								      th:text="${report.risk.status.getDescription}">
 								</span>
+								
                             </td>
-
+							<td>
+								<div class="progress" role="progressbar" aria-label="Warning example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+									<div class="progress-bar text-bg-warning" style="width: 75%" >3</div>
+								</div>
+							</td>
                             <td th:text="${#temporals.format(report.reportcreatedate, 'yyyy-MM-dd HH:mm')}"></td>
                             <td>
                                 <a th:href="@{/admin/reports/{id}(id=${report.reportid})}" class="btn btn-sm btn-outline-primary btn-action">상세</a>

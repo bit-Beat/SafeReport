@@ -4,12 +4,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.SafeReport.Entity.Report;
+import com.example.SafeReport.Entity.Risk;
 import com.example.SafeReport.Enum.RiskGrade;
 import com.example.SafeReport.Enum.RiskStatus;
 import com.example.SafeReport.Service.IndexService;
+import com.example.SafeReport.Service.ReportService;
 import com.example.SafeReport.Service.RiskService;
 
 import lombok.RequiredArgsConstructor;
@@ -19,6 +23,7 @@ import lombok.RequiredArgsConstructor;
 public class AdminController {
 	private final IndexService indexService;
 	private final RiskService riskService;
+	private final ReportService reportService;
 	
  	/*@GetMapping("/admin/reports")
 	public String reportlist(Model model, @RequestParam(value = "keyword", defaultValue = "") String keyword) // 
@@ -63,4 +68,29 @@ public class AdminController {
  	    model.addAttribute("selectedRiskGrade", riskGrade); // 등급
         return "admin/admin_reports";
     }
+ 	
+ 	@GetMapping("/admin/reports/{id}")
+ 	public String adminReportManage(@PathVariable Integer id, Model model) {
+ 	   
+ 	    Report report = this.reportService.getReport(id);
+		model.addAttribute("report", report);
+
+ 	    return "admin/admin_report_manage";
+ 	}
+ 	
+ 	@PostMapping("/admin/reports/{id}")
+ 	public String updateRisk(
+ 	    @PathVariable("id") Integer id,
+ 	    @RequestParam("riskFactor") String riskFactor,
+ 	    @RequestParam("riskType") String riskType,
+ 	    @RequestParam("status") RiskStatus status,
+ 	    @RequestParam("riskGrade") RiskGrade riskGrade,
+ 	    @RequestParam("riskDescription") String riskDescription,
+ 	    @RequestParam("improvementMeasures") String improvementMeasures) {
+ 	    Risk risk = this.riskService.getRisk(id);
+ 	    this.riskService.modify(risk, riskFactor, riskType, status, riskGrade, riskDescription, improvementMeasures);
+ 	    return "redirect:/admin/reports/" + id;
+ 	}
+
+
 }

@@ -86,7 +86,17 @@
 					<tr th:each="report, loop : ${paging}">
 						<td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
 						<td>
-						    <a th:href="@{|/board/report_detail/${report.reportid}|}" >[[${report.report_title}]]</a>
+							<div>
+								<span th:classappend="${report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).PENDING ? 'badge text-bg-secondary' : 
+																		report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).REVIEWED ? 'badge text-bg-primary' : 
+																		report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).DISCUSSING ? 'badge text-bg-danger' : 
+																		report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).IN_PROGRESS ? 'badge text-bg-warning' : 
+																		report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).COMPLETED ? 'badge text-bg-success' : 
+																		'badge text-bg-light'}" 
+									  th:text="${report.risk.status.getDescription}"
+								  	  style="margin-right: 5px; font-size: 0.7em;"></span>
+								<a th:href="@{|/board/report_detail/${report.reportid}|}" >[[${report.report_title}]]</a>
+							</div>
 						</td>
 						
 						<td>[[${report.reporter_name}]]</td>

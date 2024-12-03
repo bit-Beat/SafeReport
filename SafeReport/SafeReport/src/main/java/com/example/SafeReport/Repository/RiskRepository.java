@@ -1,6 +1,6 @@
 package com.example.SafeReport.Repository;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +17,9 @@ import com.example.SafeReport.Enum.RiskStatus;
 @Repository
 public interface RiskRepository extends JpaRepository<Risk, Integer> {
 	
+	@Query("SELECT r FROM Risk r WHERE r.reportid.reportid = :reportid")
+	Optional<Risk> findByReportid(@Param("reportid") Integer reportid);
+	 
 	@Query("SELECT r FROM Report r " +
 		       "JOIN r.risk k " +
 		       "WHERE (:keyword IS NULL OR r.report_title LIKE %:keyword% OR r.reporter_name LIKE %:keyword%) " +
