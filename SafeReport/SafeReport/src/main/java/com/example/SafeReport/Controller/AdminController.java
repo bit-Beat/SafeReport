@@ -90,6 +90,7 @@ public class AdminController {
  	    Risk risk = this.riskService.getRisk(id);
  	    this.riskService.modify(risk, riskFactor, riskType, status, riskGrade, riskDescription, improvementMeasures);
  	    return "redirect:/admin/reports/" + id;
+ 	    return "redirect:/admin/reports/{id}" ;
  	}
 
 
