@@ -93,9 +93,9 @@
 								
                             </td>
 							<td>
-								<div class="progress" role="progressbar" aria-label="Warning example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-									<div class="progress-bar text-bg-warning" style="width: 75%" >3</div>
-								</div>
+								<div class="progress" role="progressbar" aria-label="Default striped example" >
+								  <div class="progress-bar progress-bar-striped" th:style="|width: ${((report.risk.status.ordinal + 1)*100) / T(com.example.SafeReport.Enum.RiskStatus).values().length }%|"></div>
+								</div> 
 							</td>
                             <td th:text="${#temporals.format(report.reportcreatedate, 'yyyy-MM-dd HH:mm')}"></td>
                             <td>

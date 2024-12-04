@@ -76,6 +76,7 @@
 				<thead class="table">
 					<tr>
 						<th>번호</th>
+						<th>상태</th>
 						<th>제목</th>
 						<th>작성자</th>
 						<th>소속</th>
@@ -85,20 +86,18 @@
 				<tbody>
 					<tr th:each="report, loop : ${paging}">
 						<td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
-						<td>
-							<div>
-								<span th:classappend="${report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).PENDING ? 'badge text-bg-secondary' : 
-																		report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).REVIEWED ? 'badge text-bg-primary' : 
-																		report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).DISCUSSING ? 'badge text-bg-danger' : 
-																		report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).IN_PROGRESS ? 'badge text-bg-warning' : 
-																		report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).COMPLETED ? 'badge text-bg-success' : 
-																		'badge text-bg-light'}" 
-									  th:text="${report.risk.status.getDescription}"
-								  	  style="margin-right: 5px; font-size: 0.7em;"></span>
-								<a th:href="@{|/board/report_detail/${report.reportid}|}" >[[${report.report_title}]]</a>
-							</div>
+						<td><span th:classappend="${report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).PENDING ? 'badge text-bg-secondary' : 
+												report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).REVIEWED ? 'badge text-bg-primary' : 
+												report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).DISCUSSING ? 'badge text-bg-danger' : 
+												report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).IN_PROGRESS ? 'badge text-bg-warning' : 
+												report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).COMPLETED ? 'badge text-bg-success' : 
+												'badge text-bg-light'}" 
+									th:text="${report.risk.status.getDescription}"
+								  	style="margin-right: 5px; font-size: 0.7em;"></span>
 						</td>
-						
+						<td>
+							<a th:href="@{|/board/report_detail/${report.reportid}|}" >[[${report.report_title}]]</a>
+						</td>
 						<td>[[${report.reporter_name}]]</td>
 						<td>[[${report.report_department}]]</td>
 						<td th:text="${#temporals.format(report.reportcreatedate, 'yyyy-MM-dd HH:mm')}"></td>

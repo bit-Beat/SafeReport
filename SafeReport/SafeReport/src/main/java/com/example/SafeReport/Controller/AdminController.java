@@ -89,7 +89,6 @@ public class AdminController {
  	    @RequestParam("improvementMeasures") String improvementMeasures) {
  	    Risk risk = this.riskService.getRisk(id);
  	    this.riskService.modify(risk, riskFactor, riskType, status, riskGrade, riskDescription, improvementMeasures);
- 	    return "redirect:/admin/reports/" + id;
  	    return "redirect:/admin/reports/{id}" ;
  	}
 

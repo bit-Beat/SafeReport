@@ -5,9 +5,8 @@ public enum RiskStatus {
     REVIEWED("확인완료"),
     DISCUSSING("개선논의중"),
     IN_PROGRESS("개선조치중"),
-    COMPLETED("개선조치완료"),
-    OTHER("기타");
-
+    COMPLETED("개선조치완료");
+    
     private final String description;
 
     RiskStatus(String description) {
