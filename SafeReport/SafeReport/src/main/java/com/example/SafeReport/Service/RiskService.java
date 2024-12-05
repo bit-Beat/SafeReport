@@ -1,11 +1,14 @@
 package com.example.SafeReport.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.SafeReport.DataNotFoundException;
@@ -47,8 +50,9 @@ public class RiskService {
 	
 	// Find Reports with Risks by Keyword(title, reporter_name), Status, RiskGrade
 	public Page<Report> getFindRisks(String keyword, RiskStatus status, RiskGrade riskGrade, int page) {
-		
-		Pageable pageable = PageRequest.of(page, 100);
+		 List<Sort.Order> sorts = new ArrayList<>();
+		 sorts.add(Sort.Order.desc("reportcreatedate"));
+		Pageable pageable = PageRequest.of(page, 100, Sort.by(sorts));
 	    return riskRepository.findByKeywordAndFilters(keyword, status, riskGrade, pageable);
 	}
 	

@@ -7,8 +7,37 @@
     <title>안전신문고 제보사이트</title>
 	
 	<style>
+		h3{
+			margin-bottom: 20px
+		}
 		.inactive-row {
 		    background-color: rgb(234, 189, 189); /* 원하는 색상으로 변경 */
+		}
+		.hero {
+		           background-image: url('');
+		           background-size: cover;
+		           background-position: center;
+		           height: 250px;
+		           margin-bottom: 20px;
+		           position: relative;
+		           color: rgb(#797979);
+				   background-color: rgb(255, 255, 255);
+		           display: flex;
+		           align-items: center;
+		           justify-content: center;
+		           font-size: 2rem;
+		           text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+		       }
+			   
+		/* Cards Section */
+       .card {
+           border: none;
+           border-radius: 10px;
+           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+           margin-bottom: 20px;
+       }
+		body {
+			background-color: #f8f9fa
 		}
 	</style>
 </head>
@@ -17,6 +46,69 @@
 
 <body>
 	<div layout:fragment="content" class="container-fluid">
+		<!-- Hero Section -->
+		<div class="hero">
+
+			안전한 세상을 위한 한걸음!
+		</div>
+		
+		<section class="container mt-5">
+		    <h3>공지사항</h3>
+		    <div class="card" th:if="${notice != null && !notice.isEmpty()}">
+				<!-- 최신 공지사항 한 개만 표시 -->
+				<div class="card-header" >				
+					<div class="d-flex align-items-center" style="margin-bottom: 8px">
+					    <i class="bi bi-megaphone-fill" style="color: rgb(2, 94, 232); font-size: 18px"></i> <!-- 빨간색 아이콘 -->
+					    <h5 class="card-title mb-0 ms-2" th:text="${notice[0].title}">공지사항 제목</h5>
+					</div>
+				</div>
+		        <div class="card-body">
+		            <p class="card-text" th:text="${notice[0].contents}"></p>
+		            <a th:href="@{|/notice/notice_detail/${notice[0].noticeid}|}" class="btn btn-primary">자세히 보기</a>
+		        </div>
+		    </div>
+		    <div th:if="${notice == null || notice.isEmpty()}">
+		        <p>현재 공지사항이 없습니다.</p>
+		    </div>
+		</section>
+		
+		<!-- Quick Links -->
+		<section id="quick-links" class="container mt-5">
+		    <h3>빠른 링크</h3>
+		    <div class="row">
+		        <div class="col-md-4">
+		            <div class="card text-center">
+		                <div class="card-body">
+		                    <h5 class="card-title" style="color: #D57402;"><i class="bi bi-exclamation-diamond-fill" style="margin-right: 5px"></i>신고 접수</h5>
+							<hr>
+		                    <p class="card-text">위험 요소를 신고하세요.</p>
+		                    <a href="/" class="btn btn-success">신고하기</a>
+		                </div>
+		            </div>
+		        </div>
+		        <div class="col-md-4">
+		            <div class="card text-center">
+		                <div class="card-body">
+		                    <h5 class="card-title">처리 현황</h5>
+							<hr>
+		                    <p class="card-text">신고 진행 상황을 확인하세요.</p>
+		                    <a href="/reportlist" class="btn btn-info">확인하기</a>
+		                </div>
+		            </div>
+		        </div>
+		        <div class="col-md-4">
+		            <div class="card text-center">
+		                <div class="card-body">
+		                    <h5 class="card-title">문의하기</h5>
+							<hr>
+		                    <p class="card-text">문의 사항이 있으신가요?</p>
+		                    <a href="/qna" class="btn btn-warning">문의하기</a>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</section>
+		
         <!-- 최근 게시글 섹션 -->
         <div class="container mt-5">			
             <div class="row  text-truncate">
