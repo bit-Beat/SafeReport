@@ -9,12 +9,14 @@
 <body>
 	<div layout:fragment="content">
 		
-    <div class="container mt-5 mb-3  text-truncate">
+    <div class="container mt-5 mb-3 text-truncate">
         <!-- 제목 및 통계 링크 -->
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1 class="text-primary">관리자 제보 관리</h1>
+            <h1 class="text-primary mb-3">관리자 제보 관리</h1>
             <a href="/admin/statistics" class="btn btn-outline-primary">📊 통계 보기</a>
         </div>
+		
+		<hr>
 
         <!-- 검색 및 필터 -->
         <form method="get" th:action="@{/admin/reports}" class="mb-4" id="searchForm">
@@ -25,23 +27,23 @@
 
                 <div class="col-md-3">
                     <select name="riskGrade" class="form-select">
-						<option selected value="null" >위험 등급 선택</option>
 						<option th:each="grade : ${T(com.example.SafeReport.Enum.RiskGrade).values()}"
 						        th:value="${grade.name()}"
 						        th:text="${grade.getDescription}"
 								th:selected="${selectedRiskGrade == grade.name()}">
 						</option>
+						<option selected value="null" >위험 등급 선택</option>
                     </select>
                 </div>
 				
 				<div class="col-md-3">
 					<select name="status" class="form-select">
-					    <option disabled hidden selected value="">상태 선택</option>
 					    <option th:each="status : ${T(com.example.SafeReport.Enum.RiskStatus).values()}"
 					            th:value="${status.name()}"
 					            th:text="${status.getDescription}"
 								th:selected="${selectedStatus == status.name()}">
 						</option>
+					    <option disabled hidden selected value="">상태 선택</option>
 					</select>
 				</div>
                 <div class="col-md-2">

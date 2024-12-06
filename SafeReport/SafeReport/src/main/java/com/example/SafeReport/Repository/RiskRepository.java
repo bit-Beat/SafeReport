@@ -29,5 +29,8 @@ public interface RiskRepository extends JpaRepository<Risk, Integer> {
 		        						 @Param("status") RiskStatus status,
 		        						 @Param("riskGrade") RiskGrade riskGrade,
 		        						 Pageable pageable);
+	
+
+
 
 }

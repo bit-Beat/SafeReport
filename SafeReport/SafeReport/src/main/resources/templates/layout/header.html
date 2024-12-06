@@ -30,8 +30,18 @@
                         <a class="nav-link" href="/qna" th:classappend="${page == 'qna'} ? 'active' : ''">문의</a>
                     </li>
 					
+					<div style="border-left: 1px solid rgb(171, 171, 171); margin-left: 10px; margin-right: 10px; margin-top: 5px; margin-bottom: 5px;"></div>
+					<li class="nav-item d-flex align-items-center " sec:authorize="isAuthenticated()" style="margin-right: 10px;">
+					    <button type="button" class="btn btn-primary position-relative btn-sm " style="gap: 5px;">
+					        <i class="bi bi-bell-fill" style="color: white;"></i>
+					        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+					            99+
+					            <span class="visually-hidden">unread messages</span>
+					        </span>
+					    </button>
+					</li>
+					
 					<!-- 관리자용 메뉴 -->
-					<div class="vl" style="border-left: 1px solid rgb(171, 171, 171); margin-left: 10px; margin-right: 10px; margin-top: 5px; margin-bottom: 5px;"></div>
 					<li class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMIN')" style="margin-right: 5px;">
 					    <a class="nav-link dropdown-toggle text-warning" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 					        <span class="text-warning">🏆</span>
@@ -39,7 +49,8 @@
 							
 					    </a>
 					    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminDropdown">
-					        <li><a class="dropdown-item" href="/admin/reports"><span class="badge text-bg-primary">개발중</span> 제보 관리</a></li>
+					        <li><a class="dropdown-item" href="/admin/reports">제보 관리</a></li>
+							<li><a class="dropdown-item" href="/admin/award"><span class="badge text-bg-primary">개발중</span> 수상 관리</a></li>
 					        <li><a class="dropdown-item" href="/admin/statistics"><span class="badge text-bg-danger">미개발</span> 통계 보기</a></li>
 					        <li><a class="dropdown-item" href="/admin/settings"><span class="badge text-bg-danger">미개발</span> 설정</a></li>
 							<li><a class="dropdown-item" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a></li>

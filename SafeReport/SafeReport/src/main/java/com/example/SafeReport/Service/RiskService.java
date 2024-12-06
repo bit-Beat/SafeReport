@@ -50,11 +50,18 @@ public class RiskService {
 	
 	// Find Reports with Risks by Keyword(title, reporter_name), Status, RiskGrade
 	public Page<Report> getFindRisks(String keyword, RiskStatus status, RiskGrade riskGrade, int page) {
-		 List<Sort.Order> sorts = new ArrayList<>();
-		 sorts.add(Sort.Order.desc("reportcreatedate"));
+		List<Sort.Order> sorts = new ArrayList<>();
+		sorts.add(Sort.Order.desc("reportcreatedate"));
 		Pageable pageable = PageRequest.of(page, 100, Sort.by(sorts));
 	    return riskRepository.findByKeywordAndFilters(keyword, status, riskGrade, pageable);
 	}
+	
+	/// 관리자 수상내역관리에 제보 목록 리스트 찾기
+	public void getFindRisksToAwards(String keyword, String year, String month, int page) {
+	    Pageable pageable = PageRequest.of(page, 10); // 페이지 크기 10
+
+	}
+
 	
 	/// Risk Update
 	public void modify(Risk risk, String riskFactor, String riskType, RiskStatus status, RiskGrade riskGrade, String riskDescription, String improvementMeasures) {

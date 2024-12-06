@@ -91,6 +91,12 @@ public class AdminController {
  	    this.riskService.modify(risk, riskFactor, riskType, status, riskGrade, riskDescription, improvementMeasures);
  	    return "redirect:/admin/reports/{id}" ;
  	}
+ 	
+ 	@GetMapping("/admin/award")
+ 	public String adminAward(Model model) {
+ 		
+ 		return "admin/admin_award";
+ 	}
 
 
 }
