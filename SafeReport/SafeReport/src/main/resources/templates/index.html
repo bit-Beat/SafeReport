@@ -62,7 +62,7 @@
 					</div>
 				</div>
 		        <div class="card-body">
-		            <p class="card-text" th:text="${notice[0].contents}"></p>
+		            <p class="card-text  text-truncate" th:text="${notice[0].contents}"></p>
 		            <a th:href="@{|/notice/notice_detail/${notice[0].noticeid}|}" class="btn btn-primary">자세히 보기</a>
 		        </div>
 		    </div>
@@ -80,7 +80,7 @@
 		                <div class="card-body">
 		                    <h5 class="card-title" style="color: #D57402;"><i class="bi bi-exclamation-diamond-fill" style="margin-right: 5px"></i>신고 접수</h5>
 							<hr>
-		                    <p class="card-text">위험 요소를 신고하세요.</p>
+		                    <p class="card-text text-truncate">위험 요소를 신고하세요.</p>
 		                    <a href="/" class="btn btn-success">신고하기</a>
 		                </div>
 		            </div>
@@ -90,7 +90,7 @@
 		                <div class="card-body">
 		                    <h5 class="card-title">처리 현황</h5>
 							<hr>
-		                    <p class="card-text">신고 진행 상황을 확인하세요.</p>
+		                    <p class="card-text text-truncate">신고 진행 상황을 확인하세요.</p>
 		                    <a href="/reportlist" class="btn btn-info">확인하기</a>
 		                </div>
 		            </div>
@@ -100,7 +100,7 @@
 		                <div class="card-body">
 		                    <h5 class="card-title">문의하기</h5>
 							<hr>
-		                    <p class="card-text">문의 사항이 있으신가요?</p>
+		                    <p class="card-text text-truncate">문의 사항이 있으신가요?</p>
 		                    <a href="/qna" class="btn btn-warning">문의하기</a>
 		                </div>
 		            </div>

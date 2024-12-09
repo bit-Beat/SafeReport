@@ -1,5 +1,6 @@
 package com.example.SafeReport.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -30,6 +31,8 @@ public interface RiskRepository extends JpaRepository<Risk, Integer> {
 		        						 @Param("riskGrade") RiskGrade riskGrade,
 		        						 Pageable pageable);
 	
+	 @Query("SELECT r FROM Report r WHERE (:keyword IS NULL OR r.report_title LIKE %:keyword% OR r.reporter_name LIKE %:keyword%) AND YEAR(r.reportcreatedate) = :year AND MONTH(r.reportcreatedate) = :month")
+	 Page<Report> findByYearAndMonth(Integer year, Integer month, String keyword, Pageable pageable );
 
 
 

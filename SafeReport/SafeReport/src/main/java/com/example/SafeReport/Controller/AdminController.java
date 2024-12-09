@@ -1,5 +1,7 @@
 package com.example.SafeReport.Controller;
 
+import java.time.LocalDate;
+
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -92,11 +94,23 @@ public class AdminController {
  	    return "redirect:/admin/reports/{id}" ;
  	}
  	
- 	@GetMapping("/admin/award")
- 	public String adminAward(Model model) {
- 		
- 		return "admin/admin_award";
- 	}
+	
+	 @GetMapping("/admin/award")
+     public String adminAward(Model model, @RequestParam(value="page", defaultValue="1") int page,
+    		 					@RequestParam(value = "year", required = false) Integer year,
+    		 					@RequestParam(value = "month", required = false) Integer month,
+    		 					@RequestParam(value = "keyword", defaultValue = "") String keyword) {
+		 if (year == null) year = LocalDate.now().getYear();
+		 if (month == null) month = LocalDate.now().getMonthValue();
+		 Page<Report> paging = riskService.getReportsByYearAndMonth(year, month, keyword, page-1);
+
+         // Add data to the model
+         model.addAttribute("paging", paging);
+         model.addAttribute("year", year);
+         model.addAttribute("month", month);
+
+         return "admin/admin_award";
+     }
 
 
 }

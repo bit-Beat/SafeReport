@@ -13,6 +13,7 @@
 		    background-color: rgb(255, 255, 255); /* 색상은 각 버튼에 맞게 변경 */
 		}
 	</style>
+
 </head>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -24,109 +25,9 @@
             <!-- 제목 -->
             <div class="d-flex  justify-content-between align-items-center ">
                 <h1 class="text-primary mb-3">제보 수상 관리 </h1>
-				<div class="text-primary" style="--bs-text-opacity: .7;">2024년 11월 수상내역</div>
+				<div class="text-primary" style="--bs-text-opacity: .7;" >[[${year}]]년 [[${month}]]월 수상내역</div>
             </div>
-
-                    
             <hr>
-            
-            <!-- 검색 및 필터 / 연도 및 월 선택 -->
-            <form class="row g-3 align-items-end mb-4">
-                <div class="col-md-3">
-                    <select class="form-select" id="year" name="year">
-                        <option value="2024">2024</option>
-                        <option value="2023">2023</option>
-                        <option value="2022">2022</option>
-                        <option value="2021">2021</option>
-                        <option selected value="null">연도 선택</option>
-                    </select>
-                </div>
-                
-                <div class="col-md-3">
-                    <select class="form-select" id="month" name="month">
-                        <option value="1">1월</option>
-                        <option value="2">2월</option>
-                        <option value="3">3월</option>
-                        <option value="4">4월</option>
-                        <option value="5">5월</option>
-                        <option value="6">6월</option>
-                        <option value="7">7월</option>
-                        <option value="8">8월</option>
-                        <option value="9">9월</option>
-                        <option value="10">10월</option>
-                        <option value="11">11월</option>
-                        <option value="12">12월</option>
-                        <option selected value="null">월 선택</option>
-                    </select>
-                </div>
-                
-                <div class="col-md-4">
-                    <input type="text" name="keyword" class="form-control" placeholder="제목/작성자 검색" th:value="${keyword}" autocomplete="off">
-                </div>
-
-                <div class="col-md-2">
-                    <button type="submit" class="btn btn-primary w-100">검색</button>
-                </div>
-            </form>
-
-            <!-- 제보 목록 -->
-			<div class="card mb-4 d-block text-truncate">
-				<div class="card-header bg-secondary text-white">제보 리스트</div>
-			    <div class="card-body text-truncate">
-			        <table class="table table-hover">
-			            <thead>
-			                <tr>
-			                    <th>번호</th>
-			                    <th>제목</th>
-			                    <th>작성자</th>
-			                    <th>작성일</th>
-								<th>위험등급</th>
-			                    <th>수상선택</th>
-			                </tr>
-			            </thead>
-			            <tbody>
-			                <tr >
-								<td>1</td>
-								<td>제보 제목 1</td>
-								<td>홍길동</td>
-								<td>2024-01-10</td>
-								<td><span class="badge text-bg-secondary">낮음</span></td>
-								<td>
-									<button type="button" 
-									        class="btn btn-sm btnaward" 
-									        style="border-color: #FFC107; color: #FFC107; " 
-									        onclick="selectAward(this, '최우수상')">
-									    
-										<i class="bi bi-flower1" style="font-size: 18px;"></i>
-										<i class="bi bi-flower1" style="font-size: 18px;"></i>
-										<i class="bi bi-flower1" style="font-size: 18px;"></i>
-									</button>
-
-									<button type="button" 
-									        class="btn btn-sm btnaward" 
-									        style="border-color: silver; color: silver; " 
-									        onclick="selectAward(this, '우수상')">
-										<i class="bi bi-flower1" style="font-size: 18px;"></i>
-										<i class="bi bi-flower1" style="font-size: 18px;"></i>
-									</button>
-
-									<button type="button" 
-									        class="btn btn-sm btnaward" 
-									        style="border-color: #cd7f32; color: #cd7f32; " 
-									        onclick="selectAward(this, '장려상')">
-									    <!--<i class="bi bi-award-fill" style="margin-right: 3px;"></i> -->
-										<i class="bi bi-flower1" style="font-size: 18px;"></i>
-									</button>
-
-								</td>
-
-			                </tr>
-			            </tbody>
-			        </table>
-			    </div>
-			</div>
-			
-			<hr class="hr-13 mt-5 mb-5">
 			
 			<!-- 최우수상, 우수상, 장려상 선택 (가로 3열 배열) -->
 			<div class="row ">
@@ -198,26 +99,154 @@
 			                        <tr>
 			                            <th>제목</th>
 			                            <th>작성자</th>
-			                            <th>작성일</th>
-			                            <th>선택</th>
-			                        </tr>
-			                    </thead>
-			                    <tbody id="encouragementAwardTable">
-			                        <!-- 장려상 수상 항목이 추가될 영역 -->
-									<td>제보 제목 1</td>
-									<td>홍길동</td>
-									<td>2024-01-10</td>
+							            <th>작성일</th>
+										<th>선택</th>
+									</tr>
+							    </thead>
+							    <tbody id="encouragementAwardTable">
+							            <!-- 장려상 수상 항목이 추가될 영역 -->
+										<td>제보 제목 1</td>
+										<td>홍길동</td>
+										<td>2024-01-10</td>
 									<td><span class="badge text-bg-secondary">낮음</span></td>
-			                    </tbody>
-			                </table>
-			            </div>
-			        </div>
-			    </div>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
 			</div>
-
+	
 			<div class="d-grid gap-2">
 				<button type="submit" class="btn btn-primary">저장</button>
 			</div>
+				
+			<hr class="hr-13 mt-5 mb-5">
+            <!-- 검색 및 필터 / 연도 및 월 선택 -->
+            <form method="get" th:action="@{/admin/award}" id="searchForm" class="row g-3 align-items-end mb-4">
+                <div class="col-md-3">
+                    <select class="form-select" id="year" name="year" >
+                        <option value="2024" th:selected="${year == 2024}">2024</option>
+                        <option value="2023" th:selected="${year == 2023}">2023</option>
+                        <option value="2022" th:selected="${year == 2022}">2022</option>
+                        <option value="2021" th:selected="${year == 2021}">2021</option>
+                    </select>
+                </div>
+                
+                <div class="col-md-3">
+					<select class="form-select" id="month" name="month">
+					    <option value="1" th:selected="${month == 1}">1월</option>
+					    <option value="2" th:selected="${month == 2}">2월</option>
+					    <option value="3" th:selected="${month == 3}">3월</option>
+					    <option value="4" th:selected="${month == 4}">4월</option>
+					    <option value="5" th:selected="${month == 5}">5월</option>
+					    <option value="6" th:selected="${month == 6}">6월</option>
+					    <option value="7" th:selected="${month == 7}">7월</option>
+					    <option value="8" th:selected="${month == 8}">8월</option>
+					    <option value="9" th:selected="${month == 9}">9월</option>
+					    <option value="10" th:selected="${month == 10}">10월</option>
+					    <option value="11" th:selected="${month == 11}">11월</option>
+					    <option value="12" th:selected="${month == 12}">12월</option>
+					</select>
+                </div>
+                
+                <div class="col-md-4">
+                    <input type="text" name="keyword" class="form-control" placeholder="제목/작성자 검색" th:value="${keyword}" autocomplete="off">
+                </div>
+
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">검색</button>
+                </div>
+            </form>
+
+            <!-- 제보 목록 -->
+			<div class="card mb-4 d-block text-truncate">
+				<div class="card-header bg-secondary text-white">제보 리스트</div>
+			    <div class="card-body text-truncate">
+			        <table class="table table-hover">
+			            <thead>
+			                <tr>
+			                    <th>번호</th>
+			                    <th>제목</th>
+			                    <th>작성자</th>
+			                    <th>작성일</th>
+								<th>위험등급</th>
+			                    <th>수상선택</th>
+			                </tr>
+			            </thead>
+			            <tbody>
+			                <tr th:each="report, loop : ${paging}">
+								<td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
+								<td th:text="${report.report_title}"></td>
+								<td th:text="${report.reporter_name}"></td>
+								<td th:text="${#temporals.format(report.reportcreatedate, 'yyyy-MM-dd HH:mm')}"></td>
+								<td>
+									<span th:classappend="${report.risk.riskGrade != null ?
+															(report.risk.riskGrade == T(com.example.SafeReport.Enum.RiskGrade).A ? 'badge text-bg-danger' : 
+															report.risk.riskGrade == T(com.example.SafeReport.Enum.RiskGrade).B ? 'badge text-bg-warning' : 
+															report.risk.riskGrade == T(com.example.SafeReport.Enum.RiskGrade).C ? 'badge text-bg-primary' : 
+															report.risk.riskGrade == T(com.example.SafeReport.Enum.RiskGrade).D ? 'badge text-bg-success' : 
+															'badge text-bg-light') : 'badge text-bg-light'}" 
+											th:text="${report.risk.riskGrade.description}">
+									</span>
+								</td>
+								<td>
+									<button type="button" 
+									        class="btn btn-sm btnaward" 
+									        style="border-color: #FFC107; color: #FFC107; " 
+									        onclick="selectAward(this, '최우수상')">
+									    
+										<i class="bi bi-flower1" style="font-size: 18px;"></i>
+										<i class="bi bi-flower1" style="font-size: 18px;"></i>
+										<i class="bi bi-flower1" style="font-size: 18px;"></i>
+									</button>
+
+									<button type="button" 
+									        class="btn btn-sm btnaward" 
+									        style="border-color: silver; color: silver; " 
+									        onclick="selectAward(this, '우수상')">
+										<i class="bi bi-flower1" style="font-size: 18px;"></i>
+										<i class="bi bi-flower1" style="font-size: 18px;"></i>
+									</button>
+
+									<button type="button" 
+									        class="btn btn-sm btnaward" 
+									        style="border-color: #cd7f32; color: #cd7f32; " 
+									        onclick="selectAward(this, '장려상')">
+									    <!--<i class="bi bi-award-fill" style="margin-right: 3px;"></i> -->
+										<i class="bi bi-flower1" style="font-size: 18px;"></i>
+									</button>
+
+								</td>
+
+			                </tr>
+			            </tbody>
+			        </table>
+			    </div>
+			</div>
+			
+			<!-- 페이징처리 시작 -->
+			<div th:if="${!paging.isEmpty()}">
+				<ul class="pagination justify-content-center">
+				    <!-- Previous Page -->
+				    <li class="page-item" th:classappend="${paging.number == 0} ? 'disabled'">
+				        <a class="page-link" th:href="@{/admin/award(page=${paging.number}, keyword=${keyword}, month=${year}, month=${month})}">&laquo;</a>
+				    </li>
+
+				    <!-- Page Numbers -->
+				    <li th:each="page : ${#numbers.sequence(1, paging.totalPages)}" 
+				        th:classappend="${page - 1 == paging.number} ? 'active'" 
+				        class="page-item">
+				        <a class="page-link" th:href="@{/admin/award(page=${page}, keyword=${keyword}, year=${year}, month=${month})}" 
+				           th:text="${page}"></a>
+				    </li>
+
+				    <!-- Next Page -->
+				    <li class="page-item" th:classappend="${paging.number + 1 == paging.totalPages} ? 'disabled'">
+				        <a class="page-link" th:href="@{/admin/award(page=${paging.number + 2}, keyword=${keyword}, year=${year}, month=${month})}">&raquo;</a>
+				    </li>
+				</ul>
+			</div>
+			<!-- 페이징처리 끝 -->
         </div>
     </div>
 
