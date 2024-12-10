@@ -1,6 +1,7 @@
 package com.example.SafeReport.Controller;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -10,10 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.SafeReport.Entity.Award;
 import com.example.SafeReport.Entity.Report;
 import com.example.SafeReport.Entity.Risk;
 import com.example.SafeReport.Enum.RiskGrade;
 import com.example.SafeReport.Enum.RiskStatus;
+import com.example.SafeReport.Service.AwardService;
 import com.example.SafeReport.Service.IndexService;
 import com.example.SafeReport.Service.ReportService;
 import com.example.SafeReport.Service.RiskService;
@@ -26,6 +29,7 @@ public class AdminController {
 	private final IndexService indexService;
 	private final RiskService riskService;
 	private final ReportService reportService;
+	private final AwardService awardService;
 	
  	/*@GetMapping("/admin/reports")
 	public String reportlist(Model model, @RequestParam(value = "keyword", defaultValue = "") String keyword) // 
@@ -103,9 +107,15 @@ public class AdminController {
 		 if (year == null) year = LocalDate.now().getYear();
 		 if (month == null) month = LocalDate.now().getMonthValue();
 		 Page<Report> paging = riskService.getReportsByYearAndMonth(year, month, keyword, page-1);
+		 List<Award> bestaward = awardService.getMonthlyAwardsByType(year, month, "최우수상");
+		 List<Award> betteraward = awardService.getMonthlyAwardsByType(year, month, "우수상"); 
+		 List<Award> goodaward = awardService.getMonthlyAwardsByType(year, month, "장려상"); 
 
          // Add data to the model
          model.addAttribute("paging", paging);
+         model.addAttribute("bestaward", bestaward); // 최우수상
+         model.addAttribute("betteraward", betteraward); //우수상
+         model.addAttribute("goodaward", goodaward); //장려상
          model.addAttribute("year", year);
          model.addAttribute("month", month);
 

@@ -41,7 +41,7 @@ public class ReportController {
 	{
 		if(bindingResult.hasErrors())
 	  	{
-	  		return "report";
+	  		return "board/report";
 	  	}
 	  		
 		Report savedReport = this.reportService.create(

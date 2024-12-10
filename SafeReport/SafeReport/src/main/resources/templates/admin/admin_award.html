@@ -48,11 +48,12 @@
 			                        </tr>
 			                    </thead>
 			                    <tbody id="bestAwardTable">
-			                        <!-- 최우수상 수상 항목이 추가될 영역 -->
-									<td>제보 제목 1</td>
-									<td>홍길동</td>
-									<td>2024-01-10</td>
-									<td><span class="badge text-bg-secondary">낮음</span></td>
+			                        <tr th:each="bestaward, loop : ${bestaward}">
+										<td th:text="${bestaward.report.report_title}"></td>
+										<td th:text="${bestaward.report.reporter_name}"></td>
+										<td th:text="${#temporals.format(bestaward.report.reportcreatedate, 'yyyy-MM-dd')}"></td>
+										<td><button type="button" style="--bs-btn-padding-y: .05rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" class="btn btn-danger btn-sm">삭제</button></td>
+									</tr>
 			                    </tbody>
 			                </table>
 			            </div>
@@ -75,13 +76,14 @@
 			                            <th>선택</th>
 			                        </tr>
 			                    </thead>
-			                    <tbody id="excellentAwardTable">
-			                        <!-- 우수상 수상 항목이 추가될 영역 -->
-									<td>제보 제목 1</td>
-									<td>홍길동</td>
-									<td>2024-01-10</td>
-									<td><span class="badge text-bg-secondary">낮음</span></td>									
-			                    </tbody>
+								<tbody id="betterAwardTable">
+							    	<tr th:each="betteraward, loop : ${betteraward}">
+										<td th:text="${betteraward.report.report_title}"></td>
+										<td th:text="${betteraward.report.reporter_name}"></td>
+										<td th:text="${#temporals.format(betteraward.report.reportcreatedate, 'yyyy-MM-dd')}"></td>
+										<td><button type="button" style="--bs-btn-padding-y: .05rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" class="btn btn-danger btn-sm">삭제</button></td>
+									</tr>
+								</tbody>
 			                </table>
 			            </div>
 			        </div>
@@ -103,12 +105,13 @@
 										<th>선택</th>
 									</tr>
 							    </thead>
-							    <tbody id="encouragementAwardTable">
-							            <!-- 장려상 수상 항목이 추가될 영역 -->
-										<td>제보 제목 1</td>
-										<td>홍길동</td>
-										<td>2024-01-10</td>
-									<td><span class="badge text-bg-secondary">낮음</span></td>
+								<tbody id="goodAwardTable">
+									<tr th:each="goodaward, loop : ${goodaward}">
+										<td th:text="${goodaward.report.report_title}"></td>
+										<td th:text="${goodaward.report.reporter_name}"></td>
+										<td th:text="${#temporals.format(goodaward.report.reportcreatedate, 'yyyy-MM-dd')}"></td>
+										<td><button type="button" style="--bs-btn-padding-y: .05rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" class="btn btn-danger btn-sm">삭제</button></td>
+									</tr>
 								</tbody>
 							</table>
 						</div>
