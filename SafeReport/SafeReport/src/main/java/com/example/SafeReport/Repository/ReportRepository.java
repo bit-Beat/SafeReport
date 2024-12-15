@@ -17,7 +17,7 @@ import com.example.SafeReport.Entity.Report;
 
 @Repository
 public interface ReportRepository extends JpaRepository<Report, Integer> {
-	List<Report> findTop5ByOrderByReportcreatedateDesc();  // 상위 5개 행 가져오기
+	List<Report> findTop13ByOrderByReportcreatedateDesc();  // 상위 5개 행 가져오기
 	Page<Report> findAll(Pageable pageable); // 페이징 기능 
 	Page<Report> findAll(Specification<Report> spec, Pageable pageable); // 검색
 	

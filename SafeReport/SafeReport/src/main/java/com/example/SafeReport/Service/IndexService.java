@@ -26,7 +26,7 @@ public class IndexService {
 	private final ReportRepository reportRepository;
 
 	public List<Report> getList(){
-		return this.reportRepository.findTop5ByOrderByReportcreatedateDesc();
+		return this.reportRepository.findTop13ByOrderByReportcreatedateDesc();
 	}
 	
 	public List<Report> getFindAll(){

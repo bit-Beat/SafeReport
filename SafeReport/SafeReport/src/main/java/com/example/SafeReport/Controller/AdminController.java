@@ -147,26 +147,38 @@ public class AdminController {
 	 @PostMapping("/admin/award/save")
 	 public String saveAwards(@RequestParam("year") int year,
 	         				  @RequestParam("month") int month,
-	         				  @RequestParam("bestAwardIds") List<Integer> goodAwardIds, Model model) {
+	         				  @RequestParam("awardType") String awardType,
+	         				  @RequestParam("awardIds") Integer awardIds, Model model) {
 	     
-	     LocalDate awardDate = LocalDate.of(year, month, 1); // 수상 날짜 설정
+	    LocalDate awardDate = LocalDate.of(year, month, 1); // 수상 날짜 설정
 	     
 	     // 기존 날짜 데이터 모두 삭제(최우수상, 우수상, 장려상)
 	     //awardService.deleteAwardsByDate(awardDate);
 
 	     // 새로운 수상 데이터 저장
-	     /*for (Integer reportId : goodAwardIds) {
-	         Report report = reportService.getReport(reportId); // Report 엔티티 조회
-	         Award award = new Award();
-	         award.setAwardDate(awardDate);
-	         award.setAwardType("장려상");
-	         award.setReport(report);
+	     Integer reportId = awardIds;
+	     Report report = reportService.getReport(reportId); // Report 엔티티 조회
+	     Award award = new Award();
+	     award.setAwardDate(awardDate);
+	     award.setAwardType(awardType);
+	     award.setReport(report);
+	     
+	     awardService.saveAward(award); // Award 저장
+	     
+	     return "redirect:/admin/award?year=" + year + "&month=" + month ;
+		/*model.addAttribute("page", "qna");
+		return "qna";  // qna.html을 반환*/
+	 }
 
-	         awardService.saveAward(award); // Award 저장
-	     }*/
-
-			model.addAttribute("page", "qna");
-	        return "qna";  // qna.html을 반환
+	 @PostMapping("/admin/award/delete")
+	 public String deleteAwards(@RequestParam("year") int year,
+			  					@RequestParam("month") int month,
+			  					@RequestParam("deleteid") Integer deleteid, Model model)
+	 {		 
+		  
+	     // 기존 데이터를 삭제
+		 awardService.deleteAwardByReportId(deleteid);
+	     return "redirect:/admin/award?year=" + year + "&month=" + month ;
 	 }
 
 

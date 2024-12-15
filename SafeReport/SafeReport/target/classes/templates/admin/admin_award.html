@@ -17,75 +17,97 @@
 	<script>
 	    function selectAward(button, awardType) {
 	        const row = button.closest('tr'); // 클릭된 버튼(button)을 기준으로 가장 가까운 <tr> 요소를 찾습니다./ 상수지정
-	      			
-	        let targetTable;
-	        if (awardType === '최우수상' ) {
-	            targetTable = document.getElementById('bestAward');
-	        } else if (awardType === '우수상') {
-	            targetTable = document.getElementById('betterAward');
-	        } else if (awardType === '장려상') {
-	            targetTable = document.getElementById('goodAward');
-	        }
-	        if (!targetTable) return; //없으면 리턴
-
-			const id = row.querySelector('td:nth-child(2)').textContent; // 1번째 열인 게시판id
-	        const title = row.querySelector('td:nth-child(3)').textContent; // 3번째열인 제목
-						
-			// 모든 테이블을 중복 확인
-			const tables = [
-			    document.getElementById('bestAward'),
-			    document.getElementById('betterAward'),
-			    document.getElementById('goodAward')
-			];
-
-			const isDuplicate = tables.some(table => 
-			    Array.from(table.rows).some(row => row.cells[0].textContent === id)
-			);
-
-			if (isDuplicate) {
-			    alert('이미 추가된 항목입니다.');
-			    return;
-			}
-			
-			if(awardType === '최우수상' && document.getElementById('bestAward').rows.length >= 1)
-			{
-				alert("최우수상은 1개까지 수상 가능합니다.");
-				return;
-			}
-			if(awardType === '우수상' && document.getElementById('betterAward').rows.length >= 1)
-			{
-				alert("우수상은 1개까지 수상 가능합니다.");
-				return;	
-			}
-			if(awardType === '장려상' && document.getElementById('goodAward').rows.length >= 3)
-			{
-				alert("장려상은 3개까지 수상 가능합니다.");
-				return;
-			}
-			
-			if(awardType === '최우수상' )
-				document.getElementById("bestAwardIds").value = id;
+			var msg = "해당 제보 ["+ row.querySelector('td:nth-child(3)').textContent + "]를(을) "+ awardType+" 수상하시겠습니까?";
 				
+			if(confirm(msg))
+			{
+	        	let targetTable;
+	        	if (awardType === '최우수상' ) {
+	            	targetTable = document.getElementById('bestAward');
+	        	} else if (awardType === '우수상') {
+	            	targetTable = document.getElementById('betterAward');
+	        	} else if (awardType === '장려상') {
+	            	targetTable = document.getElementById('goodAward');
+	        	}
+	        	if (!targetTable) return; //없으면 리턴
+
+				const id = row.querySelector('td:nth-child(2)').textContent; // 2번째 열인 게시판id
+	        	const title = row.querySelector('td:nth-child(3)').textContent; // 3번째열인 제목
+						
+				// 모든 테이블을 중복 확인
+				const tables = [
+			    	document.getElementById('bestAward'),
+			    	document.getElementById('betterAward'),
+			    	document.getElementById('goodAward')
+				];
+
+				const isDuplicate = tables.some(table =>Array.from(table.rows).some(row => row.cells[0].textContent === id));
+
+				if (isDuplicate) {
+			    	alert('이미 추가된 항목입니다.');
+			    	return;
+				}
 			
-	        // Create a new row for the target table
-	        /*const newRow = targetTable.insertRow();
-	        newRow.innerHTML = `
-	            <td>${id}</td>
-	            <td>${title}</td>
-	            <td>
-	                <button type="button" 
-	                        class="btn btn-danger btn-sm"
-	                        style="--bs-btn-padding-y: .05rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" 
-	                        onclick="deleteRow(this)">삭제</button>
-	            </td>
-	        `; */
-			document.forms['awardForm'].submit(); // 폼 전송
+				if(awardType === '최우수상' && document.getElementById('bestAward').rows.length >= 1)
+				{
+					alert("최우수상은 1개까지 수상 가능합니다.");
+					return;
+				}
+				if(awardType === '우수상' && document.getElementById('betterAward').rows.length >= 1)
+				{
+					alert("우수상은 1개까지 수상 가능합니다.");
+					return;	
+				}
+				if(awardType === '장려상' && document.getElementById('goodAward').rows.length >= 3)
+				{
+					alert("장려상은 3개까지 수상 가능합니다.");
+					return;
+				}
+
+				document.getElementById("awardType").value = awardType;
+				document.getElementById("awardIds").value = id;
+				document.getElementById("awardInsertForm").submit(); // 폼 전송
+	
+				// 테이블에 데이터 추가
+				/*const newRow = targetTable.insertRow();
+				newRow.innerHTML = `<td>${id}</td>
+			  	 	            	<td>${title}</td>
+			 	  	            	<td>
+			   	   	             <button type="button" 
+			   	                        class="btn btn-danger btn-sm"
+			   	                        style="--bs-btn-padding-y: .05rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" 
+			   	                        onclick="deleteRow(this)">삭제</button>
+			   	         		   </td>`; */
+
+			}
+			else{}
 	    }
 
-	    function deleteRow(button) {
-	        const row = button.closest('tr');
-	        row.parentNode.removeChild(row);
-	    }
+		function deleteRow(button) {
+		    if (!confirm("해당 제보를 수상 삭제하시겠습니까?")) return; // 사용자가 취소하면 함수 종료
+			
+			const row = button.closest('tr'); 
+			const id = row.querySelector('td:nth-child(1)').textContent; // 1번째 열인 게시판id
+			
+			document.getElementById("deleteid").value = id;
+			document.getElementById("awardDeleteForm").submit(); // 폼 전송
+		    // 동적으로 폼 생성
+		    /*const form = document.createElement("form");
+		    form.method = "POST"; // POST 방식 사용
+		    form.action = "/admin/award/delete"; // 서버의 삭제 엔드포인트
+
+		    // ID 값을 담은 hidden input 생성
+		    const input = document.createElement("input");
+		    input.type = "hidden";
+		    input.name = "id";
+		    input.value = id;
+
+		    // 폼에 input 추가 후 body에 붙여서 제출
+		    form.appendChild(input);
+		    document.body.appendChild(form);
+		    form.submit();*/
+		}
+
 	</script>
 </head>
 
@@ -102,17 +124,22 @@
             </div>
             <hr>
 
-			<form method="post" th:action="@{/admin/award/save}" name="awardForm">
-			    <input  name="year" th:value="${year}" />
-			    <input  name="month" th:value="${month}" />
-			    <!-- 최우수상 데이터 -->
-			    <input name="bestAwardIds" id="bestAwardIds"/>
-			    <!-- 우수상 데이터 -->
-			    <input name="betterAwardIds" />
-			    <!-- 장려상 데이터 -->
-			    <input name="goodAwardIds" th:each="award : ${goodaward}" th:value="${award.report.reportid}" />
+			<!-- hidden 폼 영역 -->
+			<!-- 추가 영역-->
+			<form style="display: none;" id="awardInsertForm" method="post" th:action="@{/admin/award/save}" >
+			    <input type="hidden" name="year" th:value="${year}" />
+			    <input type="hidden" name="month" th:value="${month}" />
+				<input type="hidden" name="awardType" id="awardType"/>
+			    <input type="hidden" name="awardIds" id="awardIds" />
 			</form>
-
+			<!-- 삭제 영역-->
+			<form style="display: none;" id="awardDeleteForm" method="post" th:action="@{/admin/award/delete}" >
+				<input type="hidden" name="year" th:value="${year}" />
+				<input type="hidden" name="month" th:value="${month}" />
+				<input type="hidden" name="deleteid" id="deleteid" />
+			</form >
+			
+			
 			<!-- 최우수상, 우수상, 장려상 선택 (가로 3열 배열) -->
 			<div class="row ">
 			    <div class="col-md-4">
