@@ -7,9 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.SafeReport.Entity.Award;
 import com.example.SafeReport.Repository.AwardRepository;
-import com.example.SafeReport.Repository.ReportRepository;
-import com.example.SafeReport.Repository.RiskRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Service
@@ -20,6 +19,17 @@ public class AwardService {
 	    LocalDate startDate = LocalDate.of(year, month, 1);
 	    LocalDate endDate = startDate.withDayOfMonth(startDate.lengthOfMonth());
 	    return awardRepository.findByAwardDateBetweenAndAwardType(startDate, endDate, awardType);
+	}
+	
+	@Transactional
+    public void deleteAwardsByDate(LocalDate awardDate) {
+        awardRepository.deleteByAwardDate(awardDate);
+    }
+	
+	/// 수상 저장
+	@Transactional
+	public void saveAward(Award award) {
+	    awardRepository.save(award);
 	}
 
 }

@@ -11,4 +11,7 @@ public interface AwardRepository extends JpaRepository<Award, Integer>{
 	
 	 // 특정 년-월과 수상 종류로 조회
     List<Award> findByAwardDateBetweenAndAwardType(LocalDate startDate, LocalDate endDate, String awardType);
+    
+    // Award Delete Date
+    void deleteByAwardDate(LocalDate awardDate);
 }

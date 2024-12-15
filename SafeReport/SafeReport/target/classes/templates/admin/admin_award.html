@@ -13,7 +13,80 @@
 		    background-color: rgb(255, 255, 255); /* 색상은 각 버튼에 맞게 변경 */
 		}
 	</style>
+	
+	<script>
+	    function selectAward(button, awardType) {
+	        const row = button.closest('tr'); // 클릭된 버튼(button)을 기준으로 가장 가까운 <tr> 요소를 찾습니다./ 상수지정
+	      			
+	        let targetTable;
+	        if (awardType === '최우수상' ) {
+	            targetTable = document.getElementById('bestAward');
+	        } else if (awardType === '우수상') {
+	            targetTable = document.getElementById('betterAward');
+	        } else if (awardType === '장려상') {
+	            targetTable = document.getElementById('goodAward');
+	        }
+	        if (!targetTable) return; //없으면 리턴
 
+			const id = row.querySelector('td:nth-child(2)').textContent; // 1번째 열인 게시판id
+	        const title = row.querySelector('td:nth-child(3)').textContent; // 3번째열인 제목
+						
+			// 모든 테이블을 중복 확인
+			const tables = [
+			    document.getElementById('bestAward'),
+			    document.getElementById('betterAward'),
+			    document.getElementById('goodAward')
+			];
+
+			const isDuplicate = tables.some(table => 
+			    Array.from(table.rows).some(row => row.cells[0].textContent === id)
+			);
+
+			if (isDuplicate) {
+			    alert('이미 추가된 항목입니다.');
+			    return;
+			}
+			
+			if(awardType === '최우수상' && document.getElementById('bestAward').rows.length >= 1)
+			{
+				alert("최우수상은 1개까지 수상 가능합니다.");
+				return;
+			}
+			if(awardType === '우수상' && document.getElementById('betterAward').rows.length >= 1)
+			{
+				alert("우수상은 1개까지 수상 가능합니다.");
+				return;	
+			}
+			if(awardType === '장려상' && document.getElementById('goodAward').rows.length >= 3)
+			{
+				alert("장려상은 3개까지 수상 가능합니다.");
+				return;
+			}
+			
+			if(awardType === '최우수상' )
+				document.getElementById("bestAwardIds").value = id;
+				
+			
+	        // Create a new row for the target table
+	        /*const newRow = targetTable.insertRow();
+	        newRow.innerHTML = `
+	            <td>${id}</td>
+	            <td>${title}</td>
+	            <td>
+	                <button type="button" 
+	                        class="btn btn-danger btn-sm"
+	                        style="--bs-btn-padding-y: .05rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" 
+	                        onclick="deleteRow(this)">삭제</button>
+	            </td>
+	        `; */
+			document.forms['awardForm'].submit(); // 폼 전송
+	    }
+
+	    function deleteRow(button) {
+	        const row = button.closest('tr');
+	        row.parentNode.removeChild(row);
+	    }
+	</script>
 </head>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -28,7 +101,18 @@
 				<div class="text-primary" style="--bs-text-opacity: .7;" >[[${year}]]년 [[${month}]]월 수상내역</div>
             </div>
             <hr>
-			
+
+			<form method="post" th:action="@{/admin/award/save}" name="awardForm">
+			    <input  name="year" th:value="${year}" />
+			    <input  name="month" th:value="${month}" />
+			    <!-- 최우수상 데이터 -->
+			    <input name="bestAwardIds" id="bestAwardIds"/>
+			    <!-- 우수상 데이터 -->
+			    <input name="betterAwardIds" />
+			    <!-- 장려상 데이터 -->
+			    <input name="goodAwardIds" th:each="award : ${goodaward}" th:value="${award.report.reportid}" />
+			</form>
+
 			<!-- 최우수상, 우수상, 장려상 선택 (가로 3열 배열) -->
 			<div class="row ">
 			    <div class="col-md-4">
@@ -38,21 +122,19 @@
 							최우수상
 						</div>
 			            <div class="card-body ">
-			                <table class="table table-hover " >
+			                <table class="table table-hover" >
 			                    <thead>
 			                        <tr>
+										<th>게시물ID</th>
 			                            <th>제목</th>
-			                            <th>작성자</th>
-			                            <th>작성일</th>
 			                            <th>선택</th>
 			                        </tr>
 			                    </thead>
-			                    <tbody id="bestAwardTable">
+			                    <tbody id="bestAward">
 			                        <tr th:each="bestaward, loop : ${bestaward}">
+										<td th:text="${bestaward.report.reportid}"></td>
 										<td th:text="${bestaward.report.report_title}"></td>
-										<td th:text="${bestaward.report.reporter_name}"></td>
-										<td th:text="${#temporals.format(bestaward.report.reportcreatedate, 'yyyy-MM-dd')}"></td>
-										<td><button type="button" style="--bs-btn-padding-y: .05rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" class="btn btn-danger btn-sm">삭제</button></td>
+										<td><button onclick="deleteRow(this)" type="button" style="--bs-btn-padding-y: .05rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" class="btn btn-danger btn-sm">삭제</button></td>
 									</tr>
 			                    </tbody>
 			                </table>
@@ -70,18 +152,16 @@
 			                <table class="table table-hover">
 			                    <thead>
 			                        <tr>
+										<th>게시물ID</th>
 			                            <th>제목</th>
-			                            <th>작성자</th>
-			                            <th>작성일</th>
 			                            <th>선택</th>
 			                        </tr>
 			                    </thead>
-								<tbody id="betterAwardTable">
+								<tbody id="betterAward">
 							    	<tr th:each="betteraward, loop : ${betteraward}">
+										<td th:text="${betteraward.report.reportid}"></td>
 										<td th:text="${betteraward.report.report_title}"></td>
-										<td th:text="${betteraward.report.reporter_name}"></td>
-										<td th:text="${#temporals.format(betteraward.report.reportcreatedate, 'yyyy-MM-dd')}"></td>
-										<td><button type="button" style="--bs-btn-padding-y: .05rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" class="btn btn-danger btn-sm">삭제</button></td>
+										<td><button onclick="deleteRow(this)" type="button" style="--bs-btn-padding-y: .05rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" class="btn btn-danger btn-sm">삭제</button></td>
 									</tr>
 								</tbody>
 			                </table>
@@ -99,18 +179,16 @@
 			                <table class="table table-hover">
 			                    <thead>
 			                        <tr>
+										<th>게시물ID</th>
 			                            <th>제목</th>
-			                            <th>작성자</th>
-							            <th>작성일</th>
 										<th>선택</th>
 									</tr>
 							    </thead>
-								<tbody id="goodAwardTable">
+								<tbody id="goodAward">
 									<tr th:each="goodaward, loop : ${goodaward}">
+										<td th:text="${goodaward.report.reportid}"></td>
 										<td th:text="${goodaward.report.report_title}"></td>
-										<td th:text="${goodaward.report.reporter_name}"></td>
-										<td th:text="${#temporals.format(goodaward.report.reportcreatedate, 'yyyy-MM-dd')}"></td>
-										<td><button type="button" style="--bs-btn-padding-y: .05rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" class="btn btn-danger btn-sm">삭제</button></td>
+										<td><button onclick="deleteRow(this)" type="button" style="--bs-btn-padding-y: .05rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" class="btn btn-danger btn-sm">삭제</button></td>
 									</tr>
 								</tbody>
 							</table>
@@ -169,6 +247,7 @@
 			            <thead>
 			                <tr>
 			                    <th>번호</th>
+								<th>게시물ID</th>
 			                    <th>제목</th>
 			                    <th>작성자</th>
 			                    <th>작성일</th>
@@ -179,6 +258,7 @@
 			            <tbody>
 			                <tr th:each="report, loop : ${paging}">
 								<td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
+								<td th:text="${report.reportid}"></td>
 								<td th:text="${report.report_title}"></td>
 								<td th:text="${report.reporter_name}"></td>
 								<td th:text="${#temporals.format(report.reportcreatedate, 'yyyy-MM-dd HH:mm')}"></td>
@@ -195,28 +275,25 @@
 								<td>
 									<button type="button" 
 									        class="btn btn-sm btnaward" 
-									        style="border-color: #FFC107; color: #FFC107; " 
+									        style="border-color: #FFC107; color: #FFC107;" 
 									        onclick="selectAward(this, '최우수상')">
-									    
-										<i class="bi bi-flower1" style="font-size: 18px;"></i>
-										<i class="bi bi-flower1" style="font-size: 18px;"></i>
-										<i class="bi bi-flower1" style="font-size: 18px;"></i>
+										최우수상
 									</button>
 
 									<button type="button" 
 									        class="btn btn-sm btnaward" 
 									        style="border-color: silver; color: silver; " 
 									        onclick="selectAward(this, '우수상')">
-										<i class="bi bi-flower1" style="font-size: 18px;"></i>
-										<i class="bi bi-flower1" style="font-size: 18px;"></i>
+										우수상
 									</button>
 
 									<button type="button" 
 									        class="btn btn-sm btnaward" 
-									        style="border-color: #cd7f32; color: #cd7f32; " 
+									        style="border-color: #cd7f32; color: #cd7f32; "
+											name = "goodAward" 
 									        onclick="selectAward(this, '장려상')">
 									    <!--<i class="bi bi-award-fill" style="margin-right: 3px;"></i> -->
-										<i class="bi bi-flower1" style="font-size: 18px;"></i>
+										장려상
 									</button>
 
 								</td>
@@ -253,21 +330,7 @@
         </div>
     </div>
 
-    <script>
-        function selectAward(button, awardType) {
-            const row = button.closest('tr');
-            const awardTableId = awardType === '최우수상' ? 'bestAwardTable' : 
-                                awardType === '우수상' ? 'excellentAwardTable' : 'encouragementAwardTable';
-            const awardTable = document.getElementById(awardTableId);
-            const clonedRow = row.cloneNode(true);
-            clonedRow.querySelector('td:last-child').innerHTML = '<button type="button" class="btn btn-outline-danger" onclick="removeAward(this)">취소</button>';
-            awardTable.appendChild(clonedRow);
-        }
 
-        function removeAward(button) {
-            const row = button.closest('tr');
-            row.remove();
-        }
-    </script>
+
 </body>
 </html>
