@@ -17,8 +17,7 @@
 		           background-image: url('');
 		           background-size: cover;
 		           background-position: center;
-		           height: 250px;
-		           margin-bottom: 20px;
+		           height: 100px;
 		           position: relative;
 		           color: rgb(#797979);
 				   background-color: rgb(255, 255, 255);
@@ -47,9 +46,18 @@
 <body>
 	<div layout:fragment="content" class="container-fluid">
 		<!-- Hero Section -->
-		<div class="hero">
-			안전한 세상을 위한 한걸음!
-		</div>
+		<div style="background-color: rgb(255, 255, 255); padding-bottom: 50px;">
+			<div class="hero">
+				<span class="hero2">안전한 세상을 위한 한걸음!</span>
+			</div>
+			<div style="background-color: rgb(255, 255, 255);display: flex;align-items: center;justify-content: center; ">
+				<ul class="list-group list-group-horizontal-md">
+					<li class="list-group-item">An item</li>
+					<li class="list-group-item">A second item</li>
+					<li class="list-group-item">A third item</li>
+				</ul>
+			</div>
+		</div>		
 		
 		<!-- 이달의 우수 신고 섹션 -->
 		<section class="container mt-5">
@@ -95,23 +103,64 @@
 		</section>
 
 		<section class="container mt-5">
-		    <h3></h3>
-		    <div class="card" th:if="${notice != null && !notice.isEmpty()}">
-				<!-- 최신 공지사항 한 개만 표시 -->
-				<div class="card-header" >				
-					<div class="d-flex align-items-center" style="margin-bottom: 8px">
-					    <i class="bi bi-megaphone-fill" style="color: rgb(2, 94, 232); font-size: 18px"></i> <!-- 빨간색 아이콘 -->
-					    <h5 class="card-title mb-0 ms-2" th:text="${notice[0].title}">공지사항 제목</h5>
+		    <div class="row">
+				<div class="col">
+					<div class="card w-100" th:if="${notice != null && !notice.isEmpty()}" >
+						<!-- 최신 공지사항 한 개만 표시 -->
+						<div class="card-header" >				
+							<div class="d-flex align-items-center" style="margin-bottom: 8px">
+							    <i class="bi bi-megaphone-fill" style="color: rgb(2, 94, 232); font-size: 18px"></i> <!-- 빨간색 아이콘 -->
+							    <h5 class="card-title mb-0 ms-2" th:text="${notice[0].title}">공지사항 제목</h5>
+							</div>
+						</div>
+					    <div class="card-body">
+					        <p class="card-text  text-truncate" th:text="${notice[0].contents}"></p>
+					    </div>
+						<div class="card-body text-end" >
+							<a th:href="@{|/notice/notice_detail/${notice[0].noticeid}|}" class="btn btn-primary">자세히 보기</a>
+						</div>
+					</div>
+					<div th:if="${notice == null || notice.isEmpty()}">
+					    <p>현재 공지사항이 없습니다.</p>
 					</div>
 				</div>
-		        <div class="card-body">
-		            <p class="card-text  text-truncate" th:text="${notice[0].contents}"></p>
-		            <a th:href="@{|/notice/notice_detail/${notice[0].noticeid}|}" class="btn btn-primary">자세히 보기</a>
-		        </div>
-		    </div>
-		    <div th:if="${notice == null || notice.isEmpty()}">
-		        <p>현재 공지사항이 없습니다.</p>
-		    </div>
+				
+				<div class="col-md-auto">
+					<div id="carouselExampleCaptions" class="carousel slide" style="max-width: 300px; margin:auto" >
+						<div class="carousel-indicators">
+							<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+							<button type="button" th:each="award, iterStat : ${goodaward}" th:if="${iterStat.index > 0 && iterStat.index < 3}" 
+									data-bs-target="#carouselExampleCaptions" th:data-bs-slide-to="${iterStat.index}" 
+						        	aria-label="'Slide ' + ${iterStat.index + 1}"></button>
+						</div>
+						<!-- 캐러셀 슬라이드 -->
+						<div class="carousel-inner">
+						    <div class="carousel-item active" th:if="${goodaward != null and goodaward.size() > 0}">
+						        <img src="https://via.placeholder.com/300x200" class="d-block w-100" alt="Slide 1">
+						        <div class="carousel-caption d-none d-md-block">
+						            <h5 th:text="${goodaward[0].report.report_title}">장려상 제목</h5>
+						            <p th:text="'작성자: ' + ${goodaward[0].report.reporter_name}">작성자 이름</p>
+						        </div>
+						    </div>
+						    <div class="carousel-item" th:each="award, iterStat : ${goodaward}" th:if="${iterStat.index > 0 && iterStat.index < 3}">
+						        <img src="https://via.placeholder.com/300x200" class="d-block w-100" alt="'Slide ' + ${iterStat.index + 1}">
+						        <div class="carousel-caption d-none d-md-block">
+						            <h5 th:text="${award.report.report_title}">장려상 제목</h5>
+						            <p th:text="'작성자: ' + ${award.report.reporter_name}">작성자 이름</p>
+						        </div>
+						    </div>
+						</div>
+					  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+					    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					    <span class="visually-hidden">Previous</span>
+					  </button>
+					  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+					    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+					    <span class="visually-hidden">Next</span>
+					  </button>
+					</div>
+				</div>
+			</div>
 		</section>
 		
 		<!-- Quick Links -->
@@ -150,7 +199,7 @@
 		        </div>
 		    </div>
 		</section>
-		
+
         <!-- 최근 게시글 섹션 -->
         <div class="container mt-5">			
             <div class="row  text-truncate">
