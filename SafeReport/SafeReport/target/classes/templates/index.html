@@ -54,7 +54,7 @@
 			background-color: #f8f9fa
 		}
 		.hero .redesigned-title {
-		    font-size: 1.85rem;
+		    font-size: 1.8rem;
 		    font-weight: bold;
 		    color: #333; /* 기본 글자색 */
 		    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
@@ -62,11 +62,11 @@
 		}
 
 		.highlight-step {
-		    font-size: 2.5rem;
+		    font-size: 2.7rem;
 		    font-weight: 800;
 		    color: #295fe5; /* 메인 색상 */
 		    text-transform: uppercase;
-		    background: linear-gradient(to right, #295fe5, #1e70ef);
+		    background: linear-gradient(to right, #295fe5,rgb(128, 128, 255), rgb(33, 171, 237));
 		    -webkit-background-clip: text;
 		    -webkit-text-fill-color: transparent;
 		}
@@ -78,10 +78,11 @@
 
 <body>
 	<div layout:fragment="content" >
-		
+		<link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+
 		<!-- Hero Section -->
 		<div class="hero" style=" padding-bottom: 50px;">
-		    <h3 class="redesigned-title text-center mb-2" >안전한 세상을 위한  <span class="highlight-step">"한걸음!"</span></h3>
+		    <h3 class="redesigned-title text-center mb-2" >안전한 세상을 위한  <span class="highlight-step">한걸음!</span></h3>
 			
 		    <!-- 기관별 우수기관 순위 -->
 		    <div class="container mb-4">
@@ -92,15 +93,15 @@
 								<h5 class="text-center mb-1 mt-1"><i class="bi bi-trophy-fill" style="color: #FFC107;"></i> 기관별 우수기관 순위</h5>
 							</li>
 		                    <li class="list-group-item d-flex justify-content-between align-items-center">
-		                        현대파텍스 - 2,400건
+		                        <i class="bi bi-flower1" style="font-size: 18px; color: #FFC107;"><span style="font-style: normal; font-size: 1rem; color: black;"> 현대파텍스 - 2,400건</span></i>
 		                        <span class="badge text-dark rounded-pill" style="background-color: #FFC107;">1위</span>
 		                    </li>
 		                    <li class="list-group-item d-flex justify-content-between align-items-center">
-		                       	JS파트너스 - 2,100건
+								<i class="bi bi-flower2" style="font-size: 17px; color: silver;"><span style="font-style: normal; font-size: 1rem; color: black;"> JS파트너스 - 2,100건</span></i>
 		                        <span class="badge text-white rounded-pill" style="background-color: silver;">2위</span>
 		                    </li>
 		                    <li class="list-group-item d-flex justify-content-between align-items-center">
-		                        SMP - 1,400건
+								<i class="bi bi-flower3" style="font-size: 18px; color: #cd7f32;"><span style="font-style: normal; font-size: 1rem; color: black;"> SMP - 1,400건</span></i>
 		                        <span class="badge text-dark rounded-pill" style="background-color: #cd7f32;">3위</span>
 		                    </li>
 		                    <li class="list-group-item d-flex justify-content-between align-items-center">
