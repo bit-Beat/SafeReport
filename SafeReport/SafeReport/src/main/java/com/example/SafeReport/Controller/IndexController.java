@@ -28,7 +28,8 @@ public class IndexController {
     public String home(Model model) {
 		int year = LocalDate.now().getYear();
 		int month = LocalDate.now().getMonthValue();
-    	
+		
+		List<Object[]> reportStats = indexService.getReportStatistics();
 		List<Report> report = this.indexService.getList(); // Report
     	List<Notice> activeNotices = noticeService.getActiveNotices(); // active == true인 공지사항
     	List<Notice> notice = this.noticeService.findTop5ByActiveFalseOrderByCreatedateDesc();
@@ -48,6 +49,7 @@ public class IndexController {
         model.addAttribute("bestaward", bestaward); // 최우수상
         model.addAttribute("betteraward", betteraward); //우수상
         model.addAttribute("goodaward", goodaward); //장려상
+        model.addAttribute("reportStats", reportStats); /// 사별 순위 통계
     	model.addAttribute("page", "home");
         return "index";  // index.html을 반환
     }

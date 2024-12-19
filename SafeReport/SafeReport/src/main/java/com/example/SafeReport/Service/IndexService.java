@@ -56,5 +56,10 @@ public class IndexService {
 	          return criteriaBuilder.like(root.get("reporterName"), "%" + keyword + "%");
 	      };
 	  }
+	
+	/// 통계read
+	public List<Object[]> getReportStatistics() {
+        return reportRepository.findReportStatistics();
+    }
 		
 }
