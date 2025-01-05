@@ -16,6 +16,18 @@
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 	<script>
 	    document.addEventListener("DOMContentLoaded", function () {
+			let actionType = null; // 수정 또는 삭제 동작을 구분하는 변수
+
+			// 수정 버튼 클릭 이벤트
+			document.getElementById("modifyButton").addEventListener("click", function () {
+			    actionType = "modify";
+			});
+
+			// 삭제 버튼 클릭 이벤트
+			document.getElementById("deleteButton").addEventListener("click", function () {
+			    actionType = "delete";
+			});
+			
 	        // 폼 제출 이벤트 리스너 추가
 	        const passwordForm = document.querySelector("#modal1");
 	        passwordForm.addEventListener("submit", function (e) {
@@ -26,6 +38,9 @@
 				
 				var token = $("meta[name='_csrf']").attr("content");
 				var header = $("meta[name='_csrf_header']").attr("content");
+				
+				const url = actionType === "modify" ? `/report/modify/${reportId}` : `/report/delete/${reportId}`;
+									
 	            // AJAX 요청
 				fetch("/report/passwordcompare", {
 				    method: "POST",
@@ -41,12 +56,11 @@
 				.then((response) => response.json())
 				.then((data) => {
 					if (data.success) {
-						window.location.href = `/report/modify/${reportId}`;
+						window.location.href =url;
 					} else {
 						alertContainer.style.display = "block"; // 알림 메시지창 표시
 						const errorDiv = document.getElementById("errordiv");
 						errorDiv.textContent = data.error; // data.error를 텍스트로 설정
-						
 					}
 				})
 				.catch((error) => {
@@ -55,6 +69,22 @@
 					errorDiv.textContent = "오류가 발생했습니다. 다시 시도해주세요.";
 				});
 	        });
+			
+			document.getElementById("closeModalButton").addEventListener("click", function () {
+				document.getElementById("password").value = "";
+				const alertContainer = document.getElementById("alertContainer");
+				if (alertContainer.style.display === "block") {
+					alertContainer.style.display = "none";
+				}
+			});
+			
+			document.getElementById("closeModalButton2").addEventListener("click", function () {
+				document.getElementById("password").value = "";
+				const alertContainer = document.getElementById("alertContainer");
+				if (alertContainer.style.display === "block") {
+					alertContainer.style.display = "none";
+				}
+			});
 	    });
 	</script>
 
@@ -112,8 +142,8 @@
 			</div>
 			<!-- 익명 수정, 삭제 버튼-->
 			<div class ="my-3" style="display: flex; justify-content: flex-end;" sec:authorize="isAnonymous()">
-				<button type="button" class="btn btn-sm btn-outline-secondary m-1" data-bs-toggle="modal" data-bs-target="#modal1" >수정</button>
-				<button type="button" class="btn btn-sm btn-outline-secondary m-1" data-bs-toggle="modal" data-bs-target="#modal1" >삭제</button>				
+				<button type="button" class="btn btn-sm btn-outline-secondary m-1" data-bs-toggle="modal" data-bs-target="#modal1" id="modifyButton">수정</button>
+				<button type="button" class="btn btn-sm btn-outline-secondary m-1" data-bs-toggle="modal" data-bs-target="#modal1" id="deleteButton">삭제</button>
 			</div>
 			
 			<!-- 익명 수정, 삭제 modal창 -->
@@ -122,7 +152,7 @@
 			    <div class="modal-content">
 			      <div class="modal-header">
 			        <h1 class="modal-title fs-5" id="exampleModalLabel">비밀번호 입력</h1>
-			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="closeModalButton2"></button>
 			      </div>
 			      <div class="modal-body">
 			        <!-- form 태그 안에 모든 관련 내용을 포함 -->
@@ -134,7 +164,7 @@
 					  <input type="hidden" id="id" name="id" th:value="${report.reportid}">
 			          <div class="modal-footer">
 			            <button type="submit" class="btn btn-primary">확인</button> <!-- 저장 버튼에 type="submit" 유지 -->
-			            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+			            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeModalButton">닫기</button>
 			          </div>
 			        </form>
 			      </div>

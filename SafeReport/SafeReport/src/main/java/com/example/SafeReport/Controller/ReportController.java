@@ -155,7 +155,7 @@ public class ReportController {
 	        String password = (String) request.get("password");
 
 	        // 보고서 가져오기
-	        Report report = this.reportService.getReport(101);
+	        Report report = this.reportService.getReport(Integer.parseInt(id));
 
 	        // 응답 데이터 구성
 	        Map<String, Object> response = new HashMap<>();
