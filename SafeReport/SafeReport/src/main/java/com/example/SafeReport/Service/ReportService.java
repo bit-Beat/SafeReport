@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.SafeReport.DataNotFoundException;
 import com.example.SafeReport.Entity.Report;
-import com.example.SafeReport.Entity.Risk;
+
 import com.example.SafeReport.Repository.ReportRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -59,8 +59,15 @@ public class ReportService {
         }
     }
 	
-	
 	public void delete(Report report) {
         this.reportRepository.delete(report);
     }
+	
+	/// 제보 비밀번호 비교 맞으면 true, 틀리면 false 리턴
+	public boolean reportComparePassword(Report report, String password) {
+		if(password.equals(report.getReport_pw()))
+			return true;
+		else return false;
+	}
+	
 }

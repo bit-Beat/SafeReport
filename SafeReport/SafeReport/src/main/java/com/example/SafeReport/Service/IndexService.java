@@ -1,8 +1,9 @@
 package com.example.SafeReport.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -11,7 +12,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import com.example.SafeReport.DataNotFoundException;
 import com.example.SafeReport.Entity.Report;
 import com.example.SafeReport.Repository.ReportRepository;
 
@@ -61,5 +61,15 @@ public class IndexService {
 	public List<Object[]> getReportStatistics() {
         return reportRepository.findReportStatistics();
     }
+	
+	/// 올해 신고 건수 가져오기
+	public long getReportsCount(int year, int month, int day) {
+        LocalDateTime startOfYear = LocalDateTime.of(year, month, day, 0, 0);
+        return reportRepository.countReportsThisYear(startOfYear);
+    }
+
+	
+	
+	
 		
 }

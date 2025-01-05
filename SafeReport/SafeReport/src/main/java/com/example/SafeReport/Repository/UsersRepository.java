@@ -9,5 +9,5 @@ import com.example.SafeReport.Entity.Users;
 
 @Repository
 public interface UsersRepository extends JpaRepository<Users, Long> {
-	Optional<Users> findByusername(String username);
+	Optional<Users> findByUserid(String userid);
 }

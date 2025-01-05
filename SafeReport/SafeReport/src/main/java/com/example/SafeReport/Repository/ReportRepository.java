@@ -1,7 +1,7 @@
 package com.example.SafeReport.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
-
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,6 +28,9 @@ public interface ReportRepository extends JpaRepository<Report, Integer> {
 		       "FROM Report r GROUP BY r.report_department ORDER BY COUNT(r.report_department) DESC")
 	List<Object[]> findReportStatistics();
 
-
+	// 올해 신고 건수
+	@Query("SELECT COUNT(r) FROM Report r WHERE r.reportcreatedate >= :startOfYear")
+	long countReportsThisYear(@Param("startOfYear") LocalDateTime startOfYear);
+	
 
 }

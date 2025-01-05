@@ -30,7 +30,7 @@
 		<div class="container mt-5  text-truncate">		
 			<div class="row my-3">
 				<div class="col-6">
-					<a href="/notice" class="btn btn-primary" sec:authorize="hasRole('ROLE_ADMIN')">공지사항작성</a>
+					<a href="/notice" class="btn btn-primary" sec:authorize="hasAnyRole('ADMIN', 'MANAGER')">공지사항작성</a>
 				</div>
 				
 			</div>

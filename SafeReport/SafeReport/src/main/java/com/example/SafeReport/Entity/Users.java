@@ -19,10 +19,14 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true, nullable = false)
+    private String userid; // 유저 id
+    
+    @Column(nullable = false)
+    private String password;
+    
     @Column(unique = true)
     private String username;
-
-    private String password;
 
     @Column(unique = true)
     private String email;

@@ -1,6 +1,7 @@
 package com.example.SafeReport.Controller;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +31,9 @@ public class IndexController {
 		int month = LocalDate.now().getMonthValue();
 		
 		List<Object[]> reportStats = indexService.getReportStatistics();
+		Long yearReportCount = indexService.getReportsCount(LocalDateTime.now().getYear(),1,1); /// 올해 제보 건수
+		Long monthReportCount = indexService.getReportsCount(LocalDateTime.now().getYear(),LocalDateTime.now().getMonthValue(),1); /// 이번달 제보 건수
+		Long dayReportCount = indexService.getReportsCount(LocalDateTime.now().getYear(),LocalDateTime.now().getMonthValue(),LocalDateTime.now().getDayOfMonth()); /// 오늘 제보 건수
 		List<Report> report = this.indexService.getList(); // Report
     	List<Notice> activeNotices = noticeService.getActiveNotices(); // active == true인 공지사항
     	List<Notice> notice = this.noticeService.findTop5ByActiveFalseOrderByCreatedateDesc();
@@ -50,6 +54,10 @@ public class IndexController {
         model.addAttribute("betteraward", betteraward); //우수상
         model.addAttribute("goodaward", goodaward); //장려상
         model.addAttribute("reportStats", reportStats); /// 사별 순위 통계
+        model.addAttribute("yearReportCount", yearReportCount); /// 올해 제보 건수
+        model.addAttribute("monthReportCount", monthReportCount); /// 이번달 제보 건수
+        model.addAttribute("dayReportCount", dayReportCount); /// 오늘 제보 건수
+        
     	model.addAttribute("page", "home");
         return "index";  // index.html을 반환
     }

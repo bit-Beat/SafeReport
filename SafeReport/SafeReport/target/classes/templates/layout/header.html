@@ -40,8 +40,8 @@
 					    </button>
 					</li>
 					
-					<!-- 관리자용 메뉴 -->
-					<li class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMIN')" style="margin-right: 5px;">
+					<!-- 보안 관리자용 메뉴 -->
+					<li class="nav-item dropdown"  sec:authorize="hasAnyRole('ADMIN', 'ADMINSAFETY')" style="margin-right: 5px;">
 					    <a class="nav-link dropdown-toggle text-warning" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 					        <span class="text-warning">🏆</span>
 					        <span class="navbar-text" th:text="${#authentication.name} + '님 환영합니다!'"></span>
@@ -57,7 +57,7 @@
 					</li >
 	
 					<!-- 일반 사용자용 메뉴 -->
-					<li class="nav-item dropdown" sec:authorize="hasRole('ROLE_USER')" style="margin-right: 5px;">
+					<li class="nav-item dropdown" sec:authorize="!hasAnyRole('ADMIN', 'ADMINSAFETY') and isAuthenticated()"   style="margin-right: 5px;">
 					    <a class="nav-link dropdown-toggle text-info" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 					        <span class="text-info">🧑</span>
 					        <span class="navbar-text" th:text="${#authentication.name} + '님 환영합니다!'" ></span>
@@ -65,6 +65,7 @@
 					    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
 					        <li><a class="dropdown-item" href="/reportlist"><span class="badge text-bg-danger">미개발</span> 내 제보 보기</a></li>
 					        <li><a class="dropdown-item" href="/user/settings"><span class="badge text-bg-danger">미개발</span> 프로필 설정</a></li>
+							<li><a class="dropdown-item" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a></li>
 					    </ul>
 					</li>
 					

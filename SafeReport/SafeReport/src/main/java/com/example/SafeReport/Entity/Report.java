@@ -1,7 +1,16 @@
 package com.example.SafeReport.Entity;
 import java.time.LocalDateTime;
 
-import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,6 +18,7 @@ import lombok.Setter;
 @Entity
 @Setter
 @Getter
+
 public class Report {
 	
 	@Id
@@ -34,7 +44,7 @@ public class Report {
 	@Column(nullable = false, columnDefinition = "TEXT")
 	private String report_detail;
 	
-	@Column(nullable = false, length=50)
+	@Column(length=50)
 	private String report_status;
 	
 	@Column(name = "report_createdate") // DB 컬럼 이름과 매핑, 실제 db에 들어가는 이름
@@ -49,7 +59,13 @@ public class Report {
 	@Column(nullable = false, length=50)
 	private String report_pw;
 	
-	@OneToOne(mappedBy = "reportid") 
-    private Risk risk; // Risk와 ManyToOne 매핑을 통해 riskList 참조 가능 
+	@OneToOne(mappedBy = "reportid", cascade = CascadeType.REMOVE, orphanRemoval = true)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	private Risk risk;
+
+	@OneToOne(mappedBy = "report", cascade = CascadeType.REMOVE, orphanRemoval = true)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	private Award award;
+
 	
 }

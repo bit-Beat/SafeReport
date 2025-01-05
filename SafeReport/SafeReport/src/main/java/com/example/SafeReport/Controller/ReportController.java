@@ -1,24 +1,32 @@
 package com.example.SafeReport.Controller;
 
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.SafeReport.ReportForm;
 import com.example.SafeReport.Entity.Report;
+import com.example.SafeReport.Entity.Users;
 import com.example.SafeReport.Service.IndexService;
 import com.example.SafeReport.Service.ReportService;
 import com.example.SafeReport.Service.RiskService;
+import com.example.SafeReport.Service.UserService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+
 
 @RequiredArgsConstructor
 @Controller
@@ -26,13 +34,16 @@ public class ReportController {
 	private final IndexService indexService;
 	private final ReportService reportService;
 	private final RiskService riskService;
+	private final UserService userService;
 	
 	@GetMapping("/")
 	public String root(ReportForm reportForm, Model model, Principal principal) {
 	    // reporterName 값이 비어 있을 때만 로그인한 사용자의 이름을 설정
 	    if (principal != null && (reportForm.getReporterName() == null || reportForm.getReporterName().isEmpty())) {
-	        reportForm.setReporterName(principal.getName());
+	    	Users users = userService.getUser(principal.getName());
+	    	reportForm.setReporterName(users.getUsername());
 	    }
+	    
 	    model.addAttribute("page", "report"); // 현재 페이지
 	    return "board/report";  // report.html 반환
 	}
@@ -122,6 +133,47 @@ public class ReportController {
 	        this.reportService.delete(report);	
 	        return "redirect:/admin/reports";
 	    }
+	    
+	    /*
+	    @PostMapping("/report/passwordcompare")
+	    public String passwordCompare(@RequestParam("id") int id, @RequestParam("password") int password, Model model) {
+	        Report report = this.reportService.getReport(id);
+	        if (this.reportService.reportComparePassword(report, "1")) {
+	            return "redirect:/report/modify/" + id;
+	        } else {
+	            model.addAttribute("error", "비밀번호가 일치하지 않습니다.");
+	            model.addAttribute("report", report);
+	            return "board/report_detail";
+	        }
+	    }
+	    */
+	    @PostMapping("/report/passwordcompare")
+	    @ResponseBody
+	    public ResponseEntity<Map<String, Object>> passwordCompare(@RequestBody Map<String, Object> request) {
+	        // 요청에서 id와 password 가져오기
+	        String id = (String) request.get("id");
+	        String password = (String) request.get("password");
+
+	        // 보고서 가져오기
+	        Report report = this.reportService.getReport(101);
+
+	        // 응답 데이터 구성
+	        Map<String, Object> response = new HashMap<>();
+	        if (this.reportService.reportComparePassword(report, password)) {
+	            response.put("success", true);
+	            response.put("redirectUrl", "/report/modify/" + id); // 수정 페이지 URL
+	        } else {
+	            response.put("success", false);
+	            response.put("error", "비밀번호가 일치하지 않습니다.");
+	            response.put("password", password);
+	            response.put("id", id);
+	        }
+
+	        // JSON 응답 반환
+	        return ResponseEntity.ok(response);
+	    }
+
+
 	    
 	    
 }

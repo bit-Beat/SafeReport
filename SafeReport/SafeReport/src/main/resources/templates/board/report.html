@@ -43,7 +43,7 @@
 		    <form method="post" th:object="${reportForm}">
 				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 				<div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
-				    <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+				    <div th:each="err : ${#fields.allErrors()}" th:text="${err}"/>
 				</div>
 
 				<div class="mb-3">
@@ -83,6 +83,10 @@
 					            th:selected="${reportForm.reportDepartment == 'JS파트너스'}">JS파트너스</option>
 					    <option th:value="협성테크" 
 					            th:selected="${reportForm.reportDepartment == '협성테크'}">협성테크</option>
+						<option th:value="한국메탈" 
+								th:selected="${reportForm.reportDepartment == '한국메탈'}">한국메탈</option>
+						<option th:value="서영" 
+								th:selected="${reportForm.reportDepartment == '서영'}">서영</option>
 					</select>
 
 				</div>
