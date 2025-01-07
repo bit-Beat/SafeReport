@@ -50,6 +50,7 @@
 					    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminDropdown">
 					        <li><a class="dropdown-item" href="/admin/reports">제보 관리</a></li>
 							<li><a class="dropdown-item" href="/admin/award">수상 관리</a></li>
+							<li><a class="dropdown-item" href="/myreports">내 제보 보기</a></li>
 					        <li><a class="dropdown-item" href="/admin/statistics"><span class="badge text-bg-danger">미개발</span> 통계 보기</a></li>
 					        <li><a class="dropdown-item" href="/admin/settings"><span class="badge text-bg-danger">미개발</span> 설정</a></li>
 							<li><a class="dropdown-item" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a></li>
@@ -63,7 +64,7 @@
 					        <span class="navbar-text" th:text="${#authentication.name} + '님 환영합니다!'" ></span>
 					    </a>
 					    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-					        <li><a class="dropdown-item" href="/reportlist"><span class="badge text-bg-danger">미개발</span> 내 제보 보기</a></li>
+					        <li><a class="dropdown-item" href="/myreports">내 제보 보기</a></li>
 					        <li><a class="dropdown-item" href="/user/settings"><span class="badge text-bg-danger">미개발</span> 프로필 설정</a></li>
 							<li><a class="dropdown-item" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a></li>
 					    </ul>

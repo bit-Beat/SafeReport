@@ -72,6 +72,17 @@ public class ReportController {
 	  	//return "redirect:/";
 	  }
 	
+	/// 내 제보 보기
+ 	@GetMapping("/myreports")
+	public String reportlist(Model model, @RequestParam(value="page", defaultValue="1") int page, Principal principal) // 모델은 자바와 탬플릿간의 연결고리역할
+	{
+ 		String keyword = userService.getUser(principal.getName()).getUsername(); // 유저명가져오기
+		Page<Report> paging = this.indexService.getList(page-1, keyword);  // page - 1로 0부터 시작
+		model.addAttribute("paging", paging); // 모델 객체에 questionList라는 이름으로 저장했다. 
+		model.addAttribute("keyword", keyword);
+		return "board/myreport_list";
+	}
+	
 	 	@GetMapping("/reportlist")
 		public String reportlist(Model model, @RequestParam(value="page", defaultValue="1") int page, @RequestParam(value = "keyword", defaultValue = "") String keyword) // 모델은 자바와 탬플릿간의 연결고리역할
 		{

@@ -179,8 +179,8 @@
 
 		<section class="container mt-5">
 		    <div class="row">
-				<div class="col-md-8 ">
-					<div class="card h-50 w-100" th:if="${notice != null && !notice.isEmpty()}" >
+				<div class="col-md-9 ">
+					<div class="card h-100 w-100" th:if="${notice != null && !notice.isEmpty()}" >
 						<!-- 최신 공지사항 한 개만 표시 -->
 						<div class="card-header" >				
 							<div class="d-flex align-items-center" style="margin-bottom: 8px">
@@ -201,11 +201,11 @@
 				</div>
 	
 				<!-- 자동재생 캐러셀 -->
-				<div class="col-md-4" >
-				    <div id="autoCarousel" class="carousel slide " data-bs-ride="carousel">
+				<div class="col-md-3" >
+				    <div id="autoCarousel" class="carousel slide shadow " data-bs-ride="carousel">
 				        <div class="carousel-inner">
 							<div class="carousel-item active" th:if="${bestaward.isEmpty() && betteraward.isEmpty() && goodaward.isEmpty()} ">
-							    <div class="card  text-center shadow-bg">
+							    <div class="card text-center mb-0">
 							        <img src="/static/img/MedalBlank.png" class="card-img-top" alt="..." >
 							        <div class="card-footer text-body-secondary" style="background-color: #FFC107;">
 							            <h6 class="card-title text-white fw-bold text-truncate">이번 달 우수 신고는...?</h6>
@@ -214,7 +214,7 @@
 							</div>
 				            <div class="carousel-item active" th:each="award, iterStat : ${bestaward}" th:if="${iterStat.index < 3}">
 								<div class="card text-center mb-0 " >
-								  	<img src="/static/img/GoldMedal1.png" class="card-img-top mt-3" alt="..." >
+								  	<img src="/static/img/GoldMedal1.png" class="card-img-top mt-3" alt="..." style="height: 280px;">
 									<div class=" card-footer text-body-secondary" style="background-color: #FFC107;">
 										<h6 class="mt-1 card-title text-white fw-bold  text-truncate" th:text="${award.report.report_title}">최우수상 제목</h6>
 										<p class="text-white fw-bold text-truncate"><small>작성자: [[${award.report.reporter_name}]]</small></p>
@@ -223,7 +223,7 @@
 				            </div>
 							<div class="carousel-item" th:each="award, iterStat : ${betteraward}" th:if="${iterStat.index < 3}">
 								<div class="card text-center mb-0" >
-							  		<img src="/static/img/SilverMedal1.png" class="card-img-top mt-3" alt="...">
+							  		<img src="/static/img/SilverMedal1.png" class="card-img-top mt-3" alt="..." style="height: 280px;">
 							  		<div class="card-footer text-body-secondary" style="background-color: #FFC107;">
 										<h6 class="mt-1 card-title text-white fw-bold text-truncate" th:text="${award.report.report_title}">우수상 제목</h6> 
 										<p class="text-white fw-bold text-truncate"><small>작성자: [[${award.report.reporter_name}]]</small></p>
@@ -232,9 +232,9 @@
 							</div>
 							<div class="carousel-item" th:each="award, iterStat : ${goodaward}" th:if="${iterStat.index < 3}">
 								<div class="card text-center mb-0" >
-							  		<img src="/static/img/BronzeMedal1.png" class="card-img-top mt-3" alt="...">
+							  		<img src="/static/img/BronzeMedal1.png" class="card-img-top mt-3" alt="..." style="height: 280px;">
 							  		<div class="card-footer text-body-secondary" style="background-color: #FFC107;">
-										<h6 class="mt-1card-title text-white fw-bold text-truncate" th:text="${award.report.report_title}">장려상 제목</h6>
+										<h6 class="mt-1 card-title text-white fw-bold text-truncate" th:text="${award.report.report_title}">장려상 제목</h6>
 										<p class="text-white fw-bold text-truncate"><small>작성자: [[${award.report.reporter_name}]]</small></p>
 							  		</div>
 								</div>

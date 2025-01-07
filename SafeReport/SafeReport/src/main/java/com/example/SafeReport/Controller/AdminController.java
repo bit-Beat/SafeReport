@@ -1,5 +1,6 @@
 package com.example.SafeReport.Controller;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -16,30 +17,21 @@ import com.example.SafeReport.Entity.Report;
 import com.example.SafeReport.Entity.Risk;
 import com.example.SafeReport.Enum.RiskGrade;
 import com.example.SafeReport.Enum.RiskStatus;
-import com.example.SafeReport.Repository.AwardRepository;
 import com.example.SafeReport.Service.AwardService;
 import com.example.SafeReport.Service.IndexService;
 import com.example.SafeReport.Service.ReportService;
 import com.example.SafeReport.Service.RiskService;
+import com.example.SafeReport.Service.UserService;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Controller
 public class AdminController {
-	private final IndexService indexService;
 	private final RiskService riskService;
 	private final ReportService reportService;
 	private final AwardService awardService;
-		
- 	/*@GetMapping("/admin/reports")
-	public String reportlist(Model model, @RequestParam(value = "keyword", defaultValue = "") String keyword) // 
-	{
-		List<Report> report = this.indexService.getFindAll();  // page - 1로 0부터 시작
-		model.addAttribute("report", report); // 모델 객체에 questionList라는 이름으로 저장했다. 
-		return "admin/admin_reports";
-	}*/
- 	
+	
  	@GetMapping("/admin/reports")  //required = false 시 파라미터가 입력되지 않으면, 변수는 null 값을 가진다.
     public String reportList(Model model, @RequestParam(value="page", defaultValue="1") int page,
     									  @RequestParam(value = "keyword", defaultValue = "") String keyword,
