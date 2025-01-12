@@ -116,7 +116,7 @@
 				</div>
 				
 				<div class="card-body">
-					<p class="card-text" th:text="${report.report_content}"></p>
+					<p style="white-space: pre-wrap;" th:text="${report.report_content}">신고내용</p>
 					<div class="d-flex justify-content-end">
 						<div class="badge bg-light text-dark p-2 text-start">
 							<div th:text="${#temporals.format(report.reportcreatedate, 'yyyy-MM-dd HH:mm')}"></div>
@@ -131,15 +131,22 @@
 			<div class="card my-3">
 			  <div class="card-header">개선요청사항</div>
 			  <div class="card-body">
-				<p class="card-text" th:text="${report.report_detail}"></p>
+				<p style="white-space: pre-wrap;" th:text="${report.report_detail}">개선내용</p>
 			  </div>
 			</div>
 
-			<!-- 수정 삭제 버튼 -->
+			<!-- 관리자 수정 삭제 버튼 -->
 			<div class ="my-3" style="display: flex; justify-content: flex-end;" sec:authorize="hasAnyRole('ADMIN', 'ADMINSAFETY')">
 				<a th:href="@{|/report/modify/${report.reportid}|}" class="btn btn-sm btn-outline-secondary m-1">수정</a>
 				<a href="javascript:void(0);" th:data-uri="@{|/report/delete/${report.reportid}|}" class="delete btn btn-sm btn-outline-secondary m-1">삭제</a>
 			</div>
+			
+			<!-- 일반유저 수정 삭제 버튼 -->
+			<div class ="my-3" style="display: flex; justify-content: flex-end;" sec:authorize="!hasAnyRole('ADMIN', 'ADMINSAFETY')" th:if = "${report.reporter_id} == ${#authentication.name}">
+				<a th:href="@{|/report/modify/${report.reportid}|}" class="btn btn-sm btn-outline-secondary m-1">수정</a>
+				<a href="javascript:void(0);" th:data-uri="@{|/report/delete/${report.reportid}|}" class="delete btn btn-sm btn-outline-secondary m-1">삭제</a>
+			</div>
+			
 			<!-- 익명 수정, 삭제 버튼-->
 			<div class ="my-3" style="display: flex; justify-content: flex-end;" sec:authorize="isAnonymous()">
 				<button type="button" class="btn btn-sm btn-outline-secondary m-1" data-bs-toggle="modal" data-bs-target="#modal1" id="modifyButton">수정</button>

@@ -24,6 +24,10 @@ public interface ReportRepository extends JpaRepository<Report, Integer> {
 	@Query("SELECT a FROM Report a WHERE a.reporter_name LIKE %:keyword%")
 	Page<Report> findAllByKeyword(@Param("keyword") String keyword, Pageable pageable);
 	
+	// userid로 신고 조회
+	@Query("SELECT a FROM Report a WHERE a.reporter_id LIKE %:keyword%")
+	Page<Report> findAllByUserid(@Param("keyword") String keyword, Pageable pageable);
+	
 	@Query("SELECT r.report_department AS department, COUNT(r.report_department) AS count " +
 		       "FROM Report r GROUP BY r.report_department ORDER BY COUNT(r.report_department) DESC")
 	List<Object[]> findReportStatistics();

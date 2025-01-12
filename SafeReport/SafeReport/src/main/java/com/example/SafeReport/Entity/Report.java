@@ -1,6 +1,7 @@
 package com.example.SafeReport.Entity;
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -30,10 +31,17 @@ public class Report {
 	private String report_title;
 	
 	@Column(nullable = false, length = 100)
+	private String reporter_id;
+	
+	@Column(nullable = false, length = 100)
 	private String reporter_name;
 	
 	@Column(nullable = false, length=100)
-	private String report_department;
+	private String report_department; /// 접수부서
+	
+	@Column(length=100)
+	@ColumnDefault("안전환경팀") 
+	private String report_managedepartment = "안전환경팀"; /// 관리부서
 	
 	@Column(nullable = false, length=255)
 	private String report_location;
@@ -55,9 +63,6 @@ public class Report {
 	
 	@Column(length=255)
 	private String attachfile;
-	
-	@Column(nullable = false, length=50)
-	private String report_pw;
 	
 	@OneToOne(mappedBy = "reportid", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	@OnDelete(action = OnDeleteAction.CASCADE)

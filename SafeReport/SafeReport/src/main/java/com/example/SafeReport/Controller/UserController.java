@@ -11,5 +11,11 @@ public class UserController {
 	{
 		return "login_form";
 	}
+	
+	@GetMapping("/user/myalert")
+	public String myalerts()
+	{
+		return "board/alert";
+	}
 
 }

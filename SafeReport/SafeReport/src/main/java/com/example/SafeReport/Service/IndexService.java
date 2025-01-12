@@ -47,6 +47,18 @@ public class IndexService {
         //return this.reportRepository.findAll(spec, pageable);
 	}
 	
+	//페이징 불러오기<유저 id로 검색>
+	public Page<Report> getList_userid(int page, String keyword)
+	{
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("reportcreatedate"));
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
+        return this.reportRepository.findAllByUserid(keyword, pageable);
+        
+        //Specification<Report> spec = reporterNameContains(keyword);
+        //return this.reportRepository.findAll(spec, pageable);
+	}
+	
 	/// 검색기능
 	public static Specification<Report> reporterNameContains(String keyword) {
 	      return (Root<Report> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) -> {

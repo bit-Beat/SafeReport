@@ -233,10 +233,10 @@
             <form method="get" th:action="@{/admin/award}" id="searchForm" class="row g-3 align-items-end mb-4">
                 <div class="col-md-3">
                     <select class="form-select" id="year" name="year" >
+                        <option value="2025" th:selected="${year == 2025}">2025</option>
                         <option value="2024" th:selected="${year == 2024}">2024</option>
                         <option value="2023" th:selected="${year == 2023}">2023</option>
                         <option value="2022" th:selected="${year == 2022}">2022</option>
-                        <option value="2021" th:selected="${year == 2021}">2021</option>
                     </select>
                 </div>
                 

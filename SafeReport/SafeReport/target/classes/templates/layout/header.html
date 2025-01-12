@@ -22,25 +22,29 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/home" th:classappend="${page == 'home'} ? 'active' : ''">홈</a>
                     </li>
+					<li class="nav-item">
+					    <a class="nav-link" href="/home" th:classappend="${page == ''} ? 'active' : ''">안전핀포인트</a>
+					</li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/" th:classappend="${page == 'report'} ? 'active' : ''">신고 접수</a>
+                        <a class="nav-link" href="/" th:classappend="${page == 'report'} ? 'active' : ''">신고접수</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/qna" th:classappend="${page == 'qna'} ? 'active' : ''">문의</a>
                     </li>
 					
 					<div style="border-left: 1px solid rgb(171, 171, 171); margin-left: 10px; margin-right: 10px; margin-top: 5px; margin-bottom: 5px;"></div>
-					<li class="nav-item d-flex align-items-center " sec:authorize="isAuthenticated()" style="margin-right: 10px;">
-					    <button type="button" class="btn btn-primary position-relative btn-sm " style="gap: 5px;">
+
+					<li class="nav-item d-flex align-items-center" sec:authorize="isAuthenticated()" style="margin-right: 10px;">
+					    <a href="/user/myalert" class="btn btn-primary position-relative btn-sm" style="gap: 5px;">
 					        <i class="bi bi-bell-fill" style="color: white;"></i>
 					        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
 					            99+
 					            <span class="visually-hidden">unread messages</span>
 					        </span>
-					    </button>
+					    </a>
 					</li>
-					
-					<!-- 보안 관리자용 메뉴 -->
+
+					<!-- 보안 관리자, 안전관리자용 메뉴 -->
 					<li class="nav-item dropdown"  sec:authorize="hasAnyRole('ADMIN', 'ADMINSAFETY')" style="margin-right: 5px;">
 					    <a class="nav-link dropdown-toggle text-warning" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 					        <span class="text-warning">🏆</span>
@@ -56,9 +60,23 @@
 							<li><a class="dropdown-item" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a></li>
 					    </ul>
 					</li >
+					
+					<!-- 보안 관리자, 안전관리자용 메뉴 -->
+					<li class="nav-item dropdown"  sec:authorize="hasAnyRole('MANAGER')" style="margin-right: 5px;">
+					    <a class="nav-link dropdown-toggle text-warning" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					        <span class="text-warning">🏆</span>
+					        <span class="navbar-text" th:text="${#authentication.name} + '님 환영합니다!'"></span>
+							
+					    </a>
+					    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminDropdown">
+					        <li><a class="dropdown-item" href="/admin/reports">제보 관리</a></li>
+							<li><a class="dropdown-item" href="/myreports">내 제보 보기</a></li>
+							<li><a class="dropdown-item" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a></li>
+					    </ul>
+					</li >
 	
 					<!-- 일반 사용자용 메뉴 -->
-					<li class="nav-item dropdown" sec:authorize="!hasAnyRole('ADMIN', 'ADMINSAFETY') and isAuthenticated()"   style="margin-right: 5px;">
+					<li class="nav-item dropdown" sec:authorize="hasRole('USER')" style="margin-right: 5px;">
 					    <a class="nav-link dropdown-toggle text-info" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 					        <span class="text-info">🧑</span>
 					        <span class="navbar-text" th:text="${#authentication.name} + '님 환영합니다!'" ></span>

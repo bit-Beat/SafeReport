@@ -74,8 +74,19 @@ public class AdminController {
  	    Report report = this.reportService.getReport(id);
 		model.addAttribute("report", report);
 
- 	    return "admin/admin_report_manage";
+ 	    return "admin/admin_report_detail";
  	}
+ 	
+ 	@GetMapping("/admin/reportsManage/{id}") /// 위험성관리
+ 	public String adminReportManage2(@PathVariable Integer id, Model model) {
+ 	   
+ 	    Report report = this.reportService.getReport(id);
+		model.addAttribute("report", report);
+
+ 	    //return "admin/admin_report_detail";
+		return "admin/admin_report_manage";
+ 	}
+ 	
  	
  	@PostMapping("/admin/reports/{id}")
  	public String updateRisk(

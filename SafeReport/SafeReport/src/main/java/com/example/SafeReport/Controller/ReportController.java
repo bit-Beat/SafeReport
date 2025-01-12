@@ -42,6 +42,8 @@ public class ReportController {
 	    if (principal != null && (reportForm.getReporterName() == null || reportForm.getReporterName().isEmpty())) {
 	    	Users users = userService.getUser(principal.getName());
 	    	reportForm.setReporterName(users.getUsername());
+	    	reportForm.setReportDepartment(users.getDepartment());
+	    	reportForm.setReporterId(users.getUserid());
 	    }
 	    
 	    model.addAttribute("page", "report"); // 현재 페이지
@@ -62,7 +64,7 @@ public class ReportController {
 	              reportForm.getReportLocation(),
 	              reportForm.getReportContent(),
 	              reportForm.getReportDetails(),
-	              reportForm.getReportPassword()
+	              reportForm.getReporterId()
 	          );
 
 	    // Risk 생성 및 저장
@@ -77,7 +79,7 @@ public class ReportController {
 	public String reportlist(Model model, @RequestParam(value="page", defaultValue="1") int page, Principal principal) // 모델은 자바와 탬플릿간의 연결고리역할
 	{
  		String keyword = userService.getUser(principal.getName()).getUsername(); // 유저명가져오기
-		Page<Report> paging = this.indexService.getList(page-1, keyword);  // page - 1로 0부터 시작
+		Page<Report> paging = this.indexService.getList_userid(page-1, principal.getName());  // page - 1로 0부터 시작
 		model.addAttribute("paging", paging); // 모델 객체에 questionList라는 이름으로 저장했다. 
 		model.addAttribute("keyword", keyword);
 		return "board/myreport_list";
@@ -158,7 +160,7 @@ public class ReportController {
 	        }
 	    }
 	    */
-	    @PostMapping("/report/passwordcompare")
+	    /*@PostMapping("/report/passwordcompare")
 	    @ResponseBody
 	    public ResponseEntity<Map<String, Object>> passwordCompare(@RequestBody Map<String, Object> request) {
 	        // 요청에서 id와 password 가져오기
@@ -182,7 +184,7 @@ public class ReportController {
 
 	        // JSON 응답 반환
 	        return ResponseEntity.ok(response);
-	    }
+	    }*/
 
 
 	    

@@ -19,14 +19,17 @@ public class SecurityConfig { // Spring Security 설정을 담당
 	        http
 	        	//.csrf(csrf -> csrf.disable()) // CSRF 비활성화 (람다 방식 사용), 실제서비스에서는 반드시 죽일 것!
 	            .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
-	                .requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
+	                //.requestMatchers(new AntPathRequestMatcher("/")).permitAll())
+	            	//.requestMatchers("/home").permitAll() // 홈 페이지는 인증 없이 접근 가능
+	            	.anyRequest().authenticated()) // 모든 요청은 인증 필요
 	            .formLogin((formLogin) -> formLogin
-	                .loginPage("/user/login")
+	            	.loginPage("/user/login").permitAll() // 로그인 페이지 인증 없이 접근 가능
 	                .usernameParameter("userid") // 로그인 시 username -> userid로 변경
 	                .defaultSuccessUrl("/home")) // 로그인 성공 시 기본 페이지로 리다이렉트 
 	            .logout((logout) -> logout
 	            	.logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
-	                .logoutSuccessUrl("/home")
+	                //.logoutSuccessUrl("/home")
+	                .logoutSuccessUrl("/user/login").permitAll() // 로그아웃 후 로그인 페이지로 이동
 	                .invalidateHttpSession(true))
 	        ;
 	        return http.build();

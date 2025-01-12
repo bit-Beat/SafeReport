@@ -19,7 +19,7 @@ public class ReportService {
 	private final ReportRepository reportRepository;
 	
 	/// Report Insert
-	public Report create(String title, String department, String name, String location, String content, String details, String password)
+	public Report create(String title, String department, String name, String location, String content, String details, String reporterId)
 	{
 		Report report = new Report(); // Report 테이블 생성
 		
@@ -30,8 +30,8 @@ public class ReportService {
 		report.setReporter_name(name); // 신고자
 		report.setReport_content(content); // 신고내용 접수
 		report.setReport_detail(details); // 개선내용
-		report.setReport_pw(password);//패스워드
 		report.setReportcreatedate(LocalDateTime.now()); // 저장시간
+		report.setReporter_id(reporterId); // 접수 아이디
 		return this.reportRepository.save(report); // 저장 후 리턴
 	}
 	
@@ -64,10 +64,10 @@ public class ReportService {
     }
 	
 	/// 제보 비밀번호 비교 맞으면 true, 틀리면 false 리턴
-	public boolean reportComparePassword(Report report, String password) {
+	/*public boolean reportComparePassword(Report report, String password) {
 		if(password.equals(report.getReport_pw()))
 			return true;
 		else return false;
-	}
+	}*/
 	
 }
