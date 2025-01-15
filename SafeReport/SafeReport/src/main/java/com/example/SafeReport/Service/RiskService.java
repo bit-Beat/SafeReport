@@ -71,18 +71,18 @@ public class RiskService {
 	}
 
 	/// Risk Update
-	public void modify(Risk risk, String riskFactor, String riskType, RiskStatus status, RiskGrade riskGrade, String riskDescription, String improvementMeasures) {
+	public void modify(Risk risk, Report report, String riskFactor, String riskType, RiskStatus status, RiskGrade riskGrade, String manageDepartment) {
 		
 		risk.setRiskFactor(riskFactor); // 위험요인 (ex. 전기, 화재, 기계 등)
 		risk.setRiskType(riskType); // 위험유형 (ex. 화재, 충돌, 낙상 등)
 		risk.setStatus(status); // 상태
 		risk.setRiskGrade(riskGrade); //위험등금 enum(a, b, c, d)
-		risk.setRiskDescription(riskDescription); // 위험내용 (ex. 분전반 화재시 신속 조치 불가 등)
-		risk.setImprovementMeasures(improvementMeasures); // 위험개선대책 (ex. 자동소화장치설치)
-		
 		risk.setLastModifiedDate(LocalDateTime.now()); // 수정시간
 		
+		report.setReport_managedepartment(manageDepartment); // 제보 테이블에 담당부서 변경
+		
         this.riskRepository.save(risk);
+        this.reportRepository.save(report);
     }
 	
 }

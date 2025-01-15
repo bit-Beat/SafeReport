@@ -95,10 +95,12 @@ public class AdminController {
  	    @RequestParam("riskType") String riskType,
  	    @RequestParam("status") RiskStatus status,
  	    @RequestParam("riskGrade") RiskGrade riskGrade,
- 	    @RequestParam("riskDescription") String riskDescription,
- 	    @RequestParam("improvementMeasures") String improvementMeasures) {
+ 	    @RequestParam("reportDepartment") String reportDepartment
+ 	    ) {
  	    Risk risk = this.riskService.getRisk(id);
- 	    this.riskService.modify(risk, riskFactor, riskType, status, riskGrade, riskDescription, improvementMeasures);
+ 	    Report report = this.reportService.getReport(id);
+ 	    
+ 	    this.riskService.modify(risk, report, riskFactor, riskType, status, riskGrade, reportDepartment);
  	    return "redirect:/admin/reports/{id}" ;
  	}
  	

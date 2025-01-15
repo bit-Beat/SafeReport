@@ -60,10 +60,10 @@
 			<hr class="hr-13">
 			
 			<h2 class="border-bottom py-2">			
+				위험성 관리
 				<svg xmlns="http://www.w3.org/2000/svg" width="37" height="37" fill="currentColor" class="bi bi-cone-striped" viewBox="0 0 16 16">
 			  		<path d="m9.97 4.88.953 3.811C10.159 8.878 9.14 9 8 9s-2.158-.122-2.923-.309L6.03 4.88C6.635 4.957 7.3 5 8 5s1.365-.043 1.97-.12m-.245-.978L8.97.88C8.718-.13 7.282-.13 7.03.88L6.275 3.9C6.8 3.965 7.382 4 8 4s1.2-.036 1.725-.098m4.396 8.613a.5.5 0 0 1 .037.96l-6 2a.5.5 0 0 1-.316 0l-6-2a.5.5 0 0 1 .037-.96l2.391-.598.565-2.257c.862.212 1.964.339 3.165.339s2.303-.127 3.165-.339l.565 2.257z"/>
 				</svg>
-				위험성 관리
 			</h2>
 			
 			<div class="card my-3">
@@ -72,14 +72,6 @@
 					<form th:action="@{/admin/reports/{id}(id=${report.reportid})}" method="post">
 						<div class="mb-3">
 						    <label for="status" class="form-label">상태</label>
-							<span th:classappend="${report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).PENDING ? 'badge text-bg-secondary' : 
-							                      report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).REVIEWED ? 'badge text-bg-primary' : 
-							                      report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).DISCUSSING ? 'badge text-bg-danger' : 
-							                      report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).IN_PROGRESS ? 'badge text-bg-warning' : 
-							                      report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).COMPLETED ? 'badge text-bg-success' : 
-							                      'badge text-bg-light'}" 
-							      th:text="${report.risk.status.getDescription}">
-							</span>
 						    <select id="status" name="status" class="form-select">
 						        <option th:each="status : ${T(com.example.SafeReport.Enum.RiskStatus).values()}"
 						                th:value="${status.name()}"
@@ -91,13 +83,6 @@
 												
 			            <div class="mb-3">
 			                <label for="riskGrade" class="form-label">위험 등급</label>
-							<span th:classappend="${report.risk.riskGrade != null ?(report.risk.riskGrade == T(com.example.SafeReport.Enum.RiskGrade).A ? 'badge text-bg-danger' : 
-																	                report.risk.riskGrade == T(com.example.SafeReport.Enum.RiskGrade).B ? 'badge text-bg-warning' : 
-																	                report.risk.riskGrade == T(com.example.SafeReport.Enum.RiskGrade).C ? 'badge text-bg-primary' : 
-																	                report.risk.riskGrade == T(com.example.SafeReport.Enum.RiskGrade).D ? 'badge text-bg-success' : 
-																	                'badge text-bg-light') : 'badge text-bg-light'}" 
-									th:text="${report.risk.riskGrade.description}">
-							</span>
 			                <select id="riskGrade" name="riskGrade" class="form-select">
 			                    <option th:each="grade : ${T(com.example.SafeReport.Enum.RiskGrade).values()}"
 			                            th:value="${grade.name()}"
@@ -119,15 +104,34 @@
 			                <label for="riskType" class="form-label">위험 유형</label>
 			                <input type="text" id="riskType" name="riskType" class="form-control" th:value="${report.risk.riskType}" autocomplete="off">
 			            </div>
-
-						<div class="mb-3">
-							<label for="riskDescription" class="form-label" >위험 내용</label>
-							<textarea th:text="${report.risk.riskDescription}" type="text" class="form-control" name="riskDescription" id="riskDescription" rows="5" autocomplete="off"></textarea>
-						</div>
 						
 						<div class="mb-3">
-							<label for="improvementMeasures" class="form-label" >위험개선대책</label>
-							<textarea th:text="${report.risk.improvementMeasures}" type="text" class="form-control" name="improvementMeasures" id="improvementMeasures" rows="5" autocomplete="off"></textarea>
+							<label for="reportDepartment" class="form-label">담당 부서</label>
+							<select class="form-select" name="reportDepartment" id="reportDepartment" >
+								<option disabled hidden 
+								    th:selected="${report.report_managedepartment == null}" 
+								    value="소속을 선택해주세요.">
+								    소속을 선택해주세요.
+								</option>
+								<optgroup label="현대파텍스">
+								    <option th:value="관리지원팀" 
+								            th:selected="${report.report_managedepartment == '관리지원팀'}">관리지원팀</option>
+								    <option th:value="안전환경팀" 
+								            th:selected="${report.report_managedepartment == '안전환경팀'}">안전환경팀</option>
+								    <option th:value="사업기획팀" 
+								            th:selected="${report.report_managedepartment == '사업기획팀'}">사업기획팀</option>
+								    <option th:value="재경팀" 
+								            th:selected="${report.report_managedepartment == '재경팀'}">재경팀</option>
+								    <option th:value="자재관리팀" 
+								            th:selected="${report.report_managedepartment == '자재관리팀'}">자재관리팀</option>
+								    <option th:value="프레스지원팀" 
+								            th:selected="${report.report_managedepartment == '프레스지원팀'}">프레스지원팀</option>
+								    <option th:value="차체지원팀" 
+								            th:selected="${report.report_managedepartment == '차체지원팀'}">차체지원팀</option>
+								    <option th:value="품질보증팀" 
+								            th:selected="${report.report_managedepartment == '품질보증팀'}">품질보증팀</option>
+								</optgroup>
+							</select>
 						</div>
 	
 						<div class="mb-3">

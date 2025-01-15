@@ -40,8 +40,8 @@ public class Report {
 	private String report_department; /// 접수부서
 	
 	@Column(length=100)
-	@ColumnDefault("안전환경팀") 
-	private String report_managedepartment = "안전환경팀"; /// 관리부서
+	@ColumnDefault("'안전환경팀'") // 기본값 세팅
+	private String report_managedepartment; /// 관리부서
 	
 	@Column(nullable = false, length=255)
 	private String report_location;

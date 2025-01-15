@@ -52,7 +52,7 @@
 				</div>
 				   
 				<div class="mb-3">
-					<select class="form-select visually-hidden" name="reportDepartment" id="reportDepartment" >
+					<select class="form-select visually-hidden" name="reportDepartment" id="reportDepartment" tabindex="-1">
 					    <option disabled hidden 
 					        th:selected="${reportForm.reportDepartment == null}" 
 					        value="소속을 선택해주세요.">
@@ -91,8 +91,8 @@
 				</div>
 
 				<div class="mb-3">
-					<input th:field="*{reporterId}" type="text" class="form-control form-control-sm visually-hidden" name="reporterId" id="reporterId" placeholder="아이디를 입력하세요" autocomplete="off">
-				    <input th:field="*{reporterName}" type="text" class="form-control form-control-sm visually-hidden" name="reporterName" id="reporterName" placeholder="이름을 입력하세요" autocomplete="off">
+					<input th:field="*{reporterId}" type="text" class="form-control form-control-sm visually-hidden" name="reporterId" id="reporterId" placeholder="아이디를 입력하세요" autocomplete="off" tabindex="-1">
+				    <input th:field="*{reporterName}" type="text" class="form-control form-control-sm visually-hidden" name="reporterName" id="reporterName" placeholder="이름을 입력하세요" autocomplete="off" tabindex="-1">
 				</div>
 
 				<div class="mb-3">

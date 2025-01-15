@@ -187,8 +187,16 @@
 							<a th:href="@{|/notice/notice_detail/${notice[0].noticeid}|}" class="btn btn-primary">자세히 보기</a>
 						</div>
 					</div>
-					<div th:if="${notice == null || notice.isEmpty()}">
-					    <p>현재 공지사항이 없습니다.</p>
+					<div class="card h-100 w-100" th:if="${notice == null || notice.isEmpty()}">
+						<div class="card-header" >				
+							<div class="d-flex align-items-center" style="margin-bottom: 8px">
+								<i class="bi bi-megaphone-fill" style="color: rgb(2, 94, 232); font-size: 18px"></i> <!-- 빨간색 아이콘 -->
+								<h5 class="card-title mb-0 ms-2">공지사항 없음</h5>
+							</div>
+						</div>
+						<div class="card-body">
+					    	<p style="white-space: pre-wrap;" class="card-text  text-truncate">현재 공지사항이 없습니다.</p>
+						</div>
 					</div>
 				</div>
 	

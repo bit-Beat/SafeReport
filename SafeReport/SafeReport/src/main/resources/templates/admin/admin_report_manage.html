@@ -71,41 +71,38 @@
 					<table class="table align-middle">
 						<thead class="table-light">
 							<tr>
-						       <th>위험등급</th>
-						       <th>위험요인</th>
-						       <th>위험유형</th>
-						        <th>작성일</th>
+								<th>담당부서</th>
+								<th>위험등급</th>
+								<th>접수상태</th>
+								<th>위험요인</th>
+								<th>위험유형</th>
+								<th>작성일</th>
 						    </tr>
 						</thead>
 						<tbody>
 							<tr>
+								<td th:text = "${report.report_managedepartment}">담당부서</td>
 								<td><span th:classappend="${report.risk.riskGrade != null ?(report.risk.riskGrade == T(com.example.SafeReport.Enum.RiskGrade).A ? 'badge text-bg-danger' : 
 																							report.risk.riskGrade == T(com.example.SafeReport.Enum.RiskGrade).B ? 'badge text-bg-warning' : 
 																							report.risk.riskGrade == T(com.example.SafeReport.Enum.RiskGrade).C ? 'badge text-bg-primary' : 
 																							report.risk.riskGrade == T(com.example.SafeReport.Enum.RiskGrade).D ? 'badge text-bg-success' : 
 																							'badge text-bg-light') : 'badge text-bg-light'}" 
 										  th:text="${report.risk.riskGrade.description}">
-									</span></td>
+								</td>
+								<td><span th:classappend="${report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).PENDING ? 'badge text-bg-secondary' : 
+																		report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).REVIEWED ? 'badge text-bg-primary' : 
+																		report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).DISCUSSING ? 'badge text-bg-danger' : 
+																		report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).IN_PROGRESS ? 'badge text-bg-warning' : 
+																		report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).COMPLETED ? 'badge text-bg-success' : 
+																		'badge text-bg-light'}" 
+														th:text="${report.risk.status.getDescription}">
+								</td>
 								<td th:text="${report.risk.riskFactor}"></td>
 								<td th:text="${report.risk.riskType}"></td>
 								<td th:text="${#temporals.format(report.risk.lastModifiedDate, 'yyyy-MM-dd HH:mm')}"></td>
 							</tr>
 						</tbody>
 					</table>
-								
-					<div class="card my-3">
-						<div class="card-header">위험 내용</div>
-							<div class="card-body">
-								<label th:text="${report.risk.riskDescription}"></label>
-							</div>	
-						</div>
-									
-					<div class="card my-3">
-						<div class="card-header">위험개선대책</div>
-							<div class="card-body">
-								<label th:text="${report.risk.improvementMeasures}"></label>
-							</div>
-					</div>				
 			    </div>
 			</div>
 		</div>
@@ -132,7 +129,6 @@
 							<table class="table table-sm">
 							    <thead>
 							        <tr>
-							            <th rowspan="2" class="text-center"><p class="text-center">위험 요인 상황</p></th>
 							            <th colspan="2" class="text-center">위험성 추정</th>
 							            <th rowspan="2" class="text-center"><p class="text-center">위험성 결정</p></th>
 							        </tr>
@@ -143,7 +139,6 @@
 							    </thead>
 							    <tbody>
 							        <tr>
-							            <td rowspan="2" ><textarea name="riskSituation" rows="3" class="form-control"></textarea></td>
 							            <td><input type="text" name="participants" placeholder="개선전" class="form-control"></td>
 							            <td><input type="text" name="participants" placeholder="개선전" class="form-control"></td>
 							            <td><input type="text" name="participants" placeholder="개선전" class="form-control"></td>
@@ -156,15 +151,9 @@
 							    </tbody>
 							</table>
 
-							<h3 class="mb-4">개선 대책 협의</h3>
+							<h3 class="mb-4 mt-4">개선 대책 협의</h3>
 							<table class="table table-sm">
 							    <tbody>
-							        <tr>
-							            <td>참석자</td>
-							            <td colspan="3">
-							                <input type="text" name="participants" class="form-control">
-							            </td>
-							        </tr>
 							        <tr>
 							            <td>관리감독자</td>
 							            <td><input type="text" name="supervisor" class="form-control"></td>
@@ -246,13 +235,11 @@
 							<table class="table table-sm">
 							    <thead>
 							        <tr>
-							            <th colspan="3" class="text-center"><p class="text-center">위험 요인 상황</p></th>
-							            <th colspan="1" class="text-center"><p class="text-center">3단계 평가</p></th>
+							            <th class="text-center"><p class="text-center">3단계 평가</p></th>
 							        </tr>
 							    </thead>
 							    <tbody>
 							        <tr>
-							            <td rowspan="2" colspan="3"><textarea name="riskSituation" rows="5" class="form-control"></textarea></td>
 							            <td>										
 											<div class="form-floating">
 											  <select class="form-select form-select-sm" id="floatingSelect" >
@@ -272,22 +259,16 @@
 											    <option value="중">중</option>
 											    <option value="하">하</option>
 											  </select>
-											  <label for="floatingSelect">개선전</label>
+											  <label for="floatingSelect">개선후</label>
 											</div>
 										</td>
 									</tr>
 							    </tbody>
 							</table>
 
-							<h3 class="mb-4">개선 대책 협의</h3>
+							<h3 class="mb-4 mt-4">개선 대책 협의</h3>
 							<table class="table table-sm">
 							    <tbody>
-							        <tr>
-							            <td>참석자</td>
-							            <td colspan="3">
-							                <input type="text" name="participants" class="form-control">
-							            </td>
-							        </tr>
 							        <tr>
 							            <td>관리감독자</td>
 							            <td><input type="text" name="supervisor" class="form-control"></td>
@@ -369,27 +350,16 @@
 							<table class="table table-sm">
 							    <thead>
 							        <tr>
-							            <th class="text-center"><p class="text-center">위험 요인 상황</p></th>
-							        </tr>
-							    </thead>
-							    <tbody>
-							        <tr>
-							            <td ><textarea name="riskSituation" rows="5" class="form-control"></textarea></td>
-							        </tr>
-							    </tbody>
-							</table>
-							
-							<table class="table table-sm">
-							    <thead>
-							        <tr>
 							            <th class="text-center">구분</th>
+										<th class="text-center">내용</th>
 										<th class="text-center">위험성 확인 결과</th>
 										<th class="text-center">개선방안</th>
 							        </tr>
 							    </thead>
 							    <tbody>
 							        <tr>
-										<td class="text-center">인터뷰 : 작업자의 위험요인에 대한 인식은 잘 되어있는가?</td>
+										<td class="text-center">인터뷰 </td>
+										<td class="text-center">작업자의 위험요인에 대한 인식은 잘 되어있는가?</td>
 										<td>
 											<select class="form-select form-select-sm" >
 											    <option value="상">적정</option>
@@ -402,7 +372,8 @@
 										</td>
 							        </tr>
 									<tr>
-										<td class="text-center">안전장치 : 위험요인에 대한 안전 장치는 설치되어 있는가?</td>
+										<td class="text-center">안전장치</td>
+										<td class="text-center">위험요인에 대한 안전 장치는 설치되어 있는가?</td>
 										<td>
 											<select class="form-select form-select-sm" >
 											    <option value="상">적정</option>
@@ -415,7 +386,8 @@
 										</td>
 									</tr>
 									<tr>
-										<td class="text-center">안전수칙 : 위험요인에 대한 안전 수칙 기준이 있는가?</td>
+										<td class="text-center">안전수칙</td>
+										<td class="text-center">위험요인에 대한 안전 수칙 기준이 있는가?</td>
 										<td>
 											<select class="form-select form-select-sm" >
 											    <option value="상">적정</option>
@@ -428,7 +400,8 @@
 										</td>
 									</tr>
 									<tr>
-										<td class="text-center">안전보호구 : 위험요인에 대한 보호구가 지급되고 있는가?</td>
+										<td class="text-center">안전보호구</td>
+										<td class="text-center">위험요인에 대한 보호구가 지급되고 있는가?</td>
 										<td>
 											<select class="form-select form-select-sm" >
 											    <option value="상">적정</option>
@@ -441,7 +414,8 @@
 										</td>
 									</tr>
 									<tr>
-										<td class="text-center">안전표지 : 위험요인에 대한 안전 표지가 부착되어 있는가?</td>
+										<td class="text-center">안전표지</td>
+										<td class="text-center">위험요인에 대한 안전 표지가 부착되어 있는가?</td>
 										<td>
 											<select class="form-select form-select-sm" >
 											    <option value="상">적정</option>

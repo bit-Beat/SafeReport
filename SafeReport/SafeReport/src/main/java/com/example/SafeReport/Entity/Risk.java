@@ -32,11 +32,11 @@ public class Risk {
     @Column(length = 10)
     private RiskGrade riskGrade; // 위험등급 (ex. A, B, C, D)
 
-    @Column(columnDefinition = "TEXT")
+    /*@Column(columnDefinition = "TEXT")
     private String riskDescription; // 위험내용 (ex. 분전반 화재시 신속 조치 불가 등)
 
     @Column(columnDefinition = "TEXT")
-    private String improvementMeasures; // 위험개선대책 (ex. 자동소화장치설치)
+    private String improvementMeasures; // 위험개선대책 (ex. 자동소화장치설치)*/
 
     @Enumerated(EnumType.STRING) // ENUM을 문자열로 저장
     @Column(length = 50)
