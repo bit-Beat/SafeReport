@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap.min.css">
+	
+</head>
+
+<body >
+	<div layout:fragment="content" class="container-fluid">
+		<div class="container mt-5"> <!--마진탑 5-->
+			<div class="d-flex  justify-content-between align-items-center ">
+			    <h1 class="text-primary mb-3">알림 목록</h1>
+			</div>
+			<hr>
+			<div class="row">
+			    <div class="col">
+			      <ul class="list-group">
+			        <li class="list-group-item d-flex justify-content-between align-items-center">
+			          <div>
+			            <strong>[복사기 고장] 제보가 담당부서로 인계되었습니다.</strong>
+						<span class="badge text-bg-secondary" style="margin-left: 2px;">읽지않음</span>
+			            <p class="mb-0 text-muted">10분 전</p>
+			          </div>
+			          <button class="btn btn-sm btn-primary" onclick="location.href='/board/report_detail/1'">확인</button>
+			        </li>
+					<li class="list-group-item d-flex justify-content-between align-items-center">
+					  <div>
+					    <strong>[1500톤 프레스 안정 고장] 제보가 담당부서로 인계되었습니다.</strong>
+					    <p class="mb-0 text-muted">30분 전</p>
+					  </div>
+					  <button class="btn btn-sm btn-primary">확인</button>
+					</li>
+					<li class="list-group-item d-flex justify-content-between align-items-center">
+					  <div>
+					    <strong>[공지] 2025.03.14(일) 서버 업데이트 작업 공지가 등록되었습니다.</strong>
+					    <p class="mb-0 text-muted">3일 전</p>
+					  </div>
+					  <button class="btn btn-sm btn-primary">확인</button>
+					</li>
+			      </ul>
+			    </div>
+			</div>
+			
+		</div>
+	</div>
+</body>
+</html>

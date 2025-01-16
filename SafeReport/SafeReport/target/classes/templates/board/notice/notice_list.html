@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap.min.css">
+	
+	<style>
+		.inactive-row {
+		    background-color: rgb(234, 189, 189); /* 원하는 색상으로 변경 */
+		}
+	</style>
+	
+	<script type="text/javascript">
+	    document.addEventListener("DOMContentLoaded", function () {
+	        const page_elements = document.getElementsByClassName("page-link");
+	        Array.from(page_elements).forEach(function(element) {
+	            element.addEventListener('click', function() {
+	                document.getElementById('page').value = this.dataset.page;
+	                document.getElementById('searchForm').submit();
+	            });
+	        });
+	    });
+	</script>
+</head>
+
+<body>
+	<div layout:fragment="content" class="container-fluid">
+
+		<div class="container mt-5  text-truncate">		
+			<div class="row my-3">
+				<div class="col-6">
+					<a href="/notice" class="btn btn-primary" sec:authorize="hasAnyRole('ADMIN', 'MANAGER')">공지사항작성</a>
+				</div>
+				
+			</div>
+				
+			<table class="table table-striped">
+				<thead class="table">
+					<tr>
+						<th>번호</th>
+						<th>제목</th>
+						<th>작성자</th>
+						<th>작성일</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="notice, loop : ${combinedNotices}" th:class="${notice.active == true} ? 'inactive-row' : ''">
+					    <td th:if="${notice.active != true}" th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
+						<td th:if="${notice.active == true}"><span class="badge rounded-pill text-bg-danger">긴급</span></td>
+					    <td>
+					        
+					        <a th:href="@{|/notice/notice_detail/${notice.noticeid}|}" th:text="${notice.title}"></a>
+					    </td>
+					    <td th:text="${notice.author}"></td>
+					    <td th:text="${#temporals.format(notice.createdate, 'yyyy-MM-dd HH:mm')}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<!-- 페이징처리 시작 -->
+		<div th:if="${!paging.isEmpty()}">
+		    <ul class="pagination justify-content-center">
+				<li class="page-item">
+					<a class="page-link" href="javascript:void(0)" th:data-page="${paging.number - 5 < 1 ? 1 : paging.number - 5}" aria-label="Previous 5 Pages">
+						<span aria-hidden="true">&laquo;</span>
+					</a>
+				<li th:each="page : ${#numbers.sequence(
+										(paging.number <= 2) ? 0 : (paging.number >= paging.totalPages - 3 ? paging.totalPages - 5 : paging.number - 2), 
+				                       	(paging.number <= 2) ? 4 : (paging.number >= paging.totalPages - 3 ? paging.totalPages - 1 : paging.number + 2))}"
+					th:classappend="${page == paging.number} ? 'active'"
+					class="page-item">
+					<a th:text="${page + 1}" class="page-link" href="javascript:void(0)" th:data-page="${page + 1}"></a>
+				</li>		
+				<li class="page-item" th:classappend="${paging.number + 5 >= paging.totalPages} ? 'disabled'">
+					<a class="page-link" href="javascript:void(0)" th:data-page="${paging.number +5 >= paging.totalPages ? paging.totalPages - 1 : paging.number + 5}" aria-label="Next 5 Pages">
+						<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+		    </ul>
+		</div>
+		<!-- 페이징처리 끝 -->
+		
+		<form th:action="@{/notice/list}" method="get" id="searchForm">
+			<input type="hidden" id="page" name="page" th:value="${paging.number}">
+		</form>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<link rel="stylesheet" type="text/css" href="/static/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	<link rel="shortcut icon" href="/static/favicon.ico">
+	<title>안전신문고 제보사이트</title>
+</head>
+
+<style>
+    table {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 5px;
+    }
+
+    th {
+        background-color: #f8f9fa;
+    }
+	.badge:hover {
+		cursor: default; /* 커서를 기본 모양으로 설정 */
+	}
+	body{
+		font-size: 15px;
+	}
+	p{
+		white-space: pre-wrap; /*p태그 모두 줄바꿈 있으면 처리*/	
+	}
+</style>
+
+<body >
+	<!-- 기본 템플릿 안에 삽입될 내용 Start -->
+	<nav th:replace="~{layout/header :: header}"></nav><!--헤더 네비게이션-->
+	<th:block layout:fragment="content" class = "text-truncate"></th:block>
+	<!-- 기본 템플릿 안에 삽입될 내용 End -->
+	<footer th:replace="~{layout/footer :: footer}"></footer>
+	
+	<!-- 자바스크립트 Start -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+	<th:block layout:fragment="script"></th:block>
+	<!-- 자바스크립트 End -->
+</body>
+</html>

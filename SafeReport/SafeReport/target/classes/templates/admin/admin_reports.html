@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap.min.css">
+
+</head>
+<body>
+	<div layout:fragment="content">
+		
+    <div class="container mt-5 mb-3 text-truncate">
+        <!-- 제목 및 통계 링크 -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="text-primary mb-3">관리자 제보 관리</h1>
+            <a href="/admin/statistics" class="btn btn-outline-primary">📊 통계 보기</a>
+        </div>
+		
+		<hr>
+
+        <!-- 검색 및 필터 -->
+        <form method="get" th:action="@{/admin/reports}" class="mb-4" id="searchForm">
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <input type="text" name="keyword" class="form-control" placeholder="제목/작성자 검색" th:value="${keyword}" autocomplete="off">
+                </div>
+
+                <div class="col-md-3">
+                    <select name="riskGrade" class="form-select">
+						<option selected value="null" >위험 등급 선택</option>
+						<option th:each="grade : ${T(com.example.SafeReport.Enum.RiskGrade).values()}"
+						        th:value="${grade.name()}"
+						        th:text="${grade.getDescription}"
+								th:selected="${selectedRiskGrade == grade.name()}">
+						</option>
+                    </select>
+                </div>
+				
+				<div class="col-md-3">
+					<select name="status" class="form-select">
+					    <option selected value="">상태 선택</option>
+					    <option th:each="status : ${T(com.example.SafeReport.Enum.RiskStatus).values()}"
+					            th:value="${status.name()}"
+					            th:text="${status.getDescription}"
+								th:selected="${selectedStatus == status.name()}">
+						</option>
+					</select>
+				</div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">검색</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- 제보 목록 -->
+        <div class="card d-block text-truncate">
+            <div class="card-body text-truncate">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>제목</th>
+                            <th>작성자</th>
+							<th>담당부서</th>
+                            <th>위험 등급</th>
+                            <th>상태</th>
+							<th>진행상황</th>
+                            <th>작성일</th>
+                            <th>관리</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="report, loop : ${report}">
+                            <td th:text="${loop.count}"></td>
+                            <td th:text="${report.report_title}"></td>
+                            <td th:text="${report.reporter_name}"></td>
+							<td th:text="${report.report_managedepartment}"></td>
+                            <td>
+								<span th:classappend="${report.risk.riskGrade != null ?
+														(report.risk.riskGrade == T(com.example.SafeReport.Enum.RiskGrade).A ? 'badge text-bg-danger' : 
+										                report.risk.riskGrade == T(com.example.SafeReport.Enum.RiskGrade).B ? 'badge text-bg-warning' : 
+										                report.risk.riskGrade == T(com.example.SafeReport.Enum.RiskGrade).C ? 'badge text-bg-primary' : 
+										                report.risk.riskGrade == T(com.example.SafeReport.Enum.RiskGrade).D ? 'badge text-bg-success' : 
+										                'badge text-bg-light') : 'badge text-bg-light'}" 
+										th:text="${report.risk.riskGrade.description}">
+								</span>
+                            </td>
+                            <td>
+								<span th:classappend="${report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).PENDING ? 'badge text-bg-secondary' : 
+								                      report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).REVIEWED ? 'badge text-bg-primary' : 
+								                      report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).DISCUSSING ? 'badge text-bg-danger' : 
+								                      report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).IN_PROGRESS ? 'badge text-bg-warning' : 
+								                      report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).COMPLETED ? 'badge text-bg-success' : 
+								                      'badge text-bg-light'}" 
+								      th:text="${report.risk.status.getDescription}">
+								</span>
+								
+                            </td>
+							<td>
+								<div class="progress" role="progressbar" aria-label="Default striped example" >
+								  <div class="progress-bar progress-bar-striped" th:style="|width: ${((report.risk.status.ordinal + 1)*100) / T(com.example.SafeReport.Enum.RiskStatus).values().length }%|"></div>
+								</div> 
+							</td>
+                            <td th:text="${#temporals.format(report.reportcreatedate, 'yyyy-MM-dd HH:mm')}"></td>
+                            <td>
+                                <a th:href="@{/admin/reports/{id}(id=${report.reportid})}" class="btn btn-sm btn-outline-primary btn-action">상세</a>
+								<a th:href="@{/admin/reportsManage/{id}(id=${report.reportid})}" class="btn btn-sm btn-outline-primary btn-action">위험성 평가</a>
+                                <form th:action="@{|/report/delete/${report.reportid}|}" method="post" style="display:inline;">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger btn-action" onclick="return confirm('정말 삭제하시겠습니까?')" sec:authorize="hasAnyRole('ADMIN', 'ADMINSAFETY')">삭제</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+	
+	<!-- 페이징처리 시작 -->
+	<div th:if="${!report.isEmpty()}">
+		<ul class="pagination justify-content-center">
+		    <!-- Previous Page -->
+		    <li class="page-item" th:classappend="${report.number == 0} ? 'disabled'">
+		        <a class="page-link" th:href="@{/admin/reports(page=${report.number}, keyword=${keyword}, status=${selectedStatus}, riskGrade=${selectedRiskGrade})}">&laquo;</a>
+		    </li>
+
+		    <!-- Page Numbers -->
+		    <li th:each="page : ${#numbers.sequence(1, report.totalPages)}" 
+		        th:classappend="${page - 1 == report.number} ? 'active'" 
+		        class="page-item">
+		        <a class="page-link" th:href="@{/admin/reports(page=${page}, keyword=${keyword}, status=${selectedStatus}, riskGrade=${selectedRiskGrade})}" 
+		           th:text="${page}"></a>
+		    </li>
+
+		    <!-- Next Page -->
+		    <li class="page-item" th:classappend="${report.number + 1 == report.totalPages} ? 'disabled'">
+		        <a class="page-link" th:href="@{/admin/reports(page=${report.number + 2}, keyword=${keyword}, status=${selectedStatus}, riskGrade=${selectedRiskGrade})}">&raquo;</a>
+		    </li>
+		</ul>
+	</div>
+	<!-- 페이징처리 끝 -->
+	   
+	</div>
+</body>
+</html>

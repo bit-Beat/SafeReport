@@ -114,6 +114,7 @@ public class ReportController {
 	        reportForm.setReportLocation(report.getReport_location()); // 발생장소
 	        reportForm.setReportContent(report.getReport_content()); //신고내용
 	        reportForm.setReportDetails(report.getReport_detail()); //개선요청
+	        reportForm.setReporterId(report.getReporter_id()); // 아이디
 	        
 	    	model.addAttribute("page", "report"); // 현재 페이지 
 	        return "board/report"; /// 신고접수 페이지

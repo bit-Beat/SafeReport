@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap.min.css">
+</head>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+
+<header th:fragment="header" >
+	
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="background-color: rgb(10,34,104);" >
+        <div class="container-fluid">
+			<a href="/home"  style="margin-left: 5px;"><img  src="/static/HYUNDAIPARTECS_LOGO.SVG" alt="Bootstrap" width="110" height="40"></a>
+			<a class="navbar-brand ms-4" href="/home" style="font-size: 20px; font-weight: bold; vertical-align: middle; "><img src="/static/logo.png" width="22" height="23" style="vertical-align: middle; margin-right: 8px;">안전신문고</a>
+						
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+			
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">                                        
+                    <!-- 네비게이션 메뉴 -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home" th:classappend="${page == 'home'} ? 'active' : ''">홈</a>
+                    </li>
+					<li class="nav-item">
+					    <a class="nav-link" href="/home" th:classappend="${page == ''} ? 'active' : ''">안전핀포인트</a>
+					</li>
+					<li class="nav-item">
+					    <a class="nav-link" href="/reportlist" >신고현황</a>
+					</li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/" th:classappend="${page == 'report'} ? 'active' : ''">신고접수</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/qna" th:classappend="${page == 'qna'} ? 'active' : ''">문의</a>
+                    </li>
+					
+					<div style="border-left: 1px solid rgb(171, 171, 171); margin-left: 10px; margin-right: 10px; margin-top: 5px; margin-bottom: 5px;"></div>
+
+					<li class="nav-item d-flex align-items-center" sec:authorize="isAuthenticated()" style="margin-right: 10px;">
+					    <a href="/user/myalert" class="btn btn-primary position-relative btn-sm" style="gap: 5px;">
+					        <i class="bi bi-bell-fill" style="color: white;"></i>
+					        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+					            99+
+					            <span class="visually-hidden">unread messages</span>
+					        </span>
+					    </a>
+					</li>
+
+					<!-- 보안 관리자, 안전관리자용 메뉴 -->
+					<li class="nav-item dropdown"  sec:authorize="hasAnyRole('ADMIN', 'ADMINSAFETY')" style="margin-right: 5px;">
+					    <a class="nav-link dropdown-toggle text-warning" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					        <span class="text-warning">🏆</span>
+					        <span class="navbar-text" th:text="${#authentication.name} + '님 환영합니다!'"></span>
+							
+					    </a>
+					    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminDropdown">
+					        <li><a class="dropdown-item" href="/admin/reports">제보 관리</a></li>
+							<li><a class="dropdown-item" href="/admin/award">수상 관리</a></li>
+							<li><a class="dropdown-item" href="/myreports">내 제보 보기</a></li>
+					        <li><a class="dropdown-item" href="/admin/statistics"><span class="badge text-bg-danger">미개발</span> 통계 보기</a></li>
+					        <li><a class="dropdown-item" href="/admin/settings"><span class="badge text-bg-danger">미개발</span> 설정</a></li>
+							<li><a class="dropdown-item" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a></li>
+					    </ul>
+					</li >
+					
+					<!-- 보안 관리자, 안전관리자용 메뉴 -->
+					<li class="nav-item dropdown"  sec:authorize="hasAnyRole('MANAGER')" style="margin-right: 5px;">
+					    <a class="nav-link dropdown-toggle text-warning" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					        <span class="text-warning">🏆</span>
+					        <span class="navbar-text" th:text="${#authentication.name} + '님 환영합니다!'"></span>
+							
+					    </a>
+					    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminDropdown">
+					        <li><a class="dropdown-item" href="/admin/reports">제보 관리</a></li>
+							<li><a class="dropdown-item" href="/myreports">내 제보 보기</a></li>
+							<li><a class="dropdown-item" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a></li>
+					    </ul>
+					</li >
+	
+					<!-- 일반 사용자용 메뉴 -->
+					<li class="nav-item dropdown" sec:authorize="hasRole('USER')" style="margin-right: 5px;">
+					    <a class="nav-link dropdown-toggle text-info" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					        <span class="text-info">🧑</span>
+					        <span class="navbar-text" th:text="${#authentication.name} + '님 환영합니다!'" ></span>
+					    </a>
+					    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+					        <li><a class="dropdown-item" href="/myreports">내 제보 보기</a></li>
+					        <li><a class="dropdown-item" href="/user/settings"><span class="badge text-bg-danger">미개발</span> 프로필 설정</a></li>
+							<li><a class="dropdown-item" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a></li>
+					    </ul>
+					</li>
+					
+					<!-- 로그인/로그아웃 -->
+					<li class="nav-item" >
+					    <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/user/login}">로그인</a>
+					</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+	<div style="padding-bottom: 56px;"><!-- 헤더 높이 만큼 여백 추가 --></div> <!-- padding-top 추가 -->
+</header>
+</html>
