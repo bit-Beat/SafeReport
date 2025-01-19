@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.SafeReport.NoticeForm;
+import com.example.SafeReport.DTO.NoticeForm;
 import com.example.SafeReport.Entity.Notice;
 import com.example.SafeReport.Service.NoticeService;
 

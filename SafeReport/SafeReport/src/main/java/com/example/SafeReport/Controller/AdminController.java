@@ -1,27 +1,32 @@
 package com.example.SafeReport.Controller;
 
-import java.security.Principal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.SafeReport.DTO.RiskAssessmentCForm;
 import com.example.SafeReport.Entity.Award;
 import com.example.SafeReport.Entity.Report;
 import com.example.SafeReport.Entity.Risk;
+import com.example.SafeReport.Entity.RiskAssessmentB;
+import com.example.SafeReport.Entity.RiskAssessmentC;
 import com.example.SafeReport.Enum.RiskGrade;
 import com.example.SafeReport.Enum.RiskStatus;
 import com.example.SafeReport.Service.AwardService;
-import com.example.SafeReport.Service.IndexService;
 import com.example.SafeReport.Service.ReportService;
 import com.example.SafeReport.Service.RiskService;
-import com.example.SafeReport.Service.UserService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -79,9 +84,14 @@ public class AdminController {
  	
  	@GetMapping("/admin/reportsManage/{id}") /// 위험성관리
  	public String adminReportManage2(@PathVariable Integer id, Model model) {
- 	   
- 	    Report report = this.reportService.getReport(id);
+ 		Report report = this.reportService.getReport(id);
+ 		Optional<RiskAssessmentB>  riskassessmentB = this.riskService.getRiskB_Reportid(report);
+		
 		model.addAttribute("report", report);
+
+		riskassessmentB.ifPresent(riskB -> model.addAttribute("riskB", riskB)); // optional의 메소드인 ifPresent를 이용해 값이 있을경우에만 Model추가
+
+        model.addAttribute("reportId", id);
 
  	    //return "admin/admin_report_detail";
 		return "admin/admin_report_manage";
@@ -177,7 +187,7 @@ public class AdminController {
 
 	 @PostMapping("/admin/award/delete")
 	 public String deleteAwards(@RequestParam("year") int year,
-			  					@RequestParam("month") int month,
+			  					@RequestParam("month") int month,	
 			  					@RequestParam("deleteid") Integer deleteid, Model model)
 	 {		 
 		  
@@ -185,7 +195,49 @@ public class AdminController {
 		 awardService.deleteAwardByReportId(deleteid);
 	     return "redirect:/admin/award?year=" + year + "&month=" + month ;
 	 }
-
-
-
+	 
+	 @PostMapping("/admin/reportsManage/Bgrade/{id}")
+	 public String riskEvaluation_B(@PathVariable("id") Integer reportid
+			 						,@RequestParam("possibilityBefore_B") String possibilityBefore_B
+	 								,@RequestParam("possibilityAfter_B") String possibilityAfter_B
+	 								,@RequestParam("supervisorB") String supervisorB
+	 								,@RequestParam("representativeB") String representativeB
+	 								,@RequestParam(value = "essentialActiveB", required = false, defaultValue = "false") Boolean essentialActiveB 
+	 								,@RequestParam(value = "administrativeActiveB", required = false, defaultValue = "false") Boolean administrativeActiveB
+	 								,@RequestParam(value = "engineeringActiveB", required = false, defaultValue = "false") Boolean engineeringActiveB
+	 								,@RequestParam(value = "equipmentActiveB", required = false, defaultValue = "false") Boolean equipmentActiveB
+	 								,@RequestParam("essential_measuresB") String essential_measuresB
+	 								,@RequestParam("administrative_measuresB") String administrative_measuresB
+	 								,@RequestParam("engineering_measuresB") String engineering_measuresB
+	 								,@RequestParam("personal_equipmentB") String personal_equipment
+	 								,@RequestParam("confirmed_measured") String confirmed_measured
+	 								,@RequestParam(value = "confirmed_date", required = false) String confirmedDateString
+	 								)
+	 {
+		 Report report = this.reportService.getReport(reportid);
+		 
+		 Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); // 수정 ㅎ해야함 id가 아닌 유저명으로 하도록
+		 String loggedInUsername = authentication.getName(); // // 수정 ㅎ해야함 id가 아닌 유저명으로 하도록
+		 
+		 LocalDate confirmedDate = null;// = LocalDate.parse(confirmedDateString);
+		 if(!confirmedDateString.equals(""))
+			 confirmedDate = LocalDate.parse(confirmedDateString);
+		 
+		 // Service를 호출하여 저장 또는 업데이트
+	     riskService.saveOrUpdateRiskAssessmentB(report, possibilityBefore_B, possibilityAfter_B, loggedInUsername, supervisorB, representativeB
+	    		 								,essentialActiveB, administrativeActiveB, engineeringActiveB, equipmentActiveB
+	    		 								,essential_measuresB, administrative_measuresB, engineering_measuresB, personal_equipment
+	    		 								,confirmed_measured, confirmedDate);
+		 								
+		 return "redirect:/admin/reportsManage/" + reportid;
+	 }
+	 
+	 @PostMapping("/admin/reportsManage/Cgrade/{id}")
+	 public String riskEvaluation_C(@PathVariable("id") Integer reportid, @ModelAttribute RiskAssessmentCForm RiskAssessmentCForm)
+	 {
+		 Report report = this.reportService.getReport(reportid);
+		 
+		 
+		 return "redirect:/admin/reportsManage/" + reportid;
+	 }
 }

@@ -1,5 +1,6 @@
 package com.example.SafeReport.Entity;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
@@ -11,6 +12,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,7 +27,7 @@ public class Report {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // 컬럼 속성인 identity 지정
 	@Column(name = "report_id") // DB 컬럼 이름과 매핑
-	private Integer reportid;
+	private Integer reportid; 
 	
 	@Column(nullable = false, length = 255)
 	private String report_title;
@@ -66,11 +68,18 @@ public class Report {
 	
 	@OneToOne(mappedBy = "reportid", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	@OnDelete(action = OnDeleteAction.CASCADE)
-	private Risk risk;
+	private Risk risk; // 위험성관리
 
 	@OneToOne(mappedBy = "report", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	@OnDelete(action = OnDeleteAction.CASCADE)
-	private Award award;
-
+	private Award award; // 수상테이블
+	
+	@OneToOne(mappedBy = "reportid", cascade = CascadeType.REMOVE, orphanRemoval = true)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	private RiskAssessmentB riskAssessmentB; // 위험성평가 b
+	
+	@OneToMany(mappedBy = "reportid", cascade = CascadeType.REMOVE, orphanRemoval = true)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	private List<RiskAssessmentC> riskAssessmentC; // 위험성평가 c
 	
 }

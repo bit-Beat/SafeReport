@@ -1,4 +1,4 @@
-package com.example.SafeReport;
+package com.example.SafeReport.DTO;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;

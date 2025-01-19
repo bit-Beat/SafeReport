@@ -35,6 +35,14 @@
 	}
 </style>
 
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		document.querySelectorAll("input").forEach(function (input) {
+	    	input.setAttribute("autocomplete", "off"); // 모든 input 요소에 autocomplete="off" 추가
+		});
+	});
+</script>
+
 <body >
 	<!-- 기본 템플릿 안에 삽입될 내용 Start -->
 	<nav th:replace="~{layout/header :: header}"></nav><!--헤더 네비게이션-->

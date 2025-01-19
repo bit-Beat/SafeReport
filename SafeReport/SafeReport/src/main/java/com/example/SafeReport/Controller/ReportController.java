@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.SafeReport.ReportForm;
+import com.example.SafeReport.DTO.ReportForm;
 import com.example.SafeReport.Entity.Report;
 import com.example.SafeReport.Entity.Users;
 import com.example.SafeReport.Service.IndexService;

@@ -114,14 +114,14 @@
 			
 			<nav>
 			  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-				<button class="nav-link" id="disabled-tab" data-bs-toggle="tab"  type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false" disabled>위험등급</button>
-			    <button class="nav-link active" id="A-Grade-tab" data-bs-toggle="tab" data-bs-target="#A-Grade" type="button" role="tab" aria-controls="A-Grade" aria-selected="true">A등급</button>
-			    <button class="nav-link" id="B-Grade-tab" data-bs-toggle="tab" data-bs-target="#B-Grade" type="button" role="tab" aria-controls="B-Grade" aria-selected="false">B등급</button>
-			    <button class="nav-link" id="C-Grade-tab" data-bs-toggle="tab" data-bs-target="#C-Grade" type="button" role="tab" aria-controls="C-Grade" aria-selected="false">C/D등급</button>
+				<button class="nav-link" th:classappend="${report.risk.riskGrade == T(com.example.SafeReport.Enum.RiskGrade).UNDEFINED ? ' active' : ''}" th:text="${report.risk.riskGrade == T(com.example.SafeReport.Enum.RiskGrade).UNDEFINED ?  '등급지정없음' : '위험등급'}" id="disabled-tab" data-bs-toggle="tab"  type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false" disabled>위험등급</button>
+			    <button class="nav-link" th:classappend="${report.risk.riskGrade == T(com.example.SafeReport.Enum.RiskGrade).A ?  'active' : ''}" th:if="${report.risk.riskGrade == T(com.example.SafeReport.Enum.RiskGrade).A}" id="A-Grade-tab" data-bs-toggle="tab" data-bs-target="#A-Grade" type="button" role="tab" aria-controls="A-Grade" aria-selected="true">A등급</button>
+			    <button class="nav-link" th:classappend="${report.risk.riskGrade == T(com.example.SafeReport.Enum.RiskGrade).B ? ' active' : ''}" th:if="${report.risk.riskGrade == T(com.example.SafeReport.Enum.RiskGrade).B}"id="B-Grade-tab" data-bs-toggle="tab" data-bs-target="#B-Grade" type="button" role="tab" aria-controls="B-Grade" aria-selected="true">B등급</button>
+			    <button class="nav-link" th:classappend="${report.risk.riskGrade == T(com.example.SafeReport.Enum.RiskGrade).C || report.risk.riskGrade == T(com.example.SafeReport.Enum.RiskGrade).D ? ' active' : ''}" th:if="${report.risk.riskGrade == T(com.example.SafeReport.Enum.RiskGrade).C || report.risk.riskGrade == T(com.example.SafeReport.Enum.RiskGrade).D}" id="C-Grade-tab" data-bs-toggle="tab" data-bs-target="#C-Grade" type="button" role="tab" aria-controls="C-Grade" aria-selected="true">C/D등급</button>
 			  </div>
 			</nav>
 			<div class="tab-content" id="nav-tabContent">
-			  <div class="tab-pane fade show active" id="A-Grade" role="tabpanel" aria-labelledby="A-Grade-tab" tabindex="0">
+			  <div class="tab-pane fade" th:classappend="${report.risk.riskGrade == T(com.example.SafeReport.Enum.RiskGrade).A ? 'show active' : ''}" id="A-Grade" role="tabpanel" aria-labelledby="A-Grade-tab" tabindex="0">
 				<div class="card my-3">
 					<div class="card-header">위험 관리</div>
 					<div class="card-body">
@@ -227,11 +227,11 @@
 				</div>
 			  </div>
 			  
-			  <div class="tab-pane fade" id="B-Grade" role="tabpanel" aria-labelledby="B-Grade-tab" tabindex="0">
+			  <div class="tab-pane fade" th:classappend="${report.risk.riskGrade == T(com.example.SafeReport.Enum.RiskGrade).B ? 'show active' : ''}" id="B-Grade" role="tabpanel" aria-labelledby="B-Grade-tab" tabindex="0">
 				<div class="card my-3">
 					<div class="card-header">위험 관리</div>
 					<div class="card-body">
-						<form th:action="@{/admin/reports/{id}(id=${report.reportid})}" method="post">
+						<form th:action="@{/admin/reportsManage/Bgrade/{id}(id=${report.reportid})}" method="post">
 							<table class="table table-sm">
 							    <thead>
 							        <tr>
@@ -242,24 +242,24 @@
 							        <tr>
 							            <td>										
 											<div class="form-floating">
-											  <select class="form-select form-select-sm" id="floatingSelect" >
-											    <option value="상">상</option>
-											    <option value="중">중</option>
-											    <option value="하">하</option>
-											  </select>
-											  <label for="floatingSelect">개선전</label>
+											    <select class="form-select form-select-sm" id="possibilityBefore_B" name="possibilityBefore_B" >
+											        <option value="상" th:selected="${riskB?.possibilityBefore == '상'}">상</option>
+											        <option value="중" th:selected="${riskB?.possibilityBefore == '중'}">중</option>
+											        <option value="하" th:selected="${riskB?.possibilityBefore == '하'}">하</option>
+											    </select>
+											    <label for="possibilityBefore_B">개선전</label>
 											</div>
 										</td>
 							        </tr>
 									<tr>			          
 										<td>										
 											<div class="form-floating">
-											  <select class="form-select form-select-sm" id="floatingSelect" >
-											    <option value="상">상</option>
-											    <option value="중">중</option>
-											    <option value="하">하</option>
+											  <select class="form-select form-select-sm" id="possibilityAfter_B" name="possibilityAfter_B">
+											    <option value="상" th:selected="${riskB?.possibilityAfter == '상'}">상</option>
+											    <option value="중" th:selected="${riskB?.possibilityAfter == '중'}">중</option>
+											    <option value="하" th:selected="${riskB?.possibilityAfter == '하'}">하</option>
 											  </select>
-											  <label for="floatingSelect">개선후</label>
+											  <label for="possibilityAfter_B">개선후</label>
 											</div>
 										</td>
 									</tr>
@@ -269,24 +269,25 @@
 							<h3 class="mb-4 mt-4">개선 대책 협의</h3>
 							<table class="table table-sm">
 							    <tbody>
+									<tr>
+									    <td>작업자</td>
+									    <td colspan="3"><input type="text" name="workernameB" class="form-control-plaintext form-control-sm" th:value="${riskB?.workerName}" readonly></td>
+									</tr>
 							        <tr>
 							            <td>관리감독자</td>
-							            <td><input type="text" name="supervisor" class="form-control"></td>
+							            <td><input type="text" name="supervisorB" class="form-control form-control-sm" th:value="${riskB?.supervisorName}" maxlength='5' placeholder="최대 5자"></td>
 							            <td>수급인 대표</td>
-							            <td><input type="text" name="representative" class="form-control"></td>
+							            <td><input type="text" name="representativeB" class="form-control form-control-sm" th:value="${riskB?.representativeName}" maxlength='5' placeholder="최대 5자"></td>
 							        </tr>
-							        <tr>
-							            <td>작업자</td>
-							            <td colspan="3"><input type="text" name="worker" class="form-control"></td>
-							        </tr>
+							       
 							        <tr>
 							            <td>본질적 대책 [Y/N]</td>
 										<td colspan="3">
 											<div class="input-group mb-3">
 											  <div class="input-group-text">
-											    <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+											    <input class="form-check-input" type="checkbox" value="true" name="essentialActiveB" th:checked="${riskB?.essential_checked == true}">
 											  </div>
-											  <textarea name="finalMeasures" rows="2" class="form-control"></textarea>
+											  <textarea name="essential_measuresB" rows="4" class="form-control form-control-sm" th:text="${riskB?.essential_measures}"></textarea>
 											</div>
 										</td>
 							        </tr>
@@ -295,9 +296,9 @@
 										<td colspan="3">
 											<div class="input-group mb-3">
 											  <div class="input-group-text">
-											    <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+											    <input class="form-check-input" type="checkbox" value="true" name="administrativeActiveB" th:checked="${riskB?.administrative_checked == true}">
 											  </div>
-											  <textarea name="finalMeasures" rows="2" class="form-control"></textarea>
+											  <textarea name="administrative_measuresB" rows="4" class="form-control form-control-sm" th:text="${riskB?.administrative_measures}"></textarea>
 											</div>
 										</td>
 							        </tr>
@@ -306,9 +307,9 @@
 										<td colspan="3">
 											<div class="input-group mb-3">
 											  <div class="input-group-text">
-											    <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+											    <input class="form-check-input" type="checkbox" value="true" name="engineeringActiveB" th:checked="${riskB?.engineering_checked == true}">
 											  </div>
-											  <textarea name="finalMeasures" rows="2" class="form-control"></textarea>
+											  <textarea name="engineering_measuresB" rows="4" class="form-control form-control-sm" th:text="${riskB?.engineering_measures}"></textarea>
 											</div>
 										</td>
 							        </tr>
@@ -317,19 +318,20 @@
 										<td colspan="3">
 											<div class="input-group mb-3">
 											  <div class="input-group-text">
-											    <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+											    <input class="form-check-input" type="checkbox" value="true" name="equipmentActiveB" th:checked="${riskB?.equipment_checked == true}">
 											  </div>
-											  <textarea name="finalMeasures" rows="2" class="form-control"></textarea>
+											  <textarea name="personal_equipmentB" rows="4" class="form-control form-control-sm" th:text="${riskB?.personal_equipment}"></textarea>
+											  	
 											</div>
 										</td>
 							        </tr>
 							        <tr>
 							            <td>확정 대책</td>
-							            <td colspan="3"><textarea name="finalMeasures" rows="3" class="form-control"></textarea></td>
+							            <td colspan="3"><input class="form-control form-control-sm" type="text" name="confirmed_measured"  th:value="${riskB?.confirmed_measured}" placeholder="최대 120자" maxlength="120"></td>
 							        </tr>
 							        <tr>
 							            <td>조치 예정</td>
-							            <td colspan="3"><textarea name="plannedMeasures" rows="3" class="form-control"></textarea></td>
+										<td colspan="3"><input type="date" class="form-control form-control-sm" name="confirmed_date" th:value="${riskB?.confirmed_date}"></td>
 							        </tr>
 							    </tbody>
 							</table>
@@ -342,11 +344,11 @@
 				</div>
 			  </div>
 			  
-			  <div class="tab-pane fade" id="C-Grade" role="tabpanel" aria-labelledby="C-Grade-tab" tabindex="0">
+			  <div class="tab-pane fade" th:classappend="${report.risk.riskGrade == T(com.example.SafeReport.Enum.RiskGrade).C || report.risk.riskGrade == T(com.example.SafeReport.Enum.RiskGrade).D ? 'show active' : ''}" id="C-Grade" role="tabpanel" aria-labelledby="C-Grade-tab" tabindex="0">
 				<div class="card my-3">
 					<div class="card-header">Check-List</div>
 					<div class="card-body">
-						<form th:action="@{/admin/reports/{id}(id=${report.reportid})}" method="post">
+						<form th:action="@{/admin/reportsManage/Cgrade/{id}(id=${report.reportid})}" method="post">
 							<table class="table table-sm">
 							    <thead>
 							        <tr>
