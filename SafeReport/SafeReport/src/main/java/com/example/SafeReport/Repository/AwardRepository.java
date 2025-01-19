@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.example.SafeReport.Entity.Award;
 import com.example.SafeReport.Entity.Report;
@@ -15,8 +17,8 @@ public interface AwardRepository extends JpaRepository<Award, Integer>{
     
     // Award Delete Date
     void deleteByAwardDate(LocalDate awardDate);
+
     
-    // report_id에 해당하는 Award 삭제
     void deleteByReport_Reportid(Integer reportid);
     
 }

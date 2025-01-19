@@ -1,27 +1,29 @@
 package com.example.SafeReport.Controller;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.SafeReport.DTO.RiskAssessmentCForm;
+import com.example.SafeReport.DTO.RiskAssessmentDTO;
 import com.example.SafeReport.Entity.Award;
 import com.example.SafeReport.Entity.Report;
 import com.example.SafeReport.Entity.Risk;
 import com.example.SafeReport.Entity.RiskAssessmentB;
-import com.example.SafeReport.Entity.RiskAssessmentC;
 import com.example.SafeReport.Enum.RiskGrade;
 import com.example.SafeReport.Enum.RiskStatus;
 import com.example.SafeReport.Service.AwardService;
@@ -232,12 +234,37 @@ public class AdminController {
 		 return "redirect:/admin/reportsManage/" + reportid;
 	 }
 	 
-	 @PostMapping("/admin/reportsManage/Cgrade/{id}")
-	 public String riskEvaluation_C(@PathVariable("id") Integer reportid, @ModelAttribute RiskAssessmentCForm RiskAssessmentCForm)
+	 @PostMapping("/admin/reportsManage/Cgrade")
+	 @ResponseBody
+	 public ResponseEntity<Map<String, Object>> riskEvaluation_C(@RequestBody List<RiskAssessmentDTO> requests)
 	 {
-		 Report report = this.reportService.getReport(reportid);
+		 Report report = this.reportService.getReport(102);
 		 
+		 Map<String, Object> response = new HashMap<>(); // 응답데이티ㅓ 구성
 		 
-		 return "redirect:/admin/reportsManage/" + reportid;
+		 try
+		 {
+			 riskService.RiskC_DeleteReport(report);
+			 
+			 int no = 1;
+			 for(RiskAssessmentDTO request : requests)
+			 {
+				 riskService.RiskC_save(request, report, no);
+				 no++;
+			 }
+			 response.put("success", true);
+		 }
+		 catch (Exception e)
+		 {
+			 response.put("success", false);
+			 response.put("error", e);
+		 }
+		 finally
+		 {
+			 return ResponseEntity.ok(response);
+		 }
+		 
+		 //return "redirect:/admin/reportsManage/" + reportid;
 	 }
+
 }

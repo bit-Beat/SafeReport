@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.SafeReport.DataNotFoundException;
+import com.example.SafeReport.DTO.RiskAssessmentDTO;
 import com.example.SafeReport.Entity.Report;
 import com.example.SafeReport.Entity.Risk;
 import com.example.SafeReport.Entity.RiskAssessmentB;
@@ -155,6 +156,21 @@ public class RiskService {
         return riskAssessmentBRepository.save(riskAssessmentB);
     }
 	
+	public void RiskC_save(RiskAssessmentDTO request, Report report, Integer no)
+	{
+		RiskAssessmentC riskAssessment = new RiskAssessmentC();
+        riskAssessment.setCategory(request.getCategory()); // 구분
+        riskAssessment.setContents(request.getContents()); // 내용
+        riskAssessment.setResult(request.getResult()); // 위험성 확인결과
+        riskAssessment.setImprovement(request.getImprovement()); // 개선내용
+        riskAssessment.setNo(no);
+        riskAssessment.setReportid(report);
+        
+        riskAssessmentCRepository.save(riskAssessment);
+	}
 	
-	
+	public void RiskC_DeleteReport(Report report)
+	{
+		riskAssessmentCRepository.deleteByReport(report); // report_id에 해당하는 Award 삭제
+	}
 }

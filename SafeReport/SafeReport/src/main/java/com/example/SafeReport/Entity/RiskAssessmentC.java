@@ -33,5 +33,7 @@ public class RiskAssessmentC {
 	 
 	 @Column(columnDefinition = "TEXT")
 	 private String improvement; // 개선내용
+	 
+	 private Integer no; // 순서
 
 }
