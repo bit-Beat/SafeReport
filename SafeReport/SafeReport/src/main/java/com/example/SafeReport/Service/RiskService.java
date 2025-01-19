@@ -167,6 +167,7 @@ public class RiskService {
         riskAssessment.setReportid(report);
         
         riskAssessmentCRepository.save(riskAssessment);
+
 	}
 	
 	public void RiskC_DeleteReport(Report report)

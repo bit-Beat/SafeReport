@@ -8,15 +8,17 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor // 기본 생성자를 명시적으로 추가 (JPA 요구사항)
 @Entity
 public class RiskAssessmentC {
 	 @Id
 	 @GeneratedValue(strategy = GenerationType.IDENTITY)
-	 private Long id;
+	 private Integer id;
 
 	 @ManyToOne
 	 @JoinColumn(name = "report_id", nullable = false) // Report 테이블과의 FK 설정
@@ -35,5 +37,6 @@ public class RiskAssessmentC {
 	 private String improvement; // 개선내용
 	 
 	 private Integer no; // 순서
-
+	 
 }
+

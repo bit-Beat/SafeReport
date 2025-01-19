@@ -44,7 +44,7 @@
 				
 				console.log(rows);
 				
-				fetch("/admin/reportsManage/Cgrade",{
+				fetch("/admin/reportsManage/Cgrade/"+reportId,{
 					method : "POST",
 					headers:{
 						"Content-Type" : "application/json",
@@ -56,14 +56,22 @@
 				.then((data) => {
 					if(data.success){
 						console.log("success");
+						document.querySelector(".modal-body").textContent = "데이터 저장이 완료되었습니다.";
 					}
 					else{
 						console.log(data.error);
+						document.querySelector(".modal-body").textContent = "에러가 발생하였습니다." + data.error;
 					}
 				})
 				.catch((error) => {
 					console.error("error:", data.error);
-				});
+					document.querySelector(".modal-body").textContent = "에러가 발생하였습니다." + data.error;
+				})
+				.finally(() =>{
+					// 모달 표시
+					const modal = new bootstrap.Modal(document.querySelector("#Modal1"));
+					modal.show();					
+				}); 
 			}); 
 		});
 	</script>
@@ -400,88 +408,33 @@
 					<div class="card-body">
 						<form th:action="@{/admin/reportsManage/Cgrade/{id}(id=${report.reportid})}" method="post" id="formC">
 							<table class="table table-sm">
-							    <thead>
-							        <tr>
-							            <th class="text-center">구분</th>
-										<th class="text-center">내용</th>
-										<th class="text-center">위험성 확인 결과</th>
-										<th class="text-center">개선방안</th>
-							        </tr>
-							    </thead>
-							    <tbody>
-							        <tr>
-										<td class="text-center">인터뷰 </td>
-										<td class="text-center">작업자의 위험요인에 대한 인식은 잘 되어있는가?</td>
-										<td>
-											<select class="form-select form-select-sm" >
-											    <option value="적정">적정</option>
-											    <option value="보완">보완</option>
-												<option value="해당없음">해당없음</option>
-											</select>
-										</td>
-										<td>
-											<input type="text" name="participants" class="form-control">
-										</td>
-							        </tr>
+								<thead>
 									<tr>
-										<td class="text-center">안전장치</td>
-										<td class="text-center">위험요인에 대한 안전 장치는 설치되어 있는가?</td>
-										<td>
-											<select class="form-select form-select-sm" >
-												<option value="적정">적정</option>
-												<option value="보완">보완</option>
-												<option value="해당없음">해당없음</option>
-											</select>
-										</td>
-										<td>
-											<input type="text" name="participants" class="form-control">
-										</td>
+								        <th class="text-center">구분</th>
+								        <th class="text-center">내용</th>
+								        <th class="text-center">위험성 확인 결과</th>
+								        <th class="text-center">개선방안</th>
+								    </tr>
+								</thead>
+								<tbody>
+								    <tr th:each="riskAssessment : ${report.riskAssessmentC}">
+								        <td class="text-center" th:text="${riskAssessment.category}" maxlength="15">구분</td>
+								        <td class="text-center" th:text="${riskAssessment.contents}" maxlength="120">내용</td>
+								        <td>
+								            <select class="form-select form-select-sm" th:value="${riskAssessment.result}">
+								                <option value="적정" th:selected="${riskAssessment.result == '적정'}">적정</option>
+								                <option value="보완" th:selected="${riskAssessment.result == '보완'}">보완</option>
+								                <option value="해당없음" th:selected="${riskAssessment.result == '해당없음'}">해당없음</option>
+								            </select>
+								        </td>
+								        <td>
+								            <input type="text" name="participants" class="form-control"
+								                   th:value="${riskAssessment.improvement}" />
+								        </td>
 									</tr>
-									<tr>
-										<td class="text-center">안전수칙</td>
-										<td class="text-center">위험요인에 대한 안전 수칙 기준이 있는가?</td>
-										<td>
-											<select class="form-select form-select-sm" >
-												<option value="적정">적정</option>
-												<option value="보완">보완</option>
-												<option value="해당없음">해당없음</option>
-											</select>
-										</td>
-										<td>
-											<input type="text" name="participants" class="form-control">
-										</td>
-									</tr>
-									<tr>
-										<td class="text-center">안전보호구</td>
-										<td class="text-center">위험요인에 대한 보호구가 지급되고 있는가?</td>
-										<td>
-											<select class="form-select form-select-sm" >
-												<option value="적정">적정</option>
-												<option value="보완">보완</option>
-												<option value="해당없음">해당없음</option>
-											</select>
-										</td>
-										<td>
-											<input type="text" name="participants" class="form-control">
-										</td>
-									</tr>
-									<tr>
-										<td class="text-center">안전표지</td>
-										<td class="text-center">위험요인에 대한 안전 표지가 부착되어 있는가?</td>
-										<td>
-											<select class="form-select form-select-sm" >
-												<option value="적정">적정</option>
-												<option value="보완">보완</option>
-												<option value="해당없음">해당없음</option>
-											</select>
-										</td>
-										<td>
-											<input type="text" name="participants" class="form-control" >
-										</td>
-									</tr>
-							    </tbody>
+								</tbody>
 							</table>
-							
+
 							<div class="text-end">
 								<button type="submit" class="btn btn-primary" onclick="return confirm('해당 내용으로 저장하시겠습니까?')">저장</button>
 							</div>
@@ -491,6 +444,26 @@
 			  </div>
 			</div>
 		</div>
+		
+
+		<!-- Modal -->
+		<div class="modal fade" id="Modal1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h1 class="modal-title fs-5" id="staticBackdropLabel">데이터 전송 확인</h1>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body text-center">
+		        본문내용
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">닫기</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<!-- Modal -->
 		
 		</div>
 	</div> <!--body끝-->

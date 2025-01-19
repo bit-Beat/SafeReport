@@ -1,6 +1,7 @@
 package com.example.SafeReport.Controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,7 @@ import com.example.SafeReport.Entity.Award;
 import com.example.SafeReport.Entity.Report;
 import com.example.SafeReport.Entity.Risk;
 import com.example.SafeReport.Entity.RiskAssessmentB;
+import com.example.SafeReport.Entity.RiskAssessmentC;
 import com.example.SafeReport.Enum.RiskGrade;
 import com.example.SafeReport.Enum.RiskStatus;
 import com.example.SafeReport.Service.AwardService;
@@ -84,18 +86,60 @@ public class AdminController {
  	    return "admin/admin_report_detail";
  	}
  	
- 	@GetMapping("/admin/reportsManage/{id}") /// 위험성관리
+ 	@GetMapping("/admin/reportsManage/{id}") /// 위험성평가
  	public String adminReportManage2(@PathVariable Integer id, Model model) {
  		Report report = this.reportService.getReport(id);
  		Optional<RiskAssessmentB>  riskassessmentB = this.riskService.getRiskB_Reportid(report);
 		
-		model.addAttribute("report", report);
-
 		riskassessmentB.ifPresent(riskB -> model.addAttribute("riskB", riskB)); // optional의 메소드인 ifPresent를 이용해 값이 있을경우에만 Model추가
+		// RiskAssessmentC 데이터가 비어 있는 경우 기본 데이터를 제공
+		// RiskAssessmentC 데이터가 비어 있는 경우 기본 데이터를 제공
+        if (report.getRiskAssessmentC() == null || report.getRiskAssessmentC().isEmpty()) {
+            List<RiskAssessmentC> defaultAssessments = new ArrayList<>();
 
-        model.addAttribute("reportId", id);
+            // 기본 생성자를 통해 객체 생성 후 필드 값 설정
+            RiskAssessmentC assessment1 = new RiskAssessmentC();
+            assessment1.setCategory("인터뷰");
+            assessment1.setContents("작업자의 위험요인에 대한 인식은 잘 되어있는가?");
+            assessment1.setResult("");
+            assessment1.setImprovement("");
 
- 	    //return "admin/admin_report_detail";
+            RiskAssessmentC assessment2 = new RiskAssessmentC();
+            assessment2.setCategory("안전장치");
+            assessment2.setContents("위험요인에 대한 안전 장치는 설치되어 있는가?");
+            assessment2.setResult("");
+            assessment2.setImprovement("");
+
+            RiskAssessmentC assessment3 = new RiskAssessmentC();
+            assessment3.setCategory("안전수칙");
+            assessment3.setContents("위험요인에 대한 안전 수칙 기준이 있는가?");
+            assessment3.setResult("");
+            assessment3.setImprovement("");
+
+            RiskAssessmentC assessment4 = new RiskAssessmentC();
+            assessment4.setCategory("안전보호구");
+            assessment4.setContents("위험요인에 대한 보호구가 지급되고 있는가?");
+            assessment4.setResult("");
+            assessment4.setImprovement("");
+
+            RiskAssessmentC assessment5 = new RiskAssessmentC();
+            assessment5.setCategory("안전표지");
+            assessment5.setContents("위험요인에 대한 안전 표지가 부착되어 있는가?");
+            assessment5.setResult("");
+            assessment5.setImprovement("");
+
+            // 리스트에 추가
+            defaultAssessments.add(assessment1);
+            defaultAssessments.add(assessment2);
+            defaultAssessments.add(assessment3);
+            defaultAssessments.add(assessment4);
+            defaultAssessments.add(assessment5);
+
+            report.setRiskAssessmentC(defaultAssessments);
+        }
+        
+		model.addAttribute("report", report); 
+
 		return "admin/admin_report_manage";
  	}
  	
@@ -234,11 +278,11 @@ public class AdminController {
 		 return "redirect:/admin/reportsManage/" + reportid;
 	 }
 	 
-	 @PostMapping("/admin/reportsManage/Cgrade")
+	 @PostMapping("/admin/reportsManage/Cgrade/{reportId}")
 	 @ResponseBody
-	 public ResponseEntity<Map<String, Object>> riskEvaluation_C(@RequestBody List<RiskAssessmentDTO> requests)
+	 public ResponseEntity<Map<String, Object>> riskEvaluation_C(@PathVariable("reportId") int reportId, @RequestBody List<RiskAssessmentDTO> requests)
 	 {
-		 Report report = this.reportService.getReport(102);
+		 Report report = this.reportService.getReport(reportId);
 		 
 		 Map<String, Object> response = new HashMap<>(); // 응답데이티ㅓ 구성
 		 
