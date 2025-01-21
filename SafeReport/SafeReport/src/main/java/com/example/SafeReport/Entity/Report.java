@@ -76,6 +76,10 @@ public class Report {
 	
 	@OneToOne(mappedBy = "reportid", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	@OnDelete(action = OnDeleteAction.CASCADE)
+	private RiskAssessmentA riskAssessmentA; // 위험성평가 a
+	
+	@OneToOne(mappedBy = "reportid", cascade = CascadeType.REMOVE, orphanRemoval = true)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private RiskAssessmentB riskAssessmentB; // 위험성평가 b
 	
 	@OneToMany(mappedBy = "reportid", cascade = CascadeType.REMOVE, orphanRemoval = true)

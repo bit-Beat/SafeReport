@@ -42,7 +42,7 @@
 					return {category, contents, result, improvement};
 				});
 				
-				console.log(rows);
+				//console.log(rows);
 				
 				fetch("/admin/reportsManage/Cgrade/"+reportId,{
 					method : "POST",
@@ -197,31 +197,32 @@
 							    </thead>
 							    <tbody>
 							        <tr>
-							            <td><input type="text" name="participants" placeholder="개선전" class="form-control"></td>
-							            <td><input type="text" name="participants" placeholder="개선전" class="form-control"></td>
-							            <td><input type="text" name="participants" placeholder="개선전" class="form-control"></td>
+							            <td><input type="number" min="1" max="5" maxlength="1" name="participants" placeholder="개선전" class="form-control"></td>
+							            <td><input type="number" name="participants" placeholder="개선전" class="form-control"></td>
+							            <td><input type="number" name="participants" placeholder="개선전" class="form-control"></td>
 							        </tr>
 									<tr>
-										<td><input type="text" name="participants" placeholder="개선후" class="form-control"></td>
-										<td><input type="text" name="participants" placeholder="개선후" class="form-control"></td>
-										<td><input type="text" name="participants" placeholder="개선후" class="form-control"></td>
+										<td><input type="number" name="participants" placeholder="개선후" class="form-control"></td>
+										<td><input type="number" name="participants" placeholder="개선후" class="form-control"></td>
+										<td><input type="number" name="participants" placeholder="개선후" class="form-control"></td>
 									</tr>
+									
 							    </tbody>
 							</table>
 
 							<h3 class="mb-4 mt-4">개선 대책 협의</h3>
 							<table class="table table-sm">
 							    <tbody>
-							        <tr>
-							            <td>관리감독자</td>
-							            <td><input type="text" name="supervisor" class="form-control"></td>
-							            <td>수급인 대표</td>
-							            <td><input type="text" name="representative" class="form-control"></td>
-							        </tr>
-							        <tr>
-							            <td>작업자</td>
-							            <td colspan="3"><input type="text" name="worker" class="form-control"></td>
-							        </tr>
+									<tr>
+									    <td>작업자</td>
+									    <td colspan="3"><input type="text" name="workernameB" class="form-control-plaintext form-control-sm" th:value="${riskA?.workerName}" readonly></td>
+									</tr>
+									<tr>
+									    <td>관리감독자</td>
+									    <td><input type="text" name="supervisorB" class="form-control form-control-sm" th:value="${riskB?.supervisorName}" maxlength='5' placeholder="최대 5자"></td>
+									    <td>수급인 대표</td>
+									    <td><input type="text" name="representativeB" class="form-control form-control-sm" th:value="${riskB?.representativeName}" maxlength='5' placeholder="최대 5자"></td>
+									</tr>
 							        <tr>
 							            <td>본질적 대책 [Y/N]</td>
 										<td colspan="3">
@@ -266,14 +267,14 @@
 											</div>
 										</td>
 							        </tr>
-							        <tr>
-							            <td>확정 대책</td>
-							            <td colspan="3"><textarea name="finalMeasures" rows="3" class="form-control"></textarea></td>
-							        </tr>
-							        <tr>
-							            <td>조치 예정</td>
-							            <td colspan="3"><textarea name="plannedMeasures" rows="3" class="form-control"></textarea></td>
-							        </tr>
+									<tr>
+									    <td>확정 대책</td>
+									    <td colspan="3"><input class="form-control form-control-sm" type="text" name="confirmed_measured"  th:value="${riskB?.confirmed_measured}" placeholder="최대 120자" maxlength="120"></td>
+									</tr>
+									<tr>
+									    <td>조치 예정</td>
+										<td colspan="3"><input type="date" class="form-control form-control-sm" name="confirmed_date" th:value="${riskB?.confirmed_date}"></td>
+									</tr>
 							    </tbody>
 							</table>
 							
