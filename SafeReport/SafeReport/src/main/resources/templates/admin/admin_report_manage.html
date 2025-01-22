@@ -183,7 +183,7 @@
 				<div class="card my-3">
 					<div class="card-header">위험 관리</div>
 					<div class="card-body">
-						<form th:action="@{/admin/reports/{id}(id=${report.reportid})}" method="post">
+						<form th:action="@{/admin/reportsManage/Agrade/{id}(id=${report.reportid})}" method="post">
 							<table class="table table-sm">
 							    <thead>
 							        <tr>
@@ -197,14 +197,14 @@
 							    </thead>
 							    <tbody>
 							        <tr>
-							            <td><input type="number" min="1" max="5" maxlength="1" name="participants" placeholder="개선전" class="form-control"></td>
-							            <td><input type="number" name="participants" placeholder="개선전" class="form-control"></td>
-							            <td><input type="number" name="participants" placeholder="개선전" class="form-control"></td>
+							            <td><input type="number" min="1" max="5" maxlength="1" name="possibilityBefore_A" placeholder="개선전" class="form-control"></td>
+							            <td><input type="number" min="1" max="5" maxlength="1" name="importanceBefore_A" placeholder="개선전" class="form-control"></td>
+							            <td><input type="number" placeholder="개선전" class="form-control" ></td>
 							        </tr>
 									<tr>
-										<td><input type="number" name="participants" placeholder="개선후" class="form-control"></td>
-										<td><input type="number" name="participants" placeholder="개선후" class="form-control"></td>
-										<td><input type="number" name="participants" placeholder="개선후" class="form-control"></td>
+										<td><input type="number" name="possibilityAfter_A" placeholder="개선후" class="form-control"></td>
+										<td><input type="number" name="importanceAfter_A" placeholder="개선후" class="form-control"></td>
+										<td><input type="number"  placeholder="개선후" class="form-control"></td>
 									</tr>
 									
 							    </tbody>
@@ -212,70 +212,72 @@
 
 							<h3 class="mb-4 mt-4">개선 대책 협의</h3>
 							<table class="table table-sm">
-							    <tbody>
+								<tbody>
 									<tr>
 									    <td>작업자</td>
-									    <td colspan="3"><input type="text" name="workernameB" class="form-control-plaintext form-control-sm" th:value="${riskA?.workerName}" readonly></td>
+									    <td colspan="3"><input type="text" name="workernameA" class="form-control-plaintext form-control-sm" readonly></td>
 									</tr>
-									<tr>
-									    <td>관리감독자</td>
-									    <td><input type="text" name="supervisorB" class="form-control form-control-sm" th:value="${riskB?.supervisorName}" maxlength='5' placeholder="최대 5자"></td>
-									    <td>수급인 대표</td>
-									    <td><input type="text" name="representativeB" class="form-control form-control-sm" th:value="${riskB?.representativeName}" maxlength='5' placeholder="최대 5자"></td>
-									</tr>
-							        <tr>
-							            <td>본질적 대책 [Y/N]</td>
+								    <tr>
+								        <td>관리감독자</td>
+								        <td><input type="text" name="supervisorA" class="form-control form-control-sm"  maxlength='5' placeholder="최대 5자"></td>
+								        <td>수급인 대표</td>
+								        <td><input type="text" name="representativeA" class="form-control form-control-sm" maxlength='5' placeholder="최대 5자"></td>
+								    </tr>
+								   
+								    <tr>
+								        <td>본질적 대책 [Y/N]</td>
 										<td colspan="3">
 											<div class="input-group mb-3">
 											  <div class="input-group-text">
-											    <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+											    <input class="form-check-input" type="checkbox" value="true" name="essentialActiveA" th:checked="${riskB?.essential_checked == true}">
 											  </div>
-											  <textarea name="finalMeasures" rows="2" class="form-control"></textarea>
+											  <textarea name="essential_measuresA" rows="4" class="form-control form-control-sm" th:text="${riskB?.essential_measures}"></textarea>
 											</div>
 										</td>
-							        </tr>
-							        <tr>
-							            <td>공학적 대책 [Y/N]</td>
+								    </tr>
+								    <tr>
+								        <td>공학적 대책 [Y/N]</td>
 										<td colspan="3">
 											<div class="input-group mb-3">
 											  <div class="input-group-text">
-											    <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+											    <input class="form-check-input" type="checkbox" value="true" name="administrativeActiveA" th:checked="${riskB?.administrative_checked == true}">
 											  </div>
-											  <textarea name="finalMeasures" rows="2" class="form-control"></textarea>
+											  <textarea name="administrative_measuresA" rows="4" class="form-control form-control-sm" th:text="${riskB?.administrative_measures}"></textarea>
 											</div>
 										</td>
-							        </tr>
-							        <tr>
-							            <td>관리적 대책 [Y/N]</td>
+								    </tr>
+								    <tr>
+								        <td>관리적 대책 [Y/N]</td>
 										<td colspan="3">
 											<div class="input-group mb-3">
 											  <div class="input-group-text">
-											    <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+											    <input class="form-check-input" type="checkbox" value="true" name="engineeringActiveA" th:checked="${riskB?.engineering_checked == true}">
 											  </div>
-											  <textarea name="finalMeasures" rows="2" class="form-control"></textarea>
+											  <textarea name="engineering_measuresA" rows="4" class="form-control form-control-sm" th:text="${riskB?.engineering_measures}"></textarea>
 											</div>
 										</td>
-							        </tr>
-							        <tr>
-							            <td>개인보호구 [Y/N]</td>
+								    </tr>
+								    <tr>
+								        <td>개인보호구 [Y/N]</td>
 										<td colspan="3">
 											<div class="input-group mb-3">
 											  <div class="input-group-text">
-											    <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+											    <input class="form-check-input" type="checkbox" value="true" name="equipmentActiveA" th:checked="${riskB?.equipment_checked == true}">
 											  </div>
-											  <textarea name="finalMeasures" rows="2" class="form-control"></textarea>
+											  <textarea name="personal_equipmentA" rows="4" class="form-control form-control-sm" th:text="${riskB?.personal_equipment}"></textarea>
+											  	
 											</div>
 										</td>
-							        </tr>
-									<tr>
-									    <td>확정 대책</td>
-									    <td colspan="3"><input class="form-control form-control-sm" type="text" name="confirmed_measured"  th:value="${riskB?.confirmed_measured}" placeholder="최대 120자" maxlength="120"></td>
-									</tr>
-									<tr>
-									    <td>조치 예정</td>
-										<td colspan="3"><input type="date" class="form-control form-control-sm" name="confirmed_date" th:value="${riskB?.confirmed_date}"></td>
-									</tr>
-							    </tbody>
+								    </tr>
+								    <tr>
+								        <td>확정 대책</td>
+								        <td colspan="3"><input class="form-control form-control-sm" type="text" name="confirmed_measuredA"  th:value="${riskB?.confirmed_measured}" placeholder="최대 120자" maxlength="120"></td>
+								    </tr>
+								    <tr>
+								        <td>조치 예정</td>
+										<td colspan="3"><input type="date" class="form-control form-control-sm" name="confirmed_dateA" th:value="${riskB?.confirmed_date}"></td>
+								    </tr>
+								</tbody>
 							</table>
 							
 							<div class="text-end">

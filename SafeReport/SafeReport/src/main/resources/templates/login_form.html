@@ -55,35 +55,35 @@
 </style>
 
 <body>
-    <div class="container">
-
-        <div class="login-container">
-            <h1 class="form-title">로그인</h1>
-            <form th:action="@{/user/login}" method="post">
-                <!-- Error Alert -->
-                <div th:if="${param.error}" class="alert alert-danger">
-                    사용자ID 또는 비밀번호를 확인해 주세요.
-                </div>
+    <div class="container-fluid ">
+		<div class="row align-items-center">
+        	<div class="col login-container">
+            	<h1 class="form-title">로그인</h1>
+            	<form th:action="@{/user/login}" method="post">
+                	<!-- Error Alert -->
+                	<div th:if="${param.error}" class="alert alert-danger">
+                    	사용자ID 또는 비밀번호를 확인해 주세요.
+                	</div>
                 
-                <!-- Username Input -->
-                <div class="mb-3">
-                    <label for="userid" class="form-label">사용자ID</label>
-                    <input type="text" name="userid" id="userid" class="form-control" placeholder="사용자ID를 입력하세요" required autocomplete="off">
-                </div>
-                
-                <!-- Password Input -->
-                <div class="mb-3">
-                    <label for="password" class="form-label">비밀번호</label>
-                    <input type="password" name="password" id="password" class="form-control" placeholder="비밀번호를 입력하세요" required autocomplete="off">
-                </div>
-                
-                <!-- Submit Button -->
-                <button type="submit" class="btn btn-primary">로그인</button>
-            </form>
-        </div>
+                	<!-- Username Input -->
+                	<div class="mb-3">
+                    	<label for="userid" class="form-label">사용자ID</label>
+                    	<input type="text" name="userid" id="userid" class="form-control" placeholder="사용자ID를 입력하세요" required autocomplete="off">
+               		</div>
+                	
+               	 	<!-- Password Input -->
+                	<div class="mb-3">
+                    	<label for="password" class="form-label">비밀번호</label>
+                	    <input type="password" name="password" id="password" class="form-control" placeholder="비밀번호를 입력하세요" required autocomplete="off">
+               	 	</div>
+                	
+            	    <!-- Submit Button -->
+        	        <button type="submit" class="btn btn-primary">로그인</button>
+    	        </form>
+	        </div> 
+		</div>
     </div>
 	
-
 	<footer class="my-5 border-top">
 		<p class="text-center text-muted">© 2024 Hyundai Partecs Safety-Environment-Team, Inc</p>
 	</footer>

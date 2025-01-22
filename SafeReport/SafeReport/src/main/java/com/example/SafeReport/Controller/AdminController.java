@@ -242,6 +242,50 @@ public class AdminController {
 	     return "redirect:/admin/award?year=" + year + "&month=" + month ;
 	 }
 	 
+	 @PostMapping("/admin/reportsManage/Agrade/{id}")
+	 public String riskEvaluation_A(@PathVariable("id") Integer reportid,@RequestParam(value="possibilityBefore_A", defaultValue = "0") String possibilityBefore_A
+									,@RequestParam(value="possibilityAfter_A", defaultValue = "0") String possibilityAfter_A
+									,@RequestParam(value="importanceBefore_A", defaultValue = "0") String importanceBefore_A
+									,@RequestParam(value="importanceAfter_A", defaultValue = "0") String importanceAfter_A
+									,@RequestParam("supervisorA") String supervisorA
+									,@RequestParam("representativeA") String representativeA
+									,@RequestParam(value = "essentialActiveA", required = false, defaultValue = "false") Boolean essentialActiveA 
+									,@RequestParam(value = "administrativeActiveA", required = false, defaultValue = "false") Boolean administrativeActiveA
+									,@RequestParam(value = "engineeringActiveA", required = false, defaultValue = "false") Boolean engineeringActiveA
+									,@RequestParam(value = "equipmentActiveA", required = false, defaultValue = "false") Boolean equipmentActiveA
+									,@RequestParam("essential_measuresA") String essential_measuresA
+									,@RequestParam("administrative_measuresA") String administrative_measuresA
+									,@RequestParam("engineering_measuresA") String engineering_measuresA
+									,@RequestParam("personal_equipmentA") String personal_equipmentA
+									,@RequestParam("confirmed_measuredA") String confirmed_measuredA
+									,@RequestParam(value = "confirmed_dateA", required = false) String confirmedDateString)
+	 {
+		 Report report = this.reportService.getReport(reportid);
+		 Map<String, Object> response = new HashMap<>(); // 응답데이터 구성
+		 
+		 // 공백이면 0
+		 int possibilityBefore = Integer.parseInt(possibilityBefore_A);
+		 int possibilityAfter = Integer.parseInt(possibilityAfter_A);
+		 
+		 int importanceBefore = Integer.parseInt(importanceBefore_A);
+		 int importanceAfter = Integer.parseInt(importanceAfter_A);
+		 
+		 Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); // 수정 ㅎ해야함 id가 아닌 유저명으로 하도록
+		 String loggedInUsername = authentication.getName(); // // 수정 ㅎ해야함 id가 아닌 유저명으로 하도록
+		 
+		 LocalDate confirmedDate = null;// = LocalDate.parse(confirmedDateString);
+		 if(!confirmedDateString.equals(""))
+			 confirmedDate = LocalDate.parse(confirmedDateString);
+		 
+		 // Service를 호출하여 저장 또는 업데이트
+	     riskService.saveOrUpdateRiskAssessmentA(report, possibilityBefore, possibilityAfter, importanceBefore, importanceAfter, loggedInUsername, supervisorA, representativeA
+	    		 								,essentialActiveA, administrativeActiveA, engineeringActiveA, equipmentActiveA
+	    		 								,essential_measuresA, administrative_measuresA, engineering_measuresA, personal_equipmentA
+	    		 								,confirmed_measuredA, confirmedDate);
+		 
+		 return "redirect:/admin/reportsManage/" + reportid;
+	 }
+	 
 	 @PostMapping("/admin/reportsManage/Bgrade/{id}")
 	 public String riskEvaluation_B(@PathVariable("id") Integer reportid
 			 						,@RequestParam("possibilityBefore_B") String possibilityBefore_B
@@ -284,7 +328,7 @@ public class AdminController {
 	 {
 		 Report report = this.reportService.getReport(reportId);
 		 
-		 Map<String, Object> response = new HashMap<>(); // 응답데이티ㅓ 구성
+		 Map<String, Object> response = new HashMap<>(); // 응답데이터 구성
 		 
 		 try
 		 {

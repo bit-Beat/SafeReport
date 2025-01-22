@@ -16,11 +16,13 @@ import com.example.SafeReport.DataNotFoundException;
 import com.example.SafeReport.DTO.RiskAssessmentDTO;
 import com.example.SafeReport.Entity.Report;
 import com.example.SafeReport.Entity.Risk;
+import com.example.SafeReport.Entity.RiskAssessmentA;
 import com.example.SafeReport.Entity.RiskAssessmentB;
 import com.example.SafeReport.Entity.RiskAssessmentC;
 import com.example.SafeReport.Enum.RiskGrade;
 import com.example.SafeReport.Enum.RiskStatus;
 import com.example.SafeReport.Repository.ReportRepository;
+import com.example.SafeReport.Repository.RiskAssessmentARepository;
 import com.example.SafeReport.Repository.RiskAssessmentBRepository;
 import com.example.SafeReport.Repository.RiskAssessmentCRepository;
 import com.example.SafeReport.Repository.RiskRepository;
@@ -33,6 +35,7 @@ public class RiskService {
 	private final RiskRepository riskRepository;
 	private final ReportRepository reportRepository;
 	
+	private final RiskAssessmentARepository riskAssessmentARepository; // A등급 위험성평가
 	private final RiskAssessmentBRepository riskAssessmentBRepository; // B등급 위험성평가
 	private final RiskAssessmentCRepository riskAssessmentCRepository; // C등급 위험성평가
 	
@@ -100,6 +103,65 @@ public class RiskService {
         this.riskRepository.save(risk);
         this.reportRepository.save(report);
     }
+	
+	/// RiskAssessement A Merge
+	public RiskAssessmentA saveOrUpdateRiskAssessmentA(Report report, int possibilityBefore, int possibilityAfter, int importanceBefore, int importanceAfter, String workername, String supervisor, String representative
+														,Boolean essentialActive, Boolean administrativeActive, Boolean engineeringActive, Boolean equipmentActive 
+														,String essentialmeasures, String administrativemeasures, String engineeringmesaures, String personalequipment
+														,String confirmedmeasured, LocalDate confirmedDate) {
+	        
+	        // ReportId로 기존 데이터 조회
+	        Optional<RiskAssessmentA> existingAssessment = riskAssessmentARepository.findByReportid(report);
+
+	        RiskAssessmentA riskAssessmentA;
+	        if (existingAssessment.isPresent()) { // 데이터가 있으면 업데이트
+	            riskAssessmentA = existingAssessment.get();
+	            riskAssessmentA.setPossibilityBefore(possibilityBefore); // 가능성 : 개선전
+	            riskAssessmentA.setPossibilityAfter(possibilityAfter); // 가능성 : 개선후
+	            riskAssessmentA.setImportanceBefore(importanceBefore); // 중대성 : 개선전
+	            riskAssessmentA.setImportanceAfter(importanceAfter); // 중대성 : 개선후
+	            riskAssessmentA.setWorkerName(workername);
+	            riskAssessmentA.setSupervisorName(supervisor);
+	            riskAssessmentA.setRepresentativeName(representative);
+	            riskAssessmentA.setEssential_checked(essentialActive); // 본질적대책 Y/N
+	            riskAssessmentA.setAdministrative_checked(administrativeActive); // 공학적대책 Y/N
+	            riskAssessmentA.setEngineering_checked(engineeringActive); // 관리적대책 Y/N
+	            riskAssessmentA.setEquipment_checked(equipmentActive); // 개인보호구 Y/N
+	            riskAssessmentA.setEssential_measures(essentialmeasures); // 본질적대책
+	            riskAssessmentA.setAdministrative_measures(administrativemeasures); // 공학적대책
+	            riskAssessmentA.setEngineering_measures(engineeringmesaures); // 관리적대책
+	            riskAssessmentA.setPersonal_equipment(personalequipment); // 개인보호구
+	            riskAssessmentA.setConfirmed_measured(confirmedmeasured); // 확정대책
+	            riskAssessmentA.setConfirmed_date(confirmedDate); // 조치예정일
+	                        
+	            riskAssessmentA.setModifiedDate(LocalDateTime.now()); // 수정일
+	        } else { // 데이터가 없으면 새로 삽입
+	            riskAssessmentA = new RiskAssessmentA();            
+	            riskAssessmentA.setReportid(report);
+	            riskAssessmentA.setPossibilityBefore(possibilityBefore); // 가능성 : 개선전
+	            riskAssessmentA.setPossibilityAfter(possibilityAfter); // 가능성 : 개선후
+	            riskAssessmentA.setImportanceBefore(importanceBefore); // 중대성 : 개선전
+	            riskAssessmentA.setImportanceAfter(importanceAfter); // 중대성 : 개선후
+	            riskAssessmentA.setWorkerName(workername); // 작업자
+	            riskAssessmentA.setSupervisorName(supervisor); // 관리감독자
+	            riskAssessmentA.setRepresentativeName(representative); // 수급인 대표
+	            riskAssessmentA.setEssential_checked(essentialActive); // 본질적대책 Y/N
+	            riskAssessmentA.setAdministrative_checked(administrativeActive); // 공학적대책 Y/N
+	            riskAssessmentA.setEngineering_checked(engineeringActive); // 관리적대책 Y/N
+	            riskAssessmentA.setEquipment_checked(equipmentActive); // 개인보호구 Y/N
+	            riskAssessmentA.setEssential_measures(essentialmeasures); // 본질적대책
+	            riskAssessmentA.setAdministrative_measures(administrativemeasures); // 공학적대책
+	            riskAssessmentA.setEngineering_measures(engineeringmesaures); // 관리적대책
+	            riskAssessmentA.setPersonal_equipment(personalequipment); // 개인보호구
+	            riskAssessmentA.setConfirmed_measured(confirmedmeasured); // 확정대책
+	            riskAssessmentA.setConfirmed_date(confirmedDate); // 조치예정일
+	                          
+	            riskAssessmentA.setCreatedate(LocalDateTime.now()); //생성일
+	        }
+
+	        // 저장
+	        return riskAssessmentARepository.save(riskAssessmentA);
+	    }
 	
 	/// RiskAssessement B Merge
 	public RiskAssessmentB saveOrUpdateRiskAssessmentB(Report report, String possibilityBefore, String possibilityAfter, String workername, String supervisor, String representative
