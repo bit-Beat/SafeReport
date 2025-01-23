@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.SafeReport.DTO.RiskAssessmentADTO;
 import com.example.SafeReport.DTO.RiskAssessmentDTO;
 import com.example.SafeReport.Entity.Award;
 import com.example.SafeReport.Entity.Report;
@@ -242,7 +243,7 @@ public class AdminController {
 	     return "redirect:/admin/award?year=" + year + "&month=" + month ;
 	 }
 	 
-	 @PostMapping("/admin/reportsManage/Agrade/{id}")
+	 /*@PostMapping("/admin/reportsManage/Agrade/{id}")
 	 public String riskEvaluation_A(@PathVariable("id") Integer reportid,@RequestParam(value="possibilityBefore_A", defaultValue = "0") String possibilityBefore_A
 									,@RequestParam(value="possibilityAfter_A", defaultValue = "0") String possibilityAfter_A
 									,@RequestParam(value="importanceBefore_A", defaultValue = "0") String importanceBefore_A
@@ -284,7 +285,7 @@ public class AdminController {
 	    		 								,confirmed_measuredA, confirmedDate);
 		 
 		 return "redirect:/admin/reportsManage/" + reportid;
-	 }
+	 }*/
 	 
 	 @PostMapping("/admin/reportsManage/Bgrade/{id}")
 	 public String riskEvaluation_B(@PathVariable("id") Integer reportid
@@ -354,5 +355,51 @@ public class AdminController {
 		 
 		 //return "redirect:/admin/reportsManage/" + reportid;
 	 }
+	 
+	 @PostMapping("/admin/reportsManage/Agrade/{reportid}")
+	 @ResponseBody
+	 public ResponseEntity<Map<String, Object>> riskEvaluation_A(@PathVariable("reportid") int reportid, @RequestBody RiskAssessmentADTO request)
+	 {
+		 Report report = this.reportService.getReport(reportid);
+		 
+		 Map<String, Object> response = new HashMap<>();
+		 
+		 Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); // 수정 ㅎ해야함 id가 아닌 유저명으로 하도록
+		 String loggedInUsername = authentication.getName(); // // 수정 ㅎ해야함 id가 아닌 유저명으로 하도록
+		 
+		 try 
+		 {
+			 riskService.saveOrUpdateRiskAssessmentA(
+					 			report,
+								request.getPossibilityBefore(),
+								request.getPossibilityAfter(),
+								request.getImportanceBefore(),
+								request.getImportanceAfter(),
+								loggedInUsername,
+								request.getSupervisor(),
+								request.getRepresentative(),
+								request.getEssentialActive(),
+								request.getAdministrativeActive(),
+								request.getEngineeringActive(),
+								request.getEquipmentActive(),
+								request.getEssentialMeasures(),
+								request.getAdministrativeMeasures(),
+								request.getEngineeringMeasures(),
+								request.getPersonalEquipment(),
+								request.getConfirmedMeasured(),
+								request.getConfirmedDate());
+	         response.put("success", true); 
+		 }
+		 catch (Exception e)
+		 {
+			 response.put("success", false);
+			 response.put("error", e);
+		 }
+		 finally
+		 {
+			 return ResponseEntity.ok(response);
+		 }	
+	 }
+	 
 
 }

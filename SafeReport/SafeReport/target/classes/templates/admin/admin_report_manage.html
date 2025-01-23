@@ -24,6 +24,7 @@
 	<script>
 		document.addEventListener("DOMContentLoaded", function(){
 			const formC = document.querySelector("#formC"); // 괄호속에 제공한 선택자와 일치하는 문서 내 첫번째 Element를 반환
+			const formA = document.querySelector("#formA"); // 괄호속에 제공한 선택자와 일치하는 문서 내 첫번째 Element를 반환
 			const reportId = document.querySelector("#reportid").value;
 			
 			formC.addEventListener("submit", async function (e){ // C등급 제출 이벤트
@@ -34,10 +35,10 @@
 				
 				const tableRows = formC.querySelectorAll("table tbody tr"); // form 안에 있는 table > tbody > tr모두 가져오기
 				const rows = Array.from(tableRows).map((row) => {
-					const category = row.querySelector("td:nth-child(1)").innerText.trim();
-					const contents = row.querySelector("td:nth-child(2)").innerText.trim();
-					const result = row.querySelector("select").value; // select option 선택자
-					const improvement = row.querySelector("input").value;
+				const category = row.querySelector("td:nth-child(1)").innerText.trim();
+				const contents = row.querySelector("td:nth-child(2)").innerText.trim();
+				const result = row.querySelector("select").value; // select option 선택자
+				const improvement = row.querySelector("input").value;
 					
 					return {category, contents, result, improvement};
 				});
@@ -73,6 +74,61 @@
 					modal.show();					
 				}); 
 			}); 
+			
+			formA.addEventListener("submit", async function (e){
+				e.preventDefault(); // 기본 폼 제출 동작 방지
+				
+				var token = $("meta[name='_csrf']").attr("content");
+				var header = $("meta[name='_csrf_header']").attr("content");
+				
+				const formData = {
+				        possibilityBefore: document.querySelector("#possibilityBefore_A").value,
+				        possibilityAfter: document.querySelector("#possibilityAfter_A").value,
+				        importanceBefore: document.querySelector("#importanceBefore_A").value,
+				        importanceAfter: document.querySelector("#importanceAfter_A").value,
+				        workerName: document.querySelector("#workernameA").value,
+				        supervisor: document.querySelector("#supervisorA").value,
+				        representative: document.querySelector("#representativeA").value,
+				        essentialActive: document.querySelector("#essentialActiveA").checked,
+				        administrativeActive: document.querySelector("#administrativeActiveA").checked,
+				        engineeringActive: document.querySelector("#engineeringActiveA").checked,
+				        equipmentActive: document.querySelector("#equipmentActiveA").checked,
+				        essentialMeasures: document.querySelector("#essential_measuresA").value,
+				        administrativeMeasures: document.querySelector("#administrative_measuresA").value,
+				        engineeringMeasures: document.querySelector("#engineering_measuresA").value,
+				        personalEquipment: document.querySelector("#personal_equipmentA").value,
+				        confirmedMeasured: document.querySelector("#confirmed_measuredA").value,
+				        confirmedDate: document.querySelector("#confirmed_dateA").value
+				};
+				fetch("/admin/reportsManage/Agrade/"+reportId,{
+					method : "POST",
+					headers:{
+						"Content-Type" : "application/json",
+						[header]: token, // 동적으로 CSRF 헤더 추가
+					},
+				 	body: JSON.stringify(formData),
+				})
+				.then((response) => response.json())
+				.then((data) => {
+					if(data.success){
+				 		console.log("success");
+				 		document.querySelector(".modal-body").textContent = "데이터 저장이 완료되었습니다.";
+				 	}
+				 	else{
+				 		console.log(data.error);
+				 		document.querySelector(".modal-body").textContent = "에러가 발생하였습니다." + data.error;
+				 	}
+				})
+				.catch((error) => {
+					console.error("error:", data.error);
+					document.querySelector(".modal-body").textContent = "에러가 발생하였습니다." + data.error;
+				})
+				.finally(() =>{
+					const modal = new bootstrap.Modal(document.querySelector("#Modal1"));
+				 	modal.show();
+					console.log("종료");					
+				}); 
+			});
 		});
 	</script>
 </head>
@@ -183,7 +239,7 @@
 				<div class="card my-3">
 					<div class="card-header">위험 관리</div>
 					<div class="card-body">
-						<form th:action="@{/admin/reportsManage/Agrade/{id}(id=${report.reportid})}" method="post">
+						<form th:action="@{/admin/reportsManage/Agrade/{id}(id=${report.reportid})}" method="post" id="formA">
 							<table class="table table-sm">
 							    <thead>
 							        <tr>
@@ -197,14 +253,14 @@
 							    </thead>
 							    <tbody>
 							        <tr>
-							            <td><input type="number" min="1" max="5" maxlength="1" name="possibilityBefore_A" placeholder="개선전" class="form-control"></td>
-							            <td><input type="number" min="1" max="5" maxlength="1" name="importanceBefore_A" placeholder="개선전" class="form-control"></td>
-							            <td><input type="number" placeholder="개선전" class="form-control" ></td>
+							            <td><input type="number" min="1" max="5" maxlength="1" id="possibilityBefore_A" placeholder="개선전" class="form-control form-control-sm" th:value="${report.riskAssessmentA?.possibilityBefore}"></td>
+							            <td><input type="number" min="1" max="5" maxlength="1" id="importanceBefore_A" placeholder="개선전" class="form-control form-control-sm" th:value="${report.riskAssessmentA?.importanceBefore}"></td>
+							            <td><input type="number" placeholder="개선전" class="form-control-plaintext form-control-sm px-2" th:value="${report.riskAssessmentA?.possibilityBefore} * ${report.riskAssessmentA?.importanceBefore}" readonly></td>
 							        </tr>
 									<tr>
-										<td><input type="number" name="possibilityAfter_A" placeholder="개선후" class="form-control"></td>
-										<td><input type="number" name="importanceAfter_A" placeholder="개선후" class="form-control"></td>
-										<td><input type="number"  placeholder="개선후" class="form-control"></td>
+										<td><input type="number" id="possibilityAfter_A" placeholder="개선후" class="form-control form-control-sm" th:value="${report.riskAssessmentA?.possibilityAfter}"></td>
+										<td><input type="number" id="importanceAfter_A" placeholder="개선후" class="form-control form-control-sm" th:value="${report.riskAssessmentA?.importanceAfter}"></td>
+										<td><input type="number" placeholder="개선후" class="form-control-plaintext form-control-sm px-2" th:value="${report.riskAssessmentA?.possibilityAfter} * ${report.riskAssessmentA?.importanceAfter}" readonly></td>
 									</tr>
 									
 							    </tbody>
@@ -215,13 +271,13 @@
 								<tbody>
 									<tr>
 									    <td>작업자</td>
-									    <td colspan="3"><input type="text" name="workernameA" class="form-control-plaintext form-control-sm" readonly></td>
+									    <td colspan="3"><input type="text" id="workernameA" class="form-control-plaintext form-control-sm" th:value="${report.riskAssessmentA?.workerName}" readonly></td>
 									</tr>
 								    <tr>
 								        <td>관리감독자</td>
-								        <td><input type="text" name="supervisorA" class="form-control form-control-sm"  maxlength='5' placeholder="최대 5자"></td>
+								        <td><input type="text" id="supervisorA" class="form-control form-control-sm"  maxlength='5' placeholder="최대 5자"  th:value="${report.riskAssessmentA?.supervisorName}"></td>
 								        <td>수급인 대표</td>
-								        <td><input type="text" name="representativeA" class="form-control form-control-sm" maxlength='5' placeholder="최대 5자"></td>
+								        <td><input type="text" id="representativeA" class="form-control form-control-sm" maxlength='5' placeholder="최대 5자" th:value="${report.riskAssessmentA?.representativeName}" ></td>
 								    </tr>
 								   
 								    <tr>
@@ -229,9 +285,9 @@
 										<td colspan="3">
 											<div class="input-group mb-3">
 											  <div class="input-group-text">
-											    <input class="form-check-input" type="checkbox" value="true" name="essentialActiveA" th:checked="${riskB?.essential_checked == true}">
+											    <input class="form-check-input" type="checkbox" value="true" id="essentialActiveA" th:checked="${report.riskAssessmentA?.essential_checked == true}">
 											  </div>
-											  <textarea name="essential_measuresA" rows="4" class="form-control form-control-sm" th:text="${riskB?.essential_measures}"></textarea>
+											  <textarea id="essential_measuresA" rows="4" class="form-control form-control-sm" th:text="${report.riskAssessmentA?.essential_measures}"></textarea>
 											</div>
 										</td>
 								    </tr>
@@ -240,9 +296,9 @@
 										<td colspan="3">
 											<div class="input-group mb-3">
 											  <div class="input-group-text">
-											    <input class="form-check-input" type="checkbox" value="true" name="administrativeActiveA" th:checked="${riskB?.administrative_checked == true}">
+											    <input class="form-check-input" type="checkbox" value="true" id="administrativeActiveA" th:checked="${report.riskAssessmentA?.administrative_checked == true}">
 											  </div>
-											  <textarea name="administrative_measuresA" rows="4" class="form-control form-control-sm" th:text="${riskB?.administrative_measures}"></textarea>
+											  <textarea id="administrative_measuresA" rows="4" class="form-control form-control-sm" th:text="${report.riskAssessmentA?.administrative_measures}"></textarea>
 											</div>
 										</td>
 								    </tr>
@@ -251,9 +307,9 @@
 										<td colspan="3">
 											<div class="input-group mb-3">
 											  <div class="input-group-text">
-											    <input class="form-check-input" type="checkbox" value="true" name="engineeringActiveA" th:checked="${riskB?.engineering_checked == true}">
+											    <input class="form-check-input" type="checkbox" value="true" id="engineeringActiveA" th:checked="${report.riskAssessmentA?.engineering_checked == true}">
 											  </div>
-											  <textarea name="engineering_measuresA" rows="4" class="form-control form-control-sm" th:text="${riskB?.engineering_measures}"></textarea>
+											  <textarea id="engineering_measuresA" rows="4" class="form-control form-control-sm" th:text="${report.riskAssessmentA?.engineering_measures}"></textarea>
 											</div>
 										</td>
 								    </tr>
@@ -262,20 +318,20 @@
 										<td colspan="3">
 											<div class="input-group mb-3">
 											  <div class="input-group-text">
-											    <input class="form-check-input" type="checkbox" value="true" name="equipmentActiveA" th:checked="${riskB?.equipment_checked == true}">
+											    <input class="form-check-input" type="checkbox" value="true" id="equipmentActiveA" th:checked="${report.riskAssessmentA?.equipment_checked == true}">
 											  </div>
-											  <textarea name="personal_equipmentA" rows="4" class="form-control form-control-sm" th:text="${riskB?.personal_equipment}"></textarea>
+											  <textarea id="personal_equipmentA" rows="4" class="form-control form-control-sm" th:text="${report.riskAssessmentA?.personal_equipment}"></textarea>
 											  	
 											</div>
 										</td>
 								    </tr>
 								    <tr>
 								        <td>확정 대책</td>
-								        <td colspan="3"><input class="form-control form-control-sm" type="text" name="confirmed_measuredA"  th:value="${riskB?.confirmed_measured}" placeholder="최대 120자" maxlength="120"></td>
+								        <td colspan="3"><input class="form-control form-control-sm" type="text" id="confirmed_measuredA"  th:value="${report.riskAssessmentA?.confirmed_measured}" placeholder="최대 120자" maxlength="120"></td>
 								    </tr>
 								    <tr>
 								        <td>조치 예정</td>
-										<td colspan="3"><input type="date" class="form-control form-control-sm" name="confirmed_dateA" th:value="${riskB?.confirmed_date}"></td>
+										<td colspan="3"><input type="date" class="form-control form-control-sm" id="confirmed_dateA" th:value="${report.riskAssessmentA?.confirmed_date}"></td>
 								    </tr>
 								</tbody>
 							</table>
