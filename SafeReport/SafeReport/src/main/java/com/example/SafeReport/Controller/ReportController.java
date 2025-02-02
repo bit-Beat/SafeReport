@@ -1,5 +1,7 @@
 package com.example.SafeReport.Controller;
 
+
+
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,6 +26,7 @@ import com.example.SafeReport.Service.ReportService;
 import com.example.SafeReport.Service.RiskService;
 import com.example.SafeReport.Service.UserService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -49,29 +52,30 @@ public class ReportController {
 	    model.addAttribute("page", "report"); // 현재 페이지
 	    return "board/report";  // report.html 반환
 	}
+	
 	@PostMapping("/")
-	public String createReport(@Valid ReportForm reportForm, BindingResult bindingResult, Model model)
-	{
+	public String createReport(@Valid ReportForm reportForm, BindingResult bindingResult, Model model , HttpServletRequest request)
+	{		
 		if(bindingResult.hasErrors())
 	  	{
 	  		return "board/report";
 	  	}
-	  		
-		Report savedReport = this.reportService.create(
-	              reportForm.getReportTitle(),
-	              reportForm.getReportDepartment(),
-	              reportForm.getReporterName(),
-	              reportForm.getReportLocation(),
-	              reportForm.getReportContent(),
-	              reportForm.getReportDetails(),
-	              reportForm.getReporterId()
-	          );
 
+		Report savedReport = this.reportService.create(
+	        		reportForm.getReportTitle(),
+	        		reportForm.getReportDepartment(),
+	        		reportForm.getReporterName(),
+	        		reportForm.getReportLocation(),
+	        		reportForm.getReportContent(),
+	        		reportForm.getReportDetails(),
+	        		reportForm.getReporterId(),
+	        		reportForm.getPhoto());
+	        
 	    // Risk 생성 및 저장
 	    this.riskService.creteRisk_FkReport(savedReport);
-	  	
-	    return "redirect:/?success";
-	  	//return "redirect:/";
+	    
+	    //return "redirect:/?success";
+	    return "message/report_complete";
 	  }
 	
 	/// 내 제보 보기
@@ -85,68 +89,88 @@ public class ReportController {
 		return "board/myreport_list";
 	}
 	
-	 	@GetMapping("/reportlist")
-		public String reportlist(Model model, @RequestParam(value="page", defaultValue="1") int page, @RequestParam(value = "keyword", defaultValue = "") String keyword) // 모델은 자바와 탬플릿간의 연결고리역할
-		{
-			Page<Report> paging = this.indexService.getList(page-1, keyword);  // page - 1로 0부터 시작
-			model.addAttribute("paging", paging); // 모델 객체에 questionList라는 이름으로 저장했다. 
-			model.addAttribute("keyword", keyword);
-			return "board/report_list";
-		}
- 	    
-		@GetMapping(value = "/board/report_detail/{reportid}")
-		public String detail(Model model, @PathVariable("reportid") Integer reportid)
-		{
-			Report report = this.reportService.getReport(reportid);
-			model.addAttribute("report", report);
-			return "board/report_detail";
-		}
-
-	    @GetMapping("/report/modify/{id}")
-	    public String reportModify(ReportForm reportForm, @PathVariable("id") Integer id, Principal principal, Model model) {
-	    	Report report = this.reportService.getReport(id);
-	        //if(!report.getAuthor().getUsername().equals(principal.getName())) {
-	        //    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
-	        //}
-	        reportForm.setReportTitle(report.getReport_title()); // 신고제목
-	        reportForm.setReportDepartment(report.getReport_department()); // 소속-
-	        reportForm.setReporterName(report.getReporter_name()); //신고자
-	        reportForm.setReportLocation(report.getReport_location()); // 발생장소
-	        reportForm.setReportContent(report.getReport_content()); //신고내용
-	        reportForm.setReportDetails(report.getReport_detail()); //개선요청
-	        reportForm.setReporterId(report.getReporter_id()); // 아이디
-	        
-	    	model.addAttribute("page", "report"); // 현재 페이지 
-	        return "board/report"; /// 신고접수 페이지
-	    }
+	@GetMapping("/reportlist")
+	public String reportlist(Model model, @RequestParam(value="page", defaultValue="1") int page, @RequestParam(value = "keyword", defaultValue = "") String keyword) // 모델은 자바와 탬플릿간의 연결고리역할
+	{
+		Page<Report> paging = this.indexService.getList(page-1, keyword);  // page - 1로 0부터 시작
+		model.addAttribute("paging", paging); // 모델 객체에 questionList라는 이름으로 저장했다. 
+		model.addAttribute("keyword", keyword);
+		return "board/report_list";
+	}
+	
+	@GetMapping(value = "/board/report_detail/{reportid}")
+	public String detail(Model model, @PathVariable("reportid") Integer reportid)
+	{
+		Report report = this.reportService.getReport(reportid);
+		model.addAttribute("report", report);
+		return "board/report_detail";
+	}
+	
+	@GetMapping("/report/modify/{id}")
+	public String reportModify(ReportForm reportForm, @PathVariable("id") Integer id, Principal principal, Model model) {
+		Report report = this.reportService.getReport(id);
+	    //if(!report.getAuthor().getUsername().equals(principal.getName())) {
+	    //    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
+	    //}
+	    reportForm.setReportTitle(report.getReport_title()); // 신고제목
+	    reportForm.setReportDepartment(report.getReport_department()); // 소속-
+	    reportForm.setReporterName(report.getReporter_name()); //신고자
+	    reportForm.setReportLocation(report.getReport_location()); // 발생장소
+	    reportForm.setReportContent(report.getReport_content()); //신고내용
+	    reportForm.setReportDetails(report.getReport_detail()); //개선요청
+	    reportForm.setReporterId(report.getReporter_id()); // 아이디
+	    reportForm.setExistingPhotoName(report.getAttachfile()); // 기존 이미지 파일
+	    reportForm.setUuidPhotoName(report.getAttachfile_upload()); // 고유값 이미지 파일명
 	    
-	    @PostMapping("/report/modify/{id}") //// form에 액션을 지정하지 않으면 간은 uri로 요청된다.
-	    public String reportModify(@Valid ReportForm reportForm, BindingResult bindingResult,Principal principal, @PathVariable("id") Integer id) {
-	        if (bindingResult.hasErrors()) {
-	            return "board/report";
-	        }
-	        Report report = this.reportService.getReport(id);
-	        //if (!question.getAuthor().getUsername().equals(principal.getName())) {
-	        //    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
-	        //}
-	        this.reportService.modify(report, reportForm.getReportTitle(), reportForm.getReportDepartment(),reportForm.getReporterName(), reportForm.getReportLocation(), reportForm.getReportContent(), reportForm.getReportDetails());
-	        return "redirect:/board/report_detail/{id}";
+		model.addAttribute("page", "report"); // 현재 페이지 
+	    return "board/report"; /// 신고접수 페이지
+	}
+	
+	@PostMapping("/report/modify/{id}") //// form에 액션을 지정하지 않으면 간은 uri로 요청된다.
+	public String reportModify(@Valid ReportForm reportForm, BindingResult bindingResult,Principal principal, @PathVariable("id") Integer id) {
+	    if (bindingResult.hasErrors()) {
+	        return "board/report";
 	    }
+	    Report report = this.reportService.getReport(id);
+	    //if (!question.getAuthor().getUsername().equals(principal.getName())) {
+	    //    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
+	    //}
+	    this.reportService.modify(report, reportForm.getReportTitle(), reportForm.getReportDepartment(),reportForm.getReporterName(), reportForm.getReportLocation(), reportForm.getReportContent(), reportForm.getReportDetails(), reportForm.getPhoto());
+	    return "redirect:/board/report_detail/{id}";
+	}
+	
+	
+	@GetMapping("/report/delete/{id}")
+	public String questionDelete(Principal principal, @PathVariable("id") Integer id) {
+	    Report report = this.reportService.getReport(id);	     
+	    this.reportService.delete(report);	
+	    return "redirect:/reportlist";
+	}
+	
+	@PostMapping("/report/delete/{id}")
+	public String questionDelete( @PathVariable("id") Integer id) {
+	    Report report = this.reportService.getReport(id);	     
+	    this.reportService.delete(report);	
+	    return "redirect:/admin/reports";
+	}
+	
+	@PostMapping("/report/modify/filedelete/{id}") /// 파일 삭제 ajax
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> report_fileDelete(@PathVariable("id") Integer id, @RequestBody Map<String, Object> request)
+	{
+	    // ID로 Report 조회
+	    Report report = this.reportService.getReport(id);
+	    if (report == null) return ResponseEntity.badRequest().body(Map.of("error", "Report not found."));
 	    
+	    // 파일 삭제 서비스 호출
+	    Map<String, Object> response = new HashMap<>();
+	    if(this.reportService.file_delete(report))
+	    	response.put("success", true);	    	
+	    else
+	    	response.put("success", false);
 	    
-	    @GetMapping("/report/delete/{id}")
-	    public String questionDelete(Principal principal, @PathVariable("id") Integer id) {
-	        Report report = this.reportService.getReport(id);	     
-	        this.reportService.delete(report);	
-	        return "redirect:/reportlist";
-	    }
-	    
-	    @PostMapping("/report/delete/{id}")
-	    public String questionDelete( @PathVariable("id") Integer id) {
-	        Report report = this.reportService.getReport(id);	     
-	        this.reportService.delete(report);	
-	        return "redirect:/admin/reports";
-	    }
+		return ResponseEntity.ok(response); // json 응답 반환
+	}
 	    
 	    /*
 	    @PostMapping("/report/passwordcompare")
@@ -186,8 +210,5 @@ public class ReportController {
 	        // JSON 응답 반환
 	        return ResponseEntity.ok(response);
 	    }*/
-
-
-	    
-	    
+ 
 }

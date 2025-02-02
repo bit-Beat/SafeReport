@@ -97,6 +97,7 @@
 						</td>
 						<td>
 							<a th:href="@{|/board/report_detail/${report.reportid}|}" >[[${report.report_title}]]</a>
+							<i th:if="${report.attachfile}!='' AND ${report.attachfile}!=null" class="bi bi-image-fill text-secondary mx-1" ></i>
 						</td>
 						<td>[[${report.reporter_name}]]</td>
 						<td>[[${report.report_department}]]</td>

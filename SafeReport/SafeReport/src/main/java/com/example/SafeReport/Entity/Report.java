@@ -21,7 +21,6 @@ import lombok.Setter;
 @Entity
 @Setter
 @Getter
-
 public class Report {
 	
 	@Id
@@ -65,6 +64,9 @@ public class Report {
 	
 	@Column(length=255)
 	private String attachfile;
+	
+	@Column(length=255)
+	private String attachfile_upload; // 업로드한 파일명
 	
 	@OneToOne(mappedBy = "reportid", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	@OnDelete(action = OnDeleteAction.CASCADE)

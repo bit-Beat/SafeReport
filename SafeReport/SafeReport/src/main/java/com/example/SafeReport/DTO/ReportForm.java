@@ -1,5 +1,7 @@
 package com.example.SafeReport.DTO;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -31,9 +33,12 @@ public class ReportForm {
     @NotEmpty(message = "신고내용은 필수 항목입니다.")
     private String reportContent;
 
-    @NotEmpty(message = "개선내용은 항목입니다.")
-    private String reportDetails; // 개선 요청 내용은 선택 사항이므로 검증은 추가하지 않음
-
+    @NotEmpty(message = "개선내용은 필수 항목입니다.")
+    private String reportDetails; 
+    
+    private MultipartFile photo; // 이미지 첨부
+    private String existingPhotoName; // 기존 첨부 파일명
+    private String uuidPhotoName; // 고유 첨부 파일명
 }
 
 

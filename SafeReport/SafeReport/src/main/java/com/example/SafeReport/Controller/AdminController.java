@@ -1,11 +1,13 @@
 package com.example.SafeReport.Controller;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -27,11 +29,15 @@ import com.example.SafeReport.Entity.Report;
 import com.example.SafeReport.Entity.Risk;
 import com.example.SafeReport.Entity.RiskAssessmentB;
 import com.example.SafeReport.Entity.RiskAssessmentC;
+import com.example.SafeReport.Entity.RiskFactor;
+import com.example.SafeReport.Entity.Users;
 import com.example.SafeReport.Enum.RiskGrade;
 import com.example.SafeReport.Enum.RiskStatus;
+import com.example.SafeReport.Repository.RiskFactorRepository;
 import com.example.SafeReport.Service.AwardService;
 import com.example.SafeReport.Service.ReportService;
 import com.example.SafeReport.Service.RiskService;
+import com.example.SafeReport.Service.UserService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -41,12 +47,15 @@ public class AdminController {
 	private final RiskService riskService;
 	private final ReportService reportService;
 	private final AwardService awardService;
+	private final UserService userService;
+	
+	private final RiskFactorRepository riskFactorRepository; // 위험요인 table
 	
  	@GetMapping("/admin/reports")  //required = false 시 파라미터가 입력되지 않으면, 변수는 null 값을 가진다.
     public String reportList(Model model, @RequestParam(value="page", defaultValue="1") int page,
     									  @RequestParam(value = "keyword", defaultValue = "") String keyword,
             							  @RequestParam(value = "status", required = false) String status,
-            							  @RequestParam(value = "riskGrade", required = false) String riskGrade) {
+            							  @RequestParam(value = "riskGrade", required = false) String riskGrade, Principal principal) {
  		
  	    RiskStatus riskStatus = null;
  	    RiskGrade riskGradeEnum = null;
@@ -69,12 +78,14 @@ public class AdminController {
  	    }
  	    
  		Page<Report> report = this.riskService.getFindRisks(keyword, riskStatus, riskGradeEnum, page-1);
+ 		Users user = userService.getUser(principal.getName());
 
  	    // Add attributes to the model
  	    model.addAttribute("report", report);
  	    model.addAttribute("keyword", keyword); // 작성자 or 제목
  	    model.addAttribute("selectedStatus", status); // 상태
  	    model.addAttribute("selectedRiskGrade", riskGrade); // 등급
+ 	    model.addAttribute("user", user); // 유저정보
         return "admin/admin_reports";
     }
  	
@@ -82,8 +93,17 @@ public class AdminController {
  	public String adminReportManage(@PathVariable Integer id, Model model) {
  	   
  	    Report report = this.reportService.getReport(id);
-		model.addAttribute("report", report);
-
+        List<RiskFactor> riskFactor = riskFactorRepository.findAll(); //모든 위험요인 조회
+        
+        // 카테고리 중복 제거된 카테고리 목록 생성
+        /*List<String> uniqueCategories = riskFactor.stream()
+                .map(RiskFactor::getCategory) // category 필드만 추출
+                .distinct() // 중복 제거
+                .collect(Collectors.toList());*/
+        
+        //model.addAttribute("uniqueCategories", uniqueCategories); // 위험요인
+        model.addAttribute("riskFactor", riskFactor); // 위험유형
+        model.addAttribute("report", report);
  	    return "admin/admin_report_detail";
  	}
  	

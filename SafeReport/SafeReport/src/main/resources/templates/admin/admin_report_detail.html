@@ -94,15 +94,24 @@
 	
 			            <div class="mb-3">
 			                <label for="riskFactor" class="form-label">위험 요인</label>
-							<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" class="bi bi-lightning-fill" viewBox="0 0 16 16">
-							  <path d="M5.52.359A.5.5 0 0 1 6 0h4a.5.5 0 0 1 .474.658L8.694 6H12.5a.5.5 0 0 1 .395.807l-7 9a.5.5 0 0 1-.873-.454L6.823 9.5H3.5a.5.5 0 0 1-.48-.641z"/>
-							</svg>
-			                <input type="text" id="riskFactor" name="riskFactor" class="form-control" th:value="${report.risk.riskFactor}" autocomplete="off">
+							<select id="riskFactor" name="riskFactor" class="form-select">
+								<option th:each="uniqueCategories : ${uniqueCategories}"
+									th:value="${uniqueCategories}"
+									th:text="${uniqueCategories}"
+									th:selected="${report.risk.riskFactor == uniqueCategories}">
+								</option>
+							</select>
 			            </div>
 	
 			            <div class="mb-3">
 			                <label for="riskType" class="form-label">위험 유형</label>
-			                <input type="text" id="riskType" name="riskType" class="form-control" th:value="${report.risk.riskType}" autocomplete="off">
+							<select id="riskType" name="riskType" class="form-select">
+								<option th:each="riskFactor : ${riskFactor}"
+										th:value="${riskFactor.factor_name}"
+										th:text="${riskFactor.factor_name}"
+										th:selected="${report.risk.riskType == riskFactor.factor_name}">
+								</option>
+							</select>
 			            </div>
 						
 						<div class="mb-3">

@@ -99,7 +99,11 @@
 
 <body >
 	
-	<div layout:fragment="content" class="container-fluid">
+	<div layout:fragment="content" >
+		<div class="progress" role="progressbar" style="height: 4px">
+			<div class="progress-bar" th:style="|width: ${((report.risk.status.ordinal + 1)*100) / T(com.example.SafeReport.Enum.RiskStatus).values().length }%|"></div>
+		</div>
+		 
 		<span id="error-message" style="display:none;">[[${error}]]</span>
 		<!--body시작-->
 		<!--질문-->
@@ -127,8 +131,25 @@
 			<div class="card my-3">
 			  <div class="card-header">개선요청사항</div>
 			  <div class="card-body">
-				<p style="white-space: pre-wrap;" th:text="${report.report_detail}">개선내용</p>
+				<p style="white-space: pre-wrap;" th:text="${report.report_detail}">개선-내용</p>
 			  </div>
+			</div>
+			
+			<!-- 첨부 이미지 -->
+			<div class="accordion" id="accordionExample" th:if="${report.attachfile}!='' AND ${report.attachfile}!=null">
+				<div class="accordion-item">
+				   <h2 class="accordion-header">
+				     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse" aria-expanded="false" aria-controls="collapse">
+				       첨부 이미지
+					   <span class="badge rounded-pill text-bg-danger ms-2">1</span>
+				     </button>
+				   </h2>
+				   <div id="collapse" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+				     <div class="accordion-body">
+						<img th:src="@{'/uploads/' + ${report.attachfile_upload}}" class="img-fluid rounded" alt="image error" style="max-width: 30rem;">
+				     </div>
+				   </div>
+				 </div>
 			</div>
 
 			<!-- 관리자 수정 삭제 버튼 -->
@@ -178,13 +199,23 @@
 		
 		<div class="container mt-5">
 			<hr class="hr-13">
-			<h2 class="border-bottom py-2">			
-				위험성 관리
-				<svg xmlns="http://www.w3.org/2000/svg" width="37" height="37" fill="currentColor" class="bi bi-cone-striped" viewBox="0 0 16 16">
-			  		<path d="m9.97 4.88.953 3.811C10.159 8.878 9.14 9 8 9s-2.158-.122-2.923-.309L6.03 4.88C6.635 4.957 7.3 5 8 5s1.365-.043 1.97-.12m-.245-.978L8.97.88C8.718-.13 7.282-.13 7.03.88L6.275 3.9C6.8 3.965 7.382 4 8 4s1.2-.036 1.725-.098m4.396 8.613a.5.5 0 0 1 .037.96l-6 2a.5.5 0 0 1-.316 0l-6-2a.5.5 0 0 1 .037-.96l2.391-.598.565-2.257c.862.212 1.964.339 3.165.339s2.303-.127 3.165-.339l.565 2.257z"/>
-				</svg>
-			</h2>
-					
+			<div class="row mt-4">
+			    <div class="col-md-4">
+					<h2 >			
+						위험성 관리
+						<svg xmlns="http://www.w3.org/2000/svg" width="37" height="37" fill="currentColor" class="bi bi-cone-striped" viewBox="0 0 16 16">
+							<path d="m9.97 4.88.953 3.811C10.159 8.878 9.14 9 8 9s-2.158-.122-2.923-.309L6.03 4.88C6.635 4.957 7.3 5 8 5s1.365-.043 1.97-.12m-.245-.978L8.97.88C8.718-.13 7.282-.13 7.03.88L6.275 3.9C6.8 3.965 7.382 4 8 4s1.2-.036 1.725-.098m4.396 8.613a.5.5 0 0 1 .037.96l-6 2a.5.5 0 0 1-.316 0l-6-2a.5.5 0 0 1 .037-.96l2.391-.598.565-2.257c.862.212 1.964.339 3.165.339s2.303-.127 3.165-.339l.565 2.257z"/>
+						</svg>
+					</h2>
+				</div>
+			    <div class="col-md-4 ms-auto d-flex justify-content-end" sec:authorize="hasAnyRole('ADMIN', 'ADMINSAFETY')">
+					<div >
+						<a th:href="@{|/admin/reports/${report.reportid}|}" class="btn btn-sm btn-outline-secondary m-1">상세</a>
+					</div>
+				</div>
+			</div>
+			<h2 class="border-bottom mb-3"></h2>
+
 			<table class="table align-middle">
 				<thead class="table-light">
 					<tr>

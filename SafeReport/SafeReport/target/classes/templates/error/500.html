@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap.min.css">
+</head>    
+<body>
+    <section class="py-3 py-md-5 min-vh-100 d-flex justify-content-center align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="text-center">
+                        <img src="/static/404.png" class="rounded mx-auto d-block" alt="...">
+                        <h3 class="h2 mb-2">[500]에러가 발생하였습니다.</h3>
+                        <!-- 서버에서 전달된 에러 메시지 표시 -->
+                        <p id="contents" class="mb-5" th:text="${errorMessage}"></p>
+                        <a class="btn bsb-btn-5xl btn-dark rounded-pill px-5 fs-6 m-0" href="/home" role="button">홈으로</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

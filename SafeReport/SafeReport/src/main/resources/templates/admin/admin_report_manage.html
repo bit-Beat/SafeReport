@@ -255,12 +255,12 @@
 							        <tr>
 							            <td><input type="number" min="1" max="5" maxlength="1" id="possibilityBefore_A" placeholder="개선전" class="form-control form-control-sm" th:value="${report.riskAssessmentA?.possibilityBefore}"></td>
 							            <td><input type="number" min="1" max="5" maxlength="1" id="importanceBefore_A" placeholder="개선전" class="form-control form-control-sm" th:value="${report.riskAssessmentA?.importanceBefore}"></td>
-							            <td><input type="number" placeholder="개선전" class="form-control-plaintext form-control-sm px-2" th:value="${report.riskAssessmentA?.possibilityBefore} * ${report.riskAssessmentA?.importanceBefore}" readonly></td>
+							            <td><input type="number" placeholder="개선전" class="form-control-plaintext form-control-sm px-2"  th:value="${(report.riskAssessmentA?.possibilityBefore ?: 0) * (report.riskAssessmentA?.importanceBefore ?: 0)}" readonly></td>
 							        </tr>
 									<tr>
 										<td><input type="number" id="possibilityAfter_A" placeholder="개선후" class="form-control form-control-sm" th:value="${report.riskAssessmentA?.possibilityAfter}"></td>
 										<td><input type="number" id="importanceAfter_A" placeholder="개선후" class="form-control form-control-sm" th:value="${report.riskAssessmentA?.importanceAfter}"></td>
-										<td><input type="number" placeholder="개선후" class="form-control-plaintext form-control-sm px-2" th:value="${report.riskAssessmentA?.possibilityAfter} * ${report.riskAssessmentA?.importanceAfter}" readonly></td>
+										<td><input type="number" placeholder="개선후" class="form-control-plaintext form-control-sm px-2"  th:value="${(report.riskAssessmentA?.possibilityAfter ?: 0) * (report.riskAssessmentA?.importanceAfter ?: 0)}" readonly></td>
 									</tr>
 									
 							    </tbody>

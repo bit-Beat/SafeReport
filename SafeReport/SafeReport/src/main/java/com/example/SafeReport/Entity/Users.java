@@ -1,12 +1,16 @@
 package com.example.SafeReport.Entity;
 
-import org.hibernate.annotations.ColumnDefault;
+import java.util.List;
 
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,9 +20,6 @@ import lombok.Setter;
 public class Users {
 	
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @Column(unique = true, nullable = false)
     private String userid; // 유저 id
     
@@ -37,5 +38,10 @@ public class Users {
     @Column(nullable = false)
     @ColumnDefault("'user'") // default
     private String role; // 권한
+    
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	private List<Alert> alert; // 위험성평가 c
 	
+    
 }

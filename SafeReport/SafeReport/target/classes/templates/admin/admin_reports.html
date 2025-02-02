@@ -104,7 +104,11 @@
                             <td th:text="${#temporals.format(report.reportcreatedate, 'yyyy-MM-dd HH:mm')}"></td>
                             <td>
                                 <a th:href="@{/admin/reports/{id}(id=${report.reportid})}" class="btn btn-sm btn-outline-primary btn-action" sec:authorize="hasAnyRole('ADMIN', 'ADMINSAFETY')">상세</a>
-								<a th:href="@{/admin/reportsManage/{id}(id=${report.reportid})}" class="btn btn-sm btn-outline-primary btn-action" th:classappend="${report.report_managedepartment == '안전환경팀'} ? '' : 'disabled'">위험성 평가</a>
+								<a th:href="@{/admin/reportsManage/{id}(id=${report.reportid})}"
+								   class="btn btn-sm btn-outline-primary btn-action"
+								   th:classappend="${#authorization.expression('hasRole(''ADMIN'')') or report.report_managedepartment == user.department} ? '' : 'disabled'">
+								   위험성 평가
+								</a>
                                 <form th:action="@{|/report/delete/${report.reportid}|}" method="post" style="display:inline;">
                                     <button type="submit" class="btn btn-sm btn-outline-danger btn-action" onclick="return confirm('정말 삭제하시겠습니까?')" sec:authorize="hasAnyRole('ADMIN', 'ADMINSAFETY')">삭제</button>
                                 </form>

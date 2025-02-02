@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.example.SafeReport.Entity.Users;
 
 @Repository
-public interface UsersRepository extends JpaRepository<Users, Long> {
+public interface UsersRepository extends JpaRepository<Users, String> {
 	Optional<Users> findByUserid(String userid);
 }

@@ -1,410 +1,420 @@
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì„¤ë¹„ ìœ ì§€ë³´ìˆ˜ ìš”ì²­', 'ì•ˆì „í™˜ê²½íŒ€', 'ìµœë¯¼ìˆ˜', 'ì£¼ì°¨ìž¥', 'ì†Œí™”ê¸°ê°€ ì œëŒ€ë¡œ ìž‘ë™í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.', 'ì¡°ì¹˜ ë°©ì•ˆì„ ë…¼ì˜í•´ì£¼ì„¸ìš”.', '2025-01-15 10:40:10');
+VALUES ('1', '¼³ºñ À¯Áöº¸¼ö ¿äÃ»', '¾ÈÀüÈ¯°æÆÀ', 'ÃÖ¹Î¼ö', 'ÁÖÂ÷Àå', '¼ÒÈ­±â°¡ Á¦´ë·Î ÀÛµ¿ÇÏÁö ¾Ê½À´Ï´Ù.', 'Á¶Ä¡ ¹æ¾ÈÀ» ³íÀÇÇØÁÖ¼¼¿ä.', '2025-01-15 10:40:10');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì•ˆì „ ìž¥ë¹„ ë¶€ì¡±', 'ì°¨ì²´ì§€ì›íŒ€', 'ë°•ì˜í¬', 'íšŒì˜ì‹¤', 'ê¸°ê³„ ì†ŒìŒì´ ì‹¬ê°í•©ë‹ˆë‹¤.', 'ë¬¸ì„œ ë¶„ì‹¤ ê²½ìœ„ë¥¼ ì¡°ì‚¬í•´ì£¼ì„¸ìš”.', '2025-01-15 07:41:22');
+VALUES ('1', '¾ÈÀü Àåºñ ºÎÁ·', 'Â÷Ã¼Áö¿øÆÀ', '¹Ú¿µÈñ', 'È¸ÀÇ½Ç', '±â°è ¼ÒÀ½ÀÌ ½É°¢ÇÕ´Ï´Ù.', '¹®¼­ ºÐ½Ç °æÀ§¸¦ Á¶»çÇØÁÖ¼¼¿ä.', '2025-01-15 07:41:22');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì•ˆì „ ìž¥ë¹„ ë¶€ì¡±', 'ì‚¬ì—…ê¸°íšíŒ€', 'ë°•ì˜í¬', 'ìƒì‚°ë¼ì¸', 'íœ´ê²Œì‹¤ì˜ ì˜¨ë„ê°€ ë„ˆë¬´ ë‚®ìŠµë‹ˆë‹¤.', 'ì¶”ê°€ ì˜ˆì‚° ìš”ì²­ì´ í¬í•¨ë˜ì—ˆìŠµë‹ˆë‹¤.', '2025-01-15 04:49:29');
+VALUES ('1', '¾ÈÀü Àåºñ ºÎÁ·', '»ç¾÷±âÈ¹ÆÀ', '¹Ú¿µÈñ', '»ý»ê¶óÀÎ', 'ÈÞ°Ô½ÇÀÇ ¿Âµµ°¡ ³Ê¹« ³·½À´Ï´Ù.', 'Ãß°¡ ¿¹»ê ¿äÃ»ÀÌ Æ÷ÇÔµÇ¾ú½À´Ï´Ù.', '2025-01-15 04:49:29');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì•ˆì „ ìž¥ë¹„ ë¶€ì¡±', 'ì°¨ì²´ì§€ì›íŒ€', 'ê¹€ì² ìˆ˜', 'ì°½ê³ ', 'ì •ê¸° ì ê²€ì´ í•„ìš”í•©ë‹ˆë‹¤.', 'ê·¼ë³¸ì ì¸ ë¬¸ì œë¥¼ í•´ê²°í•´ì£¼ì„¸ìš”.', '2025-01-15 02:23:33');
+VALUES ('1', '¾ÈÀü Àåºñ ºÎÁ·', 'Â÷Ã¼Áö¿øÆÀ', '±èÃ¶¼ö', 'Ã¢°í', 'Á¤±â Á¡°ËÀÌ ÇÊ¿äÇÕ´Ï´Ù.', '±Ùº»ÀûÀÎ ¹®Á¦¸¦ ÇØ°áÇØÁÖ¼¼¿ä.', '2025-01-15 02:23:33');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'í™”ìž¬ ì˜ˆë°© ì ê²€ í•„ìš”', 'í•œêµ­ë©”íƒˆ', 'ìž¥í•˜ë‚˜', 'ì°½ê³ ', 'ê¸°ê³„ ì†ŒìŒì´ ì‹¬ê°í•©ë‹ˆë‹¤.', 'ì¡°ì¹˜ ë°©ì•ˆì„ ë…¼ì˜í•´ì£¼ì„¸ìš”.', '2025-01-15 11:35:24');
+VALUES ('1', 'È­Àç ¿¹¹æ Á¡°Ë ÇÊ¿ä', 'ÇÑ±¹¸ÞÅ»', 'ÀåÇÏ³ª', 'Ã¢°í', '±â°è ¼ÒÀ½ÀÌ ½É°¢ÇÕ´Ï´Ù.', 'Á¶Ä¡ ¹æ¾ÈÀ» ³íÀÇÇØÁÖ¼¼¿ä.', '2025-01-15 11:35:24');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'í™”ìž¬ ì˜ˆë°© ì ê²€ í•„ìš”', 'ìž¬ê²½íŒ€', 'ê¹€ì² ìˆ˜', 'ì°½ê³ ', 'ì •ê¸° ì ê²€ì´ í•„ìš”í•©ë‹ˆë‹¤.', 'ì¡°ì¹˜ ë°©ì•ˆì„ ë…¼ì˜í•´ì£¼ì„¸ìš”.', '2025-01-15 04:26:19');
+VALUES ('1', 'È­Àç ¿¹¹æ Á¡°Ë ÇÊ¿ä', 'Àç°æÆÀ', '±èÃ¶¼ö', 'Ã¢°í', 'Á¤±â Á¡°ËÀÌ ÇÊ¿äÇÕ´Ï´Ù.', 'Á¶Ä¡ ¹æ¾ÈÀ» ³íÀÇÇØÁÖ¼¼¿ä.', '2025-01-15 04:26:19');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ê·¼ë¬´ í™˜ê²½ ê°œì„  ìš”ì²­', 'ì•ˆì „í™˜ê²½íŒ€', 'ìµœì§€í›ˆ', 'ìƒì‚°ë¼ì¸', 'ì •ê¸° ì ê²€ì´ í•„ìš”í•©ë‹ˆë‹¤.', 'ìƒì„¸ ë‚´ì—­ í™•ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤.', '2025-01-15 12:29:54');
+VALUES ('1', '±Ù¹« È¯°æ °³¼± ¿äÃ»', '¾ÈÀüÈ¯°æÆÀ', 'ÃÖÁöÈÆ', '»ý»ê¶óÀÎ', 'Á¤±â Á¡°ËÀÌ ÇÊ¿äÇÕ´Ï´Ù.', '»ó¼¼ ³»¿ª È®ÀÎÀÌ ÇÊ¿äÇÕ´Ï´Ù.', '2025-01-15 12:29:54');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'í™”ìž¬ ì˜ˆë°© ì ê²€ í•„ìš”', 'ì°¨ì²´ì§€ì›íŒ€', 'ì´ì„±ë¯¼', 'ì£¼ì°¨ìž¥', 'ì•ˆì „ëª¨ê°€ ì¶©ë¶„í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.', 'ê·¼ë³¸ì ì¸ ë¬¸ì œë¥¼ í•´ê²°í•´ì£¼ì„¸ìš”.', '2025-01-15 10:56:22');
+VALUES ('1', 'È­Àç ¿¹¹æ Á¡°Ë ÇÊ¿ä', 'Â÷Ã¼Áö¿øÆÀ', 'ÀÌ¼º¹Î', 'ÁÖÂ÷Àå', '¾ÈÀü¸ð°¡ ÃæºÐÇÏÁö ¾Ê½À´Ï´Ù.', '±Ùº»ÀûÀÎ ¹®Á¦¸¦ ÇØ°áÇØÁÖ¼¼¿ä.', '2025-01-15 10:56:22');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì„¤ë¹„ ìœ ì§€ë³´ìˆ˜ ìš”ì²­', 'ìž¬ê²½íŒ€', 'ê¹€ë¯¼ì •', 'ìž‘ì—…ìž¥', 'ê¸°ê³„ ì†ŒìŒì´ ì‹¬ê°í•©ë‹ˆë‹¤.', 'ìƒì„¸ ë‚´ì—­ í™•ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤.', '2025-01-15 09:35:29');
+VALUES ('1', '¼³ºñ À¯Áöº¸¼ö ¿äÃ»', 'Àç°æÆÀ', '±è¹ÎÁ¤', 'ÀÛ¾÷Àå', '±â°è ¼ÒÀ½ÀÌ ½É°¢ÇÕ´Ï´Ù.', '»ó¼¼ ³»¿ª È®ÀÎÀÌ ÇÊ¿äÇÕ´Ï´Ù.', '2025-01-15 09:35:29');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì•ˆì „ ìž¥ë¹„ ë¶€ì¡±', 'ìž¬ê²½íŒ€', 'ìž¥í•˜ë‚˜', 'ì£¼ì°¨ìž¥', 'ê¸°ê³„ ì†ŒìŒì´ ì‹¬ê°í•©ë‹ˆë‹¤.', 'ê·¼ë³¸ì ì¸ ë¬¸ì œë¥¼ í•´ê²°í•´ì£¼ì„¸ìš”.', '2025-01-15 12:06:34');
+VALUES ('1', '¾ÈÀü Àåºñ ºÎÁ·', 'Àç°æÆÀ', 'ÀåÇÏ³ª', 'ÁÖÂ÷Àå', '±â°è ¼ÒÀ½ÀÌ ½É°¢ÇÕ´Ï´Ù.', '±Ùº»ÀûÀÎ ¹®Á¦¸¦ ÇØ°áÇØÁÖ¼¼¿ä.', '2025-01-15 12:06:34');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì•ˆì „ ìž¥ë¹„ ë¶€ì¡±', 'í•œêµ­ë©”íƒˆ', 'í™ê¸¸ë™', 'ìž‘ì—…ìž¥', 'ì •ê¸° ì ê²€ì´ í•„ìš”í•©ë‹ˆë‹¤.', 'ì¶”ê°€ ì˜ˆì‚° ìš”ì²­ì´ í¬í•¨ë˜ì—ˆìŠµë‹ˆë‹¤.', '2025-01-15 02:48:50');
+VALUES ('1', '¾ÈÀü Àåºñ ºÎÁ·', 'ÇÑ±¹¸ÞÅ»', 'È«±æµ¿', 'ÀÛ¾÷Àå', 'Á¤±â Á¡°ËÀÌ ÇÊ¿äÇÕ´Ï´Ù.', 'Ãß°¡ ¿¹»ê ¿äÃ»ÀÌ Æ÷ÇÔµÇ¾ú½À´Ï´Ù.', '2025-01-15 02:48:50');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì•ˆì „ ìž¥ë¹„ ë¶€ì¡±', 'SMP', 'ìž¥í•˜ë‚˜', 'ìƒì‚°ë¼ì¸', 'ì†Œí™”ê¸°ê°€ ì œëŒ€ë¡œ ìž‘ë™í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.', 'ê·¼ë³¸ì ì¸ ë¬¸ì œë¥¼ í•´ê²°í•´ì£¼ì„¸ìš”.', '2025-01-15 04:51:25');
+VALUES ('1', '¾ÈÀü Àåºñ ºÎÁ·', 'SMP', 'ÀåÇÏ³ª', '»ý»ê¶óÀÎ', '¼ÒÈ­±â°¡ Á¦´ë·Î ÀÛµ¿ÇÏÁö ¾Ê½À´Ï´Ù.', '±Ùº»ÀûÀÎ ¹®Á¦¸¦ ÇØ°áÇØÁÖ¼¼¿ä.', '2025-01-15 04:51:25');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'í™”ìž¬ ì˜ˆë°© ì ê²€ í•„ìš”', 'í•œêµ­ë©”íƒˆ', 'ë°•ì˜í¬', 'ìž‘ì—…ìž¥', 'íœ´ê²Œì‹¤ì˜ ì˜¨ë„ê°€ ë„ˆë¬´ ë‚®ìŠµë‹ˆë‹¤.', 'ê·¼ë³¸ì ì¸ ë¬¸ì œë¥¼ í•´ê²°í•´ì£¼ì„¸ìš”.', '2025-01-15 13:44:19');
+VALUES ('1', 'È­Àç ¿¹¹æ Á¡°Ë ÇÊ¿ä', 'ÇÑ±¹¸ÞÅ»', '¹Ú¿µÈñ', 'ÀÛ¾÷Àå', 'ÈÞ°Ô½ÇÀÇ ¿Âµµ°¡ ³Ê¹« ³·½À´Ï´Ù.', '±Ùº»ÀûÀÎ ¹®Á¦¸¦ ÇØ°áÇØÁÖ¼¼¿ä.', '2025-01-15 13:44:19');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'í™”ìž¬ ì˜ˆë°© ì ê²€ í•„ìš”', 'ì„œì˜', 'ìµœì§€í›ˆ', 'íšŒì˜ì‹¤', 'ì•ˆì „ëª¨ê°€ ì¶©ë¶„í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.', 'ì¶”ê°€ ì˜ˆì‚° ìš”ì²­ì´ í¬í•¨ë˜ì—ˆìŠµë‹ˆë‹¤.', '2025-01-15 07:10:25');
+VALUES ('1', 'È­Àç ¿¹¹æ Á¡°Ë ÇÊ¿ä', '¼­¿µ', 'ÃÖÁöÈÆ', 'È¸ÀÇ½Ç', '¾ÈÀü¸ð°¡ ÃæºÐÇÏÁö ¾Ê½À´Ï´Ù.', 'Ãß°¡ ¿¹»ê ¿äÃ»ÀÌ Æ÷ÇÔµÇ¾ú½À´Ï´Ù.', '2025-01-15 07:10:25');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'í™”ìž¬ ì˜ˆë°© ì ê²€ í•„ìš”', 'ì„œì˜', 'í•œì§€ìˆ˜', 'ì£¼ì°¨ìž¥', 'ì •ê¸° ì ê²€ì´ í•„ìš”í•©ë‹ˆë‹¤.', 'ì¡°ì¹˜ ë°©ì•ˆì„ ë…¼ì˜í•´ì£¼ì„¸ìš”.', '2025-01-15 13:48:55');
+VALUES ('1', 'È­Àç ¿¹¹æ Á¡°Ë ÇÊ¿ä', '¼­¿µ', 'ÇÑÁö¼ö', 'ÁÖÂ÷Àå', 'Á¤±â Á¡°ËÀÌ ÇÊ¿äÇÕ´Ï´Ù.', 'Á¶Ä¡ ¹æ¾ÈÀ» ³íÀÇÇØÁÖ¼¼¿ä.', '2025-01-15 13:48:55');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì†ŒìŒ ë¬¸ì œ ë³´ê³ ', 'JSíŒŒíŠ¸ë„ˆìŠ¤', 'ê¹€ë¯¼ì •', 'ì°½ê³ ', 'ì†Œí™”ê¸°ê°€ ì œëŒ€ë¡œ ìž‘ë™í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.', 'ìƒì„¸ ë‚´ì—­ í™•ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤.', '2025-01-15 00:22:23');
+VALUES ('1', '¼ÒÀ½ ¹®Á¦ º¸°í', 'JSÆÄÆ®³Ê½º', '±è¹ÎÁ¤', 'Ã¢°í', '¼ÒÈ­±â°¡ Á¦´ë·Î ÀÛµ¿ÇÏÁö ¾Ê½À´Ï´Ù.', '»ó¼¼ ³»¿ª È®ÀÎÀÌ ÇÊ¿äÇÕ´Ï´Ù.', '2025-01-15 00:22:23');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì„¤ë¹„ ìœ ì§€ë³´ìˆ˜ ìš”ì²­', 'í•œêµ­ë©”íƒˆ', 'ë°•ì˜í¬', 'ì°½ê³ ', 'ì•ˆì „ëª¨ê°€ ì¶©ë¶„í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.', 'ì¡°ì¹˜ ë°©ì•ˆì„ ë…¼ì˜í•´ì£¼ì„¸ìš”.', '2025-01-15 13:29:20');
+VALUES ('1', '¼³ºñ À¯Áöº¸¼ö ¿äÃ»', 'ÇÑ±¹¸ÞÅ»', '¹Ú¿µÈñ', 'Ã¢°í', '¾ÈÀü¸ð°¡ ÃæºÐÇÏÁö ¾Ê½À´Ï´Ù.', 'Á¶Ä¡ ¹æ¾ÈÀ» ³íÀÇÇØÁÖ¼¼¿ä.', '2025-01-15 13:29:20');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì•ˆì „ ìž¥ë¹„ ë¶€ì¡±', 'í•œêµ­ë©”íƒˆ', 'ì´ì„±ë¯¼', 'ìƒì‚°ë¼ì¸', 'íœ´ê²Œì‹¤ì˜ ì˜¨ë„ê°€ ë„ˆë¬´ ë‚®ìŠµë‹ˆë‹¤.', 'ë¬¸ì„œ ë¶„ì‹¤ ê²½ìœ„ë¥¼ ì¡°ì‚¬í•´ì£¼ì„¸ìš”.', '2025-01-15 03:25:11');
+VALUES ('1', '¾ÈÀü Àåºñ ºÎÁ·', 'ÇÑ±¹¸ÞÅ»', 'ÀÌ¼º¹Î', '»ý»ê¶óÀÎ', 'ÈÞ°Ô½ÇÀÇ ¿Âµµ°¡ ³Ê¹« ³·½À´Ï´Ù.', '¹®¼­ ºÐ½Ç °æÀ§¸¦ Á¶»çÇØÁÖ¼¼¿ä.', '2025-01-15 03:25:11');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ê·¼ë¬´ í™˜ê²½ ê°œì„  ìš”ì²­', 'ìž¬ê²½íŒ€', 'ìž¥í•˜ë‚˜', 'íšŒì˜ì‹¤', 'ì •ê¸° ì ê²€ì´ í•„ìš”í•©ë‹ˆë‹¤.', 'ì¶”ê°€ ì˜ˆì‚° ìš”ì²­ì´ í¬í•¨ë˜ì—ˆìŠµë‹ˆë‹¤.', '2025-01-15 08:41:27');
+VALUES ('1', '±Ù¹« È¯°æ °³¼± ¿äÃ»', 'Àç°æÆÀ', 'ÀåÇÏ³ª', 'È¸ÀÇ½Ç', 'Á¤±â Á¡°ËÀÌ ÇÊ¿äÇÕ´Ï´Ù.', 'Ãß°¡ ¿¹»ê ¿äÃ»ÀÌ Æ÷ÇÔµÇ¾ú½À´Ï´Ù.', '2025-01-15 08:41:27');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'í™”ìž¬ ì˜ˆë°© ì ê²€ í•„ìš”', 'SMP', 'ë°•ì˜í¬', 'ìž‘ì—…ìž¥', 'ì†Œí™”ê¸°ê°€ ì œëŒ€ë¡œ ìž‘ë™í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.', 'ìƒì„¸ ë‚´ì—­ í™•ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤.', '2025-01-15 02:21:11');
+VALUES ('1', 'È­Àç ¿¹¹æ Á¡°Ë ÇÊ¿ä', 'SMP', '¹Ú¿µÈñ', 'ÀÛ¾÷Àå', '¼ÒÈ­±â°¡ Á¦´ë·Î ÀÛµ¿ÇÏÁö ¾Ê½À´Ï´Ù.', '»ó¼¼ ³»¿ª È®ÀÎÀÌ ÇÊ¿äÇÕ´Ï´Ù.', '2025-01-15 02:21:11');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'í™”ìž¬ ì˜ˆë°© ì ê²€ í•„ìš”', 'ìžìž¬ê´€ë¦¬íŒ€', 'ìž¥í•˜ë‚˜', 'ìƒì‚°ë¼ì¸', 'íœ´ê²Œì‹¤ì˜ ì˜¨ë„ê°€ ë„ˆë¬´ ë‚®ìŠµë‹ˆë‹¤.', 'ì¶”ê°€ ì˜ˆì‚° ìš”ì²­ì´ í¬í•¨ë˜ì—ˆìŠµë‹ˆë‹¤.', '2025-01-15 10:13:22');
+VALUES ('1', 'È­Àç ¿¹¹æ Á¡°Ë ÇÊ¿ä', 'ÀÚÀç°ü¸®ÆÀ', 'ÀåÇÏ³ª', '»ý»ê¶óÀÎ', 'ÈÞ°Ô½ÇÀÇ ¿Âµµ°¡ ³Ê¹« ³·½À´Ï´Ù.', 'Ãß°¡ ¿¹»ê ¿äÃ»ÀÌ Æ÷ÇÔµÇ¾ú½À´Ï´Ù.', '2025-01-15 10:13:22');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì•ˆì „ ìž¥ë¹„ ë¶€ì¡±', 'í•œêµ­ë©”íƒˆ', 'ê¹€ì² ìˆ˜', 'ì°½ê³ ', 'íœ´ê²Œì‹¤ì˜ ì˜¨ë„ê°€ ë„ˆë¬´ ë‚®ìŠµë‹ˆë‹¤.', 'ìƒì„¸ ë‚´ì—­ í™•ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤.', '2025-01-15 07:08:02');
+VALUES ('1', '¾ÈÀü Àåºñ ºÎÁ·', 'ÇÑ±¹¸ÞÅ»', '±èÃ¶¼ö', 'Ã¢°í', 'ÈÞ°Ô½ÇÀÇ ¿Âµµ°¡ ³Ê¹« ³·½À´Ï´Ù.', '»ó¼¼ ³»¿ª È®ÀÎÀÌ ÇÊ¿äÇÕ´Ï´Ù.', '2025-01-15 07:08:02');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'í™”ìž¬ ì˜ˆë°© ì ê²€ í•„ìš”', 'í’ˆì§ˆë³´ì¦íŒ€', 'ì´ì„±ë¯¼', 'íšŒì˜ì‹¤', 'íœ´ê²Œì‹¤ì˜ ì˜¨ë„ê°€ ë„ˆë¬´ ë‚®ìŠµë‹ˆë‹¤.', 'ê·¼ë³¸ì ì¸ ë¬¸ì œë¥¼ í•´ê²°í•´ì£¼ì„¸ìš”.', '2025-01-15 00:10:14');
+VALUES ('1', 'È­Àç ¿¹¹æ Á¡°Ë ÇÊ¿ä', 'Ç°Áúº¸ÁõÆÀ', 'ÀÌ¼º¹Î', 'È¸ÀÇ½Ç', 'ÈÞ°Ô½ÇÀÇ ¿Âµµ°¡ ³Ê¹« ³·½À´Ï´Ù.', '±Ùº»ÀûÀÎ ¹®Á¦¸¦ ÇØ°áÇØÁÖ¼¼¿ä.', '2025-01-15 00:10:14');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì„¤ë¹„ ìœ ì§€ë³´ìˆ˜ ìš”ì²­', 'SMP', 'í•œì§€ìˆ˜', 'íšŒì˜ì‹¤', 'ì•ˆì „ëª¨ê°€ ì¶©ë¶„í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.', 'ì¶”ê°€ ì˜ˆì‚° ìš”ì²­ì´ í¬í•¨ë˜ì—ˆìŠµë‹ˆë‹¤.', '2025-01-15 13:11:35');
+VALUES ('1', '¼³ºñ À¯Áöº¸¼ö ¿äÃ»', 'SMP', 'ÇÑÁö¼ö', 'È¸ÀÇ½Ç', '¾ÈÀü¸ð°¡ ÃæºÐÇÏÁö ¾Ê½À´Ï´Ù.', 'Ãß°¡ ¿¹»ê ¿äÃ»ÀÌ Æ÷ÇÔµÇ¾ú½À´Ï´Ù.', '2025-01-15 13:11:35');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ê·¼ë¬´ í™˜ê²½ ê°œì„  ìš”ì²­', 'í’ˆì§ˆë³´ì¦íŒ€', 'í•œì§€ìˆ˜', 'íšŒì˜ì‹¤', 'íœ´ê²Œì‹¤ì˜ ì˜¨ë„ê°€ ë„ˆë¬´ ë‚®ìŠµë‹ˆë‹¤.', 'ì¡°ì¹˜ ë°©ì•ˆì„ ë…¼ì˜í•´ì£¼ì„¸ìš”.', '2025-01-15 01:16:02');
+VALUES ('1', '±Ù¹« È¯°æ °³¼± ¿äÃ»', 'Ç°Áúº¸ÁõÆÀ', 'ÇÑÁö¼ö', 'È¸ÀÇ½Ç', 'ÈÞ°Ô½ÇÀÇ ¿Âµµ°¡ ³Ê¹« ³·½À´Ï´Ù.', 'Á¶Ä¡ ¹æ¾ÈÀ» ³íÀÇÇØÁÖ¼¼¿ä.', '2025-01-15 01:16:02');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'í™”ìž¬ ì˜ˆë°© ì ê²€ í•„ìš”', 'ì‚¬ì—…ê¸°íšíŒ€', 'ê¹€ë¯¼ì •', 'ì°½ê³ ', 'ì•ˆì „ëª¨ê°€ ì¶©ë¶„í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.', 'ë¬¸ì„œ ë¶„ì‹¤ ê²½ìœ„ë¥¼ ì¡°ì‚¬í•´ì£¼ì„¸ìš”.', '2025-01-15 09:48:44');
+VALUES ('1', 'È­Àç ¿¹¹æ Á¡°Ë ÇÊ¿ä', '»ç¾÷±âÈ¹ÆÀ', '±è¹ÎÁ¤', 'Ã¢°í', '¾ÈÀü¸ð°¡ ÃæºÐÇÏÁö ¾Ê½À´Ï´Ù.', '¹®¼­ ºÐ½Ç °æÀ§¸¦ Á¶»çÇØÁÖ¼¼¿ä.', '2025-01-15 09:48:44');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì†ŒìŒ ë¬¸ì œ ë³´ê³ ', 'ìž¬ê²½íŒ€', 'í•œì§€ìˆ˜', 'ìƒì‚°ë¼ì¸', 'ì •ê¸° ì ê²€ì´ í•„ìš”í•©ë‹ˆë‹¤.', 'ì¶”ê°€ ì˜ˆì‚° ìš”ì²­ì´ í¬í•¨ë˜ì—ˆìŠµë‹ˆë‹¤.', '2025-01-15 08:03:49');
+VALUES ('1', '¼ÒÀ½ ¹®Á¦ º¸°í', 'Àç°æÆÀ', 'ÇÑÁö¼ö', '»ý»ê¶óÀÎ', 'Á¤±â Á¡°ËÀÌ ÇÊ¿äÇÕ´Ï´Ù.', 'Ãß°¡ ¿¹»ê ¿äÃ»ÀÌ Æ÷ÇÔµÇ¾ú½À´Ï´Ù.', '2025-01-15 08:03:49');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ê·¼ë¬´ í™˜ê²½ ê°œì„  ìš”ì²­', 'ì°¨ì²´ì§€ì›íŒ€', 'ìµœë¯¼ìˆ˜', 'ìž‘ì—…ìž¥', 'ì •ê¸° ì ê²€ì´ í•„ìš”í•©ë‹ˆë‹¤.', 'ì¡°ì¹˜ ë°©ì•ˆì„ ë…¼ì˜í•´ì£¼ì„¸ìš”.', '2025-01-15 12:48:13');
+VALUES ('1', '±Ù¹« È¯°æ °³¼± ¿äÃ»', 'Â÷Ã¼Áö¿øÆÀ', 'ÃÖ¹Î¼ö', 'ÀÛ¾÷Àå', 'Á¤±â Á¡°ËÀÌ ÇÊ¿äÇÕ´Ï´Ù.', 'Á¶Ä¡ ¹æ¾ÈÀ» ³íÀÇÇØÁÖ¼¼¿ä.', '2025-01-15 12:48:13');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ê·¼ë¬´ í™˜ê²½ ê°œì„  ìš”ì²­', 'ê´€ë¦¬ì§€ì›íŒ€', 'ìµœì§€í›ˆ', 'ìƒì‚°ë¼ì¸', 'ì •ê¸° ì ê²€ì´ í•„ìš”í•©ë‹ˆë‹¤.', 'ê·¼ë³¸ì ì¸ ë¬¸ì œë¥¼ í•´ê²°í•´ì£¼ì„¸ìš”.', '2025-01-15 09:23:38');
+VALUES ('1', '±Ù¹« È¯°æ °³¼± ¿äÃ»', '°ü¸®Áö¿øÆÀ', 'ÃÖÁöÈÆ', '»ý»ê¶óÀÎ', 'Á¤±â Á¡°ËÀÌ ÇÊ¿äÇÕ´Ï´Ù.', '±Ùº»ÀûÀÎ ¹®Á¦¸¦ ÇØ°áÇØÁÖ¼¼¿ä.', '2025-01-15 09:23:38');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì•ˆì „ ìž¥ë¹„ ë¶€ì¡±', 'ìžìž¬ê´€ë¦¬íŒ€', 'ìµœì§€í›ˆ', 'ì£¼ì°¨ìž¥', 'íœ´ê²Œì‹¤ì˜ ì˜¨ë„ê°€ ë„ˆë¬´ ë‚®ìŠµë‹ˆë‹¤.', 'ìƒì„¸ ë‚´ì—­ í™•ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤.', '2025-01-15 03:06:22');
+VALUES ('1', '¾ÈÀü Àåºñ ºÎÁ·', 'ÀÚÀç°ü¸®ÆÀ', 'ÃÖÁöÈÆ', 'ÁÖÂ÷Àå', 'ÈÞ°Ô½ÇÀÇ ¿Âµµ°¡ ³Ê¹« ³·½À´Ï´Ù.', '»ó¼¼ ³»¿ª È®ÀÎÀÌ ÇÊ¿äÇÕ´Ï´Ù.', '2025-01-15 03:06:22');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì•ˆì „ ìž¥ë¹„ ë¶€ì¡±', 'í”„ë ˆìŠ¤ì§€ì›íŒ€', 'ë°•ì˜í¬', 'ì£¼ì°¨ìž¥', 'ì•ˆì „ëª¨ê°€ ì¶©ë¶„í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.', 'ì¡°ì¹˜ ë°©ì•ˆì„ ë…¼ì˜í•´ì£¼ì„¸ìš”.', '2025-01-15 02:45:52');
+VALUES ('1', '¾ÈÀü Àåºñ ºÎÁ·', 'ÇÁ·¹½ºÁö¿øÆÀ', '¹Ú¿µÈñ', 'ÁÖÂ÷Àå', '¾ÈÀü¸ð°¡ ÃæºÐÇÏÁö ¾Ê½À´Ï´Ù.', 'Á¶Ä¡ ¹æ¾ÈÀ» ³íÀÇÇØÁÖ¼¼¿ä.', '2025-01-15 02:45:52');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì„¤ë¹„ ìœ ì§€ë³´ìˆ˜ ìš”ì²­', 'í˜‘ì„±í…Œí¬', 'ì´ì„±ë¯¼', 'ì°½ê³ ', 'ì •ê¸° ì ê²€ì´ í•„ìš”í•©ë‹ˆë‹¤.', 'ì¶”ê°€ ì˜ˆì‚° ìš”ì²­ì´ í¬í•¨ë˜ì—ˆìŠµë‹ˆë‹¤.', '2025-01-15 06:09:20');
+VALUES ('1', '¼³ºñ À¯Áöº¸¼ö ¿äÃ»', 'Çù¼ºÅ×Å©', 'ÀÌ¼º¹Î', 'Ã¢°í', 'Á¤±â Á¡°ËÀÌ ÇÊ¿äÇÕ´Ï´Ù.', 'Ãß°¡ ¿¹»ê ¿äÃ»ÀÌ Æ÷ÇÔµÇ¾ú½À´Ï´Ù.', '2025-01-15 06:09:20');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'í™”ìž¬ ì˜ˆë°© ì ê²€ í•„ìš”', 'ì‚¬ì—…ê¸°íšíŒ€', 'ê¹€ë¯¼ì •', 'ì°½ê³ ', 'ì†Œí™”ê¸°ê°€ ì œëŒ€ë¡œ ìž‘ë™í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.', 'ìƒì„¸ ë‚´ì—­ í™•ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤.', '2025-01-15 12:57:33');
+VALUES ('1', 'È­Àç ¿¹¹æ Á¡°Ë ÇÊ¿ä', '»ç¾÷±âÈ¹ÆÀ', '±è¹ÎÁ¤', 'Ã¢°í', '¼ÒÈ­±â°¡ Á¦´ë·Î ÀÛµ¿ÇÏÁö ¾Ê½À´Ï´Ù.', '»ó¼¼ ³»¿ª È®ÀÎÀÌ ÇÊ¿äÇÕ´Ï´Ù.', '2025-01-15 12:57:33');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì„¤ë¹„ ìœ ì§€ë³´ìˆ˜ ìš”ì²­', 'ì°¨ì²´ì§€ì›íŒ€', 'ì´ì„±ë¯¼', 'íšŒì˜ì‹¤', 'ê¸°ê³„ ì†ŒìŒì´ ì‹¬ê°í•©ë‹ˆë‹¤.', 'ì¡°ì¹˜ ë°©ì•ˆì„ ë…¼ì˜í•´ì£¼ì„¸ìš”.', '2025-01-15 11:19:11');
+VALUES ('1', '¼³ºñ À¯Áöº¸¼ö ¿äÃ»', 'Â÷Ã¼Áö¿øÆÀ', 'ÀÌ¼º¹Î', 'È¸ÀÇ½Ç', '±â°è ¼ÒÀ½ÀÌ ½É°¢ÇÕ´Ï´Ù.', 'Á¶Ä¡ ¹æ¾ÈÀ» ³íÀÇÇØÁÖ¼¼¿ä.', '2025-01-15 11:19:11');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'í™”ìž¬ ì˜ˆë°© ì ê²€ í•„ìš”', 'ì°¨ì²´ì§€ì›íŒ€', 'ë°•ì˜í¬', 'íšŒì˜ì‹¤', 'íœ´ê²Œì‹¤ì˜ ì˜¨ë„ê°€ ë„ˆë¬´ ë‚®ìŠµë‹ˆë‹¤.', 'ìƒì„¸ ë‚´ì—­ í™•ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤.', '2025-01-15 08:14:02');
+VALUES ('1', 'È­Àç ¿¹¹æ Á¡°Ë ÇÊ¿ä', 'Â÷Ã¼Áö¿øÆÀ', '¹Ú¿µÈñ', 'È¸ÀÇ½Ç', 'ÈÞ°Ô½ÇÀÇ ¿Âµµ°¡ ³Ê¹« ³·½À´Ï´Ù.', '»ó¼¼ ³»¿ª È®ÀÎÀÌ ÇÊ¿äÇÕ´Ï´Ù.', '2025-01-15 08:14:02');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'í™”ìž¬ ì˜ˆë°© ì ê²€ í•„ìš”', 'í•œêµ­ë©”íƒˆ', 'ìµœë¯¼ìˆ˜', 'ì°½ê³ ', 'ì •ê¸° ì ê²€ì´ í•„ìš”í•©ë‹ˆë‹¤.', 'ì¶”ê°€ ì˜ˆì‚° ìš”ì²­ì´ í¬í•¨ë˜ì—ˆìŠµë‹ˆë‹¤.', '2025-01-15 01:24:10');
+VALUES ('1', 'È­Àç ¿¹¹æ Á¡°Ë ÇÊ¿ä', 'ÇÑ±¹¸ÞÅ»', 'ÃÖ¹Î¼ö', 'Ã¢°í', 'Á¤±â Á¡°ËÀÌ ÇÊ¿äÇÕ´Ï´Ù.', 'Ãß°¡ ¿¹»ê ¿äÃ»ÀÌ Æ÷ÇÔµÇ¾ú½À´Ï´Ù.', '2025-01-15 01:24:10');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì„¤ë¹„ ìœ ì§€ë³´ìˆ˜ ìš”ì²­', 'í˜‘ì„±í…Œí¬', 'ìµœì§€í›ˆ', 'ì°½ê³ ', 'ê¸°ê³„ ì†ŒìŒì´ ì‹¬ê°í•©ë‹ˆë‹¤.', 'ìƒì„¸ ë‚´ì—­ í™•ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤.', '2025-01-15 08:37:06');
+VALUES ('1', '¼³ºñ À¯Áöº¸¼ö ¿äÃ»', 'Çù¼ºÅ×Å©', 'ÃÖÁöÈÆ', 'Ã¢°í', '±â°è ¼ÒÀ½ÀÌ ½É°¢ÇÕ´Ï´Ù.', '»ó¼¼ ³»¿ª È®ÀÎÀÌ ÇÊ¿äÇÕ´Ï´Ù.', '2025-01-15 08:37:06');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'í™”ìž¬ ì˜ˆë°© ì ê²€ í•„ìš”', 'í’ˆì§ˆë³´ì¦íŒ€', 'í•œì§€ìˆ˜', 'ìƒì‚°ë¼ì¸', 'ì†Œí™”ê¸°ê°€ ì œëŒ€ë¡œ ìž‘ë™í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.', 'ìƒì„¸ ë‚´ì—­ í™•ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤.', '2025-01-15 00:48:44');
+VALUES ('1', 'È­Àç ¿¹¹æ Á¡°Ë ÇÊ¿ä', 'Ç°Áúº¸ÁõÆÀ', 'ÇÑÁö¼ö', '»ý»ê¶óÀÎ', '¼ÒÈ­±â°¡ Á¦´ë·Î ÀÛµ¿ÇÏÁö ¾Ê½À´Ï´Ù.', '»ó¼¼ ³»¿ª È®ÀÎÀÌ ÇÊ¿äÇÕ´Ï´Ù.', '2025-01-15 00:48:44');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì„¤ë¹„ ìœ ì§€ë³´ìˆ˜ ìš”ì²­', 'ì•ˆì „í™˜ê²½íŒ€', 'í™ê¸¸ë™', 'ì°½ê³ ', 'ì•ˆì „ëª¨ê°€ ì¶©ë¶„í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.', 'ê·¼ë³¸ì ì¸ ë¬¸ì œë¥¼ í•´ê²°í•´ì£¼ì„¸ìš”.', '2025-01-15 01:10:44');
+VALUES ('1', '¼³ºñ À¯Áöº¸¼ö ¿äÃ»', '¾ÈÀüÈ¯°æÆÀ', 'È«±æµ¿', 'Ã¢°í', '¾ÈÀü¸ð°¡ ÃæºÐÇÏÁö ¾Ê½À´Ï´Ù.', '±Ùº»ÀûÀÎ ¹®Á¦¸¦ ÇØ°áÇØÁÖ¼¼¿ä.', '2025-01-15 01:10:44');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì•ˆì „ ìž¥ë¹„ ë¶€ì¡±', 'ì‚¬ì—…ê¸°íšíŒ€', 'ë°•ì˜í¬', 'ì°½ê³ ', 'íœ´ê²Œì‹¤ì˜ ì˜¨ë„ê°€ ë„ˆë¬´ ë‚®ìŠµë‹ˆë‹¤.', 'ìƒì„¸ ë‚´ì—­ í™•ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤.', '2025-01-15 12:24:19');
+VALUES ('1', '¾ÈÀü Àåºñ ºÎÁ·', '»ç¾÷±âÈ¹ÆÀ', '¹Ú¿µÈñ', 'Ã¢°í', 'ÈÞ°Ô½ÇÀÇ ¿Âµµ°¡ ³Ê¹« ³·½À´Ï´Ù.', '»ó¼¼ ³»¿ª È®ÀÎÀÌ ÇÊ¿äÇÕ´Ï´Ù.', '2025-01-15 12:24:19');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'í™”ìž¬ ì˜ˆë°© ì ê²€ í•„ìš”', 'í’ˆì§ˆë³´ì¦íŒ€', 'ìµœì§€í›ˆ', 'ì£¼ì°¨ìž¥', 'ì†Œí™”ê¸°ê°€ ì œëŒ€ë¡œ ìž‘ë™í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.', 'ì¡°ì¹˜ ë°©ì•ˆì„ ë…¼ì˜í•´ì£¼ì„¸ìš”.', '2025-01-15 02:31:05');
+VALUES ('1', 'È­Àç ¿¹¹æ Á¡°Ë ÇÊ¿ä', 'Ç°Áúº¸ÁõÆÀ', 'ÃÖÁöÈÆ', 'ÁÖÂ÷Àå', '¼ÒÈ­±â°¡ Á¦´ë·Î ÀÛµ¿ÇÏÁö ¾Ê½À´Ï´Ù.', 'Á¶Ä¡ ¹æ¾ÈÀ» ³íÀÇÇØÁÖ¼¼¿ä.', '2025-01-15 02:31:05');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì•ˆì „ ìž¥ë¹„ ë¶€ì¡±', 'í•œêµ­ë©”íƒˆ', 'í•œì§€ìˆ˜', 'ì°½ê³ ', 'íœ´ê²Œì‹¤ì˜ ì˜¨ë„ê°€ ë„ˆë¬´ ë‚®ìŠµë‹ˆë‹¤.', 'ì¡°ì¹˜ ë°©ì•ˆì„ ë…¼ì˜í•´ì£¼ì„¸ìš”.', '2025-01-15 09:33:53');
+VALUES ('1', '¾ÈÀü Àåºñ ºÎÁ·', 'ÇÑ±¹¸ÞÅ»', 'ÇÑÁö¼ö', 'Ã¢°í', 'ÈÞ°Ô½ÇÀÇ ¿Âµµ°¡ ³Ê¹« ³·½À´Ï´Ù.', 'Á¶Ä¡ ¹æ¾ÈÀ» ³íÀÇÇØÁÖ¼¼¿ä.', '2025-01-15 09:33:53');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ê·¼ë¬´ í™˜ê²½ ê°œì„  ìš”ì²­', 'ì•ˆì „í™˜ê²½íŒ€', 'ë°•ì˜í¬', 'ìž‘ì—…ìž¥', 'ì •ê¸° ì ê²€ì´ í•„ìš”í•©ë‹ˆë‹¤.', 'ì¶”ê°€ ì˜ˆì‚° ìš”ì²­ì´ í¬í•¨ë˜ì—ˆìŠµë‹ˆë‹¤.', '2025-01-15 03:30:51');
+VALUES ('1', '±Ù¹« È¯°æ °³¼± ¿äÃ»', '¾ÈÀüÈ¯°æÆÀ', '¹Ú¿µÈñ', 'ÀÛ¾÷Àå', 'Á¤±â Á¡°ËÀÌ ÇÊ¿äÇÕ´Ï´Ù.', 'Ãß°¡ ¿¹»ê ¿äÃ»ÀÌ Æ÷ÇÔµÇ¾ú½À´Ï´Ù.', '2025-01-15 03:30:51');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì„¤ë¹„ ìœ ì§€ë³´ìˆ˜ ìš”ì²­', 'ìž¬ê²½íŒ€', 'ì´ì„±ë¯¼', 'ì°½ê³ ', 'ì•ˆì „ëª¨ê°€ ì¶©ë¶„í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.', 'ì¶”ê°€ ì˜ˆì‚° ìš”ì²­ì´ í¬í•¨ë˜ì—ˆìŠµë‹ˆë‹¤.', '2025-01-15 12:16:55');
+VALUES ('1', '¼³ºñ À¯Áöº¸¼ö ¿äÃ»', 'Àç°æÆÀ', 'ÀÌ¼º¹Î', 'Ã¢°í', '¾ÈÀü¸ð°¡ ÃæºÐÇÏÁö ¾Ê½À´Ï´Ù.', 'Ãß°¡ ¿¹»ê ¿äÃ»ÀÌ Æ÷ÇÔµÇ¾ú½À´Ï´Ù.', '2025-01-15 12:16:55');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì„¤ë¹„ ìœ ì§€ë³´ìˆ˜ ìš”ì²­', 'ì•ˆì „í™˜ê²½íŒ€', 'ìµœë¯¼ìˆ˜', 'ìž‘ì—…ìž¥', 'ì†Œí™”ê¸°ê°€ ì œëŒ€ë¡œ ìž‘ë™í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.', 'ë¬¸ì„œ ë¶„ì‹¤ ê²½ìœ„ë¥¼ ì¡°ì‚¬í•´ì£¼ì„¸ìš”.', '2025-01-15 13:39:43');
+VALUES ('1', '¼³ºñ À¯Áöº¸¼ö ¿äÃ»', '¾ÈÀüÈ¯°æÆÀ', 'ÃÖ¹Î¼ö', 'ÀÛ¾÷Àå', '¼ÒÈ­±â°¡ Á¦´ë·Î ÀÛµ¿ÇÏÁö ¾Ê½À´Ï´Ù.', '¹®¼­ ºÐ½Ç °æÀ§¸¦ Á¶»çÇØÁÖ¼¼¿ä.', '2025-01-15 13:39:43');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'í™”ìž¬ ì˜ˆë°© ì ê²€ í•„ìš”', 'SMP', 'ìµœì§€í›ˆ', 'ì£¼ì°¨ìž¥', 'ê¸°ê³„ ì†ŒìŒì´ ì‹¬ê°í•©ë‹ˆë‹¤.', 'ìƒì„¸ ë‚´ì—­ í™•ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤.', '2025-01-15 00:45:36');
+VALUES ('1', 'È­Àç ¿¹¹æ Á¡°Ë ÇÊ¿ä', 'SMP', 'ÃÖÁöÈÆ', 'ÁÖÂ÷Àå', '±â°è ¼ÒÀ½ÀÌ ½É°¢ÇÕ´Ï´Ù.', '»ó¼¼ ³»¿ª È®ÀÎÀÌ ÇÊ¿äÇÕ´Ï´Ù.', '2025-01-15 00:45:36');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ê·¼ë¬´ í™˜ê²½ ê°œì„  ìš”ì²­', 'í’ˆì§ˆë³´ì¦íŒ€', 'í•œì§€ìˆ˜', 'ìž‘ì—…ìž¥', 'ì •ê¸° ì ê²€ì´ í•„ìš”í•©ë‹ˆë‹¤.', 'ì¡°ì¹˜ ë°©ì•ˆì„ ë…¼ì˜í•´ì£¼ì„¸ìš”.', '2025-01-15 11:57:40');
+VALUES ('1', '±Ù¹« È¯°æ °³¼± ¿äÃ»', 'Ç°Áúº¸ÁõÆÀ', 'ÇÑÁö¼ö', 'ÀÛ¾÷Àå', 'Á¤±â Á¡°ËÀÌ ÇÊ¿äÇÕ´Ï´Ù.', 'Á¶Ä¡ ¹æ¾ÈÀ» ³íÀÇÇØÁÖ¼¼¿ä.', '2025-01-15 11:57:40');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ê·¼ë¬´ í™˜ê²½ ê°œì„  ìš”ì²­', 'ìž¬ê²½íŒ€', 'ì´ì§€ì€', 'íšŒì˜ì‹¤', 'ì†Œí™”ê¸°ê°€ ì œëŒ€ë¡œ ìž‘ë™í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.', 'ì¶”ê°€ ì˜ˆì‚° ìš”ì²­ì´ í¬í•¨ë˜ì—ˆìŠµë‹ˆë‹¤.', '2025-01-15 05:48:18');
+VALUES ('1', '±Ù¹« È¯°æ °³¼± ¿äÃ»', 'Àç°æÆÀ', 'ÀÌÁöÀº', 'È¸ÀÇ½Ç', '¼ÒÈ­±â°¡ Á¦´ë·Î ÀÛµ¿ÇÏÁö ¾Ê½À´Ï´Ù.', 'Ãß°¡ ¿¹»ê ¿äÃ»ÀÌ Æ÷ÇÔµÇ¾ú½À´Ï´Ù.', '2025-01-15 05:48:18');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ê·¼ë¬´ í™˜ê²½ ê°œì„  ìš”ì²­', 'ì°¨ì²´ì§€ì›íŒ€', 'í•œì§€ìˆ˜', 'ì°½ê³ ', 'ê¸°ê³„ ì†ŒìŒì´ ì‹¬ê°í•©ë‹ˆë‹¤.', 'ìƒì„¸ ë‚´ì—­ í™•ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤.', '2025-01-15 08:27:59');
+VALUES ('1', '±Ù¹« È¯°æ °³¼± ¿äÃ»', 'Â÷Ã¼Áö¿øÆÀ', 'ÇÑÁö¼ö', 'Ã¢°í', '±â°è ¼ÒÀ½ÀÌ ½É°¢ÇÕ´Ï´Ù.', '»ó¼¼ ³»¿ª È®ÀÎÀÌ ÇÊ¿äÇÕ´Ï´Ù.', '2025-01-15 08:27:59');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì†ŒìŒ ë¬¸ì œ ë³´ê³ ', 'ì•ˆì „í™˜ê²½íŒ€', 'í•œì§€ìˆ˜', 'ìƒì‚°ë¼ì¸', 'ì•ˆì „ëª¨ê°€ ì¶©ë¶„í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.', 'ì¶”ê°€ ì˜ˆì‚° ìš”ì²­ì´ í¬í•¨ë˜ì—ˆìŠµë‹ˆë‹¤.', '2025-01-15 13:44:57');
+VALUES ('1', '¼ÒÀ½ ¹®Á¦ º¸°í', '¾ÈÀüÈ¯°æÆÀ', 'ÇÑÁö¼ö', '»ý»ê¶óÀÎ', '¾ÈÀü¸ð°¡ ÃæºÐÇÏÁö ¾Ê½À´Ï´Ù.', 'Ãß°¡ ¿¹»ê ¿äÃ»ÀÌ Æ÷ÇÔµÇ¾ú½À´Ï´Ù.', '2025-01-15 13:44:57');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì„¤ë¹„ ìœ ì§€ë³´ìˆ˜ ìš”ì²­', 'ìžìž¬ê´€ë¦¬íŒ€', 'ì´ì§€ì€', 'ì°½ê³ ', 'ì•ˆì „ëª¨ê°€ ì¶©ë¶„í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.', 'ê·¼ë³¸ì ì¸ ë¬¸ì œë¥¼ í•´ê²°í•´ì£¼ì„¸ìš”.', '2025-01-15 02:58:11');
+VALUES ('1', '¼³ºñ À¯Áöº¸¼ö ¿äÃ»', 'ÀÚÀç°ü¸®ÆÀ', 'ÀÌÁöÀº', 'Ã¢°í', '¾ÈÀü¸ð°¡ ÃæºÐÇÏÁö ¾Ê½À´Ï´Ù.', '±Ùº»ÀûÀÎ ¹®Á¦¸¦ ÇØ°áÇØÁÖ¼¼¿ä.', '2025-01-15 02:58:11');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì•ˆì „ ìž¥ë¹„ ë¶€ì¡±', 'ì‚¬ì—…ê¸°íšíŒ€', 'í™ê¸¸ë™', 'ìž‘ì—…ìž¥', 'íœ´ê²Œì‹¤ì˜ ì˜¨ë„ê°€ ë„ˆë¬´ ë‚®ìŠµë‹ˆë‹¤.', 'ìƒì„¸ ë‚´ì—­ í™•ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤.', '2025-01-15 08:42:27');
+VALUES ('1', '¾ÈÀü Àåºñ ºÎÁ·', '»ç¾÷±âÈ¹ÆÀ', 'È«±æµ¿', 'ÀÛ¾÷Àå', 'ÈÞ°Ô½ÇÀÇ ¿Âµµ°¡ ³Ê¹« ³·½À´Ï´Ù.', '»ó¼¼ ³»¿ª È®ÀÎÀÌ ÇÊ¿äÇÕ´Ï´Ù.', '2025-01-15 08:42:27');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'í™”ìž¬ ì˜ˆë°© ì ê²€ í•„ìš”', 'í”„ë ˆìŠ¤ì§€ì›íŒ€', 'ìµœì§€í›ˆ', 'ì£¼ì°¨ìž¥', 'ê¸°ê³„ ì†ŒìŒì´ ì‹¬ê°í•©ë‹ˆë‹¤.', 'ë¬¸ì„œ ë¶„ì‹¤ ê²½ìœ„ë¥¼ ì¡°ì‚¬í•´ì£¼ì„¸ìš”.', '2025-01-15 02:45:14');
+VALUES ('1', 'È­Àç ¿¹¹æ Á¡°Ë ÇÊ¿ä', 'ÇÁ·¹½ºÁö¿øÆÀ', 'ÃÖÁöÈÆ', 'ÁÖÂ÷Àå', '±â°è ¼ÒÀ½ÀÌ ½É°¢ÇÕ´Ï´Ù.', '¹®¼­ ºÐ½Ç °æÀ§¸¦ Á¶»çÇØÁÖ¼¼¿ä.', '2025-01-15 02:45:14');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ê·¼ë¬´ í™˜ê²½ ê°œì„  ìš”ì²­', 'í”„ë ˆìŠ¤ì§€ì›íŒ€', 'ê¹€ì² ìˆ˜', 'ì£¼ì°¨ìž¥', 'ì•ˆì „ëª¨ê°€ ì¶©ë¶„í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.', 'ì¡°ì¹˜ ë°©ì•ˆì„ ë…¼ì˜í•´ì£¼ì„¸ìš”.', '2025-01-15 11:55:09');
+VALUES ('1', '±Ù¹« È¯°æ °³¼± ¿äÃ»', 'ÇÁ·¹½ºÁö¿øÆÀ', '±èÃ¶¼ö', 'ÁÖÂ÷Àå', '¾ÈÀü¸ð°¡ ÃæºÐÇÏÁö ¾Ê½À´Ï´Ù.', 'Á¶Ä¡ ¹æ¾ÈÀ» ³íÀÇÇØÁÖ¼¼¿ä.', '2025-01-15 11:55:09');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ê·¼ë¬´ í™˜ê²½ ê°œì„  ìš”ì²­', 'ì°¨ì²´ì§€ì›íŒ€', 'ê¹€ì² ìˆ˜', 'íšŒì˜ì‹¤', 'ê¸°ê³„ ì†ŒìŒì´ ì‹¬ê°í•©ë‹ˆë‹¤.', 'ê·¼ë³¸ì ì¸ ë¬¸ì œë¥¼ í•´ê²°í•´ì£¼ì„¸ìš”.', '2025-01-15 11:07:10');
+VALUES ('1', '±Ù¹« È¯°æ °³¼± ¿äÃ»', 'Â÷Ã¼Áö¿øÆÀ', '±èÃ¶¼ö', 'È¸ÀÇ½Ç', '±â°è ¼ÒÀ½ÀÌ ½É°¢ÇÕ´Ï´Ù.', '±Ùº»ÀûÀÎ ¹®Á¦¸¦ ÇØ°áÇØÁÖ¼¼¿ä.', '2025-01-15 11:07:10');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'í™”ìž¬ ì˜ˆë°© ì ê²€ í•„ìš”', 'í”„ë ˆìŠ¤ì§€ì›íŒ€', 'í™ê¸¸ë™', 'ì£¼ì°¨ìž¥', 'ì •ê¸° ì ê²€ì´ í•„ìš”í•©ë‹ˆë‹¤.', 'ê·¼ë³¸ì ì¸ ë¬¸ì œë¥¼ í•´ê²°í•´ì£¼ì„¸ìš”.', '2025-01-15 01:58:09');
+VALUES ('1', 'È­Àç ¿¹¹æ Á¡°Ë ÇÊ¿ä', 'ÇÁ·¹½ºÁö¿øÆÀ', 'È«±æµ¿', 'ÁÖÂ÷Àå', 'Á¤±â Á¡°ËÀÌ ÇÊ¿äÇÕ´Ï´Ù.', '±Ùº»ÀûÀÎ ¹®Á¦¸¦ ÇØ°áÇØÁÖ¼¼¿ä.', '2025-01-15 01:58:09');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì†ŒìŒ ë¬¸ì œ ë³´ê³ ', 'SMP', 'ë°•ì˜í¬', 'ì°½ê³ ', 'ê¸°ê³„ ì†ŒìŒì´ ì‹¬ê°í•©ë‹ˆë‹¤.', 'ì¶”ê°€ ì˜ˆì‚° ìš”ì²­ì´ í¬í•¨ë˜ì—ˆìŠµë‹ˆë‹¤.', '2025-01-15 05:10:13');
+VALUES ('1', '¼ÒÀ½ ¹®Á¦ º¸°í', 'SMP', '¹Ú¿µÈñ', 'Ã¢°í', '±â°è ¼ÒÀ½ÀÌ ½É°¢ÇÕ´Ï´Ù.', 'Ãß°¡ ¿¹»ê ¿äÃ»ÀÌ Æ÷ÇÔµÇ¾ú½À´Ï´Ù.', '2025-01-15 05:10:13');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì•ˆì „ ìž¥ë¹„ ë¶€ì¡±', 'ì°¨ì²´ì§€ì›íŒ€', 'ìµœì§€í›ˆ', 'ì£¼ì°¨ìž¥', 'íœ´ê²Œì‹¤ì˜ ì˜¨ë„ê°€ ë„ˆë¬´ ë‚®ìŠµë‹ˆë‹¤.', 'ì¡°ì¹˜ ë°©ì•ˆì„ ë…¼ì˜í•´ì£¼ì„¸ìš”.', '2025-01-15 08:29:08');
+VALUES ('1', '¾ÈÀü Àåºñ ºÎÁ·', 'Â÷Ã¼Áö¿øÆÀ', 'ÃÖÁöÈÆ', 'ÁÖÂ÷Àå', 'ÈÞ°Ô½ÇÀÇ ¿Âµµ°¡ ³Ê¹« ³·½À´Ï´Ù.', 'Á¶Ä¡ ¹æ¾ÈÀ» ³íÀÇÇØÁÖ¼¼¿ä.', '2025-01-15 08:29:08');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'í™”ìž¬ ì˜ˆë°© ì ê²€ í•„ìš”', 'í”„ë ˆìŠ¤ì§€ì›íŒ€', 'ì´ì§€ì€', 'íšŒì˜ì‹¤', 'ì •ê¸° ì ê²€ì´ í•„ìš”í•©ë‹ˆë‹¤.', 'ì¡°ì¹˜ ë°©ì•ˆì„ ë…¼ì˜í•´ì£¼ì„¸ìš”.', '2025-01-15 09:10:08');
+VALUES ('1', 'È­Àç ¿¹¹æ Á¡°Ë ÇÊ¿ä', 'ÇÁ·¹½ºÁö¿øÆÀ', 'ÀÌÁöÀº', 'È¸ÀÇ½Ç', 'Á¤±â Á¡°ËÀÌ ÇÊ¿äÇÕ´Ï´Ù.', 'Á¶Ä¡ ¹æ¾ÈÀ» ³íÀÇÇØÁÖ¼¼¿ä.', '2025-01-15 09:10:08');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì†ŒìŒ ë¬¸ì œ ë³´ê³ ', 'í•œêµ­ë©”íƒˆ', 'ìµœì§€í›ˆ', 'ìƒì‚°ë¼ì¸', 'ê¸°ê³„ ì†ŒìŒì´ ì‹¬ê°í•©ë‹ˆë‹¤.', 'ë¬¸ì„œ ë¶„ì‹¤ ê²½ìœ„ë¥¼ ì¡°ì‚¬í•´ì£¼ì„¸ìš”.', '2025-01-15 01:16:29');
+VALUES ('1', '¼ÒÀ½ ¹®Á¦ º¸°í', 'ÇÑ±¹¸ÞÅ»', 'ÃÖÁöÈÆ', '»ý»ê¶óÀÎ', '±â°è ¼ÒÀ½ÀÌ ½É°¢ÇÕ´Ï´Ù.', '¹®¼­ ºÐ½Ç °æÀ§¸¦ Á¶»çÇØÁÖ¼¼¿ä.', '2025-01-15 01:16:29');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì•ˆì „ ìž¥ë¹„ ë¶€ì¡±', 'í”„ë ˆìŠ¤ì§€ì›íŒ€', 'ì´ì„±ë¯¼', 'ì£¼ì°¨ìž¥', 'ì•ˆì „ëª¨ê°€ ì¶©ë¶„í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.', 'ë¬¸ì„œ ë¶„ì‹¤ ê²½ìœ„ë¥¼ ì¡°ì‚¬í•´ì£¼ì„¸ìš”.', '2025-01-15 09:00:24');
+VALUES ('1', '¾ÈÀü Àåºñ ºÎÁ·', 'ÇÁ·¹½ºÁö¿øÆÀ', 'ÀÌ¼º¹Î', 'ÁÖÂ÷Àå', '¾ÈÀü¸ð°¡ ÃæºÐÇÏÁö ¾Ê½À´Ï´Ù.', '¹®¼­ ºÐ½Ç °æÀ§¸¦ Á¶»çÇØÁÖ¼¼¿ä.', '2025-01-15 09:00:24');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì„¤ë¹„ ìœ ì§€ë³´ìˆ˜ ìš”ì²­', 'ì‚¬ì—…ê¸°íšíŒ€', 'ê¹€ë¯¼ì •', 'ì£¼ì°¨ìž¥', 'ì†Œí™”ê¸°ê°€ ì œëŒ€ë¡œ ìž‘ë™í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.', 'ê·¼ë³¸ì ì¸ ë¬¸ì œë¥¼ í•´ê²°í•´ì£¼ì„¸ìš”.', '2025-01-15 07:40:20');
+VALUES ('1', '¼³ºñ À¯Áöº¸¼ö ¿äÃ»', '»ç¾÷±âÈ¹ÆÀ', '±è¹ÎÁ¤', 'ÁÖÂ÷Àå', '¼ÒÈ­±â°¡ Á¦´ë·Î ÀÛµ¿ÇÏÁö ¾Ê½À´Ï´Ù.', '±Ùº»ÀûÀÎ ¹®Á¦¸¦ ÇØ°áÇØÁÖ¼¼¿ä.', '2025-01-15 07:40:20');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'í™”ìž¬ ì˜ˆë°© ì ê²€ í•„ìš”', 'SMP', 'ì´ì§€ì€', 'ì£¼ì°¨ìž¥', 'ê¸°ê³„ ì†ŒìŒì´ ì‹¬ê°í•©ë‹ˆë‹¤.', 'ì¶”ê°€ ì˜ˆì‚° ìš”ì²­ì´ í¬í•¨ë˜ì—ˆìŠµë‹ˆë‹¤.', '2025-01-15 08:53:24');
+VALUES ('1', 'È­Àç ¿¹¹æ Á¡°Ë ÇÊ¿ä', 'SMP', 'ÀÌÁöÀº', 'ÁÖÂ÷Àå', '±â°è ¼ÒÀ½ÀÌ ½É°¢ÇÕ´Ï´Ù.', 'Ãß°¡ ¿¹»ê ¿äÃ»ÀÌ Æ÷ÇÔµÇ¾ú½À´Ï´Ù.', '2025-01-15 08:53:24');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ê·¼ë¬´ í™˜ê²½ ê°œì„  ìš”ì²­', 'ì•ˆì „í™˜ê²½íŒ€', 'ì´ì§€ì€', 'ìž‘ì—…ìž¥', 'ê¸°ê³„ ì†ŒìŒì´ ì‹¬ê°í•©ë‹ˆë‹¤.', 'ê·¼ë³¸ì ì¸ ë¬¸ì œë¥¼ í•´ê²°í•´ì£¼ì„¸ìš”.', '2025-01-15 12:46:57');
+VALUES ('1', '±Ù¹« È¯°æ °³¼± ¿äÃ»', '¾ÈÀüÈ¯°æÆÀ', 'ÀÌÁöÀº', 'ÀÛ¾÷Àå', '±â°è ¼ÒÀ½ÀÌ ½É°¢ÇÕ´Ï´Ù.', '±Ùº»ÀûÀÎ ¹®Á¦¸¦ ÇØ°áÇØÁÖ¼¼¿ä.', '2025-01-15 12:46:57');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ê·¼ë¬´ í™˜ê²½ ê°œì„  ìš”ì²­', 'ê´€ë¦¬ì§€ì›íŒ€', 'ìž¥í•˜ë‚˜', 'ì°½ê³ ', 'ê¸°ê³„ ì†ŒìŒì´ ì‹¬ê°í•©ë‹ˆë‹¤.', 'ì¡°ì¹˜ ë°©ì•ˆì„ ë…¼ì˜í•´ì£¼ì„¸ìš”.', '2025-01-15 05:31:20');
+VALUES ('1', '±Ù¹« È¯°æ °³¼± ¿äÃ»', '°ü¸®Áö¿øÆÀ', 'ÀåÇÏ³ª', 'Ã¢°í', '±â°è ¼ÒÀ½ÀÌ ½É°¢ÇÕ´Ï´Ù.', 'Á¶Ä¡ ¹æ¾ÈÀ» ³íÀÇÇØÁÖ¼¼¿ä.', '2025-01-15 05:31:20');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'í™”ìž¬ ì˜ˆë°© ì ê²€ í•„ìš”', 'ìžìž¬ê´€ë¦¬íŒ€', 'ìµœì§€í›ˆ', 'ìž‘ì—…ìž¥', 'ì •ê¸° ì ê²€ì´ í•„ìš”í•©ë‹ˆë‹¤.', 'ìƒì„¸ ë‚´ì—­ í™•ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤.', '2025-01-15 09:50:49');
+VALUES ('1', 'È­Àç ¿¹¹æ Á¡°Ë ÇÊ¿ä', 'ÀÚÀç°ü¸®ÆÀ', 'ÃÖÁöÈÆ', 'ÀÛ¾÷Àå', 'Á¤±â Á¡°ËÀÌ ÇÊ¿äÇÕ´Ï´Ù.', '»ó¼¼ ³»¿ª È®ÀÎÀÌ ÇÊ¿äÇÕ´Ï´Ù.', '2025-01-15 09:50:49');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì†ŒìŒ ë¬¸ì œ ë³´ê³ ', 'í˜‘ì„±í…Œí¬', 'ìµœì§€í›ˆ', 'íšŒì˜ì‹¤', 'íœ´ê²Œì‹¤ì˜ ì˜¨ë„ê°€ ë„ˆë¬´ ë‚®ìŠµë‹ˆë‹¤.', 'ê·¼ë³¸ì ì¸ ë¬¸ì œë¥¼ í•´ê²°í•´ì£¼ì„¸ìš”.', '2025-01-15 03:16:33');
+VALUES ('1', '¼ÒÀ½ ¹®Á¦ º¸°í', 'Çù¼ºÅ×Å©', 'ÃÖÁöÈÆ', 'È¸ÀÇ½Ç', 'ÈÞ°Ô½ÇÀÇ ¿Âµµ°¡ ³Ê¹« ³·½À´Ï´Ù.', '±Ùº»ÀûÀÎ ¹®Á¦¸¦ ÇØ°áÇØÁÖ¼¼¿ä.', '2025-01-15 03:16:33');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì•ˆì „ ìž¥ë¹„ ë¶€ì¡±', 'ì„œì˜', 'í™ê¸¸ë™', 'ìž‘ì—…ìž¥', 'ê¸°ê³„ ì†ŒìŒì´ ì‹¬ê°í•©ë‹ˆë‹¤.', 'ìƒì„¸ ë‚´ì—­ í™•ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤.', '2025-01-15 02:17:04');
+VALUES ('1', '¾ÈÀü Àåºñ ºÎÁ·', '¼­¿µ', 'È«±æµ¿', 'ÀÛ¾÷Àå', '±â°è ¼ÒÀ½ÀÌ ½É°¢ÇÕ´Ï´Ù.', '»ó¼¼ ³»¿ª È®ÀÎÀÌ ÇÊ¿äÇÕ´Ï´Ù.', '2025-01-15 02:17:04');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì„¤ë¹„ ìœ ì§€ë³´ìˆ˜ ìš”ì²­', 'JSíŒŒíŠ¸ë„ˆìŠ¤', 'í™ê¸¸ë™', 'ì°½ê³ ', 'ì†Œí™”ê¸°ê°€ ì œëŒ€ë¡œ ìž‘ë™í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.', 'ìƒì„¸ ë‚´ì—­ í™•ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤.', '2025-01-15 03:20:08');
+VALUES ('1', '¼³ºñ À¯Áöº¸¼ö ¿äÃ»', 'JSÆÄÆ®³Ê½º', 'È«±æµ¿', 'Ã¢°í', '¼ÒÈ­±â°¡ Á¦´ë·Î ÀÛµ¿ÇÏÁö ¾Ê½À´Ï´Ù.', '»ó¼¼ ³»¿ª È®ÀÎÀÌ ÇÊ¿äÇÕ´Ï´Ù.', '2025-01-15 03:20:08');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì•ˆì „ ìž¥ë¹„ ë¶€ì¡±', 'ìžìž¬ê´€ë¦¬íŒ€', 'í•œì§€ìˆ˜', 'ìƒì‚°ë¼ì¸', 'ê¸°ê³„ ì†ŒìŒì´ ì‹¬ê°í•©ë‹ˆë‹¤.', 'ì¡°ì¹˜ ë°©ì•ˆì„ ë…¼ì˜í•´ì£¼ì„¸ìš”.', '2025-01-15 03:14:08');
+VALUES ('1', '¾ÈÀü Àåºñ ºÎÁ·', 'ÀÚÀç°ü¸®ÆÀ', 'ÇÑÁö¼ö', '»ý»ê¶óÀÎ', '±â°è ¼ÒÀ½ÀÌ ½É°¢ÇÕ´Ï´Ù.', 'Á¶Ä¡ ¹æ¾ÈÀ» ³íÀÇÇØÁÖ¼¼¿ä.', '2025-01-15 03:14:08');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì†ŒìŒ ë¬¸ì œ ë³´ê³ ', 'ì•ˆì „í™˜ê²½íŒ€', 'ì´ì„±ë¯¼', 'ì£¼ì°¨ìž¥', 'ì†Œí™”ê¸°ê°€ ì œëŒ€ë¡œ ìž‘ë™í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.', 'ì¶”ê°€ ì˜ˆì‚° ìš”ì²­ì´ í¬í•¨ë˜ì—ˆìŠµë‹ˆë‹¤.', '2025-01-15 10:38:00');
+VALUES ('1', '¼ÒÀ½ ¹®Á¦ º¸°í', '¾ÈÀüÈ¯°æÆÀ', 'ÀÌ¼º¹Î', 'ÁÖÂ÷Àå', '¼ÒÈ­±â°¡ Á¦´ë·Î ÀÛµ¿ÇÏÁö ¾Ê½À´Ï´Ù.', 'Ãß°¡ ¿¹»ê ¿äÃ»ÀÌ Æ÷ÇÔµÇ¾ú½À´Ï´Ù.', '2025-01-15 10:38:00');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì„¤ë¹„ ìœ ì§€ë³´ìˆ˜ ìš”ì²­', 'í’ˆì§ˆë³´ì¦íŒ€', 'ìž¥í•˜ë‚˜', 'ì£¼ì°¨ìž¥', 'ì•ˆì „ëª¨ê°€ ì¶©ë¶„í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.', 'ì¡°ì¹˜ ë°©ì•ˆì„ ë…¼ì˜í•´ì£¼ì„¸ìš”.', '2025-01-15 11:18:01');
+VALUES ('1', '¼³ºñ À¯Áöº¸¼ö ¿äÃ»', 'Ç°Áúº¸ÁõÆÀ', 'ÀåÇÏ³ª', 'ÁÖÂ÷Àå', '¾ÈÀü¸ð°¡ ÃæºÐÇÏÁö ¾Ê½À´Ï´Ù.', 'Á¶Ä¡ ¹æ¾ÈÀ» ³íÀÇÇØÁÖ¼¼¿ä.', '2025-01-15 11:18:01');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì•ˆì „ ìž¥ë¹„ ë¶€ì¡±', 'ì°¨ì²´ì§€ì›íŒ€', 'ì´ì§€ì€', 'íšŒì˜ì‹¤', 'ì•ˆì „ëª¨ê°€ ì¶©ë¶„í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.', 'ì¶”ê°€ ì˜ˆì‚° ìš”ì²­ì´ í¬í•¨ë˜ì—ˆìŠµë‹ˆë‹¤.', '2025-01-15 05:00:36');
+VALUES ('1', '¾ÈÀü Àåºñ ºÎÁ·', 'Â÷Ã¼Áö¿øÆÀ', 'ÀÌÁöÀº', 'È¸ÀÇ½Ç', '¾ÈÀü¸ð°¡ ÃæºÐÇÏÁö ¾Ê½À´Ï´Ù.', 'Ãß°¡ ¿¹»ê ¿äÃ»ÀÌ Æ÷ÇÔµÇ¾ú½À´Ï´Ù.', '2025-01-15 05:00:36');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'í™”ìž¬ ì˜ˆë°© ì ê²€ í•„ìš”', 'ì•ˆì „í™˜ê²½íŒ€', 'í™ê¸¸ë™', 'ìƒì‚°ë¼ì¸', 'íœ´ê²Œì‹¤ì˜ ì˜¨ë„ê°€ ë„ˆë¬´ ë‚®ìŠµë‹ˆë‹¤.', 'ê·¼ë³¸ì ì¸ ë¬¸ì œë¥¼ í•´ê²°í•´ì£¼ì„¸ìš”.', '2025-01-15 07:01:01');
+VALUES ('1', 'È­Àç ¿¹¹æ Á¡°Ë ÇÊ¿ä', '¾ÈÀüÈ¯°æÆÀ', 'È«±æµ¿', '»ý»ê¶óÀÎ', 'ÈÞ°Ô½ÇÀÇ ¿Âµµ°¡ ³Ê¹« ³·½À´Ï´Ù.', '±Ùº»ÀûÀÎ ¹®Á¦¸¦ ÇØ°áÇØÁÖ¼¼¿ä.', '2025-01-15 07:01:01');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì†ŒìŒ ë¬¸ì œ ë³´ê³ ', 'ê´€ë¦¬ì§€ì›íŒ€', 'í™ê¸¸ë™', 'ì£¼ì°¨ìž¥', 'íœ´ê²Œì‹¤ì˜ ì˜¨ë„ê°€ ë„ˆë¬´ ë‚®ìŠµë‹ˆë‹¤.', 'ë¬¸ì„œ ë¶„ì‹¤ ê²½ìœ„ë¥¼ ì¡°ì‚¬í•´ì£¼ì„¸ìš”.', '2025-01-15 06:29:36');
+VALUES ('1', '¼ÒÀ½ ¹®Á¦ º¸°í', '°ü¸®Áö¿øÆÀ', 'È«±æµ¿', 'ÁÖÂ÷Àå', 'ÈÞ°Ô½ÇÀÇ ¿Âµµ°¡ ³Ê¹« ³·½À´Ï´Ù.', '¹®¼­ ºÐ½Ç °æÀ§¸¦ Á¶»çÇØÁÖ¼¼¿ä.', '2025-01-15 06:29:36');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì•ˆì „ ìž¥ë¹„ ë¶€ì¡±', 'ì„œì˜', 'ìµœì§€í›ˆ', 'ì£¼ì°¨ìž¥', 'ì •ê¸° ì ê²€ì´ í•„ìš”í•©ë‹ˆë‹¤.', 'ìƒì„¸ ë‚´ì—­ í™•ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤.', '2025-01-15 01:48:22');
+VALUES ('1', '¾ÈÀü Àåºñ ºÎÁ·', '¼­¿µ', 'ÃÖÁöÈÆ', 'ÁÖÂ÷Àå', 'Á¤±â Á¡°ËÀÌ ÇÊ¿äÇÕ´Ï´Ù.', '»ó¼¼ ³»¿ª È®ÀÎÀÌ ÇÊ¿äÇÕ´Ï´Ù.', '2025-01-15 01:48:22');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì†ŒìŒ ë¬¸ì œ ë³´ê³ ', 'SMP', 'ë°•ì˜í¬', 'ìž‘ì—…ìž¥', 'ì†Œí™”ê¸°ê°€ ì œëŒ€ë¡œ ìž‘ë™í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.', 'ìƒì„¸ ë‚´ì—­ í™•ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤.', '2025-01-15 06:43:33');
+VALUES ('1', '¼ÒÀ½ ¹®Á¦ º¸°í', 'SMP', '¹Ú¿µÈñ', 'ÀÛ¾÷Àå', '¼ÒÈ­±â°¡ Á¦´ë·Î ÀÛµ¿ÇÏÁö ¾Ê½À´Ï´Ù.', '»ó¼¼ ³»¿ª È®ÀÎÀÌ ÇÊ¿äÇÕ´Ï´Ù.', '2025-01-15 06:43:33');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ê·¼ë¬´ í™˜ê²½ ê°œì„  ìš”ì²­', 'SMP', 'ì´ì§€ì€', 'íšŒì˜ì‹¤', 'ì†Œí™”ê¸°ê°€ ì œëŒ€ë¡œ ìž‘ë™í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.', 'ê·¼ë³¸ì ì¸ ë¬¸ì œë¥¼ í•´ê²°í•´ì£¼ì„¸ìš”.', '2025-01-15 08:53:09');
+VALUES ('1', '±Ù¹« È¯°æ °³¼± ¿äÃ»', 'SMP', 'ÀÌÁöÀº', 'È¸ÀÇ½Ç', '¼ÒÈ­±â°¡ Á¦´ë·Î ÀÛµ¿ÇÏÁö ¾Ê½À´Ï´Ù.', '±Ùº»ÀûÀÎ ¹®Á¦¸¦ ÇØ°áÇØÁÖ¼¼¿ä.', '2025-01-15 08:53:09');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì„¤ë¹„ ìœ ì§€ë³´ìˆ˜ ìš”ì²­', 'ìžìž¬ê´€ë¦¬íŒ€', 'ë°•ì˜í¬', 'íšŒì˜ì‹¤', 'ê¸°ê³„ ì†ŒìŒì´ ì‹¬ê°í•©ë‹ˆë‹¤.', 'ì¡°ì¹˜ ë°©ì•ˆì„ ë…¼ì˜í•´ì£¼ì„¸ìš”.', '2025-01-15 11:52:38');
+VALUES ('1', '¼³ºñ À¯Áöº¸¼ö ¿äÃ»', 'ÀÚÀç°ü¸®ÆÀ', '¹Ú¿µÈñ', 'È¸ÀÇ½Ç', '±â°è ¼ÒÀ½ÀÌ ½É°¢ÇÕ´Ï´Ù.', 'Á¶Ä¡ ¹æ¾ÈÀ» ³íÀÇÇØÁÖ¼¼¿ä.', '2025-01-15 11:52:38');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì†ŒìŒ ë¬¸ì œ ë³´ê³ ', 'ì„œì˜', 'í™ê¸¸ë™', 'ì°½ê³ ', 'íœ´ê²Œì‹¤ì˜ ì˜¨ë„ê°€ ë„ˆë¬´ ë‚®ìŠµë‹ˆë‹¤.', 'ìƒì„¸ ë‚´ì—­ í™•ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤.', '2025-01-15 01:24:48');
+VALUES ('1', '¼ÒÀ½ ¹®Á¦ º¸°í', '¼­¿µ', 'È«±æµ¿', 'Ã¢°í', 'ÈÞ°Ô½ÇÀÇ ¿Âµµ°¡ ³Ê¹« ³·½À´Ï´Ù.', '»ó¼¼ ³»¿ª È®ÀÎÀÌ ÇÊ¿äÇÕ´Ï´Ù.', '2025-01-15 01:24:48');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì•ˆì „ ìž¥ë¹„ ë¶€ì¡±', 'ì•ˆì „í™˜ê²½íŒ€', 'ìµœë¯¼ìˆ˜', 'íšŒì˜ì‹¤', 'ì•ˆì „ëª¨ê°€ ì¶©ë¶„í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.', 'ê·¼ë³¸ì ì¸ ë¬¸ì œë¥¼ í•´ê²°í•´ì£¼ì„¸ìš”.', '2025-01-15 01:59:22');
+VALUES ('1', '¾ÈÀü Àåºñ ºÎÁ·', '¾ÈÀüÈ¯°æÆÀ', 'ÃÖ¹Î¼ö', 'È¸ÀÇ½Ç', '¾ÈÀü¸ð°¡ ÃæºÐÇÏÁö ¾Ê½À´Ï´Ù.', '±Ùº»ÀûÀÎ ¹®Á¦¸¦ ÇØ°áÇØÁÖ¼¼¿ä.', '2025-01-15 01:59:22');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì„¤ë¹„ ìœ ì§€ë³´ìˆ˜ ìš”ì²­', 'ìž¬ê²½íŒ€', 'í•œì§€ìˆ˜', 'ì£¼ì°¨ìž¥', 'ì •ê¸° ì ê²€ì´ í•„ìš”í•©ë‹ˆë‹¤.', 'ì¡°ì¹˜ ë°©ì•ˆì„ ë…¼ì˜í•´ì£¼ì„¸ìš”.', '2025-01-15 05:07:21');
+VALUES ('1', '¼³ºñ À¯Áöº¸¼ö ¿äÃ»', 'Àç°æÆÀ', 'ÇÑÁö¼ö', 'ÁÖÂ÷Àå', 'Á¤±â Á¡°ËÀÌ ÇÊ¿äÇÕ´Ï´Ù.', 'Á¶Ä¡ ¹æ¾ÈÀ» ³íÀÇÇØÁÖ¼¼¿ä.', '2025-01-15 05:07:21');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì„¤ë¹„ ìœ ì§€ë³´ìˆ˜ ìš”ì²­', 'ìž¬ê²½íŒ€', 'ê¹€ì² ìˆ˜', 'íšŒì˜ì‹¤', 'íœ´ê²Œì‹¤ì˜ ì˜¨ë„ê°€ ë„ˆë¬´ ë‚®ìŠµë‹ˆë‹¤.', 'ìƒì„¸ ë‚´ì—­ í™•ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤.', '2025-01-15 12:57:17');
+VALUES ('1', '¼³ºñ À¯Áöº¸¼ö ¿äÃ»', 'Àç°æÆÀ', '±èÃ¶¼ö', 'È¸ÀÇ½Ç', 'ÈÞ°Ô½ÇÀÇ ¿Âµµ°¡ ³Ê¹« ³·½À´Ï´Ù.', '»ó¼¼ ³»¿ª È®ÀÎÀÌ ÇÊ¿äÇÕ´Ï´Ù.', '2025-01-15 12:57:17');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì„¤ë¹„ ìœ ì§€ë³´ìˆ˜ ìš”ì²­', 'ìžìž¬ê´€ë¦¬íŒ€', 'í•œì§€ìˆ˜', 'ì£¼ì°¨ìž¥', 'íœ´ê²Œì‹¤ì˜ ì˜¨ë„ê°€ ë„ˆë¬´ ë‚®ìŠµë‹ˆë‹¤.', 'ìƒì„¸ ë‚´ì—­ í™•ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤.', '2025-01-15 09:48:19');
+VALUES ('1', '¼³ºñ À¯Áöº¸¼ö ¿äÃ»', 'ÀÚÀç°ü¸®ÆÀ', 'ÇÑÁö¼ö', 'ÁÖÂ÷Àå', 'ÈÞ°Ô½ÇÀÇ ¿Âµµ°¡ ³Ê¹« ³·½À´Ï´Ù.', '»ó¼¼ ³»¿ª È®ÀÎÀÌ ÇÊ¿äÇÕ´Ï´Ù.', '2025-01-15 09:48:19');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì†ŒìŒ ë¬¸ì œ ë³´ê³ ', 'í˜‘ì„±í…Œí¬', 'ìµœì§€í›ˆ', 'ìƒì‚°ë¼ì¸', 'ì •ê¸° ì ê²€ì´ í•„ìš”í•©ë‹ˆë‹¤.', 'ê·¼ë³¸ì ì¸ ë¬¸ì œë¥¼ í•´ê²°í•´ì£¼ì„¸ìš”.', '2025-01-15 04:54:42');
+VALUES ('1', '¼ÒÀ½ ¹®Á¦ º¸°í', 'Çù¼ºÅ×Å©', 'ÃÖÁöÈÆ', '»ý»ê¶óÀÎ', 'Á¤±â Á¡°ËÀÌ ÇÊ¿äÇÕ´Ï´Ù.', '±Ùº»ÀûÀÎ ¹®Á¦¸¦ ÇØ°áÇØÁÖ¼¼¿ä.', '2025-01-15 04:54:42');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'í™”ìž¬ ì˜ˆë°© ì ê²€ í•„ìš”', 'ì•ˆì „í™˜ê²½íŒ€', 'ì´ì„±ë¯¼', 'íšŒì˜ì‹¤', 'ì•ˆì „ëª¨ê°€ ì¶©ë¶„í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.', 'ê·¼ë³¸ì ì¸ ë¬¸ì œë¥¼ í•´ê²°í•´ì£¼ì„¸ìš”.', '2025-01-15 10:33:40');
+VALUES ('1', 'È­Àç ¿¹¹æ Á¡°Ë ÇÊ¿ä', '¾ÈÀüÈ¯°æÆÀ', 'ÀÌ¼º¹Î', 'È¸ÀÇ½Ç', '¾ÈÀü¸ð°¡ ÃæºÐÇÏÁö ¾Ê½À´Ï´Ù.', '±Ùº»ÀûÀÎ ¹®Á¦¸¦ ÇØ°áÇØÁÖ¼¼¿ä.', '2025-01-15 10:33:40');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì•ˆì „ ìž¥ë¹„ ë¶€ì¡±', 'ì‚¬ì—…ê¸°íšíŒ€', 'ìµœë¯¼ìˆ˜', 'ìž‘ì—…ìž¥', 'ê¸°ê³„ ì†ŒìŒì´ ì‹¬ê°í•©ë‹ˆë‹¤.', 'ì¶”ê°€ ì˜ˆì‚° ìš”ì²­ì´ í¬í•¨ë˜ì—ˆìŠµë‹ˆë‹¤.', '2025-01-15 00:58:39');
+VALUES ('1', '¾ÈÀü Àåºñ ºÎÁ·', '»ç¾÷±âÈ¹ÆÀ', 'ÃÖ¹Î¼ö', 'ÀÛ¾÷Àå', '±â°è ¼ÒÀ½ÀÌ ½É°¢ÇÕ´Ï´Ù.', 'Ãß°¡ ¿¹»ê ¿äÃ»ÀÌ Æ÷ÇÔµÇ¾ú½À´Ï´Ù.', '2025-01-15 00:58:39');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì„¤ë¹„ ìœ ì§€ë³´ìˆ˜ ìš”ì²­', 'í˜‘ì„±í…Œí¬', 'ìµœì§€í›ˆ', 'ìƒì‚°ë¼ì¸', 'ê¸°ê³„ ì†ŒìŒì´ ì‹¬ê°í•©ë‹ˆë‹¤.', 'ë¬¸ì„œ ë¶„ì‹¤ ê²½ìœ„ë¥¼ ì¡°ì‚¬í•´ì£¼ì„¸ìš”.', '2025-01-15 07:34:51');
+VALUES ('1', '¼³ºñ À¯Áöº¸¼ö ¿äÃ»', 'Çù¼ºÅ×Å©', 'ÃÖÁöÈÆ', '»ý»ê¶óÀÎ', '±â°è ¼ÒÀ½ÀÌ ½É°¢ÇÕ´Ï´Ù.', '¹®¼­ ºÐ½Ç °æÀ§¸¦ Á¶»çÇØÁÖ¼¼¿ä.', '2025-01-15 07:34:51');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì•ˆì „ ìž¥ë¹„ ë¶€ì¡±', 'ì‚¬ì—…ê¸°íšíŒ€', 'ê¹€ì² ìˆ˜', 'ì£¼ì°¨ìž¥', 'ê¸°ê³„ ì†ŒìŒì´ ì‹¬ê°í•©ë‹ˆë‹¤.', 'ë¬¸ì„œ ë¶„ì‹¤ ê²½ìœ„ë¥¼ ì¡°ì‚¬í•´ì£¼ì„¸ìš”.', '2025-01-15 01:58:06');
+VALUES ('1', '¾ÈÀü Àåºñ ºÎÁ·', '»ç¾÷±âÈ¹ÆÀ', '±èÃ¶¼ö', 'ÁÖÂ÷Àå', '±â°è ¼ÒÀ½ÀÌ ½É°¢ÇÕ´Ï´Ù.', '¹®¼­ ºÐ½Ç °æÀ§¸¦ Á¶»çÇØÁÖ¼¼¿ä.', '2025-01-15 01:58:06');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì•ˆì „ ìž¥ë¹„ ë¶€ì¡±', 'ì°¨ì²´ì§€ì›íŒ€', 'ì´ì§€ì€', 'íšŒì˜ì‹¤', 'ì •ê¸° ì ê²€ì´ í•„ìš”í•©ë‹ˆë‹¤.', 'ë¬¸ì„œ ë¶„ì‹¤ ê²½ìœ„ë¥¼ ì¡°ì‚¬í•´ì£¼ì„¸ìš”.', '2025-01-15 03:42:05');
+VALUES ('1', '¾ÈÀü Àåºñ ºÎÁ·', 'Â÷Ã¼Áö¿øÆÀ', 'ÀÌÁöÀº', 'È¸ÀÇ½Ç', 'Á¤±â Á¡°ËÀÌ ÇÊ¿äÇÕ´Ï´Ù.', '¹®¼­ ºÐ½Ç °æÀ§¸¦ Á¶»çÇØÁÖ¼¼¿ä.', '2025-01-15 03:42:05');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'í™”ìž¬ ì˜ˆë°© ì ê²€ í•„ìš”', 'í”„ë ˆìŠ¤ì§€ì›íŒ€', 'ê¹€ë¯¼ì •', 'ì£¼ì°¨ìž¥', 'ì •ê¸° ì ê²€ì´ í•„ìš”í•©ë‹ˆë‹¤.', 'ê·¼ë³¸ì ì¸ ë¬¸ì œë¥¼ í•´ê²°í•´ì£¼ì„¸ìš”.', '2025-01-15 01:57:02');
+VALUES ('1', 'È­Àç ¿¹¹æ Á¡°Ë ÇÊ¿ä', 'ÇÁ·¹½ºÁö¿øÆÀ', '±è¹ÎÁ¤', 'ÁÖÂ÷Àå', 'Á¤±â Á¡°ËÀÌ ÇÊ¿äÇÕ´Ï´Ù.', '±Ùº»ÀûÀÎ ¹®Á¦¸¦ ÇØ°áÇØÁÖ¼¼¿ä.', '2025-01-15 01:57:02');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì†ŒìŒ ë¬¸ì œ ë³´ê³ ', 'ì°¨ì²´ì§€ì›íŒ€', 'ë°•ì˜í¬', 'ìƒì‚°ë¼ì¸', 'ì•ˆì „ëª¨ê°€ ì¶©ë¶„í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.', 'ì¡°ì¹˜ ë°©ì•ˆì„ ë…¼ì˜í•´ì£¼ì„¸ìš”.', '2025-01-15 12:23:25');
+VALUES ('1', '¼ÒÀ½ ¹®Á¦ º¸°í', 'Â÷Ã¼Áö¿øÆÀ', '¹Ú¿µÈñ', '»ý»ê¶óÀÎ', '¾ÈÀü¸ð°¡ ÃæºÐÇÏÁö ¾Ê½À´Ï´Ù.', 'Á¶Ä¡ ¹æ¾ÈÀ» ³íÀÇÇØÁÖ¼¼¿ä.', '2025-01-15 12:23:25');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ê·¼ë¬´ í™˜ê²½ ê°œì„  ìš”ì²­', 'ìžìž¬ê´€ë¦¬íŒ€', 'ê¹€ì² ìˆ˜', 'íšŒì˜ì‹¤', 'ê¸°ê³„ ì†ŒìŒì´ ì‹¬ê°í•©ë‹ˆë‹¤.', 'ê·¼ë³¸ì ì¸ ë¬¸ì œë¥¼ í•´ê²°í•´ì£¼ì„¸ìš”.', '2025-01-15 06:37:59');
+VALUES ('1', '±Ù¹« È¯°æ °³¼± ¿äÃ»', 'ÀÚÀç°ü¸®ÆÀ', '±èÃ¶¼ö', 'È¸ÀÇ½Ç', '±â°è ¼ÒÀ½ÀÌ ½É°¢ÇÕ´Ï´Ù.', '±Ùº»ÀûÀÎ ¹®Á¦¸¦ ÇØ°áÇØÁÖ¼¼¿ä.', '2025-01-15 06:37:59');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì•ˆì „ ìž¥ë¹„ ë¶€ì¡±', 'SMP', 'ë°•ì˜í¬', 'ìƒì‚°ë¼ì¸', 'ê¸°ê³„ ì†ŒìŒì´ ì‹¬ê°í•©ë‹ˆë‹¤.', 'ê·¼ë³¸ì ì¸ ë¬¸ì œë¥¼ í•´ê²°í•´ì£¼ì„¸ìš”.', '2025-01-15 08:24:33');
+VALUES ('1', '¾ÈÀü Àåºñ ºÎÁ·', 'SMP', '¹Ú¿µÈñ', '»ý»ê¶óÀÎ', '±â°è ¼ÒÀ½ÀÌ ½É°¢ÇÕ´Ï´Ù.', '±Ùº»ÀûÀÎ ¹®Á¦¸¦ ÇØ°áÇØÁÖ¼¼¿ä.', '2025-01-15 08:24:33');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'í™”ìž¬ ì˜ˆë°© ì ê²€ í•„ìš”', 'ì„œì˜', 'í•œì§€ìˆ˜', 'ìƒì‚°ë¼ì¸', 'ì†Œí™”ê¸°ê°€ ì œëŒ€ë¡œ ìž‘ë™í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.', 'ë¬¸ì„œ ë¶„ì‹¤ ê²½ìœ„ë¥¼ ì¡°ì‚¬í•´ì£¼ì„¸ìš”.', '2025-01-15 00:07:06');
+VALUES ('1', 'È­Àç ¿¹¹æ Á¡°Ë ÇÊ¿ä', '¼­¿µ', 'ÇÑÁö¼ö', '»ý»ê¶óÀÎ', '¼ÒÈ­±â°¡ Á¦´ë·Î ÀÛµ¿ÇÏÁö ¾Ê½À´Ï´Ù.', '¹®¼­ ºÐ½Ç °æÀ§¸¦ Á¶»çÇØÁÖ¼¼¿ä.', '2025-01-15 00:07:06');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì„¤ë¹„ ìœ ì§€ë³´ìˆ˜ ìš”ì²­', 'JSíŒŒíŠ¸ë„ˆìŠ¤', 'ìž¥í•˜ë‚˜', 'ì£¼ì°¨ìž¥', 'ì •ê¸° ì ê²€ì´ í•„ìš”í•©ë‹ˆë‹¤.', 'ìƒì„¸ ë‚´ì—­ í™•ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤.', '2025-01-15 11:36:28');
+VALUES ('1', '¼³ºñ À¯Áöº¸¼ö ¿äÃ»', 'JSÆÄÆ®³Ê½º', 'ÀåÇÏ³ª', 'ÁÖÂ÷Àå', 'Á¤±â Á¡°ËÀÌ ÇÊ¿äÇÕ´Ï´Ù.', '»ó¼¼ ³»¿ª È®ÀÎÀÌ ÇÊ¿äÇÕ´Ï´Ù.', '2025-01-15 11:36:28');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'í™”ìž¬ ì˜ˆë°© ì ê²€ í•„ìš”', 'ì‚¬ì—…ê¸°íšíŒ€', 'ì´ì§€ì€', 'ì£¼ì°¨ìž¥', 'ì •ê¸° ì ê²€ì´ í•„ìš”í•©ë‹ˆë‹¤.', 'ë¬¸ì„œ ë¶„ì‹¤ ê²½ìœ„ë¥¼ ì¡°ì‚¬í•´ì£¼ì„¸ìš”.', '2025-01-15 14:06:31');
+VALUES ('1', 'È­Àç ¿¹¹æ Á¡°Ë ÇÊ¿ä', '»ç¾÷±âÈ¹ÆÀ', 'ÀÌÁöÀº', 'ÁÖÂ÷Àå', 'Á¤±â Á¡°ËÀÌ ÇÊ¿äÇÕ´Ï´Ù.', '¹®¼­ ºÐ½Ç °æÀ§¸¦ Á¶»çÇØÁÖ¼¼¿ä.', '2025-01-15 14:06:31');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì†ŒìŒ ë¬¸ì œ ë³´ê³ ', 'ì„œì˜', 'ìµœë¯¼ìˆ˜', 'íšŒì˜ì‹¤', 'ì†Œí™”ê¸°ê°€ ì œëŒ€ë¡œ ìž‘ë™í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.', 'ë¬¸ì„œ ë¶„ì‹¤ ê²½ìœ„ë¥¼ ì¡°ì‚¬í•´ì£¼ì„¸ìš”.', '2025-01-15 02:39:46');
+VALUES ('1', '¼ÒÀ½ ¹®Á¦ º¸°í', '¼­¿µ', 'ÃÖ¹Î¼ö', 'È¸ÀÇ½Ç', '¼ÒÈ­±â°¡ Á¦´ë·Î ÀÛµ¿ÇÏÁö ¾Ê½À´Ï´Ù.', '¹®¼­ ºÐ½Ç °æÀ§¸¦ Á¶»çÇØÁÖ¼¼¿ä.', '2025-01-15 02:39:46');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'ì•ˆì „ ìž¥ë¹„ ë¶€ì¡±', 'í•œêµ­ë©”íƒˆ', 'ê¹€ë¯¼ì •', 'ìž‘ì—…ìž¥', 'íœ´ê²Œì‹¤ì˜ ì˜¨ë„ê°€ ë„ˆë¬´ ë‚®ìŠµë‹ˆë‹¤.', 'ìƒì„¸ ë‚´ì—­ í™•ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤.', '2025-01-15 11:50:21');
+VALUES ('1', '¾ÈÀü Àåºñ ºÎÁ·', 'ÇÑ±¹¸ÞÅ»', '±è¹ÎÁ¤', 'ÀÛ¾÷Àå', 'ÈÞ°Ô½ÇÀÇ ¿Âµµ°¡ ³Ê¹« ³·½À´Ï´Ù.', '»ó¼¼ ³»¿ª È®ÀÎÀÌ ÇÊ¿äÇÕ´Ï´Ù.', '2025-01-15 11:50:21');
 
 INSERT INTO report(reporter_id, report_title, report_department, reporter_name, report_location, 
                    report_content, report_detail, report_createdate) 
-VALUES ('1', 'í™”ìž¬ ì˜ˆë°© ì ê²€ í•„ìš”', 'í˜‘ì„±í…Œí¬', 'ê¹€ë¯¼ì •', 'íšŒì˜ì‹¤', 'íœ´ê²Œì‹¤ì˜ ì˜¨ë„ê°€ ë„ˆë¬´ ë‚®ìŠµë‹ˆë‹¤.', 'ì¶”ê°€ ì˜ˆì‚° ìš”ì²­ì´ í¬í•¨ë˜ì—ˆìŠµë‹ˆë‹¤.', '2025-01-15 10:07:52');
+VALUES ('1', 'È­Àç ¿¹¹æ Á¡°Ë ÇÊ¿ä', 'Çù¼ºÅ×Å©', '±è¹ÎÁ¤', 'È¸ÀÇ½Ç', 'ÈÞ°Ô½ÇÀÇ ¿Âµµ°¡ ³Ê¹« ³·½À´Ï´Ù.', 'Ãß°¡ ¿¹»ê ¿äÃ»ÀÌ Æ÷ÇÔµÇ¾ú½À´Ï´Ù.', '2025-01-15 10:07:52');
 
------> ìœ„í—˜ì„± ë°ì´í„° INSERT
+-----> À§Çè¼º µ¥ÀÌÅÍ INSERT
 INSERT INTO risk (report_id, risk_grade, status)
 SELECT report_id, 'UNDEFINED', 'PENDING' FROM report
 
------> ìœ ì € í…Œì´ë¸” INSERT
-INSERT INTO users (department, email, password, role, userid, username) VALUES ('ë³´ì•ˆê´€ë¦¬ìž', 'djp0389@partecs.co.kr', 'admin', 'admin', 'admin', 'ë³´ì•ˆê´€ë¦¬ìž')
-INSERT INTO users (department, email, password, role, userid, username) VALUES ('ì•ˆì „í™˜ê²½íŒ€', 'safety@partecs.co.kr', 'safetyadmin', 'safetyadmin', 'safetyadmin', 'ì•ˆì „ë‹´ë‹¹ìž')
-INSERT INTO users (department, email, password, role, userid, username) VALUES ('ì‚¬ì—…ê¸°íšíŒ€', 'manager@partecs.co.kr', 'manager', 'manager', 'manager', 'ë¶€ì„œë‹´ë‹¹ìž')
-INSERT INTO users (department, email, password, role, userid, username) VALUES ('ê´€ë¦¬ì§€ì›íŒ€', '1@partecs.co.kr', '1', 'user', '1', 'ì¼ë°˜ìœ ì €')
+-----> À¯Àú Å×ÀÌºí INSERT
+INSERT INTO users (department, email, password, role, userid, username) VALUES ('º¸¾È°ü¸®ÀÚ', 'djp0389@partecs.co.kr', 'admin', 'admin', 'admin', 'º¸¾È°ü¸®ÀÚ')
+INSERT INTO users (department, email, password, role, userid, username) VALUES ('¾ÈÀüÈ¯°æÆÀ', 'safety@partecs.co.kr', 'safetyadmin', 'safetyadmin', 'safetyadmin', '¾ÈÀü´ã´çÀÚ')
+INSERT INTO users (department, email, password, role, userid, username) VALUES ('»ç¾÷±âÈ¹ÆÀ', 'manager@partecs.co.kr', 'manager', 'manager', 'manager', 'ºÎ¼­´ã´çÀÚ')
+INSERT INTO users (department, email, password, role, userid, username) VALUES ('°ü¸®Áö¿øÆÀ', '1@partecs.co.kr', '1', 'user', '1', 'ÀÏ¹ÝÀ¯Àú')
 
+-----> À§Çè¿äÀÎ Å×ÀÌºí INSERT
+INSERT INTO risk_factor (category, hazard_name, description) VALUES
+('¹°¸®Àû', 'Àü±â', '°¨Àü, Àü±â È­Àç, ´©ÀüÀ¸·Î ÀÎÇÑ »ç°í À§Çè'),
+('¹°¸®Àû', 'È­Àç', 'ºÒ²É, ÀÎÈ­¼º ¹°Áú, Æø¹ß À§ÇèÀÌ Á¸Àç'),
+('È­ÇÐÀû', 'À¯±â¿ëÁ¦', 'º¥Á¨, Åç·ç¿£ µî È­ÇÐ¹°Áú ÈíÀÔÀ¸·Î ÀÎÇÑ Áßµ¶ À§Çè'),
+('È­ÇÐÀû', '°¡½º ´©Ãâ', 'ÀÏ»êÈ­Åº¼Ò, ¾Ï¸ð´Ï¾Æ µîÀÇ µ¶¼º °¡½º ÈíÀÔ À§Çè'),
+('»ý¹°ÇÐÀû', '¹ÙÀÌ·¯½º', 'ÄÚ·Î³ª19, °áÇÙ µî °¨¿°º´ È®»ê À§Çè'),
+('»ý¹°ÇÐÀû', 'µ¶¼º ½Ä¹°', 'µ¶¹ö¼¸, µ¶¼º ½Ä¹° ¼·Ãë·Î ÀÎÇÑ Áßµ¶ À§Çè'),
+('ÀÎ°£Àû', 'ÇÇ·Î ¹× °ú·Î', '°ú·Î·Î ÀÎÇÑ ÁýÁß·Â ÀúÇÏ ¹× »ç°í ¹ß»ý À§Çè'),
+('ÀÎ°£Àû', 'ºÒ¾ÈÀüÇÑ Çàµ¿', '¾ÈÀüÀåºñ ¹ÌÂø¿ë, ºÎÁÖÀÇÇÑ ÀÛ¾÷ ÅÂµµ');
