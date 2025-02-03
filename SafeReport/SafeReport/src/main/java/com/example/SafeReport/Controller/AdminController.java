@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -29,10 +28,12 @@ import com.example.SafeReport.Entity.Report;
 import com.example.SafeReport.Entity.Risk;
 import com.example.SafeReport.Entity.RiskAssessmentB;
 import com.example.SafeReport.Entity.RiskAssessmentC;
+import com.example.SafeReport.Entity.RiskCategory;
 import com.example.SafeReport.Entity.RiskFactor;
 import com.example.SafeReport.Entity.Users;
 import com.example.SafeReport.Enum.RiskGrade;
 import com.example.SafeReport.Enum.RiskStatus;
+import com.example.SafeReport.Repository.RiskCategoryRepository;
 import com.example.SafeReport.Repository.RiskFactorRepository;
 import com.example.SafeReport.Service.AwardService;
 import com.example.SafeReport.Service.ReportService;
@@ -50,6 +51,7 @@ public class AdminController {
 	private final UserService userService;
 	
 	private final RiskFactorRepository riskFactorRepository; // 위험요인 table
+	private final RiskCategoryRepository riskCategoryRepository; // 위험카테고리 Table
 	
  	@GetMapping("/admin/reports")  //required = false 시 파라미터가 입력되지 않으면, 변수는 null 값을 가진다.
     public String reportList(Model model, @RequestParam(value="page", defaultValue="1") int page,
@@ -93,6 +95,7 @@ public class AdminController {
  	public String adminReportManage(@PathVariable Integer id, Model model) {
  	   
  	    Report report = this.reportService.getReport(id);
+ 	    List<RiskCategory> riskCategory = riskCategoryRepository.findAll(); // 모든 위험카테고리 조회
         List<RiskFactor> riskFactor = riskFactorRepository.findAll(); //모든 위험요인 조회
         
         // 카테고리 중복 제거된 카테고리 목록 생성
@@ -102,6 +105,7 @@ public class AdminController {
                 .collect(Collectors.toList());*/
         
         //model.addAttribute("uniqueCategories", uniqueCategories); // 위험요인
+        model.addAttribute("riskCategory", riskCategory); // 위험카테고리
         model.addAttribute("riskFactor", riskFactor); // 위험유형
         model.addAttribute("report", report);
  	    return "admin/admin_report_detail";

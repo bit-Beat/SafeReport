@@ -32,7 +32,6 @@ public class Users {
     @Column(unique = true)
     private String email;
     
-    @Column(unique = true)
     private String department; // 부서
     
     @Column(nullable = false)

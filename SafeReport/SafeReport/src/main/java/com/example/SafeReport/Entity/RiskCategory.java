@@ -18,9 +18,6 @@ import lombok.Setter;
 @Getter
 public class RiskCategory {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // 컬럼 속성인 identity 지정
-	private Integer id; 
-	
 	@Column(length = 50)
 	private String category; // 위험요인 분류
 	

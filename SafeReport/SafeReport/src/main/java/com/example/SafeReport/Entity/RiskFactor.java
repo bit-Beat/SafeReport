@@ -26,7 +26,7 @@ public class RiskFactor {
 	private Integer id; 
 	
 	@ManyToOne
-	@JoinColumn(name = "category_id", nullable = false) // Report 테이블과의 FK 설정
+	@JoinColumn(name = "category", nullable = false) // Report 테이블과의 FK 설정
 	private RiskCategory category; // 위험요인 분류
 	
 	@Column(length = 100)

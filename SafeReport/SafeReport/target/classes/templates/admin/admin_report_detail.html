@@ -94,11 +94,11 @@
 	
 			            <div class="mb-3">
 			                <label for="riskFactor" class="form-label">위험 요인</label>
-							<select id="riskFactor" name="riskFactor" class="form-select">
-								<option th:each="uniqueCategories : ${uniqueCategories}"
-									th:value="${uniqueCategories}"
-									th:text="${uniqueCategories}"
-									th:selected="${report.risk.riskFactor == uniqueCategories}">
+							<select id="riskFactor" name="riskFactor" class="form-select" onchange="updateRiskTypes()">
+								<option th:each="riskCategory : ${riskCategory}"
+									th:value="${riskCategory.category}"
+									th:text="${riskCategory.category}"
+									th:selected="${report.risk.riskFactor == riskCategory.category}">
 								</option>
 							</select>
 			            </div>
