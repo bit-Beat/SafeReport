@@ -76,7 +76,7 @@ public class ReportController {
 	    
 	    //return "redirect:/?success";
 	    return "message/report_complete";
-	  }
+	}
 	
 	/// 내 제보 보기
  	@GetMapping("/myreports")

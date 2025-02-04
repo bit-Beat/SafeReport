@@ -79,11 +79,13 @@ public class ReportService {
         String extension = ""; // 파일 확장자 추출
         String uploadFileName = "";// 고유 파일명, 서버에 보내기위한 고유한 파일명
         
-        if(report.getAttachfile()!=null && !report.getAttachfile().isEmpty())
-        	file_delete(report); // 파일 있으면 삭제
+        
         
 		try { // 파일 업로드
 			if (file != null && !file.isEmpty()) {
+				if(report.getAttachfile()!=null && !report.getAttachfile().isEmpty())
+		        	file_delete(report); // 파일 있으면 삭제
+				
             	String uuid = UUID.randomUUID().toString(); // 고유한 UUID 생성
                 
             	fileName = file.getOriginalFilename();
@@ -101,15 +103,15 @@ public class ReportService {
                 file.transferTo(new File(filePath)); // 파일 저장
                 report.setAttachfile(fileName); // 파일명 저장
                 report.setAttachfile_upload(uploadFileName); // 고유값 파일명
-        		report.setReport_title(title); // 신고제목
-        		report.setReport_department(department); // 접수부서
-        		report.setReport_location(location); // 위치 
-        		report.setReporter_name(name); // 신고자
-        		report.setReport_content(content); // 신고내용 접수
-        		report.setReport_detail(details); // 개선내용
-        		report.setReportmodifydate(LocalDateTime.now()); // 수정시간
-                this.reportRepository.save(report); //저장
             }
+			report.setReport_title(title); // 신고제목
+			report.setReport_department(department); // 접수부서
+			report.setReport_location(location); // 위치 
+			report.setReporter_name(name); // 신고자
+			report.setReport_content(content); // 신고내용 접수
+			report.setReport_detail(details); // 개선내용
+			report.setReportmodifydate(LocalDateTime.now()); // 수정시간
+			this.reportRepository.save(report); //저장
         } catch (Exception e) {
             throw new RuntimeException("파일 업로드 중 오류가 발생했습니다: " + e.getMessage(), e);  // 파일 업로드 실패 시 예외 처리
         }
