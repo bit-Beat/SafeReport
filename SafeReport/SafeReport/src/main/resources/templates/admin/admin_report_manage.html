@@ -201,7 +201,7 @@
 																							report.risk.riskGrade == T(com.example.SafeReport.Enum.RiskGrade).C ? 'badge text-bg-primary' : 
 																							report.risk.riskGrade == T(com.example.SafeReport.Enum.RiskGrade).D ? 'badge text-bg-success' : 
 																							'badge text-bg-light') : 'badge text-bg-light'}" 
-										  th:text="${report.risk.riskGrade.description}">
+										  th:text="${report.risk.riskGrade.name()}">
 								</td>
 								<td><span th:classappend="${report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).PENDING ? 'badge text-bg-secondary' : 
 																		report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).REVIEWED ? 'badge text-bg-primary' : 

@@ -86,7 +86,7 @@
 			                <select id="riskGrade" name="riskGrade" class="form-select">
 			                    <option th:each="grade : ${T(com.example.SafeReport.Enum.RiskGrade).values()}"
 			                            th:value="${grade.name()}"
-			                            th:text="${grade.getDescription()}"
+			                            th:text="${grade.name()}"
 			                            th:selected="${report.risk.riskGrade == grade}">
 			                    </option>
 			                </select>

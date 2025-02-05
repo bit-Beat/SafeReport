@@ -22,7 +22,7 @@ public class RiskAssessmentA {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // 컬럼 속성인 identity 지정
-	private Integer riskAssessmentBId; 
+	private Integer riskAssessmentId; 
 	
     @OneToOne
     @JoinColumn(name = "report_id", nullable = false) // Report 테이블과의 FK 설정

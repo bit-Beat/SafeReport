@@ -30,7 +30,7 @@
 						<option selected value="null" >위험 등급 선택</option>
 						<option th:each="grade : ${T(com.example.SafeReport.Enum.RiskGrade).values()}"
 						        th:value="${grade.name()}"
-						        th:text="${grade.getDescription}"
+						        th:text="${grade.name()}"
 								th:selected="${selectedRiskGrade == grade.name()}">
 						</option>
                     </select>
@@ -82,7 +82,7 @@
 										                report.risk.riskGrade == T(com.example.SafeReport.Enum.RiskGrade).C ? 'badge text-bg-primary' : 
 										                report.risk.riskGrade == T(com.example.SafeReport.Enum.RiskGrade).D ? 'badge text-bg-success' : 
 										                'badge text-bg-light') : 'badge text-bg-light'}" 
-										th:text="${report.risk.riskGrade.description}">
+										th:text="${report.risk.riskGrade.name()}">
 								</span>
                             </td>
                             <td>

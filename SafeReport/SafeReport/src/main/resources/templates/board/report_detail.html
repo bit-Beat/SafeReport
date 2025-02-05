@@ -13,7 +13,7 @@
 		}
 		hr.hr-13 {
 			border: 0;
-			border-top: 3px double #8c8c8c;
+			border-top: 5px double rgb(117, 117, 117);
 		}
 	</style>
 
@@ -136,7 +136,7 @@
 			</div>
 			
 			<!-- 첨부 이미지 -->
-			<div class="accordion" id="accordionExample" th:if="${report.attachfile}!='' AND ${report.attachfile}!=null">
+			<div class="accordion" id="accordionExample" th:if="${report.attachfile}!='' AND ${report.attachfile}!=null">				
 				<div class="accordion-item">
 				   <h2 class="accordion-header">
 				     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse" aria-expanded="false" aria-controls="collapse">
@@ -146,7 +146,25 @@
 				   </h2>
 				   <div id="collapse" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
 				     <div class="accordion-body">
-						<img th:src="@{'/uploads/' + ${report.attachfile_upload}}" class="img-fluid rounded" alt="image error" style="max-width: 30rem;">
+						<div id="carouselExampleIndicators" class="carousel slide">
+							<div class="carousel-indicators">
+							  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-label="Slide 1"></button>
+							</div>
+							<div class="carousel-inner">
+							<div class="carousel-item active d-flex justify-content-center align-items-center">
+							    <img th:src="@{'/uploads/' + ${report.attachfile_upload}}" class="d-block w-100 mx-auto img-fluid rounded" alt="첨부 이미지" style="max-height: 40rem;">
+							</div>
+							</div>
+							<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+							  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							  <span class="visually-hidden">Previous</span>
+							</button>
+							<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+							  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+							  <span class="visually-hidden">Next</span>
+							</button>
+						</div>
+						
 				     </div>
 				   </div>
 				 </div>
@@ -235,7 +253,7 @@
 																					report.risk.riskGrade == T(com.example.SafeReport.Enum.RiskGrade).C ? 'badge text-bg-primary' : 
 																					report.risk.riskGrade == T(com.example.SafeReport.Enum.RiskGrade).D ? 'badge text-bg-success' : 
 																					'badge text-bg-light') : 'badge text-bg-light'}" 
-								  th:text="${report.risk.riskGrade.description}">
+								  th:text="${report.risk.riskGrade.name()}">
 						</td>
 						<td><span th:classappend="${report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).PENDING ? 'badge text-bg-secondary' : 
 																report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).REVIEWED ? 'badge text-bg-primary' : 
@@ -251,6 +269,165 @@
 					</tr>
 				</tbody>
 			</table>
+		</div>
+		
+		<div class="container mt-5" th:if="${report.riskAssessmentA?.riskAssessmentId} OR ${report.riskAssessmentB?.riskAssessmentId} OR ${not #lists.isEmpty(report.riskAssessmentC)}">
+			<hr class="hr-13">
+			<h2 class="border-bottom py-3" >위험성 평가 <i class="bi bi-clipboard-check"></i></h2>
+			
+			<div id = "RiskA" th:if="${report.riskAssessmentA?.riskAssessmentId}">
+				<table class="table table-bordered table-sm align-middle">
+				    <thead class="table-light">
+				        <tr>
+				            <th colspan="2" class="text-center">위험성 추정</th>
+				            <th rowspan="2" class="text-center align-middle">위험성 결정</th>
+				        </tr>
+				        <tr>
+				            <th class="text-center">가능성</th>
+				            <th class="text-center">중대성</th>
+				        </tr>
+				    </thead>
+				    <tbody>
+				        <tr>
+				            <td class="text-center" th:text="${report.riskAssessmentA?.possibilityBefore}"></td>
+				            <td class="text-center" th:text="${report.riskAssessmentA?.importanceBefore}"></td>
+				            <td class="text-center fw-bold">
+				                <span th:text="${(report.riskAssessmentA?.possibilityBefore ?: 0) * (report.riskAssessmentA?.importanceBefore ?: 0)}"></span>
+				            </td>
+				        </tr>
+				        <tr>
+				            <td class="text-center" th:text="${report.riskAssessmentA?.possibilityAfter}"></td>
+				            <td class="text-center" th:text="${report.riskAssessmentA?.importanceAfter}"></td>
+				            <td class="text-center fw-bold">
+				                <span th:text="${(report.riskAssessmentA?.possibilityAfter ?: 0) * (report.riskAssessmentA?.importanceAfter ?: 0)}"></span>
+				            </td>
+				        </tr>
+				    </tbody>
+				</table>
+
+				<!---h3 class="mb-4 mt-4">개선 대책 협의</h3>-->
+
+				<table class="table table-bordered table-sm align-middle">
+				    <tbody>
+				        <tr >
+				            <td class="fw-bold text-center table-light" style="width: 15%;">작업자</td>
+				            <td colspan="3" th:text="${report.riskAssessmentA?.workerName}"></td>
+				        </tr>
+				        <tr>
+				            <td class="fw-bold text-center table-light" style="width: 15%;" >관리감독자</td>
+				            <td th:text="${report.riskAssessmentA?.supervisorName}"></td>
+				            <td class="fw-bold text-center table-light" style="width: 15%;" >수급인 대표</td>
+				            <td th:text="${report.riskAssessmentA?.representativeName}"></td>
+				        </tr>
+				        <tr>
+				            <td class="fw-bold text-center table-light">본질적 대책 <i class="bi bi-patch-check-fill text-primary" th:if="${report.riskAssessmentA?.essential_checked}"></i></td>
+				            <td colspan="3" style="white-space: pre-wrap;" th:text="${report.riskAssessmentA?.essential_measures}"></td>
+				        </tr>
+				        <tr>
+				            <td class="fw-bold text-center table-light">공학적 대책 <i class="bi bi-patch-check-fill text-primary" th:if="${report.riskAssessmentA?.administrative_checked}"></i></td>
+				            <td colspan="3" style="white-space: pre-wrap;" th:text="${report.riskAssessmentA?.administrative_measures}"></td>
+				        </tr>
+				        <tr>
+				            <td class="fw-bold text-center table-light">관리적 대책 <i class="bi bi-patch-check-fill text-primary" th:if="${report.riskAssessmentA?.engineering_checked}"></i></td>
+				            <td colspan="3" style="white-space: pre-wrap;" th:text="${report.riskAssessmentA?.engineering_measures}"></td>
+				        </tr>
+				        <tr>
+				            <td class="fw-bold text-center table-light">개인보호구 <i class="bi bi-patch-check-fill text-primary" th:if="${report.riskAssessmentA?.equipment_checked}"></i></td>
+				            <td colspan="3" style="white-space: pre-wrap;" th:text="${report.riskAssessmentA?.personal_equipment}"></td>
+				        </tr>
+				        <tr>
+				            <td class="fw-bold text-center table-light">확정 대책</td>
+				            <td colspan="3" th:text="${report.riskAssessmentA?.confirmed_measured}"></td>
+				        </tr>
+				        <tr>
+				            <td class="fw-bold text-center table-light">조치 예정</td>
+				            <td colspan="3" th:text="${#temporals.format(report.riskAssessmentA?.confirmed_date, 'yyyy-MM-dd')}"></td>
+				        </tr>
+				    </tbody>
+				</table>
+			</div>
+			
+			<div id = "RiskB" th:if="${report.riskAssessmentB?.riskAssessmentId}">
+				<table class="table table-bordered table-sm align-middle">
+				    <thead class="table-light">
+						<tr>
+							<th class="text-center" colspan="2">3단계 평가</th>
+						</tr>	
+						<tr>
+							<th class="text-center">개선전</th>
+							<th class="text-center">개선후</th>
+						</tr>				    
+				    </thead>
+				    <tbody>
+				        <tr>
+							<td class="text-center" th:text="${report.riskAssessmentB?.possibilityBefore}"></td>
+				            <td class="text-center" th:text="${report.riskAssessmentB?.possibilityAfter}"></td>
+				        </tr>
+				    </tbody>
+				</table>
+
+				<!---h3 class="mb-4 mt-4">개선 대책 협의</h3>-->
+
+				<table class="table table-bordered table-sm align-middle">
+				    <tbody>
+				        <tr >
+				            <td class="fw-bold text-center table-light" style="width: 15%;">작업자</td>
+				            <td colspan="3" th:text="${report.riskAssessmentB?.workerName}"></td>
+				        </tr>
+				        <tr>
+				            <td class="fw-bold text-center table-light" style="width: 15%;" >관리감독자</td>
+				            <td th:text="${report.riskAssessmentB?.supervisorName}"></td>
+				            <td class="fw-bold text-center table-light" style="width: 15%;" >수급인 대표</td>
+				            <td th:text="${report.riskAssessmentB?.representativeName}"></td>
+				        </tr>
+				        <tr>
+				            <td class="fw-bold text-center table-light">본질적 대책 <i class="bi bi-patch-check-fill text-primary" th:if="${report.riskAssessmentB?.essential_checked}"></i></td>
+				            <td colspan="3" style="white-space: pre-wrap;" th:text="${report.riskAssessmentB?.essential_measures}"></td>
+				        </tr>
+				        <tr>
+				            <td class="fw-bold text-center table-light">공학적 대책 <i class="bi bi-patch-check-fill text-primary" th:if="${report.riskAssessmentB?.administrative_checked}"></i></td>
+				            <td colspan="3" style="white-space: pre-wrap;" th:text="${report.riskAssessmentB?.administrative_measures}"></td>
+				        </tr>
+				        <tr>
+				            <td class="fw-bold text-center table-light">관리적 대책 <i class="bi bi-patch-check-fill text-primary" th:if="${report.riskAssessmentB?.engineering_checked}"></i></td>
+				            <td colspan="3" style="white-space: pre-wrap;" th:text="${report.riskAssessmentB?.engineering_measures}"></td>
+				        </tr>
+				        <tr>
+				            <td class="fw-bold text-center table-light">개인보호구 <i class="bi bi-patch-check-fill text-primary" th:if="${report.riskAssessmentB?.equipment_checked}"></i></td>
+				            <td colspan="3" style="white-space: pre-wrap;" th:text="${report.riskAssessmentB?.personal_equipment}"></td>
+				        </tr>
+				        <tr>
+				            <td class="fw-bold text-center table-light">확정 대책</td>
+				            <td colspan="3" th:text="${report.riskAssessmentB?.confirmed_measured}"></td>
+				        </tr>
+				        <tr>
+				            <td class="fw-bold text-center table-light">조치 예정</td>
+				            <td colspan="3" th:text="${#temporals.format(report.riskAssessmentB?.confirmed_date, 'yyyy-MM-dd')}"></td>
+				        </tr>
+				    </tbody>
+				</table>
+			</div>
+			
+			<div id = "RiskC" th:if="${not #lists.isEmpty(report.riskAssessmentC)}">
+				<table class="table table-bordered table-sm align-middle">
+				    <thead class="table-light">
+						<tr>
+						    <th class="text-center">구분</th>
+						    <th class="text-center">내용</th>
+						    <th class="text-center">위험성 확인 결과</th>
+						    <th class="text-center">개선방안</th>
+						</tr>		    
+				    </thead>
+				    <tbody>
+						<tr th:each="riskAssessment : ${report.riskAssessmentC}">
+							<td class="text-center" th:text="${riskAssessment.category}" maxlength="15">구분</td>
+							<td class="text-center" th:text="${riskAssessment.contents}" maxlength="120">내용</td>
+							<td class="text-center" th:text="${riskAssessment.result}"></td>
+							<td class="text-center" th:text="${riskAssessment.improvement}"></td>
+						</tr>
+				    </tbody>
+				</table>
+			</div>
 		</div>
 		<!--body끝-->
 		
