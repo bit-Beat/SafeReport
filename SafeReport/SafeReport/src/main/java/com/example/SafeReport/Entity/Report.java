@@ -47,7 +47,7 @@ public class Report {
 	@Column(nullable = false, length=255)
 	private String report_location;
 	
-	@Column(nullable = false, length=25)
+	@Column(length=25)
 	private String report_area; // 안전핀포인트 구역
 	
 	@Column(nullable = false, columnDefinition = "TEXT")
