@@ -3,12 +3,152 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+	<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+	
     <link rel="stylesheet" type="text/css" href="/static/bootstrap.min.css">
 	<style>
 		.row1{
 			background-color: rgb(255, 255, 255);
 		}
 	</style>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	<script>
+		document.addEventListener("DOMContentLoaded", function(){
+			// ✅ 초기 데이터 로드				
+			const areaSelect = document.querySelector("select[name='area']");
+			const reportTableBody = document.querySelector("tbody");
+			const paginationDiv = document.getElementById("pagination"); // 페이징 버튼
+
+			const formArea = document.querySelector("#formArea");
+			
+			let currentPage = 1;
+			let selectedArea = areaSelect.value || "A"; // 기본값 A
+			
+			fetchReportsByArea(areaSelect.value, 1);
+			
+			formArea.addEventListener("submit", async function (e){
+				e.preventDefault(); // 기본 폼 제출 동작 방치
+				const selectedArea = areaSelect.value;
+				fetchReportsByArea(selectedArea, currentPage);
+			})
+			
+			function fetchReportsByArea(area, page) {
+				
+				var token = $("meta[name='_csrf']").attr("content");
+				var header = $("meta[name='_csrf_header']").attr("content");
+								
+				fetch(`/admin/reports/by-area?area=${area}&page=${page}`, {
+					method : "GET",
+					headers:{
+						"Content-Type" : "application/json",
+						[header]: token, // 동적으로 CSRF 헤더 추가
+					},
+				})
+				.then(response => {
+					if (!response.ok)
+					{
+						throw new Error("서버 응답이 실패했습니다.");
+					}
+					return response.json();
+				})
+				.then(data => {
+					reportTableBody.innerHTML = ""; // 기존 데이터 초기화
+					if(data.length === 0 )
+					{
+						reportTableBody.innerHTML = `<tr><td colspan="4" class="text-center">해당 구역에 대한 제보가 없습니다.</td></tr>`;
+						return;
+					}
+					
+					data.content.forEach((report, index) => {
+						const row = document.createElement("tr");
+						row.innerHTML = `
+							<td>${index + 1}</td>
+							<td>
+							    <a href="/board/report_detail/${report.reportid}" class="d-inline-block text-truncate" style="max-width: 25vw;">
+							        ${report.report_title}
+							    </a>
+							    ${report.attachfile ? '<i class="bi bi-image-fill text-secondary mx-1"></i>' : ''}
+							</td>
+							<td>${report.reporter_name}</td>
+							<td>${report.report_department}</td>
+							<td>${report.report_createdate}</td> `;
+						reportTableBody.appendChild(row);
+					});
+					
+					createPaginationButtons(data.currentPage, data.totalPages); //✅ 페이징 UI 생성
+				})
+				.catch(error => {
+					console.error("데이터 로딩 오류:", error);
+					reportTableBody.innerHTML = `<tr><td colspan="4" class="text-center text-danger">데이터를 불러오는 데 실패했습니다.</td></tr>`;
+				});
+			}
+			
+			function createPaginationButtons(currentPage, totalPages) {
+			    const paginationDiv = document.querySelector(".pagination"); // ✅ 기존 HTML 페이징 요소 선택
+			    paginationDiv.innerHTML = ""; // ✅ 기존 버튼 초기화
+
+			    // ✅ [«] 버튼 (이전 5 페이지 이동)
+			    const prevFiveLi = document.createElement("li");
+			    prevFiveLi.className = "page-item";
+			    const prevFiveA = document.createElement("a");
+			    prevFiveA.className = "page-link";
+			    prevFiveA.href = "javascript:void(0)";
+			    prevFiveA.dataset.page = currentPage - 5 < 1 ? 1 : currentPage - 5;
+			    prevFiveA.setAttribute("aria-label", "Previous 5 Pages");
+			    prevFiveA.innerHTML = "<span aria-hidden='true'>&laquo;</span>";
+			    prevFiveA.addEventListener("click", function () {
+			        const targetPage = parseInt(this.dataset.page);
+			        fetchReportsByArea(selectedArea, targetPage);
+			    });
+			    prevFiveLi.appendChild(prevFiveA);
+			    paginationDiv.appendChild(prevFiveLi);
+
+			    // ✅ 개별 페이지 번호
+			    let startPage = currentPage <= 2 ? 0 : (currentPage >= totalPages - 3 ? totalPages - 5 : currentPage - 2);
+			    let endPage = currentPage <= 2 ? 4 : (currentPage >= totalPages - 3 ? totalPages - 1 : currentPage + 2);
+
+			    for (let page = startPage; page <= endPage; page++) {
+			        const pageLi = document.createElement("li");
+			        pageLi.className = `page-item ${page + 1 === currentPage ? "active" : ""}`;
+			        
+			        const pageA = document.createElement("a");
+			        pageA.className = "page-link";
+			        pageA.href = "javascript:void(0)";
+			        pageA.dataset.page = page + 1;
+			        pageA.textContent = page + 1;
+			        
+			        pageA.addEventListener("click", function () {
+			            const targetPage = parseInt(this.dataset.page);
+			            fetchReportsByArea(selectedArea, targetPage);
+			        });
+
+			        pageLi.appendChild(pageA);
+			        paginationDiv.appendChild(pageLi);
+			    }
+
+			    // ✅ [»] 버튼 (다음 5 페이지 이동)
+			    const nextFiveLi = document.createElement("li");
+			    nextFiveLi.className = `page-item ${currentPage + 5 >= totalPages ? "disabled" : ""}`;
+			    
+			    const nextFiveA = document.createElement("a");
+			    nextFiveA.className = "page-link";
+			    nextFiveA.href = "javascript:void(0)";
+			    nextFiveA.dataset.page = currentPage + 5 >= totalPages ? totalPages : currentPage + 5;
+			    nextFiveA.setAttribute("aria-label", "Next 5 Pages");
+			    nextFiveA.innerHTML = "<span aria-hidden='true'>&raquo;</span>";
+
+			    nextFiveA.addEventListener("click", function () {
+			        const targetPage = parseInt(this.dataset.page);
+			        fetchReportsByArea(selectedArea, targetPage);
+			    });
+
+			    nextFiveLi.appendChild(nextFiveA);
+			    paginationDiv.appendChild(nextFiveLi);
+			}
+
+		});
+	</script>
 </head>
 
 <body>
@@ -24,15 +164,17 @@
 			<div class="row g-4 row1 pb-3">
 				<div class="col-12 col-xxl-6">
 					<div class="row justify-content-md-center mb-4 g-3">
-					    <div class="col-8 col-sm-4 input-group align-items-center">
-					    	<p class="mb-0">구역 </p>
-							<select class="form-select form-select-sm" >
-					    		<option>A</option>
-					        	<option>B</option>
-					        	<option>C</option>
-					    	</select>
-							<button class="btn btn-primary btn-sm">검색</button>
-						</div>
+						<form id="formArea">
+					    	<div class="col-8 col-sm-4 input-group align-items-center">
+					    		<p class="mb-0">구역 </p>
+								<select class="form-select form-select-sm" name="area">
+					    			<option value="A">A</option>
+					        		<option value="B">B</option>
+					        		<option value="C">C</option>
+					    		</select>
+								<button type="submit" class="btn btn-primary btn-sm">검색</button>
+							</div>
+						<form>
 					</div>
 					<hr class="bg-body-secondary mb-3 mt-3">
 					<!--<img src="https://designhumor.kr/wp-content/uploads/2016/12/Factory-production-line-3d-simulation002.jpg" class="img-fluid" alt="...">-->
@@ -54,37 +196,33 @@
 									<th>번호</th>
 									<th>제목</th>
 									<th>작성자</th>
+									<th>소속</th>
 									<th>작성일</th>
+									<th>구역<th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr th:each="report, loop : ${reportList}">
 									<td th:text="${loop.count}"></td>
 									<td class="align-middle product white-space-nowrap">
-										<a th:href="@{|/board/report_detail/${report.reportid}|}" >[[${report.report_title}]]</a>
+										<a th:href="@{|/board/report_detail/${report.reportid}|}" class="d-inline-block text-truncate" style="max-width: 25vw;">[[${report.report_title}]]</a>
 										<i th:if="${report.attachfile}!='' AND ${report.attachfile}!=null" class="bi bi-image-fill text-secondary mx-1" ></i>
 									</td>
 									<td>[[${report.reporter_name}]]</td>
 									<td th:text="${#temporals.format(report.reportcreatedate, 'yyyy-MM-dd HH:mm')}"></td>
+									<td>[[${report.report_area}]]</td>
 								</tr>
 							</tbody>
 						</table>
+						
+						<div id="pagination" class="pagination justify-content-center"></div>
 					</div>
 				</div>
 			</div>
 			
 			<div class="row mt-3">
 				<div class="col-12">
-					<div class="card">
-					  <div class="card-header">
-					    2024년 2월 안전신문고 통계 현황
-					  </div>
-					  <div class="card-body d-flex justify-content-center align-items-center w-100">
-					    
-						<img src="/static/img/PinPoint/test.png" class="img-fluid" alt="..." >
-					    
-					  </div>
-					</div>
+					
 				</div>
 			</div>
 

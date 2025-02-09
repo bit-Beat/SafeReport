@@ -95,6 +95,7 @@ public class ReportController {
 		Page<Report> paging = this.indexService.getList(page-1, keyword);  // page - 1로 0부터 시작
 		model.addAttribute("paging", paging); // 모델 객체에 questionList라는 이름으로 저장했다. 
 		model.addAttribute("keyword", keyword);
+		model.addAttribute("page", "reportlist");
 		return "board/report_list";
 	}
 	

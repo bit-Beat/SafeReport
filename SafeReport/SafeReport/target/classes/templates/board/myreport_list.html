@@ -72,7 +72,7 @@
 								  	style="margin-right: 5px; font-size: 0.7em;"></span>
 						</td>
 						<td>
-							<a th:href="@{|/board/report_detail/${report.reportid}|}" >[[${report.report_title}]]</a>
+							<a th:href="@{|/board/report_detail/${report.reportid}|}" class="d-inline-block text-truncate" style="max-width: 12vw;">[[${report.report_title}]]</a>
 						</td>
 						<td>[[${report.reporter_name}]]</td>
 						<td>[[${report.report_department}]]</td>
@@ -81,7 +81,7 @@
 				</tbody>
 			</table>
 		</div>
-		
+		<p></p>
 		<!-- 페이징처리 시작 -->
 		   <div th:if="${!paging.isEmpty()}">
 		       <ul class="pagination justify-content-center">

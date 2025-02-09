@@ -13,7 +13,7 @@
 		}
 		hr.hr-13 {
 			border: 0;
-			border-top: 5px double rgb(117, 117, 117);
+			border-top: 6px double rgb(136, 136, 136);
 		}
 	</style>
 
@@ -107,8 +107,9 @@
 		<span id="error-message" style="display:none;">[[${error}]]</span>
 		<!--body시작-->
 		<!--질문-->
+		
 		<div class="container mt-5">	
-			<h2 class="border-bottom py-2" th:text="${report.report_title}"></h2>
+			<h2 class="border-bottom py-2 overflow-auto" th:text="${report.report_title}"></h2>
 			
 			<div class="card my-3">
 				<div class="card-header" >				

@@ -26,7 +26,7 @@
 					    <a class="nav-link" href="/pinpoint/main" th:classappend="${page == 'pinpoint'} ? 'active' : ''">안전핀포인트</a>
 					</li>
 					<li class="nav-item">
-					    <a class="nav-link" href="/reportlist" >신고현황</a>
+					    <a class="nav-link" href="/reportlist" th:classappend="${page == 'reportlist'} ? 'active' : ''">신고현황</a>
 					</li>
                     <li class="nav-item">
                         <a class="nav-link" href="/" th:classappend="${page == 'report'} ? 'active' : ''">신고접수</a>

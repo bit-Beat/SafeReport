@@ -72,7 +72,7 @@
                     <tbody>
                         <tr th:each="report, loop : ${report}">
                             <td th:text="${loop.count}"></td>
-                            <td th:text="${report.report_title}"></td>
+                            <td><span class="d-inline-block text-truncate" style="max-width: 15vw;" th:text="${report.report_title}"></span></td>
                             <td th:text="${report.reporter_name}"></td>
 							<td th:text="${report.report_managedepartment}"></td>
                             <td>

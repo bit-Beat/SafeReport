@@ -7,7 +7,7 @@
 	<style>
 		hr.hr-13 {
 			border: 0;
-			border-top: 3px double #8c8c8c;
+			border-top: 6px double rgb(136, 136, 136);
 		}
 		.bi-lightning-fill {
 		    fill: #ffc107;
@@ -26,8 +26,8 @@
 	<div layout:fragment="content" class="container-fluid">
 		<!--body시작-->
 		<!--질문-->
-		<div class="container mt-5 mb-5">	
-			<h2 class="border-bottom py-2" th:text="${report.report_title}"></h2>
+		<div class="container mt-5">	
+			<h2 class="border-bottom py-2 overflow-auto" th:text="${report.report_title}"></h2>
 			
 			<div class="card my-3">
 				<div class="card-header">				
@@ -52,6 +52,41 @@
 			  <div class="card-body">
 				<p class="card-text" th:text="${report.report_detail}"></p>
 			  </div>
+			</div>
+			
+			<!-- 첨부 이미지 -->
+			<div class="accordion" id="accordionExample" th:if="${report.attachfile}!='' AND ${report.attachfile}!=null">				
+				<div class="accordion-item">
+				   <h2 class="accordion-header">
+				     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse" aria-expanded="false" aria-controls="collapse">
+				       첨부 이미지
+					   <span class="badge rounded-pill text-bg-danger ms-2">1</span>
+				     </button>
+				   </h2>
+				   <div id="collapse" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+				     <div class="accordion-body">
+						<div id="carouselExampleIndicators" class="carousel slide">
+							<div class="carousel-indicators">
+							  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-label="Slide 1"></button>
+							</div>
+							<div class="carousel-inner">
+							<div class="carousel-item active d-flex justify-content-center align-items-center">
+							    <img th:src="@{'/uploads/' + ${report.attachfile_upload}}" class="d-block w-100 mx-auto img-fluid rounded" alt="첨부 이미지" style="max-height: 40rem;">
+							</div>
+							</div>
+							<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+							  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							  <span class="visually-hidden">Previous</span>
+							</button>
+							<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+							  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+							  <span class="visually-hidden">Next</span>
+							</button>
+						</div>
+						
+				     </div>
+				   </div>
+				 </div>
 			</div>
 		</div>
 		

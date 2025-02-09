@@ -1,11 +1,17 @@
 package com.example.SafeReport.Service;
 
-import java.io.File;
+import java.io.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -126,6 +132,18 @@ public class ReportService {
             throw new DataNotFoundException("question not found");
         }
     }
+	
+	//구역 페이징 불러오기
+	public Page<Report> getArea_List(int page, String area)
+	{
+		    List<Sort.Order> sorts = new ArrayList<>();
+		    sorts.add(Sort.Order.desc("reportcreatedate"));
+		    Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
+		    return this.reportRepository.findAllByArea(area, pageable);
+		    
+		    //Specification<Report> spec = reporterNameContains(keyword);
+		    //return this.reportRepository.findAll(spec, pageable);
+	}
 	
 	@Transactional
 	public void delete(Report report) {
