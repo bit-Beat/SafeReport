@@ -82,35 +82,33 @@
 			</table>
 		</div>
 		<p></p>
+		
 		<!-- 페이징처리 시작 -->
-		   <div th:if="${!paging.isEmpty()}">
-		       <ul class="pagination justify-content-center">
-					<li class="page-item">
-					  <a class="page-link" href="javascript:void(0)" th:data-page="${paging.number - 5 < 1 ? 1 : paging.number - 5}" aria-label="Previous 5 Pages">
-					      <span aria-hidden="true">&laquo;</span>
-					  </a>
+		<div th:if="${!paging.isEmpty()}">
+		    <ul class="pagination justify-content-center">
+				<li class="page-item" th:classappend="${paging.number < 5 } ? 'disabled'">
+					<a class="page-link" href="javascript:void(0)" th:data-page="${paging.number - 5 < 1 ? 1 : paging.number - 5}" aria-label="Previous 5 Pages">
+				      <span aria-hidden="true">&laquo;</span>
+				  	</a>
+				<li th:each="page: ${#numbers.sequence((paging.number/5)*5, ((paging.number/5)*5) + 4 > paging.totalPages-1 ? paging.totalPages-1 : ((paging.number/5)*5) + 4)}"
+				          th:classappend="${page == paging.number} ? 'active'"
+				          class="page-item">
+					<a th:text="${page + 1}" class="page-link" href="javascript:void(0)" th:data-page="${page+1}"></a>
+				</li>
 
-				   <li th:each="page : ${#numbers.sequence(
-				                       (paging.number <= 2) ? 0 : (paging.number >= paging.totalPages - 3 ? paging.totalPages - 5 : paging.number - 2), 
-				                       (paging.number <= 2) ? 4 : (paging.number >= paging.totalPages - 3 ? paging.totalPages - 1 : paging.number + 2))}"
-				       th:classappend="${page == paging.number} ? 'active'"
-				       class="page-item">
-				       <a th:text="${page + 1}" class="page-link" href="javascript:void(0)" th:data-page="${page + 1}"></a>
-				   </li>
-
-				   <li class="page-item" th:classappend="${paging.number + 5 >= paging.totalPages} ? 'disabled'">
-						<a class="page-link" href="javascript:void(0)" th:data-page="${paging.number +5 >= paging.totalPages ? paging.totalPages - 1 : paging.number + 5}" aria-label="Next 5 Pages">
-							<span aria-hidden="true">&raquo;</span>
-						</a>
-					</li>
-		       </ul>
-		   </div>
-		   <!-- 페이징처리 끝 -->
+			   	<li class="page-item" th:classappend="${paging.number + 1 > paging.totalPages - 1} ? 'disabled'">
+					<a class="page-link" href="javascript:void(0)" th:data-page="${((paging.number / 5) * 5) + 6}" aria-label="Next 5 Pages">
+						<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+		    </ul>
+		</div>
+		<!-- 페이징처리 끝 -->
 		   
-		   <form th:action="@{/myreports}" method="get" id="searchForm">
-				<input type="hidden" id="keyword" name="keyword" th:value="${keyword}">
-				<input type="hidden" id="page" name="page" th:value="${paging.number}">
-			</form>
+		<form th:action="@{/myreports}" method="get" id="searchForm">
+			<input type="hidden" id="keyword" name="keyword" th:value="${keyword}">
+			<input type="hidden" id="page" name="page" th:value="${paging.number}">
+		</form>
 			
 		</div>
 	</div>

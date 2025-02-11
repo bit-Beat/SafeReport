@@ -54,9 +54,11 @@
 				})
 				.then(data => {
 					reportTableBody.innerHTML = ""; // 기존 데이터 초기화
-					if(data.length === 0 )
+					
+					if(data.totalItems === 0 )
 					{
-						reportTableBody.innerHTML = `<tr><td colspan="4" class="text-center">해당 구역에 대한 제보가 없습니다.</td></tr>`;
+						reportTableBody.innerHTML = `<tr><td colspan="7" class="text-center">해당 구역에 대한 제보가 없습니다.</td></tr>`;
+						createPaginationButtons(data.currentPage, data.totalPages); //✅ 페이징 UI 생성
 						return;
 					}
 					
@@ -72,10 +74,10 @@
 							</td>
 							<td>${report.reporter_name}</td>
 							<td>${report.report_department}</td>
-							<td>${report.report_createdate}</td> `;
+							<td>${report.report_createdate}</td> 
+							<td>${report.report_area}</td> `;
 						reportTableBody.appendChild(row);
 					});
-					
 					createPaginationButtons(data.currentPage, data.totalPages); //✅ 페이징 UI 생성
 				})
 				.catch(error => {
@@ -87,64 +89,68 @@
 			function createPaginationButtons(currentPage, totalPages) {
 			    const paginationDiv = document.querySelector(".pagination"); // ✅ 기존 HTML 페이징 요소 선택
 			    paginationDiv.innerHTML = ""; // ✅ 기존 버튼 초기화
+				
+				if(totalPages === 0) return; // 데이터가 없으면 페이징 UI를 생성하지 않음.
 
-			    // ✅ [«] 버튼 (이전 5 페이지 이동)
-			    const prevFiveLi = document.createElement("li");
-			    prevFiveLi.className = "page-item";
-			    const prevFiveA = document.createElement("a");
-			    prevFiveA.className = "page-link";
-			    prevFiveA.href = "javascript:void(0)";
-			    prevFiveA.dataset.page = currentPage - 5 < 1 ? 1 : currentPage - 5;
-			    prevFiveA.setAttribute("aria-label", "Previous 5 Pages");
-			    prevFiveA.innerHTML = "<span aria-hidden='true'>&laquo;</span>";
-			    prevFiveA.addEventListener("click", function () {
-			        const targetPage = parseInt(this.dataset.page);
-			        fetchReportsByArea(selectedArea, targetPage);
-			    });
-			    prevFiveLi.appendChild(prevFiveA);
-			    paginationDiv.appendChild(prevFiveLi);
+				// ✅ [«] 버튼 (이전 5 페이지 이동)
+				    const prevFiveLi = document.createElement("li");
+				    prevFiveLi.className = `page-item ${currentPage < 5 ? "disabled" : ""}`;
+				    
+				    const prevFiveA = document.createElement("a");
+				    prevFiveA.className = "page-link";
+				    prevFiveA.href = "javascript:void(0)";
+				    prevFiveA.dataset.page = currentPage - 5 < 1 ? 1 : currentPage - 5;
+				    prevFiveA.setAttribute("aria-label", "Previous 5 Pages");
+				    prevFiveA.innerHTML = "<span aria-hidden='true'>&laquo;</span>";
+				    prevFiveA.addEventListener("click", function () {
+				        const targetPage = parseInt(this.dataset.page);
+				        fetchReportsByArea(document.querySelector("select[name='area']").value, targetPage);
+				    });
 
-			    // ✅ 개별 페이지 번호
-			    let startPage = currentPage <= 2 ? 0 : (currentPage >= totalPages - 3 ? totalPages - 5 : currentPage - 2);
-			    let endPage = currentPage <= 2 ? 4 : (currentPage >= totalPages - 3 ? totalPages - 1 : currentPage + 2);
+				    prevFiveLi.appendChild(prevFiveA);
+				    paginationDiv.appendChild(prevFiveLi);
 
-			    for (let page = startPage; page <= endPage; page++) {
-			        const pageLi = document.createElement("li");
-			        pageLi.className = `page-item ${page + 1 === currentPage ? "active" : ""}`;
-			        
-			        const pageA = document.createElement("a");
-			        pageA.className = "page-link";
-			        pageA.href = "javascript:void(0)";
-			        pageA.dataset.page = page + 1;
-			        pageA.textContent = page + 1;
-			        
-			        pageA.addEventListener("click", function () {
-			            const targetPage = parseInt(this.dataset.page);
-			            fetchReportsByArea(selectedArea, targetPage);
-			        });
+				    // ✅ 개별 페이지 번호 (5개씩 그룹화)
+				    let startPage = Math.floor((currentPage - 1) / 5) * 5 + 1;
+				    let endPage = startPage + 4 > totalPages ? totalPages : startPage + 4;
 
-			        pageLi.appendChild(pageA);
-			        paginationDiv.appendChild(pageLi);
-			    }
+				    for (let page = startPage; page <= endPage; page++) {
+				        const pageLi = document.createElement("li");
+				        pageLi.className = `page-item ${page === currentPage ? "active" : ""}`;
 
-			    // ✅ [»] 버튼 (다음 5 페이지 이동)
-			    const nextFiveLi = document.createElement("li");
-			    nextFiveLi.className = `page-item ${currentPage + 5 >= totalPages ? "disabled" : ""}`;
-			    
-			    const nextFiveA = document.createElement("a");
-			    nextFiveA.className = "page-link";
-			    nextFiveA.href = "javascript:void(0)";
-			    nextFiveA.dataset.page = currentPage + 5 >= totalPages ? totalPages : currentPage + 5;
-			    nextFiveA.setAttribute("aria-label", "Next 5 Pages");
-			    nextFiveA.innerHTML = "<span aria-hidden='true'>&raquo;</span>";
+				        const pageA = document.createElement("a");
+				        pageA.className = "page-link";
+				        pageA.href = "javascript:void(0)";
+				        pageA.dataset.page = page;
+				        pageA.textContent = page;
 
-			    nextFiveA.addEventListener("click", function () {
-			        const targetPage = parseInt(this.dataset.page);
-			        fetchReportsByArea(selectedArea, targetPage);
-			    });
+				        pageA.addEventListener("click", function () {
+				            const targetPage = parseInt(this.dataset.page);
+							fetchReportsByArea(document.querySelector("select[name='area']").value, targetPage);
+				        });
 
-			    nextFiveLi.appendChild(nextFiveA);
-			    paginationDiv.appendChild(nextFiveLi);
+				        pageLi.appendChild(pageA);
+				        paginationDiv.appendChild(pageLi);
+				    }
+
+				    // ✅ [»] 버튼 (다음 5 페이지 이동)
+				    const nextFiveLi = document.createElement("li");
+				    nextFiveLi.className = `page-item ${currentPage > totalPages -1 ? "disabled" : ""}`;
+
+				    const nextFiveA = document.createElement("a");
+				    nextFiveA.className = "page-link";
+				    nextFiveA.href = "javascript:void(0)";
+				    nextFiveA.dataset.page = currentPage + 5 >= totalPages ? totalPages : currentPage + 5;
+				    nextFiveA.setAttribute("aria-label", "Next 5 Pages");
+				    nextFiveA.innerHTML = "<span aria-hidden='true'>&raquo;</span>";
+
+				    nextFiveA.addEventListener("click", function () {
+				        const targetPage = parseInt(this.dataset.page);
+				        fetchReportsByArea(document.querySelector("select[name='area']").value, targetPage);
+				    });
+
+				    nextFiveLi.appendChild(nextFiveA);
+				    paginationDiv.appendChild(nextFiveLi);
 			}
 
 		});
