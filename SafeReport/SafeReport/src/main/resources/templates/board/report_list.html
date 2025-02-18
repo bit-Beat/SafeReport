@@ -87,8 +87,7 @@
 					<tr th:each="report, loop : ${paging}">
 						<td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
 						<td><span th:classappend="${report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).PENDING ? 'badge text-bg-secondary' : 
-												report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).REVIEWED ? 'badge text-bg-primary' : 
-												report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).DISCUSSING ? 'badge text-bg-danger' : 
+												report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).DISCUSSING ? 'badge text-bg-primary' : 
 												report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).IN_PROGRESS ? 'badge text-bg-warning' : 
 												report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).COMPLETED ? 'badge text-bg-success' : 
 												'badge text-bg-light'}" 

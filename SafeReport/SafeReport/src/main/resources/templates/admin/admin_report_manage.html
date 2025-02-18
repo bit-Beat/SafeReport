@@ -204,8 +204,7 @@
 										  th:text="${report.risk.riskGrade.name()}">
 								</td>
 								<td><span th:classappend="${report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).PENDING ? 'badge text-bg-secondary' : 
-																		report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).REVIEWED ? 'badge text-bg-primary' : 
-																		report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).DISCUSSING ? 'badge text-bg-danger' : 
+																		report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).DISCUSSING ? 'badge text-bg-primary' : 
 																		report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).IN_PROGRESS ? 'badge text-bg-warning' : 
 																		report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).COMPLETED ? 'badge text-bg-success' : 
 																		'badge text-bg-light'}" 
@@ -506,21 +505,21 @@
 		
 
 		<!-- Modal -->
-		<div class="modal fade" id="Modal1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-		  <div class="modal-dialog">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h1 class="modal-title fs-5" id="staticBackdropLabel">데이터 전송 확인</h1>
-		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		      </div>
-		      <div class="modal-body text-center">
-		        본문내용
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">닫기</button>
-		      </div>
-		    </div>
-		  </div>
+		<div class="modal fade" id="Modal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+			  <div class="modal-content">
+			    <div class="modal-header">
+			      <h1 class="modal-title fs-5" id="staticBackdropLabel">데이터 전송 확인</h1>
+			      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			    </div>
+			    <div class="modal-body text-center">
+			      본문내용
+			    </div>
+			    <div class="modal-footer">
+			      
+			    </div>
+			  </div>
+			</div>
 		</div>
 		<!-- Modal -->
 		

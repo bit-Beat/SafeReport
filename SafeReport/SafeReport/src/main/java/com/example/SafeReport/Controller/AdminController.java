@@ -425,5 +425,39 @@ public class AdminController {
 		 }	
 	 }
 	 
+	@PostMapping("/admin/reports/ajax/{id}")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> updateRisk_Ajax(@PathVariable("id") Integer id, @RequestBody Map<String, Object> request) {
+		Map<String, Object> response = new HashMap<>();
 
+		try {
+		    String riskFactor = (String) request.get("riskFactor");
+		    String riskType = (String) request.get("riskType");
+		    String reportDepartment = (String) request.get("reportDepartment");
+
+		    //Enum 값 변환
+		    //RiskStatus status = RiskStatus.DISCUSSING;
+		    RiskGrade riskGrade = RiskGrade.valueOf((String) request.get("riskGrade"));
+
+		    // 엔티티 조회
+		    Risk risk = this.riskService.getRisk(id);
+		    Report report = this.reportService.getReport(id);
+
+		    //데이터 수정
+		    this.riskService.modify(risk, report, riskFactor, riskType, RiskStatus.DISCUSSING, riskGrade, reportDepartment);
+
+		    //성공 응답
+		    response.put("success", true);
+		    response.put("message", "데이터가 성공적으로 저장되었습니다.");
+		    return ResponseEntity.ok(response);
+
+		} 
+		catch (Exception e) {
+			response.put("success", false);
+		    response.put("error", e.getMessage());
+		    return ResponseEntity.ok(response);
+		}
+	}
+	
+ 	
 }
