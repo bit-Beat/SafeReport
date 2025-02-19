@@ -100,10 +100,13 @@ public class ReportController {
 	}
 	
 	@GetMapping(value = "/board/report_detail/{reportid}")
-	public String detail(Model model, @PathVariable("reportid") Integer reportid)
+	public String detail(Model model, @PathVariable("reportid") Integer reportid, Principal principal)
 	{
 		Report report = this.reportService.getReport(reportid);
+		Users user = userService.getUser(principal.getName());
+		
 		model.addAttribute("report", report);
+		model.addAttribute("user", user);
 		return "board/report_detail";
 	}
 	
