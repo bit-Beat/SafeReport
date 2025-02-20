@@ -13,6 +13,8 @@
 		}
 	</style>
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 	<script>
 		document.addEventListener("DOMContentLoaded", function(){
 			// ✅ 초기 데이터 로드				
@@ -155,6 +157,43 @@
 
 		});
 	</script>
+	<script type="text/javascript">
+	    // Google Charts 로드
+	    google.charts.load('current', {'packages':['corechart', 'bar']});
+	    google.charts.setOnLoadCallback(drawChart);
+
+	    // 차트 그리기 함수
+	    function drawChart() {
+	        // 데이터 배열
+	        var data = google.visualization.arrayToDataTable([
+	            ['위험등급', '건수', { role: 'style' }],
+	            ['A등급', 11, 'color: #dc3545'],  // 빨강
+	            ['B등급', 7,  'color: #ffc107'],  // 노랑
+	            ['C등급', 5,  'color: #0d6efd'],  // 파랑
+	            ['D등급', 3,  'color: #198754']   // 초록
+	        ]);
+
+	        // 옵션 설정
+	        var options = {
+	            title: '2월 위험성 평가 등급별 건수 (예시)',
+	            chartArea: {width: '70%'},
+	            vAxis: {
+	                title: '건수',
+	                minValue: 0
+	            },
+	            hAxis: {
+	                title: '위험등급'
+	            },
+	            width: 600,
+	            height: 400
+	        };
+
+	        // 차트 그리기 (ColumnChart 사용)
+	        var chart = new google.visualization.ColumnChart(document.getElementById('riskChart'));
+	        chart.draw(data, options);
+	    }
+	</script>
+
 </head>
 
 <body>
@@ -168,7 +207,7 @@
 			</div>
 			
 			<div class="row g-4 row1 pb-3">
-				<div class="col-12 col-xxl-6">
+				<div class="col-6">
 					<div class="row justify-content-md-center mb-4 g-3">
 						<form id="formArea">
 					    	<div class="col-8 col-sm-4 input-group align-items-center">
@@ -199,41 +238,51 @@
 					<img src="/static/img/PinPoint/pinPoint_mainlayout.png" class="img-fluid" alt="..." >
 				</div>
 				
-				<div class="col-xxl-6">
-					<div class="tabs">
-						<ul class="nav nav-tabs">
-					    	<li class="nav-item"><a class="nav-link active" href="#">안전신문고</a></li>
-					        <li class="nav-item"><a class="nav-link" href="#">점검 리스트</a></li>
-					        <li class="nav-item"><a class="nav-link" href="#">순찰 일지</a></li>
-					    </ul>
+				<div class="col-6">
+					<div class="row">
+						<div class="tabs">
+							<ul class="nav nav-tabs">
+						    	<li class="nav-item"><a class="nav-link active" href="#">안전신문고</a></li>
+						        <li class="nav-item"><a class="nav-link" href="#">점검 리스트</a></li>
+						        <li class="nav-item"><a class="nav-link" href="#">순찰 일지</a></li>
+						    </ul>
+						</div>
+						<div class="tab-content mt-3"> <!-- 테이블 또는 카드 형태로 데이터 표시 -->
+							<table class="table">
+								<thead class=>
+									<tr class="border-top">
+										<th>번호</th>
+										<th>제목</th>
+										<th>작성자</th>
+										<th>소속</th>
+										<th>작성일</th>
+										<th>구역<th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="report, loop : ${reportList}">
+										<td th:text="${loop.count}"></td>
+										<td class="align-middle product white-space-nowrap">
+											<a th:href="@{|/board/report_detail/${report.reportid}|}" class="d-inline-block text-truncate" style="max-width: 15vw;">[[${report.report_title}]]</a>
+											<i th:if="${report.attachfile}!='' AND ${report.attachfile}!=null" class="bi bi-image-fill text-secondary mx-1" ></i>
+										</td>
+										<td>[[${report.reporter_name}]]</td>
+										<td th:text="${#temporals.format(report.reportcreatedate, 'yyyy-MM-dd HH:mm')}"></td>
+										<td>[[${report.report_area}]]</td>
+									</tr>
+								</tbody>
+							</table>
+							
+							<div id="pagination" class="pagination justify-content-center"></div>
+						</div>
 					</div>
-					<div class="tab-content mt-3"> <!-- 테이블 또는 카드 형태로 데이터 표시 -->
-						<table class="table">
-							<thead class=>
-								<tr class="border-top">
-									<th>번호</th>
-									<th>제목</th>
-									<th>작성자</th>
-									<th>소속</th>
-									<th>작성일</th>
-									<th>구역<th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="report, loop : ${reportList}">
-									<td th:text="${loop.count}"></td>
-									<td class="align-middle product white-space-nowrap">
-										<a th:href="@{|/board/report_detail/${report.reportid}|}" class="d-inline-block text-truncate" style="max-width: 15vw;">[[${report.report_title}]]</a>
-										<i th:if="${report.attachfile}!='' AND ${report.attachfile}!=null" class="bi bi-image-fill text-secondary mx-1" ></i>
-									</td>
-									<td>[[${report.reporter_name}]]</td>
-									<td th:text="${#temporals.format(report.reportcreatedate, 'yyyy-MM-dd HH:mm')}"></td>
-									<td>[[${report.report_area}]]</td>
-								</tr>
-							</tbody>
-						</table>
-						
-						<div id="pagination" class="pagination justify-content-center"></div>
+					
+					<hr>
+					
+					<div class="card text-center">
+						<div class="card-body">
+							<div id="riskChart" style="display: flex; justify-content: center; align-items: center; width: 100%; height: 100%;"></div>
+						</div>
 					</div>
 				</div>
 			</div>
