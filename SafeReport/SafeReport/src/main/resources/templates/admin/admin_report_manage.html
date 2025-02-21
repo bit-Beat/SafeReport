@@ -221,9 +221,18 @@
 		</div>
 
 		<div class="col-md-6 mt-5 mb-5">
-			<h3 class="border-bottom py-2">			
-				위험성 평가 <i class="bi bi-clipboard-check"></i>
-			</h3>
+			<div class="row ">
+				<div class="col-md-4">
+					<h3 class="py-1">위험성 평가 <i class="bi bi-clipboard-check"></i></h3>
+				</div>
+				<div class="col-md-4 ms-auto d-flex justify-content-end py-1" >
+					<div >
+						<button type="button" class="btn btn-sm btn-primary" id="accepButton" th:disabled="${report.risk.status != T(com.example.SafeReport.Enum.RiskStatus).IN_PROGRESS}" ><i class="bi bi-patch-check-fill" style="margin-right: 5px;"></i>완료</button>
+					</div>
+				</div>
+			</div>
+			
+			<h3 class="border-bottom mb-2"></h3>
 			
 			<nav>
 			  <div class="nav nav-tabs" id="nav-tab" role="tablist">

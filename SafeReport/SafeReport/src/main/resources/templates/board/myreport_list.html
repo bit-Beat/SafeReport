@@ -71,7 +71,10 @@
 								  	style="margin-right: 5px; font-size: 0.7em;"></span>
 						</td>
 						<td>
-							<a th:href="@{|/board/report_detail/${report.reportid}|}" class="d-inline-block text-truncate" style="max-width: 12vw;">[[${report.report_title}]]</a>
+							<span style="display: inline-flex; align-items: center;">
+								<a th:href="@{|/board/report_detail/${report.reportid}|}" class="d-inline-block text-truncate" style="max-width: 12vw;">[[${report.report_title}]]</a>
+								<i th:if="${report.attachfile}!='' AND ${report.attachfile}!=null" class="bi bi-image text-secondary mx-2"></i>
+							</span>
 						</td>
 						<td>[[${report.reporter_name}]]</td>
 						<td>[[${report.report_department}]]</td>

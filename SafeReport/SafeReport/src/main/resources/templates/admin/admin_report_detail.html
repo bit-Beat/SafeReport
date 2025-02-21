@@ -225,6 +225,7 @@
 						
 			            <div class="text-end" >
 			                <button type="submit" class="btn btn-primary" onclick="return confirm('해당 내용으로 저장하시겠습니까?')" th:disabled="${report.risk.status != T(com.example.SafeReport.Enum.RiskStatus).PENDING}">저장</button>
+							<button class="btn btn-danger" onclick="return confirm('해당 제보를 반려하시겠습니까?')" th:disabled="${report.risk.status != T(com.example.SafeReport.Enum.RiskStatus).PENDING}">반려</button>
 			            </div>
 			        </form>
 			    </div>
