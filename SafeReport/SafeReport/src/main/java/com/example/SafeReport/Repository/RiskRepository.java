@@ -25,10 +25,12 @@ public interface RiskRepository extends JpaRepository<Risk, Integer> {
 		       "JOIN r.risk k " +
 		       "WHERE (:keyword IS NULL OR r.report_title LIKE %:keyword% OR r.reporter_name LIKE %:keyword%) " +
 		       "AND (:status IS NULL OR k.status = :status) " +
-		       "AND (:riskGrade IS NULL OR k.riskGrade = :riskGrade)")
+		       "AND (:riskGrade IS NULL OR k.riskGrade = :riskGrade)"+
+			"AND (:manageDepartment IS NULL OR :manageDepartment = '' OR r.report_managedepartment = :manageDepartment)")
 	Page<Report> findByKeywordAndFilters(@Param("keyword") String keyword,
 		        						 @Param("status") RiskStatus status,
 		        						 @Param("riskGrade") RiskGrade riskGrade,
+		        						 @Param("manageDepartment") String manageDepartment, // 담당부서
 		        						 Pageable pageable);
 	
 	 @Query("SELECT r FROM Report r WHERE (:keyword IS NULL OR r.report_title LIKE %:keyword% OR r.reporter_name LIKE %:keyword%) AND YEAR(r.reportcreatedate) = :year AND MONTH(r.reportcreatedate) = :month")

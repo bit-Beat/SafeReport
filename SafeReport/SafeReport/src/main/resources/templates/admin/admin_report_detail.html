@@ -21,9 +21,10 @@
 	</style>
 	
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-	<script>
+	<script th:inline="javascript">
 		document.addEventListener("DOMContentLoaded", function(){
 			const riskForm = document.querySelector("#riskForm"); 
+			const rejectMessageForm = document.querySelector("#Modal1"); // 반려사유입력 Modal
 				
 			riskForm.addEventListener("submit", async function (e){
 				e.preventDefault(); // 기본 폼 제출 동작 방지
@@ -52,6 +53,10 @@
 					if(data.success){
 						//console.log("success");
 						document.querySelector(".modal-body").textContent = "위험성 관리가 완료되었습니다.";
+						document.getElementById('riskStatus').className = "badge text-bg-primary";
+						document.getElementById('riskStatus').innerText = /*[[${T(com.example.SafeReport.Enum.RiskStatus).DISCUSSING.getDescription()}]]*/ '';
+						document.getElementById('submitBtn').disabled = true;
+						document.getElementById('rejectBtn').disabled = true;
 					}
 					else{
 						//console.log(data.error);
@@ -64,11 +69,61 @@
 					document.querySelector(".modal-body").textContent = "에러가 발생하였습니다." + data.error;
 				})
 				.finally(() =>{
+					document.querySelector(".modal-title").textContent = "결과";
 					const modal = new bootstrap.Modal(document.querySelector("#Modal1"));
 					modal.show();
 				}); 
 			});
+			
+			rejectMessageForm.addEventListener("submit", async function(e){
+				e.preventDefault(); // 기본폼 제출 동작 방지
+				funcReject(document.getElementById('rejectMessage').value); // Ajax Post				
+			})
+			
+			$('#Modal1').on('hide.bs.modal', function () {// 모달 내부에서 포커스된 요소가 있다면 blur()로 포커스를 제거
+			    if (document.activeElement && document.activeElement.closest('#Modal1')) document.activeElement.blur();			   
+			});
+
 		});
+		
+		function funcReject(Message){
+			var token = $("meta[name='_csrf']").attr("content");
+			var header = $("meta[name='_csrf_header']").attr("content");
+			const reportId = riskForm.getAttribute("data-report-id");
+			
+			fetch("/admin/reports/reject",{
+				method : "POST",
+				headers:{
+					"Content-Type" : "application/json",
+					[header]: token, // 동적으로 CSRF 헤더 추가
+				},
+				body: JSON.stringify({ reportId: reportId , message : Message })
+			})
+			.then((response) => response.json())
+			.then((data) => {
+				if(data.success){
+					document.querySelector(".modal-body").textContent = "제보가 성공적으로 반려되었습니다.";
+					document.getElementById('riskStatus').className = "badge text-bg-light";
+					document.getElementById('riskStatus').innerText = /*[[${T(com.example.SafeReport.Enum.RiskStatus).DENIED.getDescription()}]]*/ '';
+					document.getElementById('submitBtn').disabled = true;
+					document.getElementById('rejectBtn').disabled = true;
+				}
+				else{
+					document.querySelector(".modal-body").textContent = "에러가 발생하였습니다." + data.error;
+				}
+			})
+			.catch((error) => {
+				document.querySelector(".modal-body").textContent = "에러가 발생하였습니다." + data.error;
+			})
+			.finally(() =>{
+				document.querySelector(".modal-title").textContent = "결과";
+				//const modal = new bootstrap.Modal(document.querySelector("#Modal1"));
+				//modal.show();
+			}); 
+		}
+		
+		
+
 	</script>
 </head>
 
@@ -133,7 +188,6 @@
 							  <span class="visually-hidden">Next</span>
 							</button>
 						</div>
-						
 				     </div>
 				   </div>
 				 </div>
@@ -155,11 +209,20 @@
 			    <div class="card-header">위험 관리</div>
 			    <div class="card-body">
 					<form id="riskForm" th:action="@{/admin/reports/{id}(id=${report.reportid})}" method="post" th:data-report-id="${report.reportid}">
+						<div>
+							<label for="riskStatus" class="form-label me-2">접수 상태</label>
+							<span th:classappend="${report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).PENDING ? 'badge text-bg-secondary' : 
+									report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).DISCUSSING ? 'badge text-bg-primary' : 
+									report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).IN_PROGRESS ? 'badge text-bg-warning' : 
+									report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).COMPLETED ? 'badge text-bg-success' : 'badge text-bg-light'}" 
+									th:text="${report.risk.status.getDescription}" id="riskStatus">
+						</div>
 						
 			            <div class="mb-3">
 			                <label for="riskGrade" class="form-label">위험 등급</label>
 			                <select id="riskGrade" name="riskGrade" class="form-select">
 			                    <option th:each="grade : ${T(com.example.SafeReport.Enum.RiskGrade).values()}"
+										th:if="${grade} != ${T(com.example.SafeReport.Enum.RiskGrade).UNDEFINED}"
 			                            th:value="${grade.name()}"
 			                            th:text="${grade.name()}"
 			                            th:selected="${report.risk.riskGrade == grade}">
@@ -224,8 +287,8 @@
 						</div>
 						
 			            <div class="text-end" >
-			                <button type="submit" class="btn btn-primary" onclick="return confirm('해당 내용으로 저장하시겠습니까?')" th:disabled="${report.risk.status != T(com.example.SafeReport.Enum.RiskStatus).PENDING}">저장</button>
-							<button class="btn btn-danger" onclick="return confirm('해당 제보를 반려하시겠습니까?')" th:disabled="${report.risk.status != T(com.example.SafeReport.Enum.RiskStatus).PENDING}">반려</button>
+			                <button id="submitBtn" type="submit" class="btn btn-primary" onclick="return confirm('해당 내용으로 저장하시겠습니까?')" th:disabled="${report.risk.status != T(com.example.SafeReport.Enum.RiskStatus).PENDING}">저장</button>
+							<button id="rejectBtn" type="button" class="btn btn-danger"  th:disabled="${report.risk.status != T(com.example.SafeReport.Enum.RiskStatus).PENDING}" data-bs-toggle="modal" data-bs-target="#Modal1">반려</button>
 			            </div>
 			        </form>
 			    </div>
@@ -237,15 +300,19 @@
 		  <div class="modal-dialog">
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <h1 class="modal-title fs-5" id="staticBackdropLabel">데이터 전송 확인</h1>
+		        <h6 class="modal-title" id="staticBackdropLabel">반려사유를 입력하세요.</h6>
 		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
 		      <div class="modal-body text-center">
-		        본문내용
+				<form method="post">
+					<input type="text" name="rejectMessage" id="rejectMessage" class="form-control" placeholder="최대 20글자"  maxlength="20" required autocomplete="off">
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary">확인</button> 
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeModalButton">닫기</button>
+					</div>
+				</form>
 		      </div>
-		      <div class="modal-footer">
-		        
-		      </div>
+		      <div class="modal-footer"></div>
 		    </div>
 		  </div>
 		</div>

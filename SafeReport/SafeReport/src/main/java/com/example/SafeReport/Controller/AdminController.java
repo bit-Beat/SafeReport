@@ -57,10 +57,14 @@ public class AdminController {
     public String reportList(Model model, @RequestParam(value="page", defaultValue="1") int page,
     									  @RequestParam(value = "keyword", defaultValue = "") String keyword,
             							  @RequestParam(value = "status", required = false) String status,
-            							  @RequestParam(value = "riskGrade", required = false) String riskGrade, Principal principal) {
+            							  @RequestParam(value = "riskGrade", required = false) String riskGrade,
+            							  @RequestParam(value = "manageDepartment", required=false) String manageDepartment,
+            							  Principal principal) {
  		
+ 		Users user = userService.getUser(principal.getName());
  	    RiskStatus riskStatus = null;
  	    RiskGrade riskGradeEnum = null;
+ 	    
  	    // Convert status to RiskStatus enum
  	    if (status != null && !status.isEmpty()) {
  	        try {
@@ -79,14 +83,17 @@ public class AdminController {
  	        }
  	    }
  	    
- 		Page<Report> report = this.riskService.getFindRisks(keyword, riskStatus, riskGradeEnum, page-1);
- 		Users user = userService.getUser(principal.getName());
+ 	    if(!user.getRole().equals("adminsafety") && !user.getRole().equals("admin")) // 보안관리자 안전담당자가 아니면 자기 부서로만 검색 가능
+ 	    	manageDepartment = user.getDepartment();
+ 	    
+ 		Page<Report> report = this.riskService.getFindRisks(keyword, riskStatus, riskGradeEnum, manageDepartment,page-1);
 
  	    // Add attributes to the model
  	    model.addAttribute("report", report);
  	    model.addAttribute("keyword", keyword); // 작성자 or 제목
  	    model.addAttribute("selectedStatus", status); // 상태
  	    model.addAttribute("selectedRiskGrade", riskGrade); // 등급
+ 	    model.addAttribute("selectedDepartment", manageDepartment); // 등급
  	    model.addAttribute("user", user); // 유저정보
         return "admin/admin_reports";
     }
@@ -181,7 +188,7 @@ public class AdminController {
  	    Risk risk = this.riskService.getRisk(id);
  	    Report report = this.reportService.getReport(id);
  	    
- 	    this.riskService.modify(risk, report, riskFactor, riskType, status, riskGrade, reportDepartment);
+ 	    this.riskService.modify(risk, report, riskFactor, riskType, status, riskGrade, reportDepartment, null);
  	    return "redirect:/admin/reports/{id}" ;
  	}
  	
@@ -372,11 +379,8 @@ public class AdminController {
 			 response.put("success", false);
 			 response.put("error", e);
 		 }
-		 finally
-		 {
-			 return ResponseEntity.ok(response);
-		 }
 		 
+		 return ResponseEntity.ok(response);
 		 //return "redirect:/admin/reportsManage/" + reportid;
 	 }
 	 
@@ -419,10 +423,8 @@ public class AdminController {
 			 response.put("success", false);
 			 response.put("error", e);
 		 }
-		 finally
-		 {
-			 return ResponseEntity.ok(response);
-		 }	
+		
+		 return ResponseEntity.ok(response);
 	 }
 	 
 	@PostMapping("/admin/reports/ajax/{id}")
@@ -444,7 +446,7 @@ public class AdminController {
 		    Report report = this.reportService.getReport(id);
 
 		    //데이터 수정
-		    this.riskService.modify(risk, report, riskFactor, riskType, RiskStatus.DISCUSSING, riskGrade, reportDepartment);
+		    this.riskService.modify(risk, report, riskFactor, riskType, RiskStatus.DISCUSSING, riskGrade, reportDepartment, null);
 
 		    //성공 응답
 		    response.put("success", true);
@@ -459,5 +461,33 @@ public class AdminController {
 		}
 	}
 	
+	@PostMapping("/admin/reports/reject")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> Reject_report(@RequestBody Map<String, String> request){
+		Map<String, Object> response = new HashMap<>();
+		
+		try 
+		{
+			int id = Integer.parseInt(request.get("reportId")); 
+			Risk risk = this.riskService.getRisk(id);
+			Report report = this.reportService.getReport(id);
+			RiskGrade riskGrade = RiskGrade.valueOf("UNDEFINED");
+			
+			//데이터 수정
+		    this.riskService.modify(risk, report, "", "", RiskStatus.DENIED, riskGrade, "", request.get("message"));
+		    
+			//성공 응답
+		    response.put("success", true);
+		    response.put("message", "데이터가 성공적으로 저장되었습니다.");
+		}
+		catch(Exception e)
+		{
+			//실패 응답
+			response.put("success", false);
+			response.put("error", e.getMessage());
+		}
+		
+		return ResponseEntity.ok(response);
+	}
  	
 }

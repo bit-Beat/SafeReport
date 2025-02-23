@@ -68,11 +68,11 @@ public class RiskService {
 	}
 	
 	// Find Reports with Risks by Keyword(title, reporter_name), Status, RiskGrade
-	public Page<Report> getFindRisks(String keyword, RiskStatus status, RiskGrade riskGrade, int page) {
+	public Page<Report> getFindRisks(String keyword, RiskStatus status, RiskGrade riskGrade, String manageDepartment, int page) {
 		List<Sort.Order> sorts = new ArrayList<>();
 		sorts.add(Sort.Order.desc("reportcreatedate"));
 		Pageable pageable = PageRequest.of(page, 100, Sort.by(sorts));
-	    return riskRepository.findByKeywordAndFilters(keyword, status, riskGrade, pageable);
+	    return riskRepository.findByKeywordAndFilters(keyword, status, riskGrade, manageDepartment, pageable);
 	}
 	
 	/// Report Select Year and Month 
@@ -90,13 +90,14 @@ public class RiskService {
 	}
 
 	/// Risk Update
-	public void modify(Risk risk, Report report, String riskFactor, String riskType, RiskStatus status, RiskGrade riskGrade, String manageDepartment) {
+	public void modify(Risk risk, Report report, String riskFactor, String riskType, RiskStatus status, RiskGrade riskGrade, String manageDepartment, String rejectMessage) {
 		
 		risk.setRiskFactor(riskFactor); // 위험요인 (ex. 전기, 화재, 기계 등)
 		risk.setRiskType(riskType); // 위험유형 (ex. 화재, 충돌, 낙상 등)
 		risk.setStatus(status); // 상태
 		risk.setRiskGrade(riskGrade); //위험등금 enum(a, b, c, d)
 		risk.setLastModifiedDate(LocalDateTime.now()); // 수정시간
+		risk.setRejectMessage(rejectMessage); // 반려사유
 		
 		report.setReport_managedepartment(manageDepartment); // 제보 테이블에 담당부서 변경
 		

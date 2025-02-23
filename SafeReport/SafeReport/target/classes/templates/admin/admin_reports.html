@@ -49,6 +49,19 @@
                 <div class="col-md-2">
                     <button type="submit" class="btn btn-primary w-100">검색</button>
                 </div>
+				<div class="col-md-3" sec:authorize="hasAnyRole('ADMIN', 'ADMINSAFETY')">
+					<select class="form-select" name="manageDepartment" id="manageDepartment" tabindex="-1">
+					    <option selected value="">담당부서 선택</option>
+					    <option th:value="관리지원팀" th:selected="${selectedDepartment == '관리지원팀'}">관리지원팀</option>
+					    <option th:value="안전환경팀" th:selected="${selectedDepartment == '안전환경팀'} ">안전환경팀</option>
+					    <option th:value="사업기획팀" th:selected="${selectedDepartment == '사업기획팀'} ">사업기획팀</option>
+					    <option th:value="재경팀" th:selected="${selectedDepartment == '재경팀'} ">재경팀</option>
+					    <option th:value="자재관리팀" th:selected="${selectedDepartment == '자재관리팀'} ">자재관리팀</option>
+					    <option th:value="프레스지원팀" th:selected="${selectedDepartment == '프레스지원팀'} ">프레스지원팀</option>
+					    <option th:value="차체지원팀" th:selected="${selectedDepartment == '차체지원팀'} ">차체지원팀</option>
+					    <option th:value="품질보증팀" th:selected="${selectedDepartment == '품질보증팀'} ">품질보증팀</option>
+					</select>
+				</div>
             </div>
         </form>
 
@@ -106,7 +119,7 @@
                                 <a th:href="@{/admin/reports/{id}(id=${report.reportid})}" class="btn btn-sm btn-outline-primary btn-action" sec:authorize="hasAnyRole('ADMIN', 'ADMINSAFETY')">상세</a>
 								<a th:href="@{/admin/reportsManage/{id}(id=${report.reportid})}"
 								   class="btn btn-sm btn-outline-primary btn-action"
-								   th:classappend="${#authorization.expression('hasRole(''ADMIN'')') or report.report_managedepartment == user.department} ? '' : 'disabled'">
+								   th:classappend="${(#authorization.expression('hasRole(''ADMIN'')') or report.report_managedepartment == user.department) and report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).IN_PROGRESS} ? '' : 'disabled'">
 								   위험성 평가
 								</a>
                                 <form th:action="@{|/report/delete/${report.reportid}|}" method="post" style="display:inline;">
@@ -125,20 +138,20 @@
 		<ul class="pagination justify-content-center">
 		    <!-- Previous Page -->
 		    <li class="page-item" th:classappend="${report.number == 0} ? 'disabled'">
-		        <a class="page-link" th:href="@{/admin/reports(page=${report.number}, keyword=${keyword}, status=${selectedStatus}, riskGrade=${selectedRiskGrade})}">&laquo;</a>
+		        <a class="page-link" th:href="@{/admin/reports(page=${report.number}, keyword=${keyword}, status=${selectedStatus}, riskGrade=${selectedRiskGrade}, manageDepartment=${selectedDepartment})}">&laquo;</a>
 		    </li>
 
 		    <!-- Page Numbers -->
 		    <li th:each="page : ${#numbers.sequence(1, report.totalPages)}" 
 		        th:classappend="${page - 1 == report.number} ? 'active'" 
 		        class="page-item">
-		        <a class="page-link" th:href="@{/admin/reports(page=${page}, keyword=${keyword}, status=${selectedStatus}, riskGrade=${selectedRiskGrade})}" 
+		        <a class="page-link" th:href="@{/admin/reports(page=${page}, keyword=${keyword}, status=${selectedStatus}, riskGrade=${selectedRiskGrade}, manageDepartment=${selectedDepartment})}" 
 		           th:text="${page}"></a>
 		    </li>
 
 		    <!-- Next Page -->
 		    <li class="page-item" th:classappend="${report.number + 1 == report.totalPages} ? 'disabled'">
-		        <a class="page-link" th:href="@{/admin/reports(page=${report.number + 2}, keyword=${keyword}, status=${selectedStatus}, riskGrade=${selectedRiskGrade})}">&raquo;</a>
+		        <a class="page-link" th:href="@{/admin/reports(page=${report.number + 2}, keyword=${keyword}, status=${selectedStatus}, riskGrade=${selectedRiskGrade}, manageDepartment=${selectedDepartment})}">&raquo;</a>
 		    </li>
 		</ul>
 	</div>

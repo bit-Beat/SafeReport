@@ -41,6 +41,12 @@ public class Risk {
     @Enumerated(EnumType.STRING) // ENUM을 문자열로 저장
     @Column(length = 50)
     private RiskStatus status; // 상태
+    
+    @Column(length = 50)
+    private String rejectMessage; //반려사유
+    
+    @Column(length = 100)
+	private String acceptId; // 접수자 ID
 
     private LocalDateTime lastModifiedDate; // 수정일
 }
