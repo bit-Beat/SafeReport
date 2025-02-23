@@ -18,7 +18,44 @@
 	</style>
 
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-	<script>
+	<script th:inline="javascript">
+		function funcAccept(){
+			const reportId = document.querySelector("#id").value;
+			
+			if(confirm("해당 제보를 접수하시겠습니까?"))
+			{
+				var token = $("meta[name='_csrf']").attr("content");
+				var header = $("meta[name='_csrf_header']").attr("content");
+				
+				fetch("/admin/reports/accept",{
+					method : "POST",
+					headers:{
+						"Content-Type" : "application/json",
+						[header]: token, // 동적으로 CSRF 헤더 추가
+					},
+					body: JSON.stringify({ reportId: reportId })
+					})
+				.then((response) => response.json())
+				.then((data) => {
+					if(data.success) {
+						document.getElementById('accepButton').disabled = true;
+						document.getElementById('riskStatus').className = "badge text-bg-primary";
+						document.getElementById('riskStatus').innerText = /*[[${T(com.example.SafeReport.Enum.RiskStatus).IN_PROGRESS.getDescription()}]]*/ '';
+						document.querySelector(".modal-body").textContent = "접수가 완료되었습니다.";	
+					}
+					else document.querySelector(".modal-body").textContent = "에러가 발생하였습니다." + data.error;
+				})
+				.catch((error) => {
+					document.querySelector(".modal-body").textContent = "에러가 발생하였습니다." + data.error;
+				})
+				.finally(() =>{
+					document.querySelector(".modal-title").textContent = "결과";
+					const modal = new bootstrap.Modal(document.querySelector("#modal1"));
+					modal.show();
+				}); 
+			}			
+			
+		}
 	    /*document.addEventListener("DOMContentLoaded", function () {
 			let actionType = null; // 수정 또는 삭제 동작을 구분하는 변수
 
@@ -100,6 +137,7 @@
 <body >
 	
 	<div layout:fragment="content" >
+		<input type="hidden" id="id" name="id" th:value="${report.reportid}">
 		<div class="progress" role="progressbar" style="height: 4px">
 			<div class="progress-bar" th:style="|width: ${((report.risk.status.ordinal + 1)*100) / T(com.example.SafeReport.Enum.RiskStatus).values().length }%|"></div>
 		</div>
@@ -187,7 +225,7 @@
 			<div class ="my-3" style="display: flex; justify-content: flex-end;" sec:authorize="isAnonymous()">
 				<button type="button" class="btn btn-sm btn-outline-secondary m-1" data-bs-toggle="modal" data-bs-target="#modal1" id="modifyButton">수정</button>
 				<button type="button" class="btn btn-sm btn-outline-secondary m-1" data-bs-toggle="modal" data-bs-target="#modal1" id="deleteButton">삭제</button>
-			</div>
+			</div> 
 			
 			<div class="modal fade" id="modal1" tabindex="-1" aria-labelledby="modalLabel1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
 			  <div class="modal-dialog">
@@ -203,7 +241,7 @@
 					</div>
 			        <form method="post" th:action="@{/report/passwordcompare}">
 			          <input type="password" name="password" id="password" class="form-control" placeholder="비밀번호를 입력하세요" required autocomplete="off">
-					  <input type="hidden" id="id" name="id" th:value="${report.reportid}">
+					  
 			          <div class="modal-footer">
 			            <button type="submit" class="btn btn-primary">확인</button> 
 			            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeModalButton">닫기</button>
@@ -212,12 +250,27 @@
 			      </div>
 			    </div>
 			  </div>
-			</div> -->
-			
+			</div>-->
+			<!-- Modal -->
+			<div class="modal fade" id="modal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h6 class="modal-title" id="staticBackdropLabel">결과</h6>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      </div>
+			      <div class="modal-body text-center">
+					
+			      </div>
+			      <div class="modal-footer"></div>
+			    </div>
+			  </div>
+			</div>
+			<!-- Modal -->
 		</div>
 		
 		<div class="container mt-5">
-			<div class="row mt-4 alert alert-danger" role = "alert" th:if="${report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).DENIED }" th:text ="'반려사유 : '+ ${report.risk?.rejectMessage}"></div>
+			<div class="row my-3 mx-1 alert alert-danger" role = "alert" th:if="${report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).DENIED }" th:text ="'반려사유 : '+ ${report.risk?.rejectMessage}"></div>
 		</div>
 		
 		<div class="container mt-5" th:if="${report.risk.status != T(com.example.SafeReport.Enum.RiskStatus).DENIED }">
@@ -234,7 +287,7 @@
 				</div>
 			    <div class="col-md-4 ms-auto d-flex justify-content-end" >
 					<div >
-						<button th:if="${user.department == report.report_managedepartment and report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).DISCUSSING}" sec:authorize="hasAnyRole('MANAGER')" type="button" class="btn btn-sm btn-primary m-1" data-bs-toggle="modal" data-bs-target="#modal1" id="accepButton"><i class="bi bi-patch-check-fill"></i> 접수</button>
+						<button th:if="${user.department == report.report_managedepartment and report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).DISCUSSING}" sec:authorize="!hasAnyRole('USER')" type="button" class="btn btn-sm btn-primary m-1"  id="accepButton" onclick="funcAccept()"><i class="bi bi-patch-check-fill"></i> 접수</button>
 						<a sec:authorize="hasAnyRole('ADMIN', 'ADMINSAFETY')" th:href="@{|/admin/reports/${report.reportid}|}" class="btn btn-sm btn-outline-secondary ">상세</a>
 					</div>
 				</div>
@@ -267,7 +320,7 @@
 																report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).IN_PROGRESS ? 'badge text-bg-warning' : 
 																report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).COMPLETED ? 'badge text-bg-success' : 
 																'badge text-bg-light'}" 
-												th:text="${report.risk.status.getDescription}">
+												th:text="${report.risk.status.getDescription}" id="riskStatus">
 						</td>
 						<td th:text="${report.risk.riskFactor}"></td>
 						<td th:text="${report.risk.riskType}"></td>

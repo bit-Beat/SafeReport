@@ -474,7 +474,35 @@ public class AdminController {
 			RiskGrade riskGrade = RiskGrade.valueOf("UNDEFINED");
 			
 			//데이터 수정
-		    this.riskService.modify(risk, report, "", "", RiskStatus.DENIED, riskGrade, "", request.get("message"));
+		    this.riskService.modify(risk, report, "", "", RiskStatus.DENIED, riskGrade, "안전환경팀", request.get("message"));
+		    
+			//성공 응답
+		    response.put("success", true);
+		    response.put("message", "데이터가 성공적으로 저장되었습니다.");
+		}
+		catch(Exception e)
+		{
+			//실패 응답
+			response.put("success", false);
+			response.put("error", e.getMessage());
+		}
+		
+		return ResponseEntity.ok(response);
+	}
+	
+	@PostMapping("/admin/reports/accept")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> Accept_report(@RequestBody Map<String, String> request){
+		Map<String, Object> response = new HashMap<>();
+		
+		try 
+		{
+			int id = Integer.parseInt(request.get("reportId")); 
+			Risk risk = this.riskService.getRisk(id);
+			Report report = this.reportService.getReport(id);
+			
+			//데이터 수정
+		    this.riskService.modify(risk, report, risk.getRiskFactor(), risk.getRiskType(), RiskStatus.IN_PROGRESS, risk.getRiskGrade(), report.getReport_managedepartment(), null);
 		    
 			//성공 응답
 		    response.put("success", true);
