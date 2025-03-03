@@ -2,6 +2,8 @@ package com.example.SafeReport.DTO;
 
 import java.time.LocalDate;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,4 +29,5 @@ public class RiskAssessmentADTO {
 	    private String personalEquipment;
 	    private String confirmedMeasured;
 	    private LocalDate confirmedDate;
+	    
 }

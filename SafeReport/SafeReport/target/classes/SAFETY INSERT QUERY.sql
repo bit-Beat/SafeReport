@@ -404,7 +404,7 @@ SELECT report_id, 'UNDEFINED', 'PENDING' FROM report
 
 -----> 유저 테이블 INSERT
 INSERT INTO users (department, email, password, role, userid, username) VALUES ('보안관리자', 'djp0389@partecs.co.kr', 'admin', 'admin', 'admin', '보안관리자')
-INSERT INTO users (department, email, password, role, userid, username) VALUES ('안전환경팀', 'safety@partecs.co.kr', 'safetyadmin', 'safetyadmin', 'safetyadmin', '안전담당자')
+INSERT INTO users (department, email, password, role, userid, username) VALUES ('안전환경팀', 'safety@partecs.co.kr', 'safety', 'safety', 'adminsafety', '안전담당자')
 INSERT INTO users (department, email, password, role, userid, username) VALUES ('사업기획팀', 'manager@partecs.co.kr', 'manager', 'manager', 'manager', '부서담당자')
 INSERT INTO users (department, email, password, role, userid, username) VALUES ('관리지원팀', '1@partecs.co.kr', '1', 'user', '1', '일반유저')
 

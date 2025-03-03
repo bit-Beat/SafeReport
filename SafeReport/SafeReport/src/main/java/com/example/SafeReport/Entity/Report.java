@@ -91,4 +91,8 @@ public class Report {
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private List<RiskAssessmentC> riskAssessmentC; // 위험성평가 c
 	
+	@OneToMany(mappedBy = "reportid", cascade = CascadeType.REMOVE, orphanRemoval = true)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	private List<RiskAssessmentFile> riskFiles;
+	
 }

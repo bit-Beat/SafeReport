@@ -287,6 +287,7 @@
 				</div>
 			    <div class="col-md-4 ms-auto d-flex justify-content-end" >
 					<div >
+						
 						<button th:if="${user.department == report.report_managedepartment and report.risk.status == T(com.example.SafeReport.Enum.RiskStatus).DISCUSSING}" sec:authorize="!hasAnyRole('USER')" type="button" class="btn btn-sm btn-primary m-1"  id="accepButton" onclick="funcAccept()"><i class="bi bi-patch-check-fill"></i> 접수</button>
 						<a sec:authorize="hasAnyRole('ADMIN', 'ADMINSAFETY')" th:href="@{|/admin/reports/${report.reportid}|}" class="btn btn-sm btn-outline-secondary ">상세</a>
 					</div>
@@ -405,38 +406,54 @@
 				    </tbody>
 				</table>
 				<!-- 첨부 이미지 -->
-				<div class="accordion" id="accordionRiskA" th:if="${report.attachfile}!='' AND ${report.attachfile}!=null">				
-					<div class="accordion-item">
-					   <h2 class="accordion-header">
-					     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRiskA" aria-expanded="false" aria-controls="collapseRiskA">
-					       첨부 이미지
-						   <span class="badge rounded-pill text-bg-danger ms-2">1</span>
-					     </button>
-					   </h2>
-					   <div id="collapseRiskA" class="accordion-collapse collapse" data-bs-parent="#accordionRiskA">
-					     <div class="accordion-body">
-							<div id="carouselExampleIndicatorsRiskA" class="carousel slide">
-								<div class="carousel-indicators">
-								  <button type="button" data-bs-target="#carouselExampleIndicatorsRiskA" data-bs-slide-to="0" class="active" aria-label="Slide 1"></button>
-								</div>
-								<div class="carousel-inner">
-								<div class="carousel-item active d-flex justify-content-center align-items-center">
-								    <img th:src="@{'/uploads/' + ${report.attachfile_upload}}" class="d-block w-100 mx-auto img-fluid rounded" alt="첨부 이미지" style="max-height: 40rem;">
-								</div>
-								</div>
-								<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicatorsRiskA" data-bs-slide="prev">
-								  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-								  <span class="visually-hidden">Previous</span>
-								</button>
-								<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicatorsRiskA" data-bs-slide="next">
-								  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-								  <span class="visually-hidden">Next</span>
-								</button>
-							</div>
-							
-					     </div>
-					   </div>
-					 </div>
+				<div class="accordion" id="accordionRiskA" th:if="${report.riskFiles != null and not #lists.isEmpty(report?.riskFiles.![assessmentType == 'A'])}">
+				    <div class="accordion-item">
+				        <h2 class="accordion-header">
+				            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRiskA" aria-expanded="false" aria-controls="collapseRiskA">
+				                첨부 이미지
+				                <span class="badge rounded-pill text-bg-danger ms-2" th:text="${#lists.size(report.riskFiles)}"></span>
+				            </button>
+				        </h2>
+				        <div id="collapseRiskA" class="accordion-collapse collapse" data-bs-parent="#accordionRiskA">
+				            <div class="accordion-body">
+				                <div id="carouselExampleIndicatorsRiskA" class="carousel slide" data-bs-ride="carousel">
+				                    
+				                    <!-- 캐러셀 인디케이터 -->
+				                    <div class="carousel-indicators">
+				                        <button th:each="file, iterStat : ${report.riskFiles}" 
+				                                type="button" 
+				                                data-bs-target="#carouselExampleIndicatorsRiskA" 
+				                                th:data-bs-slide-to="${iterStat.index}" 
+				                                th:classappend="${iterStat.first} ? 'active'" 
+				                                th:aria-label="|Slide ${iterStat.index + 1}|">
+				                        </button>
+				                    </div>
+
+				                    <!-- 캐러셀 이미지 -->
+				                    <div class="carousel-inner">
+				                        <div class="carousel-item" 
+				                             th:each="file, iterStat : ${report.riskFiles}" 
+				                             th:classappend="${iterStat.first} ? 'active'">
+				                            <img th:src="@{'/uploads/riskFile/' + ${file.fileUploadName}}" 
+				                                 class="d-block w-100 mx-auto img-fluid rounded" 
+				                                 alt="첨부 이미지" 
+				                                 style="max-height: 40rem;">
+				                        </div>
+				                    </div>
+
+				                    <!-- 이전/다음 버튼 -->
+				                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicatorsRiskA" data-bs-slide="prev">
+				                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				                        <span class="visually-hidden">Previous</span>
+				                    </button>
+				                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicatorsRiskA" data-bs-slide="next">
+				                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+				                        <span class="visually-hidden">Next</span>
+				                    </button>
+				                </div>
+				            </div>
+				        </div>
+				    </div>
 				</div>
 			</div>
 			

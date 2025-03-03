@@ -22,11 +22,93 @@
 	</style>
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 	<script th:inline="javascript">
+		
 		document.addEventListener("DOMContentLoaded", function(){
 			const formC = document.querySelector("#formC"); // 괄호속에 제공한 선택자와 일치하는 문서 내 첫번째 Element를 반환
 			const formA = document.querySelector("#formA"); // 괄호속에 제공한 선택자와 일치하는 문서 내 첫번째 Element를 반환
 			const reportId = document.querySelector("#reportid").value;
 			
+			/// RiskFileA 파일 변경 이벤트
+			document.getElementById("riskFileA").addEventListener("change", function (event) {
+			    const fileInput = document.getElementById("riskFileA");
+				let visibleFileList = [];
+								
+				if(document.getElementById("riskAul"))
+				{
+					const fileList = Array.from(document.getElementById("riskAul").getElementsByTagName("li")); // 모든 li 요소 가져오기
+					const visibleFileList = fileList.filter(li => !li.querySelector("del")); // <del> 태그를 포함하지 않은 li만 필터링
+				}
+
+			    const existingFileCount = visibleFileList.length; // 기존 업로드된 파일 개수
+			    const newFileCount = fileInput.files.length; // 새로 선택한 파일 개수
+
+			    if (existingFileCount + newFileCount > 3) {
+			        fileInput.value = ""; // 파일 입력 필드 초기화
+					fileInput.innerHTML = "";
+
+			        // 모달 창 표시
+			        document.querySelector(".modal-body").textContent = "파일 첨부 개수는 총 3개로 제한됩니다.";
+			        document.querySelector(".modal-title").textContent = "결과";
+			        const modal = new bootstrap.Modal(document.querySelector("#Modal1"));
+			        modal.show();
+			        return;
+			    }
+			});
+			
+			/// RiskFileB 파일 변경 이벤트
+			document.getElementById("riskFileB").addEventListener("change", function (event) {
+			    const fileInput = document.getElementById("riskFileB");
+				let visibleFileList = [];
+				
+				if(document.getElementById("riskBul"))
+				{
+					const fileList = Array.from(document.getElementById("riskBul").getElementsByTagName("li")); // 모든 li 요소 가져오기
+					const visibleFileList = fileList.filter(li => !li.querySelector("del")); // <del> 태그를 포함하지 않은 li만 필터링
+				}
+
+			    const existingFileCount = visibleFileList.length; // 기존 업로드된 파일 개수
+			    const newFileCount = fileInput.files.length; // 새로 선택한 파일 개수
+
+			    if (existingFileCount + newFileCount > 3) {
+			        fileInput.value = ""; // 파일 입력 필드 초기화
+					fileInput.innerHTML = "";
+
+			        // 모달 창 표시
+			        document.querySelector(".modal-body").textContent = "파일 첨부 개수는 총 3개로 제한됩니다.";
+			        document.querySelector(".modal-title").textContent = "결과";
+			        const modal = new bootstrap.Modal(document.querySelector("#Modal1"));
+			        modal.show();
+			        return;
+			    }
+			});
+
+			/// RiskFileC 파일 변경 이벤트
+			document.getElementById("riskFileC").addEventListener("change", function (event) {
+			    const fileInput = document.getElementById("riskFileC");
+				let visibleFileList = [];
+				
+				if(document.getElementById("riskCul"))
+				{
+					const fileList = Array.from(document.getElementById("riskCul").getElementsByTagName("li")); // 모든 li 요소 가져오기
+					const visibleFileList = fileList.filter(li => !li.querySelector("del")); // <del> 태그를 포함하지 않은 li만 필터링
+				}
+	
+			    const existingFileCount = visibleFileList.length; // 기존 업로드된 파일 개수
+			    const newFileCount = fileInput.files.length; // 새로 선택한 파일 개수
+	
+			    if (existingFileCount + newFileCount > 3) {
+			        fileInput.value = ""; // 파일 입력 필드 초기화
+					fileInput.innerHTML = "";
+	
+			        // 모달 창 표시
+			        document.querySelector(".modal-body").textContent = "파일 첨부 개수는 총 3개로 제한됩니다.";
+			        document.querySelector(".modal-title").textContent = "결과";
+			        const modal = new bootstrap.Modal(document.querySelector("#Modal1"));
+			        modal.show();
+			        return;
+			    }
+			});
+							
 			formC.addEventListener("submit", async function (e){ // C등급 제출 이벤트
 				e.preventDefault(); // 기본 폼 제출 동작 방치
 				
@@ -35,15 +117,23 @@
 				
 				const tableRows = formC.querySelectorAll("table tbody tr"); // form 안에 있는 table > tbody > tr모두 가져오기
 				const rows = Array.from(tableRows).map((row) => {
-				const category = row.querySelector("td:nth-child(1)").innerText.trim();
-				const contents = row.querySelector("td:nth-child(2)").innerText.trim();
-				const result = row.querySelector("select").value; // select option 선택자
-				const improvement = row.querySelector("input").value;
+					const category = row.querySelector("td:nth-child(1)").innerText.trim();
+					const contents = row.querySelector("td:nth-child(2)").innerText.trim();
+					const result = row.querySelector("select").value; // select option 선택자
+					const improvement = row.querySelector("input").value;
 					
 					return {category, contents, result, improvement};
 				});
 				
-				//console.log(rows);
+				const formData = new FormData();
+				formData.append("data", new Blob([JSON.stringify(rows)], { type: "application/json" })); // JSON 데이터 추가
+				
+				// 파일 추가 (여러 개 가능)
+				const fileInput = document.querySelector("#riskFileC");
+				if (fileInput.files.length > 0) {
+					for (let i = 0; i < fileInput.files.length; i++) 
+						formData.append("photo", fileInput.files[i]); // 백엔드에서 @RequestPart("photo")로 받아야 함
+				}
 				
 				fetch("/admin/reportsManage/Cgrade/"+reportId,{
 					method : "POST",
@@ -51,7 +141,7 @@
 						"Content-Type" : "application/json",
 						[header]: token, // 동적으로 CSRF 헤더 추가
 					},
-					body: JSON.stringify(rows),
+					body: formData,
 				})
 				.then((response) => response.json())
 				.then((data) => {
@@ -75,59 +165,71 @@
 				}); 
 			}); 
 			
-			formA.addEventListener("submit", async function (e){
-				e.preventDefault(); // 기본 폼 제출 동작 방지
+			formA.addEventListener("submit", async function (e) {
+			    e.preventDefault(); // 기본 폼 제출 동작 방지
 				
-				var token = $("meta[name='_csrf']").attr("content");
-				var header = $("meta[name='_csrf_header']").attr("content");
 				
-				const formData = {
-				        possibilityBefore: document.querySelector("#possibilityBefore_A").value,
-				        possibilityAfter: document.querySelector("#possibilityAfter_A").value,
-				        importanceBefore: document.querySelector("#importanceBefore_A").value,
-				        importanceAfter: document.querySelector("#importanceAfter_A").value,
-				        workerName: document.querySelector("#workernameA").value,
-				        supervisor: document.querySelector("#supervisorA").value,
-				        representative: document.querySelector("#representativeA").value,
-				        essentialActive: document.querySelector("#essentialActiveA").checked,
-				        administrativeActive: document.querySelector("#administrativeActiveA").checked,
-				        engineeringActive: document.querySelector("#engineeringActiveA").checked,
-				        equipmentActive: document.querySelector("#equipmentActiveA").checked,
-				        essentialMeasures: document.querySelector("#essential_measuresA").value,
-				        administrativeMeasures: document.querySelector("#administrative_measuresA").value,
-				        engineeringMeasures: document.querySelector("#engineering_measuresA").value,
-				        personalEquipment: document.querySelector("#personal_equipmentA").value,
-				        confirmedMeasured: document.querySelector("#confirmed_measuredA").value,
-				        confirmedDate: document.querySelector("#confirmed_dateA").value
-				};
-				fetch("/admin/reportsManage/Agrade/"+reportId,{
-					method : "POST",
-					headers:{
-						"Content-Type" : "application/json",
-						[header]: token, // 동적으로 CSRF 헤더 추가
-					},
-				 	body: JSON.stringify(formData),
-				})
-				.then((response) => response.json())
-				.then((data) => {
-					if(data.success){
-				 		console.log("success");
-				 		document.querySelector(".modal-body").textContent = "데이터 저장이 완료되었습니다.";
-				 	}
-				 	else{
-				 		console.log(data.error);
-				 		document.querySelector(".modal-body").textContent = "에러가 발생하였습니다." + data.error;
-				 	}
-				})
-				.catch((error) => {
-					console.error("error:", data.error);
-					document.querySelector(".modal-body").textContent = "에러가 발생하였습니다." + data.error;
-				})
-				.finally(() =>{
-					const modal = new bootstrap.Modal(document.querySelector("#Modal1"));
-				 	modal.show();
-					console.log("종료");					
-				}); 
+			    var token = $("meta[name='_csrf']").attr("content");
+			    var header = $("meta[name='_csrf_header']").attr("content");
+
+			    const formData = new FormData();
+
+			    // JSON 데이터를 객체로 생성
+			    const jsonData = {
+			        possibilityBefore: document.querySelector("#possibilityBefore_A").value,
+			        possibilityAfter: document.querySelector("#possibilityAfter_A").value,
+			        importanceBefore: document.querySelector("#importanceBefore_A").value,
+			        importanceAfter: document.querySelector("#importanceAfter_A").value,
+			        workerName: document.querySelector("#workernameA").value,
+			        supervisor: document.querySelector("#supervisorA").value,
+			        representative: document.querySelector("#representativeA").value,
+			        essentialActive: document.querySelector("#essentialActiveA").checked,
+			        administrativeActive: document.querySelector("#administrativeActiveA").checked,
+			        engineeringActive: document.querySelector("#engineeringActiveA").checked,
+			        equipmentActive: document.querySelector("#equipmentActiveA").checked,
+			        essentialMeasures: document.querySelector("#essential_measuresA").value,
+			        administrativeMeasures: document.querySelector("#administrative_measuresA").value,
+			        engineeringMeasures: document.querySelector("#engineering_measuresA").value,
+			        personalEquipment: document.querySelector("#personal_equipmentA").value,
+			        confirmedMeasured: document.querySelector("#confirmed_measuredA").value,
+			        confirmedDate: document.querySelector("#confirmed_dateA").value
+			    };
+				
+			    // JSON 데이터를 문자열로 변환 후 FormData에 추가
+			    formData.append("data", new Blob([JSON.stringify(jsonData)], { type: "application/json" }));
+
+				// 파일 추가 (여러 개 가능)
+				const fileInput = document.querySelector("#riskFileA");
+				if (fileInput.files.length > 0) {
+				    for (let i = 0; i < fileInput.files.length; i++) 
+				    	formData.append("photo", fileInput.files[i]); // 백엔드에서 @RequestPart("photo")로 받아야 함
+				}
+
+			    try {
+			        const response = await fetch(`/admin/reportsManage/Agrade/${reportId}`, {
+			            method: "POST",
+			            headers: {
+			                [header]: token // CSRF 토큰 추가
+			            },
+			            body: formData // FormData 전송 (Content-Type 자동 설정됨)
+			        });
+
+			        const result = await response.json();
+
+			        if (result.success) {
+			            console.log("success");
+			            document.querySelector(".modal-body").textContent = "데이터 저장이 완료되었습니다.";
+			        } else {
+			            console.error("Server Error:", result.error);
+			            document.querySelector(".modal-body").textContent = "에러 발생: " + result.error;
+			        }
+			    } catch (error) {
+			        console.error("Request Error:", error);
+			        document.querySelector(".modal-body").textContent = "에러 발생: " + error.message;
+			    }
+				document.querySelector(".modal-title").textContent = "결과";
+			    const modal = new bootstrap.Modal(document.querySelector("#Modal1"));
+			    modal.show();
 			});
 		});
 		
@@ -166,7 +268,54 @@
 					modal.show();
 				}); 
 			}			
+		}
+		
+		function removeListItem(button, fileId) {
 			
+			if(!confirm("첨부파일을 삭제하시면 복구가 불가능합니다.\n첨부파일을 삭제하시겠습니까?"))
+				return;
+				
+			var token = $("meta[name='_csrf']").attr("content");
+			var header = $("meta[name='_csrf_header']").attr("content");
+		
+			// 현재 URL에서 ID 추출
+			const pathSegments = window.location.pathname.split("/"); // URL을 '/'로 분리
+			const id = pathSegments[pathSegments.length - 1]; // 마지막 값 추출 (예: 112)
+			
+			// AJAX 요청
+			fetch("/admin/riskfiles/delete", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					[header]: token, // 동적으로 CSRF 헤더 추가
+				},
+				body: JSON.stringify({id:fileId}),
+			})
+			.then((response) => response.json())
+			.then(data => {
+				if(data.success)
+				{
+					const listItem = button.closest('li'); // 버튼의 가장 가까운 <li> 요소 찾기
+					if (listItem) {
+						button.remove();
+						listItem.querySelector('a').remove();
+		
+						if (!listItem.querySelector('del')) { // 이미 감싸져 있지 않은 경우만 처리
+					        const delElement = document.createElement('del'); // <del> 태그 생성
+					        while (listItem.firstChild) 
+					            delElement.appendChild(listItem.firstChild); // <li>의 자식 요소를 <del>로 이동
+							listItem.appendChild(delElement); // <del>을 <li>에 추가
+						}
+					}
+				} else {
+					alert("파일 삭제 중 문제가 발생했습니다.");
+				}
+			    //console.log("파일 삭제 응답:", data); // 성공적으로 삭제된 경우
+			})
+			.catch(error => {
+			    console.error("파일 삭제 요청 중 오류:", error);
+			    alert("파일 삭제 중 문제가 발생했습니다.");
+			});
 		}
 	</script>
 </head>
@@ -382,9 +531,28 @@
 								</tbody>
 							</table>
 							<div class="mb-4 mt-4">
-							    <input class="form-control form-control-sm" type="file" id="riskFileA" autocomplete="off" multiple>
+							    <input class="form-control form-control-sm file" type="file" id="riskFileA" accept="image/*" autocomplete="off" multiple>
 							    <small class="text-muted d-block mt-1">※ 파일은 최대 3개까지 첨부 가능합니다.</small>
+								
+								<div class="mb-2 mt-2" th:if="${not #lists.isEmpty(report?.riskFiles.![assessmentType == 'A'])}">
+									<ul class="list-group " id ="riskAul">
+										<li class="list-group-item d-flex align-items-center" th:each="file, iterStat : ${report.riskFiles}" >
+											<i class="bi bi-image me-2" th:if="${file.fileType=='.jpg'} or ${file.fileType =='.png'}"></i>
+									   		<span th:text = "${file.fileUploadName}"> A list item</span>
+											<span class="d-none" th:text = "${file.fileId}" ></span>
+											<a th:href="@{'/uploads/riskFile/' + ${file.fileUploadName}}" 
+												target="_blank" 
+												class="btn btn-link btn-sm">
+												<i class="bi bi-search"></i>
+											</a>
+
+											<button type="button" class="btn-close" aria-label="Close" th:attr="onclick='removeListItem(this, ' + ${file.fileId} + ')'" ></button>
+
+										</li>
+									</ul>
+								</div>
 							</div>
+							
 							<div class="text-end">
 								<button type="submit" class="btn btn-primary" onclick="return confirm('해당 내용으로 저장하시겠습니까?')">저장</button>
 							</div>
@@ -502,6 +670,29 @@
 							    </tbody>
 							</table>
 							
+							<div class="mb-4 mt-4">
+							    <input class="form-control form-control-sm file" type="file" id="riskFileB" accept="image/*" autocomplete="off" multiple>
+							    <small class="text-muted d-block mt-1">※ 파일은 최대 3개까지 첨부 가능합니다.</small>
+								
+								<div class="mb-2 mt-2" th:if="${not #lists.isEmpty(report.riskAssessmentB?.files)}">
+									<ul class="list-group " id ="riskBul">
+										<li class="list-group-item d-flex align-items-center" th:each="file, iterStat : ${report.riskAssessmentB.files}" >
+											<i class="bi bi-image me-2" th:if="${file.fileType=='.jpg'} or ${file.fileType =='.png'}"></i>
+									   		<span th:text = "${file.fileUploadName}"> A list item</span>
+											<span class="d-none" th:text = "${file.fileId}" ></span>
+											<a th:href="@{'/uploads/riskFile/' + ${file.fileUploadName}}" 
+												target="_blank" 
+												class="btn btn-link btn-sm">
+												<i class="bi bi-search"></i>
+											</a>
+
+											<button type="button" class="btn-close" aria-label="Close" th:attr="onclick='removeListItem(this, ' + ${file.fileId} + ')'" ></button>
+
+										</li>
+									</ul>
+								</div>
+							</div>
+							
 							<div class="text-end">
 								<button type="submit" class="btn btn-primary" onclick="return confirm('해당 내용으로 저장하시겠습니까?')">저장</button>
 							</div>
@@ -542,7 +733,30 @@
 									</tr>
 								</tbody>
 							</table>
-
+							
+							<div class="mb-4 mt-4">
+							    <input class="form-control form-control-sm file" type="file" id="riskFileC" accept="image/*" autocomplete="off" multiple>
+							    <small class="text-muted d-block mt-1">※ 파일은 최대 3개까지 첨부 가능합니다.</small>
+								
+								<div class="mb-2 mt-2" th:if="${not #lists.isEmpty(report?.riskFiles.![assessmentType == 'C'])}">
+									<ul class="list-group " id ="riskCul">
+										<li class="list-group-item d-flex align-items-center" th:each="file, iterStat : ${report.riskFiles}" >
+											<i class="bi bi-image me-2" th:if="${file.fileType=='.jpg'} or ${file.fileType =='.png'}"></i>
+									   		<span th:text = "${file.fileUploadName}"> A list item</span>
+											<span class="d-none" th:text = "${file.fileId}" ></span>
+											<a th:href="@{'/uploads/riskFile/' + ${file.fileUploadName}}" 
+												target="_blank" 
+												class="btn btn-link btn-sm">
+												<i class="bi bi-search"></i>
+											</a>
+	
+											<button type="button" class="btn-close" aria-label="Close" th:attr="onclick='removeListItem(this, ' + ${file.fileId} + ')'" ></button>
+	
+										</li>
+									</ul>
+								</div>
+							</div>
+							
 							<div class="text-end">
 								<button type="submit" class="btn btn-primary" onclick="return confirm('해당 내용으로 저장하시겠습니까?')">저장</button>
 							</div>

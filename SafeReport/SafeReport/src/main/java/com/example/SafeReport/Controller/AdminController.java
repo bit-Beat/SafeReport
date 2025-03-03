@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.SafeReport.DTO.RiskAssessmentADTO;
 import com.example.SafeReport.DTO.RiskAssessmentDTO;
@@ -356,21 +358,31 @@ public class AdminController {
 	 
 	 @PostMapping("/admin/reportsManage/Cgrade/{reportId}")
 	 @ResponseBody
-	 public ResponseEntity<Map<String, Object>> riskEvaluation_C(@PathVariable("reportId") int reportId, @RequestBody List<RiskAssessmentDTO> requests)
-	 {
+	 public ResponseEntity<Map<String, Object>> riskEvaluation_C(
+			 @PathVariable("reportId") int reportId,
+			 @RequestPart("data") List<RiskAssessmentDTO> requests, // JSON 데이터
+			 @RequestPart(value = "files", required = false) List<MultipartFile> files ){
+		 
 		 Report report = this.reportService.getReport(reportId);
 		 
 		 Map<String, Object> response = new HashMap<>(); // 응답데이터 구성
 		 
 		 try
 		 {
-			 riskService.RiskC_DeleteReport(report);
+			 riskService.RiskC_DeleteReport(report); // 기존데이터삭제
 			 
 			 int no = 1;
 			 for(RiskAssessmentDTO request : requests)
 			 {
 				 riskService.RiskC_save(request, report, no);
 				 no++;
+			 }
+			 
+			 // 파일 저장 처리
+			 if (files != null && !files.isEmpty()) {
+				for (MultipartFile file : files) {
+					riskService.saveRiskFile(file, report, "C"); // 'C' 등급 파일로 저장
+				}
 			 }
 			 response.put("success", true);
 		 }
@@ -381,51 +393,51 @@ public class AdminController {
 		 }
 		 
 		 return ResponseEntity.ok(response);
-		 //return "redirect:/admin/reportsManage/" + reportid;
 	 }
 	 
 	 @PostMapping("/admin/reportsManage/Agrade/{reportid}")
 	 @ResponseBody
-	 public ResponseEntity<Map<String, Object>> riskEvaluation_A(@PathVariable("reportid") int reportid, @RequestBody RiskAssessmentADTO request)
-	 {
-		 Report report = this.reportService.getReport(reportid);
-		 
-		 Map<String, Object> response = new HashMap<>();
-		 
-		 Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); // 수정 ㅎ해야함 id가 아닌 유저명으로 하도록
-		 String loggedInUsername = authentication.getName(); // // 수정 ㅎ해야함 id가 아닌 유저명으로 하도록
-		 
-		 try 
-		 {
-			 riskService.saveOrUpdateRiskAssessmentA(
-					 			report,
-								request.getPossibilityBefore(),
-								request.getPossibilityAfter(),
-								request.getImportanceBefore(),
-								request.getImportanceAfter(),
-								loggedInUsername,
-								request.getSupervisor(),
-								request.getRepresentative(),
-								request.getEssentialActive(),
-								request.getAdministrativeActive(),
-								request.getEngineeringActive(),
-								request.getEquipmentActive(),
-								request.getEssentialMeasures(),
-								request.getAdministrativeMeasures(),
-								request.getEngineeringMeasures(),
-								request.getPersonalEquipment(),
-								request.getConfirmedMeasured(),
-								request.getConfirmedDate());
-	         response.put("success", true); 
-		 }
-		 catch (Exception e)
-		 {
-			 response.put("success", false);
-			 response.put("error", e);
-		 }
-		
-		 return ResponseEntity.ok(response);
+	 public ResponseEntity<Map<String, Object>> riskEvaluation_A(
+	     @PathVariable("reportid") int reportid, 
+	     @RequestPart("data") RiskAssessmentADTO request,
+	     @RequestPart(value = "photo", required = false) MultipartFile[] files) {
+
+	     Report report = this.reportService.getReport(reportid);
+	     Map<String, Object> response = new HashMap<>();
+	     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	     String loggedInUsername = authentication.getName();
+
+	     try {
+	    	 riskService.saveOrUpdateRiskAssessmentA(
+		         report,
+		         request.getPossibilityBefore(),
+		         request.getPossibilityAfter(),
+		         request.getImportanceBefore(),
+		         request.getImportanceAfter(),
+		         loggedInUsername,
+		         request.getSupervisor(),
+		         request.getRepresentative(),
+		         request.getEssentialActive(),
+		         request.getAdministrativeActive(),
+		         request.getEngineeringActive(),
+		         request.getEquipmentActive(),
+		         request.getEssentialMeasures(),
+		         request.getAdministrativeMeasures(),
+		         request.getEngineeringMeasures(),
+		         request.getPersonalEquipment(),
+		         request.getConfirmedMeasured(),
+		         request.getConfirmedDate(),
+		         files // 파일 추가
+	    			 );
+	    	 response.put("success", true);
+	     } catch (Exception e) {
+	         response.put("success", false);
+	         response.put("error", e.getMessage());
+	     }
+
+	     return ResponseEntity.ok(response);
 	 }
+
 	 
 	@PostMapping("/admin/reports/ajax/{id}")
 	@ResponseBody
@@ -545,5 +557,20 @@ public class AdminController {
 		
 		return ResponseEntity.ok(response);
 	}
+	
+	@PostMapping("/admin/riskfiles/delete") /// 위험성 평가 첨부파일 삭제
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> riskAssessment_fileDelete (@RequestBody Map<String, Object> request)
+	{
+		// 파일 삭제 서비스 호출
+	    Map<String, Object> response = new HashMap<>();
+	    if(this.riskService.file_delete((int)request.get("id")))
+	    	response.put("success", true);	    	
+	    else
+	    	response.put("success", false);
+	    
+		return ResponseEntity.ok(response); // json 응답 반환
+	}
+	
  	
 }
